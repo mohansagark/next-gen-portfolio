@@ -1,5 +1,6 @@
 import ThmeModeSwither from "@/components/shared/others/ThmeModeSwither";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/next";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
       >
         <Suspense fallback={<></>}>{children}</Suspense>
         <ThmeModeSwither />
+        <Analytics />
       </body>
     </html>
   );

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "glightbox": "^3.3.0",
     "gsap": "^3.12.7",
     "isotope-layout": "^3.0.6",
