@@ -1,0 +1,54 @@
+[
+  {
+    "title": "My Experience",
+    "iconName": "flaticon-recommendation",
+    "resumeItems": [
+      {
+        "date": "2022 - Present",
+        "title": "Programming course",
+        "desc": "Blockdots, London"
+      },
+      {
+        "date": "2021 - 2022",
+        "title": "CMS course",
+        "desc": "Parsons, The New School"
+      },
+      {
+        "date": "2020 - 2021",
+        "title": "Web design course",
+        "desc": "House of Life, Leeds"
+      },
+      {
+        "date": "2018 - 2020",
+        "title": "Parsons, The New School",
+        "desc": "Theme Junction, Bursa"
+      }
+    ]
+  },
+  {
+    "title": "My Education",
+    "iconName": "flaticon-graduation-cap",
+    "resumeItems": [
+      {
+        "date": "2020 - 2023",
+        "title": "BLOCKDOTS",
+        "desc": "Harverd University"
+      },
+      {
+        "date": "2016 - 2020",
+        "title": "Parsons, The New School",
+        "desc": "University of Denmark"
+      },
+      {
+        "date": "2012 - 2015",
+        "title": "IDEO",
+        "desc": "University of California"
+      },
+      {
+        "date": "2010 - 2011",
+        "title": "Parsons, The New School",
+        "desc": "Parsons, The New School"
+      }
+    ]
+  }
+]

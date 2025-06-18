@@ -1,0 +1,651 @@
+[
+  {
+    "id": 1,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/1.jpg",
+    "detailsImg": "/img/blog/blog-4.jpg",
+    "smallImg": "/img/blog/post-thumb-1.jpg",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "business",
+    "tags": ["Design", "Development"],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "The services provide for design",
+    "img": "/img/blog/2.jpg",
+    "detailsImg": "/img/blog/blog-3.jpg",
+    "smallImg": "",
+    "desc": "“Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency.”",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "oct 01, 2025",
+    "category": "Design",
+    "tags": ["Development", "Strategy"],
+    "author_name": "Silvester Scott",
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "TIPS",
+    "isBlogQuote": true,
+    "iconId": "f10e",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Nov 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/2.jpg",
+    "detailsImg": "/img/blog/blog-3.jpg",
+    "smallImg": "/img/blog/post-thumb-2.jpg",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Aug 01, 2025",
+    "category": "Development",
+    "tags": ["Strategy", "Technology"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "TIPS",
+    "popupVideo": "https://www.youtube.com/watch?v=u31qwQUeGuM",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Nov 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Digital Marketo to Their New Office.",
+    "img": "/img/blog/3.jpg",
+    "detailsImg": "/img/blog/blog-3.jpg",
+    "smallImg": "/img/blog/post-thumb-3.jpg",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Portfolio",
+    "tags": ["Business", "Design"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "FREEBIES",
+    "slider": [
+      "/img/blog/blog-2.jpg",
+      "/img/blog/blog-3.jpg",
+      "/img/blog/blog-1.jpg"
+    ],
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Dec 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Want To Upgrade Your Brain? Stop Doing 7 Things",
+    "img": "/img/blog/1.jpg",
+    "detailsImg": "/img/blog/blog-1.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "SAAS",
+    "tags": ["Development", "Strategy"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/4.jpg",
+    "detailsImg": "/img/blog/blog-2.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Technology",
+    "tags": ["Technology", "Tips"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/1.jpg",
+    "detailsImg": "/img/blog/blog-3.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Trending",
+    "tags": ["Design", "Development", "Strategy"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/2.jpg",
+    "detailsImg": "/img/blog/blog-4.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Analysis",
+    "tags": ["Strategy", "Technology", "Tips"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/3.jpg",
+    "detailsImg": "/img/blog/blog-4.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Design",
+    "tags": ["Design", "Development", "Strategy"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "The Role of Technology in Modern Logistics Management",
+    "img": "/img/blog/4.jpg",
+    "detailsImg": "/img/blog/blog-4.jpg",
+    "smallImg": "",
+    "desc": "Welcome to our blog, where we celebrate our achievement as an AWS SaaS Competency Partner and share insights on how we accomplished this significant milestone.",
+    "desc1": "As businesses unlock growth opportunities in the digital age, harnessing the power of cloud computing has become essential. Amazon Web Services (AWS) offers the AWS SaaS Competency Partner program, recognizing companies with exceptional expertise in delivering Software-as-a-Service solutions on the AWS platform.",
+    "desc2": "In this blog, we will delve into the strategies, best practices, and key factors that accelerated our business growth and earned us the prestigious AWS SaaS Competency Partner status.",
+    "date": "Nov 01, 2025",
+    "category": "Development",
+    "tags": ["Analysis", "Business"],
+    "author_role": "admin",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-light fa-user",
+        "name": "Admin",
+        "path": "#"
+      },
+      {
+        "iconName": "fa-light fa-calendar-days",
+        "name": "Oct 01, 2025"
+      },
+      {
+        "iconName": "fa-light fa-comments",
+        "name": "Comment",
+        "path": "#"
+      }
+    ],
+    "comments": [
+      {
+        "authorName": "Jane Doe",
+        "img": "/img/blog/user-1.jpg",
+        "date": "January 3, 2025",
+        "smallImg": "",
+        "desc": "England dotted with a lush, green landscape, rustic villages and throbbing with humanity. South Asian country that has plenty to offer to visitors with its diverse wildlife.",
+        "replies": [
+          {
+            "authorName": "Fred Bloggs",
+            "img": "/img/blog/user-2.jpg",
+            "date": "February 3, 2025",
+            "smallImg": "",
+            "desc": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here making it look like readable English."
+          },
+          {
+            "authorName": "Jane Bloggs",
+            "img": "/img/blog/user-3.jpg",
+            "date": "January 13, 2025",
+            "smallImg": "",
+            "desc": "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account"
+          }
+        ]
+      },
+      {
+        "authorName": "Themedemos",
+        "img": "/img/blog/user-4.jpg",
+        "date": "January 20, 2025",
+        "smallImg": "",
+        "desc": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage you need to be sure there isn't anything embarrassing hidden in the middle of text. All the"
+      }
+    ]
+  }
+]

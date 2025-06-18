@@ -1,0 +1,62 @@
+[
+	{
+		"id": 1,
+		"authorName": "Tim Bailey",
+		"authorDesig": "SEO Specialist, Theme Junction",
+		"img": "/img/testimonials/user/1.jpg",
+		"logoImg": "/img/testimonials/logo/1.png",
+		"logoImgLight": "/img/testimonials/logo/1-dark.png",
+		"thumbImg": "/img/testimonials/user/testmonial-7-thumb.jpg",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	},
+	{
+		"id": 2,
+		"authorName": "Brandon Fraser",
+		"authorDesig": "Senior Software Dev, Cosmic Sport",
+		"img": "/img/testimonials/user/2.jpg",
+		"logoImg": "/img/testimonials/logo/2.png",
+		"logoImgLight": "/img/testimonials/logo/2-dark.png",
+		"thumbImg": "/img/testimonials/user/h10-test.png",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	},
+	{
+		"id": 3,
+		"authorName": "Tim Bailey",
+		"authorDesig": "SEO Specialist, Theme Junction",
+		"img": "/img/testimonials/user/1.jpg",
+		"logoImg": "/img/testimonials/logo/1.png",
+		"logoImgLight": "/img/testimonials/logo/1-dark.png",
+		"thumbImg": "/img/testimonials/user/testmonial-7-thumb.jpg",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	},
+	{
+		"id": 4,
+		"authorName": "Brandon Fraser",
+		"authorDesig": "Senior Software Dev, Cosmic Sport",
+		"img": "/img/testimonials/user/2.jpg",
+		"logoImg": "/img/testimonials/logo/2.png",
+		"logoImgLight": "/img/testimonials/logo/2-dark.png",
+		"thumbImg": "/img/testimonials/user/h10-test.png",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	},
+	{
+		"id": 1,
+		"authorName": "Tim Bailey",
+		"authorDesig": "SEO Specialist, Theme Junction",
+		"img": "/img/testimonials/user/1.jpg",
+		"logoImg": "/img/testimonials/logo/1.png",
+		"logoImgLight": "/img/testimonials/logo/1-dark.png",
+		"thumbImg": "/img/testimonials/user/testmonial-7-thumb.jpg",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	},
+	{
+		"id": 2,
+		"authorName": "Brandon Fraser",
+		"authorDesig": "Senior Software Dev, Cosmic Sport",
+		"img": "/img/testimonials/user/2.jpg",
+		"logoImg": "/img/testimonials/logo/2.png",
+		"logoImgLight": "/img/testimonials/logo/2-dark.png",
+		"thumbImg": "/img/testimonials/user/testmonial-7-thumb.jpg",
+		"desc": "“Taylor is a professional Designer he really helps my business by providing value to my business."
+	}
+]
