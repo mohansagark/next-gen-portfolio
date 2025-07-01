@@ -89,14 +89,14 @@ const Header = ({ isSticky }) => {
                 ) : (
                   <li className="hidden md:block">
                     <Link
-                      href="mailto:contact@devmohan.com"
+                      href="mailto:contact@devmohan.in"
                       className={`text-size-15 font-medium ${
                         isInnerPage && !isSticky
                           ? "text-white-color"
                           : "text-seondary-color dark:text-white-color"
                       } `}
                     >
-                      contact@devmohan.com
+                      contact@devmohan.in
                     </Link>
                   </li>
                 )}
