@@ -63,6 +63,11 @@ const bgColor7 = "#814CEC33";
 const bgColor8 = "rgb(192, 172, 233)";
 const green1 = "#00ff2f";
 const green2 = "#00f721";
+const facebook = "#1877F2";
+const github = "#333";
+const instagram = "linear-gradient(to bottom right, #feda75, #d62976, #962fbf)";
+const linkedin = "#0A66C2";
+
 module.exports = {
   content: [
     "./demo/index.html",
@@ -122,6 +127,10 @@ module.exports = {
         "bg-color-6": bgColor6,
         "bg-color-7": bgColor7,
         "bg-color-8": bgColor8,
+        facebook: facebook,
+        instagram: instagram,
+        github: github,
+        linkedin: linkedin,
         green1: green1,
         green2: green2,
       },

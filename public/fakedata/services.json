@@ -1,118 +1,191 @@
 [
-	{
-		"id": 1,
-		"title": "Web Development",
-		"img": "/img/services/1.png",
-		"imgSm": "/img/icons/services-10-icons-1.svg",
-		"iconName": "flaticon-design",
-
-		"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-		"shortDesc": "Ensure your website looks great on any device,with layouts that adapt to different screen sizes seamlessly.",
-		"desc1": "Brolly show off show off pick your nose and blow off well A bit of how’s your father tomfoolery blimey, me old mucker starkers Queen’s English dropped a clanger bite your arm spiffing good time burke Why chancer. Hotpot bum bag cracking goal young delinquent naff bugger cup of chars bender loo it’s all gone to pot the nancy cheeky.",
-		"desc2": "At public school cras bog some dodgy chav Richard Why argy bargy vagabon William bender matie boy, off his nut chancer Jeffrey up the kyver say mufty you mug ummm telling pear shaped Oxford owt to do with me do one so said are you taking his.",
-		"totalProject": "10 Projects",
-		"process": {
-			"title": "Services Process",
-			"img": "/img/services/service-details.jpg",
-			"imgSm": "/img/icons/services-10-icons-2.svg",
-			"iconName": "flaticon-ux-design ",
-
-			"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-			"processItems": [
-				"Reinvent Your Business to Better",
-				"Pioneering the Internet's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First"
-			]
-		}
-	},
-	{
-		"id": 2,
-		"title": "UI/UX Design",
-		"img": "/img/services/2.png",
-		"imgSm": "/img/icons/services-10-icons-3.svg",
-		"iconName": "flaticon-ux-design",
-
-		"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-		"shortDesc": "Set up user-friendly CMS solutions like WordPress or custom-built options so clients can manage content  easily.",
-		"desc1": "Brolly show off show off pick your nose and blow off well A bit of how’s your father tomfoolery blimey, me old mucker starkers Queen’s English dropped a clanger bite your arm spiffing good time burke Why chancer. Hotpot bum bag cracking goal young delinquent naff bugger cup of chars bender loo it’s all gone to pot the nancy cheeky.",
-		"desc2": "At public school cras bog some dodgy chav Richard Why argy bargy vagabon William bender matie boy, off his nut chancer Jeffrey up the kyver say mufty you mug ummm telling pear shaped Oxford owt to do with me do one so said are you taking his.",
-		"totalProject": "11 Projects",
-		"process": {
-			"title": "Services Process",
-			"img": "/img/services/service-details.jpg",
-			"imgSm": "/img/icons/services-10-icons-1.svg",
-			"iconName": "flaticon-design",
-
-			"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-			"processItems": [
-				"Reinvent Your Business to Better",
-				"Pioneering the Internet's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First"
-			]
-		}
-	},
-	{
-		"id": 3,
-		"title": "Content Writing",
-		"img": "/img/services/3.png",
-		"imgSm": "/img/icons/services-10-icons-1.svg",
-		"iconName": "flaticon-web-design",
-
-		"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-		"shortDesc": "Build and integrate APIs to connect websites with third-party applications, enhancing functionality and performance.",
-		"desc1": "Brolly show off show off pick your nose and blow off well A bit of how’s your father tomfoolery blimey, me old mucker starkers Queen’s English dropped a clanger bite your arm spiffing good time burke Why chancer. Hotpot bum bag cracking goal young delinquent naff bugger cup of chars bender loo it’s all gone to pot the nancy cheeky.",
-		"desc2": "At public school cras bog some dodgy chav Richard Why argy bargy vagabon William bender matie boy, off his nut chancer Jeffrey up the kyver say mufty you mug ummm telling pear shaped Oxford owt to do with me do one so said are you taking his.",
-		"totalProject": "15 Projects",
-		"process": {
-			"title": "Services Process",
-			"img": "/img/services/service-details.jpg",
-			"imgSm": "/img/icons/services-10-icons-1.svg",
-			"iconName": "flaticon-design",
-
-			"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-			"processItems": [
-				"Reinvent Your Business to Better",
-				"Pioneering the Internet's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First"
-			]
-		}
-	},
-	{
-		"id": 4,
-		"title": "Digital Marketing",
-		"img": "/img/services/4.png",
-		"imgSm": "/img/icons/services-10-icons-1.svg",
-		"iconName": "flaticon-3d-movie",
-
-		"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-		"shortDesc": "Refresh outdated websites with modern, appealing designs that align with current brand goals and user expectations.",
-		"desc1": "Brolly show off show off pick your nose and blow off well A bit of how’s your father tomfoolery blimey, me old mucker starkers Queen’s English dropped a clanger bite your arm spiffing good time burke Why chancer. Hotpot bum bag cracking goal young delinquent naff bugger cup of chars bender loo it’s all gone to pot the nancy cheeky.",
-		"desc2": "At public school cras bog some dodgy chav Richard Why argy bargy vagabon William bender matie boy, off his nut chancer Jeffrey up the kyver say mufty you mug ummm telling pear shaped Oxford owt to do with me do one so said are you taking his.",
-		"totalProject": "10 Projects",
-		"process": {
-			"title": "Services Process",
-			"img": "/img/services/service-details.jpg",
-			"imgSm": "/img/icons/services-10-icons-1.svg",
-			"iconName": "flaticon-design",
-
-			"desc": "Elizabeth some dodgy chavs are you taking the piss faff about pardon amongst car boot a load of old tosh is cracking goal blow off telling brown.",
-			"processItems": [
-				"Reinvent Your Business to Better",
-				"Pioneering the Internet's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First",
-				"Pioneering the Design World's First"
-			]
-		}
-	}
+  {
+    "id": 1,
+    "title": "Web Development",
+    "img": "/img/services/1.png",
+    "imgSm": "/img/icons/services-10-icons-1.svg",
+    "iconName": "flaticon-web-dev",
+    "desc": "Crafting responsive, high-performance websites tailored to your brand's vision and user experience goals.",
+    "shortDesc": "Responsive websites that look great and perform seamlessly across devices.",
+    "desc1": "Leveraging modern frameworks like React, Angular or Vue to build dynamic, scalable web applications optimized for speed and maintainability.",
+    "desc2": "Ensuring pixel-perfect layouts, accessibility standards, and SEO-friendly structures so your site not only looks good but ranks well and engages users.",
+    "totalProject": "20+ Projects",
+    "process": {
+      "title": "Web Dev Process",
+      "img": "/img/services/web-dev-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-2.svg",
+      "iconName": "flaticon-code",
+      "desc": "A step-by-step workflow to bring your web project from concept to launch with full transparency.",
+      "processItems": [
+        "Requirements & Architecture",
+        "UI/UX Design & Mockups",
+        "Frontend Implementation",
+        "Backend & API Integration",
+        "Testing & QA",
+        "Deployment & Monitoring"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "title": "Mobile App Development",
+    "img": "/img/services/2.png",
+    "imgSm": "/img/icons/services-10-icons-3.svg",
+    "iconName": "flaticon-mobile-app",
+    "desc": "Building intuitive, high-quality mobile apps—iOS & Android—designed to scale and delight users.",
+    "shortDesc": "Cross‑platform mobile experiences that engage and retain users.",
+    "desc1": "Expertise in React Native and native development frameworks to deliver performant apps with native-like feel and functionality.",
+    "desc2": "Optimizing for app store distribution, performance, push‑notifications, and offline capabilities, ensuring full lifecycle support.",
+    "totalProject": "10+ Projects",
+    "process": {
+      "title": "App Dev Process",
+      "img": "/img/services/app-dev-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-4.svg",
+      "iconName": "flaticon-smartphone",
+      "desc": "From concept to App Store/Play Store launch, each stage is meticulously handled.",
+      "processItems": [
+        "Concept & Wireframing",
+        "UI/UX for Mobile",
+        "Core Development",
+        "Backend & Sync Services",
+        "Beta Testing",
+        "Store Submission & Updates"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "title": "UI/UX Design",
+    "img": "/img/services/3.png",
+    "imgSm": "/img/icons/services-10-icons-5.svg",
+    "iconName": "flaticon-ux-design",
+    "desc": "Designing engaging interfaces and seamless user journeys for web and mobile products.",
+    "shortDesc": "User-centered designs that blend aesthetics with usability.",
+    "desc1": "Conducting research, personas, and user flow mapping to inform intuitive and attractive visual design.",
+    "desc2": "Delivering high-fidelity prototypes and micro-interactions that feel natural and enhance user engagement.",
+    "totalProject": "15+ Projects",
+    "process": {
+      "title": "Design Process",
+      "img": "/img/services/ux-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-6.svg",
+      "iconName": "flaticon-design",
+      "desc": "Our design methodology focuses on clarity, consistency, and user delight.",
+      "processItems": [
+        "Discovery & Research",
+        "Wireframes & Flows",
+        "Visual Design",
+        "Interactive Prototypes",
+        "Usability Testing",
+        "Iterate & Deliver"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "title": "API Development & Integration",
+    "img": "/img/services/4.png",
+    "imgSm": "/img/icons/services-10-icons-7.svg",
+    "iconName": "flaticon-api",
+    "desc": "Designing and integrating robust APIs to power frontend and backend systems seamlessly.",
+    "shortDesc": "Secure, scalable APIs that connect systems and enhance functionality.",
+    "desc1": "Creating RESTful or GraphQL endpoints with thorough documentation and version control.",
+    "desc2": "Integrating third-party services (e.g., payment, analytics, social, CRMs), ensuring reliable data flow and error handling.",
+    "totalProject": "12+ Projects",
+    "process": {
+      "title": "API Process",
+      "img": "/img/services/api-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-8.svg",
+      "iconName": "flaticon-integration",
+      "desc": "Structured approach to API design, testing, and deployment, ensuring robust integrations.",
+      "processItems": [
+        "Endpoint Design",
+        "Authentication & Security",
+        "Implementation & Testing",
+        "Documentation",
+        "Mocking & QA",
+        "Deployment & Monitoring"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "title": "CMS Setup & Customization",
+    "img": "/img/services/5.png",
+    "imgSm": "/img/icons/services-10-icons-9.svg",
+    "iconName": "flaticon-cms",
+    "desc": "Implementing and customizing CMS platforms like WordPress, Strapi, or headless setups for easy content management.",
+    "shortDesc": "Empower non-tech users with easy-to-manage content workflows.",
+    "desc1": "Setting up CMS with tailored themes, plugins, user roles, and workflows to match your editorial or marketing needs.",
+    "desc2": "Custom integrations, content migrations and training so you can manage your site or app without developer help.",
+    "totalProject": "8+ Projects",
+    "process": {
+      "title": "CMS Process",
+      "img": "/img/services/cms-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-10.svg",
+      "iconName": "flaticon-editor",
+      "desc": "Make content publishing effortless and error‑free for your team.",
+      "processItems": [
+        "Needs Assessment",
+        "CMS Selection",
+        "Theme/Plugin Setup",
+        "Content Structure & Migration",
+        "Editor Training",
+        "Ongoing Maintenance"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "title": "Performance Optimization & Audits",
+    "img": "/img/services/6.png",
+    "imgSm": "/img/icons/services-10-icons-11.svg",
+    "iconName": "flaticon-speedometer",
+    "desc": "Auditing and optimizing your site or app for speed, accessibility, SEO and best practices.",
+    "shortDesc": "Faster sites, better metrics, improved user experience and SEO.",
+    "desc1": "Using Lighthouse, Web Vitals, and server analysis to identify bottlenecks in front‑end and back‑end performance.",
+    "desc2": "Implementing code‑splitting, caching, image compression, lazy loading, and accessibility fixes to boost efficiency.",
+    "totalProject": "7+ Projects",
+    "process": {
+      "title": "Optimization Process",
+      "img": "/img/services/perf-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-12.svg",
+      "iconName": "flaticon-optimization",
+      "desc": "A scientific approach to measuring, optimizing, and maintaining peak performance.",
+      "processItems": [
+        "Performance Audit",
+        "Identify Bottlenecks",
+        "Implement Fixes",
+        "Retest & Measure",
+        "Deployment",
+        "Monitoring & Iteration"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "title": "Progressive Web Apps (PWA)",
+    "img": "/img/services/7.png",
+    "imgSm": "/img/icons/services-10-icons-13.svg",
+    "iconName": "flaticon-pwa",
+    "desc": "Deliver app-like experiences directly through the browser—offline support, push notifications, and fast loading.",
+    "shortDesc": "Bring your web experience closer to native apps without app store hurdles.",
+    "desc1": "Smart caching strategies, service workers, and responsive design give users reliable access even offline.",
+    "desc2": "Full support for web push, manifest configuration, and performance tuning for near-native user engagement.",
+    "totalProject": "5+ Projects",
+    "process": {
+      "title": "PWA Process",
+      "img": "/img/services/pwa-process.jpg",
+      "imgSm": "/img/icons/services-10-icons-14.svg",
+      "iconName": "flaticon-technology",
+      "desc": "Evolving your web presence into an app-like solution users love.",
+      "processItems": [
+        "Feature Planning",
+        "Service Worker Setup",
+        "Push Notifications",
+        "Offline Testing",
+        "Performance Tuning",
+        "Deployment & Audit"
+      ]
+    }
+  }
 ]
