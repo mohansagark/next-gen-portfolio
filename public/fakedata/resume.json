@@ -4,50 +4,82 @@
     "iconName": "flaticon-recommendation",
     "resumeItems": [
       {
-        "date": "2022 - Present",
-        "title": "Programming course",
-        "desc": "Blockdots, London"
+        "date": "Jul 2024 – Present",
+        "title": "Senior Software Engineer II",
+        "desc": "Invesco India Pvt. Ltd. (Hyderabad)"
       },
       {
-        "date": "2021 - 2022",
-        "title": "CMS course",
-        "desc": "Parsons, The New School"
+        "date": "Sep 2022 – Jul 2024",
+        "title": "Senior Software Engineer (SDE-3)",
+        "desc": "Reliance Jio Platforms Ltd. (Bangalore)"
       },
       {
-        "date": "2020 - 2021",
-        "title": "Web design course",
-        "desc": "House of Life, Leeds"
+        "date": "Feb 2021 – Sep 2022",
+        "title": "Senior Software Engineer",
+        "desc": "Zentree Labs (Remote)"
       },
       {
-        "date": "2018 - 2020",
-        "title": "Parsons, The New School",
-        "desc": "Theme Junction, Bursa"
+        "date": "Mar 2019 – Dec 2020",
+        "title": "Software Analyst",
+        "desc": "Shell India Markets Pvt. Ltd. (Bangalore)"
+      },
+      {
+        "date": "Jan 2017 – Mar 2019",
+        "title": "Application Development Analyst",
+        "desc": "Accenture Solutions (Bangalore)"
       }
     ]
   },
   {
-    "title": "My Education",
+    "title": "My Education & Certifications",
     "iconName": "flaticon-graduation-cap",
     "resumeItems": [
       {
-        "date": "2020 - 2023",
-        "title": "BLOCKDOTS",
-        "desc": "Harverd University"
+        "date": "Jan 2022 – May 2022",
+        "title": "Full Stack Development Certification",
+        "desc": "Scaler Academy"
       },
       {
-        "date": "2016 - 2020",
-        "title": "Parsons, The New School",
-        "desc": "University of Denmark"
+        "date": "Jan 2019 – May 2019",
+        "title": "Pro Degree in Data Science",
+        "desc": "Imarticus Learning"
       },
       {
-        "date": "2012 - 2015",
-        "title": "IDEO",
-        "desc": "University of California"
+        "date": "Aug 2012 – May 2016",
+        "title": "B.Tech, Mechanical Engineering",
+        "desc": "VIT University, Tamil Nadu"
+      }
+    ]
+  },
+  {
+    "title": "Key Achievements",
+    "iconName": "flaticon-trophy",
+    "resumeItems": [
+      {
+        "date": "2024",
+        "title": "Engineering Excellence Award",
+        "desc": "Awarded at Invesco for outstanding contribution to the AI R&D team's performance optimization framework."
       },
       {
-        "date": "2010 - 2011",
-        "title": "Parsons, The New School",
-        "desc": "Parsons, The New School"
+        "date": "2023",
+        "title": "Innovation Champion",
+        "desc": "Recognized at Reliance Jio for leading the redesign of the ResQ app used by over a million users."
+      },
+
+      {
+        "date": "2021",
+        "title": "Best Employee of the Quarter",
+        "desc": "Awarded for exceptional contribution to IFSG UI Team at Reliance Jio"
+      },
+      {
+        "date": "2019",
+        "title": "Winner - Shell Hackathon",
+        "desc": "Won for best concept and presentation at Shell Hackathon 2019"
+      },
+      {
+        "date": "2018",
+        "title": "Star Performer",
+        "desc": "Awarded twice at Accenture for leadership in testing and delivery"
       }
     ]
   }
