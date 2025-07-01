@@ -6,22 +6,26 @@ const TestimonialsCard = ({ testimonial }) => {
   return (
     <div className="p-25px bg-white-color dark:bg-primary-color-light rounded-15px relative z-0 group">
       <div className="flex justify-between gap-30px mb-5">
-        <div className="max-w-100px w-full">
-          <Image
-            src={logoImg}
-            alt=""
-            className="!hidden dark:!block"
-            width={500}
-            height={100}
-          />
-          <Image
-            src={logoImgLight}
-            alt=""
-            className="!block dark:!hidden"
-            width={500}
-            height={100}
-          />
-        </div>
+        {logoImg && logoImgLight ? (
+          <div className="max-w-100px w-full">
+            <Image
+              src={logoImg}
+              alt=""
+              className="!hidden dark:!block"
+              width={500}
+              height={100}
+            />
+            <Image
+              src={logoImgLight}
+              alt=""
+              className="!block dark:!hidden"
+              width={500}
+              height={100}
+            />
+          </div>
+        ) : (
+          <div className="max-w-100px w-full" />
+        )}
         <div className="max-w-120px w-2/5">
           <Image
             className="rounded-5px rounded-bl-125px w-full"
