@@ -8,26 +8,31 @@ const Resume5 = ({ type, title }) => {
   useEffect(() => {
     tjTab();
   }, []);
+
   const resume = getResume();
+
   return (
-    <section id="credentials">
+    <section id="credentials" className="overflow-hidden">
       <div
-        className={`py-60px md:py-20 lg:py-30 relative ${
+        className={`relative py-16 md:py-20 lg:py-30 ${
           type === 2 ? "dark:bg-primary-color-light" : ""
-        } after:absolute after:top-0 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:right-5 after:w-650px after:h-550px after:blur-[150px] after:rounded-50% after:bg-gradient-circle-2 after:-z-1 after:opacity-60`}
+        }`}
       >
-        <div className="container">
-          <div className="mb-10 md:mb-50px xl:mb-60px text-center flex flex-col items-center">
-            <div className="mb-25px">
+        {/* background gradient (contained absolutely and doesn't overflow) */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[650px] h-[550px] blur-[150px] rounded-full bg-gradient-circle-2 opacity-60 -z-10 pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="mb-10 md:mb-12 xl:mb-16 text-center flex flex-col items-center">
+            <div className="mb-6">
               <span
-                className="text-xs uppercase text-primary-color font-medium relative inline-block tracking-0.2em wow fadeInUp"
+                className="text-xs uppercase text-primary-color font-medium relative inline-block tracking-wider wow fadeInUp"
                 data-wow-delay=".3s"
               >
                 Behind the Pixels
               </span>
             </div>
             <h2
-              className="text-3xl md:text-size-35 lg:text-size-40 xl:text-size-45 font-semibold leading-1.2 -tracking-0.02em inline-block text-seondary-color dark:text-white-color max-w-580px w-full wow fadeInUp"
+              className="text-2xl md:text-[35px] lg:text-[40px] xl:text-[45px] font-semibold leading-tight tracking-tight text-seondary-color dark:text-white-color max-w-[580px] w-full wow fadeInUp"
               data-wow-delay={type === 2 ? "0" : ".4s"}
             >
               {title ? title : "My Experience, Education & Awards"}
@@ -35,29 +40,31 @@ const Resume5 = ({ type, title }) => {
           </div>
 
           {/* Tabs */}
-          <div className="flex items-center mb-30px sm:mb-10">
-            <ul
-              id="tabs"
-              className="max-w-400 mx-auto inline-flex items-center justify-center bg-primary-color rounded-full p-5px relative z-0"
-            >
-              {resume?.map((section, idx) => (
-                <li key={idx} className={idx === 0 ? "active" : ""}>
-                  <a
-                    href={`#tab${idx + 1}`}
-                    className="text-sm sm:text-size-15 font-bold px-15px sm:px-25px py-10px sm:py-11px text-white-color bg-transparent rounded-full"
-                  >
-                    {section.title.includes("Experience")
-                      ? "Experiences"
-                      : section.title.includes("Education")
-                      ? "Education"
-                      : "Awards"}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="flex justify-center mb-8 sm:mb-10">
+            <div className="overflow-x-auto max-w-full scrollbar-hide">
+              <ul
+                id="tabs"
+                className="inline-flex items-center bg-primary-color rounded-full p-1 space-x-2 min-w-fit"
+              >
+                {resume?.map((section, idx) => (
+                  <li key={idx} className={idx === 0 ? "active" : ""}>
+                    <a
+                      href={`#tab${idx + 1}`}
+                      className="whitespace-nowrap text-sm sm:text-base font-bold px-4 sm:px-6 py-2 sm:py-2.5 text-white bg-transparent rounded-full"
+                    >
+                      {section.title.includes("Experience")
+                        ? "Experiences"
+                        : section.title.includes("Education")
+                        ? "Education"
+                        : "Awards"}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Content tabs */}
+          {/* Content Tabs */}
           <div id="tab-contents">
             {resume?.map((section, idx) => (
               <div
@@ -69,17 +76,17 @@ const Resume5 = ({ type, title }) => {
                 data-wow-delay=".2s"
                 data-wow-duration="0.6s"
               >
-                <div className="px-15px py-30px xl:p-60px border-2 border-body-color dark:border-bg-color-2 rounded-15px">
+                <div className="p-4 md:p-10 border-2 border-body-color dark:border-bg-color-2 rounded-[15px]">
                   <div className="w-full">
                     {section.resumeItems?.map((item, i) => (
                       <div
                         key={i}
-                        className="flex flex-col md:flex-row md:justify-between gap-5 lg:gap-35px 2xl:gap-95px pb-45px mb-10 border-b-2 border-body-color dark:border-bg-color-2 last:border-0 wow fadeInUp"
+                        className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-8 pb-8 mb-4 border-b-2 border-body-color dark:border-bg-color-2 last:border-0 wow fadeInUp"
                         data-wow-delay={`.${i + 2}s`}
                         data-wow-duration="0.5s"
                       >
-                        <div className="flex flex-col md:flex-row gap-30px md:gap-10 max-w-735px w-full">
-                          <div className="w-60px flex-shrink-0">
+                        <div className="flex flex-col sm:flex-row gap-4 w-full">
+                          <div className="w-12 h-12 flex-shrink-0">
                             <img
                               src={`/img/icons/${
                                 section.title.includes("Experience")
@@ -89,24 +96,23 @@ const Resume5 = ({ type, title }) => {
                                   : "h4-award"
                               }-${i + 1}.png`}
                               alt="icon"
+                              className="w-full h-full object-contain"
                             />
                           </div>
-                          <div>
-                            <h4 className="text-xl leading-1.2 text-seondary-color dark:text-white-color mb-15px uppercase font-medium">
+                          <div className="flex-1">
+                            <h4 className="text-lg sm:text-xl text-seondary-color dark:text-white-color mb-2 uppercase font-medium">
                               {item.title}
                             </h4>
-                            <p className="text-primary-color dark:text-body-color text-size-15 uppercase mb-22px">
+                            <p className="text-primary-color dark:text-body-color text-sm sm:text-base uppercase mb-3">
                               {item.desc}
                             </p>
                           </div>
                         </div>
-                        <div className="md:flex-shrink-0">
-                          <div className="flex items-center gap-10px text-lg sm:text-xl">
-                            <i className="fa-thin fa-calendar-check text-xl text-primary-color leading-1"></i>
-                            <p className="text-seondary-color dark:text-body-color-3 md:ml-auto">
-                              {item.date}
-                            </p>
-                          </div>
+                        <div className="flex items-center gap-2 text-base sm:text-lg mt-2 md:mt-0">
+                          <i className="fa-thin fa-calendar-check text-primary-color"></i>
+                          <p className="text-seondary-color dark:text-body-color-3">
+                            {item.date}
+                          </p>
                         </div>
                       </div>
                     ))}
