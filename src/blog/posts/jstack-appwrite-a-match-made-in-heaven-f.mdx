@@ -1,0 +1,37 @@
+---
+title: "JStack + Appwrite: A Match Made in Heaven for Modern Web Development"
+subtitle: "Essential insights for developers to start the day"
+summary: "If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice. I am talking about T3 Stack launched a while back by everyone's favourite Theo, but recently a new player has entered the market called JStack, by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always I am late to the party I try to give a framework time to mature and gather feedback from community before giving it a shot."
+slug: "jstack-appwrite-a-match-made-in-heaven-f"
+date: "2025-07-06"
+time: "15:38"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["database", "html", "databases", "cloud", "ui"]
+image_suggestion: "Professional illustration representing JStack + Appwrite: A Match Made in Heaven for Modern Web Development"
+source_url: "https://dev.to/chiragagg5k/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development-1cln"
+published_date: "Sun, 06 Jul 2025 15:27:22 +0000"
+---
+
+# JStack + Appwrite: A Match Made in Heaven for Modern Web Development
+
+## Essential insights for developers to start the day
+
+### Summary
+If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice. I am talking about T3 Stack launched a while back by everyone's favourite Theo, but recently a new player has entered the market called JStack, by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always I am late to the party I try to give a framework time to mature and gather feedback from community before giving it a shot.
+
+---
+
+If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice. I am talking about T3 Stack launched a while back by everyone's favourite Theo, but recently a new player has entered the market called JStack, by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always I am late to the party I try to give a framework time to mature and gather feedback from community before giving it a shot. So, did I prefer JStack over T3 stack? Did it have more compatibility with Appwrite, my favourite backend provider? Can it be hosted on Appwrite Sites? Let's find out. Getting Started Let's start with initialising the project: bunx create-jstack-app@latest Enter fullscreen mode Exit fullscreen mode Options selected: ┌ jStack CLI │ ◇ What will your project be called? │ testing-jstack-appwrite │ ◇ Which database ORM would you like to use? │ None │ ◇ Should we run 'bun install' for you? │ Yes Using: bun ✔ testing-jstack-appwrite scaffolded successfully! Enter fullscreen mode Exit fullscreen mode Let's just quickly run a dev server to see what we get out of the box: cd cd testing-jstack-appwrite bun dev Enter fullscreen mode Exit fullscreen mode Initialising Project On skipping the ORM option, the stack still sets up a /src/server folder with an example posts router. But it only mocks the DB using an array which does not persist: // Mocked DB interface Post { id: number name: string } const posts: Post[] = [ { id: 1, name: "Hello World", }, ] Enter fullscreen mode Exit fullscreen mode We skipped the ORM option because Appwrite provides built-in schema management through its SDK, eliminating the need for a separate ORM layer. To get started, let's head over to https://cloud.appwrite.io to set up our project. If you are using Appwrite for the first time, I highly recommend you check out our Start with Web docs. Here is a quick setup guide: Create a new project - Add a new web platform and select Next.js - Go to project overview and grab your project's ID and region-specific endpoint: Create a new .env file in your project directory and paste in those values: NEXT_PUBLIC_APPWRITE_PROJECT_ID=686a271700323696d223 NEXT_PUBLIC_APPWRITE_ENDPOINT=https://fra.cloud.appwrite.io/v1 NEXT_PUBLIC_APP_DOMAIN=localhost # we will change it later Enter fullscreen mode Exit fullscreen mode Now, let's initialise the Appwrite SDK in the project using: bun add appwrite Enter fullscreen mode Exit fullscreen mode This covers up on how to initialize Appwrite in normal Next.js project. Now we need to configure our Appwrite databases according to the project. For this demo, let's create a Posts collection to shift the mock database JStack uses as an example to Appwrite. Defining Schema Go to the Appwrite Console > Databases > Create Database. We will call it main , and keep it' ID as main as well: Similarly, create a collection posts and keep its ID as posts. Each docume
+
+## Key Takeaways
+
+1. If you are using Appwrite for the first time, I highly recommend you check out our Start with Web docs
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [JStack + Appwrite: A Match Made in Heaven for Modern Web Development](https://dev.to/chiragagg5k/jstack-appwrite-a-match-made-in-heaven-for-modern-web-development-1cln)*
+
+*Tags: database, html, databases, cloud, ui*
