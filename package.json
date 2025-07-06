@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate:blogs": "node scripts/convert-mdx-to-json.js",
+    "generate:blogs": "node scripts/convert-mdx-to-json.mjs",
     "prebuild": "yarn generate:blogs",
     "dev": "next dev --turbopack",
     "build": "next build",
