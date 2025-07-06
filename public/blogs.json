@@ -1,0 +1,322 @@
+[
+  {
+    "id": "charm-of-method-chaining-fluent-interfac",
+    "title": "Charm of Method Chaining Fluent Interface Patterns in Frameworks",
+    "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of developer_experience development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 05, 2025",
+    "category": "architecture",
+    "tags": [
+      "architecture",
+      "devops",
+      "mobile",
+      "api",
+      "performance"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "code-review-and-team-collaboration-best-",
+    "title": "Code Review and Team Collaboration Best Practices Methods for Improving Code Quality",
+    "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of developer_experience development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 06, 2025",
+    "category": "architecture",
+    "tags": [
+      "architecture",
+      "design",
+      "performance",
+      "tools",
+      "devops"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "cross-platform-quality-assurance",
+    "title": "Cross-Platform Quality Assurance",
+    "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of cross_platform development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
+    "desc1": "Educational content for late-night learners",
+    "desc2": "educational and foundational",
+    "date": "Jul 05, 2025",
+    "category": "devops",
+    "tags": [
+      "devops",
+      "backend",
+      "web",
+      "ui",
+      "mobile"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "css-intelligence-speculating-on-the-futu",
+    "title": "CSS Intelligence: Speculating On The Future Of A Smarter Language",
+    "desc": "16 min readCSS, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorGabriel is a front-end developer and technical writer. He specializes in HTML, CSS, JavaScript, React, Vue, TailwindCSS, and BootStrap, with a track record of … More about Gabriel ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.",
+    "desc1": "Technical tutorials and coding tips to start the day",
+    "desc2": "energetic and practical",
+    "date": "Jul 06, 2025",
+    "category": "javascript",
+    "tags": [
+      "javascript",
+      "html",
+      "career",
+      "css",
+      "ui"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "decoding-the-svg-code-path-code-element-",
+    "title": "Decoding The SVG <code>path</code> Element: Curve And Arc Commands",
+    "desc": "13 min readCSS, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorMyriam Frisano is a Swiss lover of words who has fallen head over heels for the world of CSS when she realized it could make one of her biggest dreams as a … More about Myriam ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks. Smart Interface Design Patterns, 40 lessons + UX training Smart Interface Design Patterns, 45 lessons + UX training Accessible Front-End Components, with Stephanie Eckles Smart Interface Design Patterns, 40 lessons + UX trainingOn her quest to teach you how to code vectors by hand, Myriam Frisano’s second installment of a path deep dive explores the most complex aspects of SVG’s most powerful element.",
+    "desc1": "Technical tutorials and coding tips to start the day",
+    "desc2": "energetic and practical",
+    "date": "Jul 06, 2025",
+    "category": "javascript",
+    "tags": [
+      "javascript",
+      "html",
+      "css",
+      "ui",
+      "angular"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "event-driven-architecture-pattern-applic",
+    "title": "Event Driven Architecture Pattern Application Practice in Web Frameworks",
+    "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of architecture development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
+    "desc1": "Educational content for late-night learners",
+    "desc2": "educational and foundational",
+    "date": "Jul 06, 2025",
+    "category": "performance",
+    "tags": [
+      "performance",
+      "mobile",
+      "design",
+      "web",
+      "backend"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "from-zero-to-chat-my-journey-building-a-",
+    "title": "From Zero to Chat: My Journey Building a MERN App (and Yours Can Be Too!)",
+    "desc": "Hey developers. 👋 I'm excited to share a project I just finished — a real-time chat application built using the MERN stack, complete with messaging, image sharing, theme switching, emoji support, and more. Whether you're into full-stack development or just looking to explore a real-world example of React + Node + Socket.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 04, 2025",
+    "category": "react",
+    "tags": [
+      "react",
+      "backend",
+      "ui",
+      "javascript",
+      "ux"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "i-built-a-reactive-no-code-flow-engine-t",
+    "title": "I built a reactive no-code flow engine that runs entirely in your browser, no login, no backend",
+    "desc": "to 👋 I’ve been working on a side project that started from a simple frustration: I just wanted to build a chatbot but every tool forced me to write complex code, bury logic inside nodes, or sign up for yet another cloud service. So I built my own. Introducing Wanderer Flow – a reactive, visual, and open flow engine that runs 100% in the browser.",
+    "desc1": "Technical tutorials and coding tips to start the day",
+    "desc2": "energetic and practical",
+    "date": "Jul 05, 2025",
+    "category": "typescript",
+    "tags": [
+      "typescript",
+      "frontend",
+      "tools",
+      "css",
+      "vue"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "jstack-appwrite-a-match-made-in-heaven-f",
+    "title": "JStack + Appwrite: A Match Made in Heaven for Modern Web Development",
+    "desc": "If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice. I am talking about T3 Stack launched a while back by everyone's favourite Theo, but recently a new player has entered the market called JStack, by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always I am late to the party I try to give a framework time to mature and gather feedback from community before giving it a shot.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 06, 2025",
+    "category": "database",
+    "tags": [
+      "database",
+      "html",
+      "databases",
+      "cloud",
+      "ui"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "kelpui",
+    "title": "KelpUI",
+    "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. KelpUI is new library that Chris Ferdinandi is developing, designed to leverage newer CSS features and Web Components. I’ve enjoyed following Chris as he’s published an ongoing series of articles detailing his thought process behind the library, getting deep into his approach.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 06, 2025",
+    "category": "design",
+    "tags": [
+      "design",
+      "performance",
+      "html",
+      "css",
+      "cloud"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "mcp-in-action-seamless-ai-integration-fo",
+    "title": "MCP in Action: Seamless AI Integration for Automation and Beyond",
+    "desc": "Curious about how the latest AI applications are connecting seamlessly with real-world tools and platforms. In my latest article, I decoded the Model Context Protocol (MCP), an open-source framework from Anthropic that's changing how Large Language Models (LLMs) integrate with files, APIs, databases, and business applications. I cover the essentials: What is MCP.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 05, 2025",
+    "category": "architecture",
+    "tags": [
+      "architecture",
+      "mobile",
+      "api",
+      "ui",
+      "tools"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "perfect-combination-of-message-queue-and",
+    "title": "Perfect Combination of Message Queue and Real-Time Communication Distributed Practice（1751557889400100）",
+    "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of realtime development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 03, 2025",
+    "category": "backend",
+    "tags": [
+      "backend",
+      "devops",
+      "ui",
+      "performance",
+      "api"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "the-gap-strikes-back-now-stylable",
+    "title": "The Gap Strikes Back: Now Stylable",
+    "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Four years ago, I wrote an article titled Minding the “gap”, where I talked about the CSS gap property, where it applied, and how it worked with various CSS layouts. At the time, I described how easy it was to evenly space items out in a flex, grid, or multi-column layout, by using the gap property.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 05, 2025",
+    "category": "cloud",
+    "tags": [
+      "cloud",
+      "css",
+      "mobile",
+      "frontend",
+      "ui"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "use-codecrafters-to-learn-by-building-th",
+    "title": "Use codecrafters to learn by building the most fundamental concepts of computer science",
+    "desc": "Sign in to view linked content Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment. It will become hidden in your post, but will still be visible via the comment's permalink.",
+    "desc1": "Educational content for late-night learners",
+    "desc2": "educational and foundational",
+    "date": "Jul 04, 2025",
+    "category": "ui",
+    "tags": [
+      "ui",
+      "concepts"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "using-css-cascade-layers-with-tailwind-u",
+    "title": "Using CSS Cascade Layers With Tailwind Utilities",
+    "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Adam Wathan has (very cleverly) built Tailwind with CSS Cascade Layers, making it extremely powerful for organizing styles by priority. @layer theme, base, components, utilities; @import 'tailwindcss/theme.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 04, 2025",
+    "category": "ui",
+    "tags": [
+      "ui",
+      "mobile",
+      "career",
+      "css",
+      "cloud"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "what-is-o4-mini-high-all-you-need-to-kno",
+    "title": "What is o4-mini-high? All You Need to Know",
+    "desc": "In April 2025, OpenAI introduced two new reasoning-focused language models—o3 and o4‑mini—marking a significant evolution in generative AI’s ability to “think” before replying. Among these, the o4‑mini model—and its enhanced variant, o4‑mini‑high—has garnered attention for combining compactness, speed, and tool‐enabled reasoning. What is o4-mini-high.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 03, 2025",
+    "category": "productivity",
+    "tags": [
+      "productivity",
+      "ui",
+      "performance",
+      "mobile",
+      "design"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  },
+  {
+    "id": "wwdc-2025-wi-fi-aware-framework-revoluti",
+    "title": "WWDC 2025 - Wi-Fi Aware Framework: Revolutionizing Device-to-Device Communication on iOS",
+    "desc": "Apple's introduction of the Wi-Fi Aware framework at WWDC 2025 marks a significant milestone in peer-to-peer device communication for iOS and iPadOS applications. This comprehensive guide explores the framework's capabilities, implementation patterns, and best practices for building robust device-to-device experiences. Understanding Wi-Fi Aware Technology Wi-Fi Aware is a global standard maintained by the Wi-Fi Alliance that enables direct device-to-device communication without requiring traditional infrastructure like routers or central servers.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "date": "Jul 06, 2025",
+    "category": "architecture",
+    "tags": [
+      "architecture",
+      "performance",
+      "security",
+      "ui",
+      "mobile"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial"
+  }
+]

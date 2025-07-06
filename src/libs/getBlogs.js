@@ -1,4 +1,4 @@
-import blogs from "../../public/fakedata/blogs";
+import blogs from "../../public/blogs.json";
 
 const getBlogs = () => {
   return blogs;

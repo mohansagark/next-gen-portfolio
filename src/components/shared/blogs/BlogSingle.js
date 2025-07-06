@@ -24,8 +24,9 @@ const BlogSingle = ({ blog }) => {
   return (
     <article className="group relative  wow fadeInUp" data-wow-delay=".3s">
       <div className="rounded-lg relative overflow-hidden bg-cream-light-color dark:bg-primary-color-light">
-        <div className="relative z-0">
-          {slider?.length ? (
+        {/* TODO: BLOG IMAGE LOGIC IS HERE */}
+        {/* <div className="relative z-0">
+          {slider?.length > 0 ? (
             <div>
               <Swiper
                 spaceBetween={30}
@@ -72,7 +73,7 @@ const BlogSingle = ({ blog }) => {
               )}
             </>
           )}
-        </div>
+        </div> */}
         <Link
           href={`/blogs?category=${makePath(category)}`}
           className="text-size-13 uppercase px-15px py-10px rounded-50px leading-1 absolute top-[15px] right-[15px] text-white-color bg-gradient-secondary-2 bg-200 hover:bg-100"
