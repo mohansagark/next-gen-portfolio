@@ -1,0 +1,38 @@
+---
+title: "Setting Line Length in CSS (and Fitting Text to a Container)"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. First, what is line length. Line length is the length of a container that holds a body of multi-line text."
+slug: "setting-line-length-in-css-and-fitting-t"
+date: "2025-07-14"
+time: "15:43"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["ux", "css", "cloud", "web", "design"]
+image_suggestion: "Professional illustration representing Setting Line Length in CSS (and Fitting Text to a Container)"
+source_url: "https://css-tricks.com/setting-line-length-in-css-and-fitting-text-to-a-container/"
+published_date: "Mon, 14 Jul 2025 12:38:23 +0000"
+---
+
+# Setting Line Length in CSS (and Fitting Text to a Container)
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. First, what is line length. Line length is the length of a container that holds a body of multi-line text.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. First, what is line length? Line length is the length of a container that holds a body of multi-line text. “Multi-line” is the key part here, because text becomes less readable if the beginning of a line of text is too far away from the end of the prior line of text. This causes users to reread lines by mistake, and generally get lost while reading. Luckily, the Web Content Accessibility Guidelines (WCAG) gives us a pretty hard rule to follow: no more than 80 characters on a line (40 if the language is Chinese, Japanese, or Korean), which is super easy to implement using character (ch) units: width: 80ch; The width of 1ch is equal to the width of the number 0 in your chosen font, so the exact width depends on the font. Setting the optimal line length Just because you’re allowed up to 80 characters on a line, it doesn’t mean that you have to aim for that number. A study by the Baymard Institute revealed that a line length of 50-75 characters is the optimal length — this takes into consideration that smaller line lengths mean more lines and, therefore, more opportunities for users to make reading mistakes. That being said, we also have responsive design to think about, so setting a minimum width (e.g., min-width: 50ch) isn’t a good idea because you’re unlikely to fit 50 characters on a line with, for example, a screen/window size that is 320 pixels wide. So, there’s a bit of nuance involved, and the best way to handle that is by combining the clamp() and min() functions: clamp(): Set a fluid value that’s relative to a container using percentage, viewport, or container query units, but with minimum and maximum constraints. min(): Set the smallest value from a list of comma-separated values. Let’s start with min(). One of the arguments is 93.75vw. Assuming that the container extends across the whole viewport, this’d equal 300px when the viewport width is 320px (allowing for 20px of spacing to be distributed as you see fit) and 1350px when the viewport width is 1440px. However, for as long as the other argument (50ch) is the smallest of the two values, that’s the value that min() will resolve to. min(93.75vw, 50ch); Next is clamp(), which accepts three arguments in the following order: the minimum, preferred, and maximum values. This is how we’ll set the line length. For the minimum, you’d plug in your min() function, which sets the 50ch line length but only conditionally. For the maximum, I suggest 75ch, as mentioned before. The preferred value is totally up to you — this will be the width of your container when not hitting the minimum or maximum. width: clamp(min(93.75vw, 50ch), 70vw, 75ch); In addition, you can use min(), max(), and calc() in any of those arguments to add further nuance. If the container feels too narrow, then the font-size might be too large. If it feels too wide, then the font-size might be too small. Fit text to container (with J
+
+## Key Takeaways
+
+1. First, what is line length
+2. A study by the Baymard Institute revealed that a line length of 50-75 characters is the optimal length — this takes into consideration that smaller line lengths mean more lines and, therefore, more opportunities for users to make reading mistakes
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Setting Line Length in CSS (and Fitting Text to a Container)](https://css-tricks.com/setting-line-length-in-css-and-fitting-text-to-a-container/)*
+
+*Tags: ux, css, cloud, web, design*

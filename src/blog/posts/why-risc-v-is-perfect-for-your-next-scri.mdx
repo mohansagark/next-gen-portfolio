@@ -1,0 +1,37 @@
+---
+title: "Why RISC-V is Perfect for Your Next Scripting Engine Backend"
+subtitle: "Essential insights for developers to start the day"
+summary: "A RISC-V Backend for a Scripting Engine Seeing this title, you may have a lot of questions, like "What. Why not WASM. " All of these are valid questions, and in this article, I will be answering them and a lot more."
+slug: "why-risc-v-is-perfect-for-your-next-scri"
+date: "2025-07-14"
+time: "15:43"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["career", "performance", "design", "mobile", "architecture"]
+image_suggestion: "Professional illustration representing Why RISC-V is Perfect for Your Next Scripting Engine Backend"
+source_url: "https://dev.to/sivansh/why-risc-v-is-perfect-for-your-next-scripting-engine-backend-5goi"
+published_date: "Mon, 14 Jul 2025 15:30:18 +0000"
+---
+
+# Why RISC-V is Perfect for Your Next Scripting Engine Backend
+
+## Essential insights for developers to start the day
+
+### Summary
+A RISC-V Backend for a Scripting Engine Seeing this title, you may have a lot of questions, like "What. Why not WASM. " All of these are valid questions, and in this article, I will be answering them and a lot more.
+
+---
+
+A RISC-V Backend for a Scripting Engine Seeing this title, you may have a lot of questions, like "What? Why? Why not WASM?" All of these are valid questions, and in this article, I will be answering them and a lot more! Core Principles The end goal of this project is to have a portable, performant, safe, and non-opinionated scripting backend, primarily for use in a game engine. Portable: Scripts should be compiled once and run anywhere the engine runs. We should be able to share the compiled script binaries without worrying about the host's architecture or operating system. Performant: The scripts must execute at the highest possible performance with little to no overhead. Safe: As the system is intended to support modding, it must be a secure sandbox. Scripts should not be able to affect the host system outside of the controlled environment I provide. Non-Opinionated: The system should not restrict developers to a single language. Any language that can target the chosen architecture, like C, C++, or Rust, should be usable. Why Not WASM? To be honest, WASM fits most of these criteria. It was designed to be portable and safe, has performant runtimes, and can be targeted by most system languages. However, WASM is a stack-based virtual machine. Real hardware is almost universally register-based. This mismatch means that it's challenging for hardware to efficiently pipeline and execute stack-based instructions. While this is often solved with JIT (Just-In-Time) compilation, it adds complexity and can make the unoptimized, interpreted performance slower. I want my interpreter to be as fast as possible from the start. For a great explanation of stack vs. register machines, check out this video. Introducing RISC-V This is where RISC-V comes in. It's an open-standard instruction set architecture (ISA) that perfectly aligns with our core principles. It's a Register Machine: As a modern RISC architecture, it's designed to map efficiently to hardware, which allows for a more performant interpreter. It's an Open Standard: The base instruction set is frozen and has a wide variety of standard extensions (like for multiplication/division, atomic operations, etc.). This means we can create a minimal, custom "profile" for our scripts to target, ensuring portability. It's Simple: The base integer ISA is so simple you can fit it on a single sheet of paper. This drastically reduces the complexity of building an emulator. The Execution Environment To run RISC-V binaries, we need an emulator that acts as a virtual machine. This emulator is our sandbox, giving us complete control over how the script executes and interacts with the outside world. A diagram of the architecture: +--------------------------------+ | Host Application | | (Game Engine) | +--------------------------------+ ^ | C++ Function Calls v +--------------------------------+ | Dawn RISC-V Emulator | | (Manages Memory & `ecall`s) | +--------------------------------+ ^ | `ecall` instruction v +----------
+
+## Key Takeaways
+
+1. It's an Open Standard: The base instruction set is frozen and has a wide variety of standard extensions (like for multiplication/division, atomic operations, etc
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Why RISC-V is Perfect for Your Next Scripting Engine Backend](https://dev.to/sivansh/why-risc-v-is-perfect-for-your-next-scripting-engine-backend-5goi)*
+
+*Tags: career, performance, design, mobile, architecture*
