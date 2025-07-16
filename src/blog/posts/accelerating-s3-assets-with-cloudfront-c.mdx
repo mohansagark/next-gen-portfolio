@@ -1,0 +1,38 @@
+---
+title: "Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide"
+subtitle: "Essential insights for developers to start the day"
+summary: "Introduction In this guide, we'll walk through the process of setting up Amazon CloudFront as a Content Delivery Network (CDN) for assets store in Amazon S3. This will help improve the performance and availability of your website or application by reducing latency and distributing content across multiple edge locations. Project overview Creating an S3 bucket Uploading Assets to the S3 bucket Creating a CloudFront distribution Configuring CloudFront to use S3 as the origin Testing the setup Step-by-Step Guide Step 1: Create an S3 bucket Login to your AWS Management Console Search S3 and click on it Click on create Name it Uncheck the block all public access Scroll down to bucket versioning and enable Scroll down to bucket key and enable Click on advance settings Click on disable under object lock Then click on create Step 2: Uploading Assets to the S3 bucket After creating the S3 bucket, click on it Click on properties Scroll down and click on Static website hosting edit Click enable In hosting type, select host a static Website Under index document, put in your index name (index."
+slug: "accelerating-s3-assets-with-cloudfront-c"
+date: "2025-07-16"
+time: "15:43"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["cloud", "html", "frontend", "ui", "performance"]
+image_suggestion: "Professional illustration representing Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide"
+source_url: "https://dev.to/christiana_orji/accelerating-s3-assets-with-cloudfront-cdn-a-step-by-step-guide-1m58"
+published_date: "Wed, 16 Jul 2025 15:29:25 +0000"
+---
+
+# Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide
+
+## Essential insights for developers to start the day
+
+### Summary
+Introduction In this guide, we'll walk through the process of setting up Amazon CloudFront as a Content Delivery Network (CDN) for assets store in Amazon S3. This will help improve the performance and availability of your website or application by reducing latency and distributing content across multiple edge locations. Project overview Creating an S3 bucket Uploading Assets to the S3 bucket Creating a CloudFront distribution Configuring CloudFront to use S3 as the origin Testing the setup Step-by-Step Guide Step 1: Create an S3 bucket Login to your AWS Management Console Search S3 and click on it Click on create Name it Uncheck the block all public access Scroll down to bucket versioning and enable Scroll down to bucket key and enable Click on advance settings Click on disable under object lock Then click on create Step 2: Uploading Assets to the S3 bucket After creating the S3 bucket, click on it Click on properties Scroll down and click on Static website hosting edit Click enable In hosting type, select host a static Website Under index document, put in your index name (index.
+
+---
+
+Introduction In this guide, we'll walk through the process of setting up Amazon CloudFront as a Content Delivery Network (CDN) for assets store in Amazon S3. This will help improve the performance and availability of your website or application by reducing latency and distributing content across multiple edge locations. Project overview Creating an S3 bucket Uploading Assets to the S3 bucket Creating a CloudFront distribution Configuring CloudFront to use S3 as the origin Testing the setup Step-by-Step Guide Step 1: Create an S3 bucket Login to your AWS Management Console Search S3 and click on it Click on create Name it Uncheck the block all public access Scroll down to bucket versioning and enable Scroll down to bucket key and enable Click on advance settings Click on disable under object lock Then click on create Step 2: Uploading Assets to the S3 bucket After creating the S3 bucket, click on it Click on properties Scroll down and click on Static website hosting edit Click enable In hosting type, select host a static Website Under index document, put in your index name (index.html) Click save changes Go back to your S3 bucket Click on upload Click on add files Add the file Scroll down and hit upload Step 3: Create a CloudFront Distribution In your AWS Management Console, search CloudFront and click on it Click on create distribution Click on origin domain Choose the S3 bucket you created Scroll down to origin access and select legacy access identities Click on create new OAI Click create Click on Origin Access Identities and select the OAI you created Under bucket policy, select yes, update the bucket policy Scroll down and click on redirect HTTP to HTTPS Scroll down to settings and select use all edge locations Click add item under alternate domain name, and put your domain (you should have a domain) Scroll down to default root object, and type your index file name (/index.html) Under web application firewall, select do not use security Click on create distribution Step 4: Test the Setup Wait for the CloudFront Distribution to deploy ( this may take some minutes) Copy the distribution domain name and paste it on your browser and hit enter Conclusion By following these steps, you have successfully set up Amazon CloudFront as a CDN for your S3 Assets. See you soon... Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's permalink. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+## Key Takeaways
+
+1. This will help improve the performance and availability of your website or application by reducing latency and distributing content across multiple edge locations
+2. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide](https://dev.to/christiana_orji/accelerating-s3-assets-with-cloudfront-cdn-a-step-by-step-guide-1m58)*
+
+*Tags: cloud, html, frontend, ui, performance*
