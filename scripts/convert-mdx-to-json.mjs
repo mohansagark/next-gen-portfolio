@@ -1,4 +1,3 @@
-// scripts/convert-mdx-to-json.js
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -41,10 +40,18 @@ function run() {
   const result = [];
 
   files.forEach((file, i) => {
-    const content = fs.readFileSync(path.join(postsDir, file), "utf-8");
-    const { data } = matter(content);
-    const blogData = convertFrontmatterToJson(data, i + 1);
-    result.push(blogData);
+    const filePath = path.join(postsDir, file);
+    console.log(`Parsing file: ${file}`);
+    const content = fs.readFileSync(filePath, "utf-8");
+    try {
+      const { data } = matter(content);
+      const blogData = convertFrontmatterToJson(data, i + 1);
+      result.push(blogData);
+    } catch (error) {
+      console.error(`❌ Error in file: ${file}`);
+      console.error(error.message);
+      throw error; // Stop execution after error for easier debugging
+    }
   });
 
   fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
