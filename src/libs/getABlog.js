@@ -1,8 +1,14 @@
 import getBlogs from "./getBlogs";
 
-const getABlog = (currentId) => {
+const getABlog = (blogId) => {
   const blogs = getBlogs();
-  const blog = blogs?.find(({ id }) => parseInt(currentId) === id);
+  // Handle both numeric IDs (legacy) and string slugs
+  const blog = blogs?.find(({ id }) => {
+    if (typeof blogId === "number") {
+      return parseInt(blogId) === id;
+    }
+    return id === blogId;
+  });
   return blog;
 };
 
