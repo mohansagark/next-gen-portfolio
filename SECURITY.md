@@ -18,7 +18,7 @@ If you believe you have found a security vulnerability in Next-Gen Portfolio, pl
 
 **Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 
-Instead, please send an email to: **security@mohansagar.dev**
+Instead, please send an email to: **contact@devmohan.in**
 
 Please include as much of the information listed below as you can to help us better understand and resolve the issue:
 
@@ -146,7 +146,7 @@ When working with MDX content:
 
 For any security-related questions or concerns, please contact:
 
-- **Email**: security@mohansagar.dev
+- **Email**: contact@devmohan.in
 - **GitHub**: [@mohansagark](https://github.com/mohansagark)
 
 ## Acknowledgments

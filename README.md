@@ -238,7 +238,7 @@ yarn start
 Create `.env.local` for environment-specific settings:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://yoursite.com
+NEXT_PUBLIC_SITE_URL=https://devmohan.in
 NEXT_PUBLIC_GA_ID=your-google-analytics-id
 ```
 
@@ -276,7 +276,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Mohan Sagar**
 
 - GitHub: [@mohansagark](https://github.com/mohansagark)
-- Website: [mohansagar.dev](https://mohansagar.dev)
+- Website: [devmohan.in](https://devmohan.in)
 
 ## 🙏 Acknowledgments
 
