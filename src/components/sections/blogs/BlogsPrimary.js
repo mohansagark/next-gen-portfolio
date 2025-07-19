@@ -4,12 +4,7 @@ import Paginations from "@/components/shared/others/Paginations";
 import BlogSidebar from "@/components/shared/sidebar/BlogSidebar";
 import { useCommonContext } from "@/context_api/CommonContext";
 import usePagination from "@/hooks/usePagination";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-
-import { Autoplay, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 const BlogsPrimary = () => {
   const { filteredBlogs } = useCommonContext();

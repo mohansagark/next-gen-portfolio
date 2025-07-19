@@ -1,5 +1,4 @@
 "use client";
-import Blogs1 from "@/components/sections/blogs/Blogs1";
 import Contact1 from "@/components/sections/contact/Contact1";
 import Hero from "@/components/sections/heros/Hero";
 import Portfolio1 from "@/components/sections/portfolio/Portfolio1";

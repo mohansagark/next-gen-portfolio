@@ -1,9 +1,8 @@
 "use client";
-import { useFooterContext } from "@/context_api/FooterContext";
 import Link from "next/link";
 
 const Footer3 = () => {
-  const { footerType } = useFooterContext();
+  // const { footerType } = useFooterContext(); // Available for future use
   return (
     <footer>
       <div className="footer-inner  dark:bg-black-color">

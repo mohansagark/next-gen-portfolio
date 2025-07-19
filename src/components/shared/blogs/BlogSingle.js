@@ -1,25 +1,12 @@
 import makePath from "@/libs/makePath";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import BlogPopupVideo from "./BlogPopupVideo";
 import countCommentLength from "@/libs/countCommentLength";
 
 const BlogSingle = ({ blog }) => {
-  const {
-    id,
-    detailsImg,
-    title,
-    desc,
-    blogTopList,
-    category,
-    slider,
-    author,
-    popupVideo,
-    comments,
-  } = blog ? blog : {};
+  const { id, title, desc, blogTopList, category, author, comments } = blog
+    ? blog
+    : {};
 
   return (
     <article className="group relative  wow fadeInUp" data-wow-delay=".3s">

@@ -1,7 +1,6 @@
 "use client";
 import BlogDetailsPrimary from "@/components/sections/blog-details/BlogDetailsPrimary";
 import HeroBreadcarumb from "@/components/sections/heros/HeroBreadcarumb";
-import filter from "@/libs/filter";
 import getABlog from "@/libs/getABlog";
 import getBlogs from "@/libs/getBlogs";
 import { useParams } from "next/navigation";

@@ -1,9 +1,8 @@
 "use client";
-import { useFooterContext } from "@/context_api/FooterContext";
 import Link from "next/link";
 
 const Footer6 = () => {
-  const { footerType } = useFooterContext();
+  // const { footerType } = useFooterContext(); // Available for future use
   return (
     <footer className="dark:bg-primary-color-light">
       <div className="footer-inner  bg-[url('/img/shapes/h4-cta.jpg')] bg-cover bg-no-repeat bg-center rounded-t-[40px] md:rounded-t-[60px] lg:rounded-t-[100px]">

@@ -1,4 +1,3 @@
-import BlogComments from "@/components/shared/blog-details/BlogComments";
 import BlogSidebar from "@/components/shared/sidebar/BlogSidebar";
 import countCommentLength from "@/libs/countCommentLength";
 import makePath from "@/libs/makePath";
@@ -16,7 +15,7 @@ const BlogDetailsPrimary = ({
   isNextBlog,
 }) => {
   const {
-    id,
+    // id, // unused but kept for future reference
     detailsImg,
     title,
     desc,

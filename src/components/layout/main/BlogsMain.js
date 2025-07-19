@@ -15,16 +15,16 @@ const BlogsMain = () => {
   const author_role = useSearchParams()?.get("author_role");
   const currentPath = usePathname();
   const search = useSearchParams()?.get("search");
-  // get searched blogs
+  // get searched blogs (prepared for future search functionality)
   const {
-    searchedItems,
-    isShowSearch,
-    handleSearch,
-    handleSearchString,
-    startSearch,
-    closeSearch,
-    isShowQuickSearchResult,
-    setIsShowQuickSearchResult,
+    // searchedItems,
+    // isShowSearch,
+    // handleSearch,
+    // handleSearchString,
+    // startSearch,
+    // closeSearch,
+    // isShowQuickSearchResult,
+    // setIsShowQuickSearchResult,
   } = useSearch(allBlogs, currentPath);
 
   const filteredBlogs = filterItems(
