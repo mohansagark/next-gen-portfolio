@@ -1,0 +1,39 @@
+---
+title: "🔥 Upstox Frontend Interview (R1) for JavaScript Developers"
+subtitle: "Essential insights for developers to start the day"
+summary: "💡 Topics they asked me & my solutions: ** Note: This is exactly the answers that I provided during the interview. ** ✅ What is a closure. const counter = () => { let count = 0; const inner = () => { count++; return count } count = 2; return inner; } const c = counter(); console."
+slug: "upstox-frontend-interview-r1-for-javascr"
+date: "2025-07-19"
+time: "07:42"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["frontend", "javascript", "career", "ui"]
+image_suggestion: "Professional illustration representing 🔥 Upstox Frontend Interview (R1) for JavaScript Developers"
+source_url: "https://dev.to/ml318097/upstox-frontend-interview-r1-for-javascript-developers-19lj"
+published_date: "Sat, 19 Jul 2025 07:31:31 +0000"
+---
+# 🔥 Upstox Frontend Interview (R1) for JavaScript Developers
+
+## Essential insights for developers to start the day
+
+### Summary
+💡 Topics they asked me & my solutions: ** Note: This is exactly the answers that I provided during the interview. ** ✅ What is a closure. const counter = () => { let count = 0; const inner = () => { count++; return count } count = 2; return inner; } const c = counter(); console.
+
+---
+
+💡 Topics they asked me & my solutions: ** Note: This is exactly the answers that I provided during the interview. ** ✅ What is a closure? const counter = () => { let count = 0; const inner = () => { count++; return count } count = 2; return inner; } const c = counter(); console.log(c()); // 3 Enter fullscreen mode Exit fullscreen mode ✅ Predict setTimeout output for (var i = 0; i  { let total = 0; const inner = (n) => { if (n) { total += n; return inner; } else { return total; } }; if (arg) { total += arg; } return inner; }; console.log('Currying : ', sum(1)(2)(3)()) // 6 Enter fullscreen mode Exit fullscreen mode ✅ Build custom .map Array.prototype.mapV2 = function(fn) { const results = []; for (let i = 0; i  n + 1; const r = [1, 2, 3].mapV2(addOne); console.log(r); Enter fullscreen mode Exit fullscreen mode ✅ Create _.get from lodash const obj = { A: { B: { c: 10 } } } const get = (obj, path) => { const pathArr = path.split('.'); // ['A', 'B', 'c'] const getValue = (obj, pathArr) => { const [firstPath, ...rest] = pathArr; const value = obj[firstPath]; if (typeof value === 'object') { return getValue(value, rest); } else { return value; } }; return getValue(obj, pathArr); }; console.log(get(obj, 'A.B.c')); console.log(get(obj, 'A.B.d')); Enter fullscreen mode Exit fullscreen mode ✅ Format characters: Split string into ≤9 char blocks Given an input string, print the total number of characters. If characters are more than 9 then split it into multiple block. ex., if there are 10 consecutive 'A's then it should print '9A1A' instead of '10A' const format = (str) => { let tempChar, count; const result = []; for (let i = 0; i  { let totalTargets = 0; const result = arr.filter(item => { if (item === target) { totalTargets++; } return item !== target; }); return [...result, ...Array(totalTargets).fill(target)]; }; console.log(organize([2, 1, 2, 3, 4, 1, 2], 2)) // [1,3,4,1,2,2,2] Enter fullscreen mode Exit fullscreen mode 🔗 Questions + Solutions here: 👉 Replit – Upstox R1 🧠 Master these to crack your next JS interview. Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dis
+
+## Key Takeaways
+
+1. 💡 Topics they asked me & my solutions: ** Note: This is exactly the answers that I provided during the interview
+2. '); // ['A', 'B', 'c'] const getValue = (obj, pathArr) => { const [firstPath,
+3. rest] = pathArr; const value = obj[firstPath]; if (typeof value === 'object') { return getValue(value, rest); } else { return value; } }; return getValue(obj, pathArr); }; console
+4. If characters are more than 9 then split it into multiple block
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [🔥 Upstox Frontend Interview (R1) for JavaScript Developers](https://dev.to/ml318097/upstox-frontend-interview-r1-for-javascript-developers-19lj)*
+
+*Tags: frontend, javascript, career, ui*
