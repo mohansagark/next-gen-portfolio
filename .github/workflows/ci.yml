@@ -22,22 +22,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Generate blog data
-        run: yarn generate:blogs
+        run: npm run generate:blogs
 
       - name: Run linting
-        run: yarn lint
+        run: npm run lint
 
       - name: Build application
-        run: yarn build
+        run: npm run build
 
       - name: Run tests (if available)
-        run: yarn test --if-present
+        run: npm test --if-present
 
   build-and-deploy:
     needs: test
@@ -52,16 +52,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Generate blog data
-        run: yarn generate:blogs
+        run: npm run generate:blogs
 
       - name: Build application
-        run: yarn build
+        run: npm run build
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25

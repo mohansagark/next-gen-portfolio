@@ -50,7 +50,7 @@ A modern, responsive portfolio website built with Next.js 15, featuring dynamic 
 ### Prerequisites
 
 - Node.js 18+
-- Yarn package manager
+- npm package manager
 
 ### Installation
 
@@ -64,19 +64,19 @@ A modern, responsive portfolio website built with Next.js 15, featuring dynamic 
 2. **Install dependencies**
 
    ```bash
-   yarn install
+   npm install
    ```
 
 3. **Generate blog data**
 
    ```bash
-   yarn generate:blogs
+   npm run generate:blogs
    ```
 
 4. **Start development server**
 
    ```bash
-   yarn dev
+   npm run dev
    ```
 
 5. **Open in browser**
@@ -140,7 +140,7 @@ next-gen-portfolio/
 2. **Generate blog data**
 
    ```bash
-   yarn generate:blogs
+   npm run generate:blogs
    ```
 
 3. **Blog Features**
@@ -184,13 +184,13 @@ Switch between different homepage styles:
 
 ## 🔧 Available Scripts
 
-| Command               | Description                             |
-| --------------------- | --------------------------------------- |
-| `yarn dev`            | Start development server with Turbopack |
-| `yarn build`          | Build production application            |
-| `yarn start`          | Start production server                 |
-| `yarn lint`           | Run ESLint code analysis                |
-| `yarn generate:blogs` | Convert MDX files to JSON               |
+| Command                  | Description                             |
+| ------------------------ | --------------------------------------- |
+| `npm run dev`            | Start development server with Turbopack |
+| `npm run build`          | Build production application            |
+| `npm start`              | Start production server                 |
+| `npm run lint`           | Run ESLint code analysis                |
+| `npm run generate:blogs` | Convert MDX files to JSON               |
 
 ## 📦 Dependencies
 
@@ -220,15 +220,15 @@ Switch between different homepage styles:
 
 1. Connect repository to Vercel
 2. Configure build settings:
-   - Build Command: `yarn build`
+   - Build Command: `npm run build`
    - Output Directory: `.next`
 3. Deploy automatically on push
 
 ### Manual Deployment
 
 ```bash
-yarn build
-yarn start
+npm run build
+npm start
 ```
 
 ## 🔧 Configuration
