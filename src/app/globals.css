@@ -2050,4 +2050,18 @@ body.tj-magic-cursor #magic-cursor {
     rgb(255, 255, 255, 0.4) 50%
   );
 }
+
+/* Skills slider styles */
+.skills-slider.swiper {
+  padding-bottom: 0;
+}
+
+.skills-slider .swiper-pagination {
+  display: none;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+}
 /* !END: Theme cursor CSS */

@@ -122,11 +122,54 @@
     "comments": []
   },
   {
-    "id": "accelerating-s3-assets-with-cloudfront-c",
-    "title": "Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide",
+    "id": "a-primer-on-focus-trapping",
+    "title": "A Primer on Focus Trapping",
     "img": "/img/blog/4.jpg",
     "detailsImg": "/img/blog/blog-4.jpg",
     "smallImg": "/img/blog/post-thumb-4.jpg",
+    "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# A Primer on Focus Trapping\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one. This whole focus trap thing is used to create accessible modal dialogs since it’s a whole ‘nother trouble to inert everything else — but you don’t need it anymore if you’re building modals with the dialog API (assuming you do it right). Anyway, back to focus trapping. The whole process sounds simple in theory, but it can quite difficult to build in practice, mostly because of the numerous parts to you got to manage. Simple and easy focus trapping with Splendid Labz If you are not averse to using code built by others, you might want to consider this snippet with the code I’ve created in Splendid Labz. The basic idea is: We detect all focusable elements within an element. We manage focus with a keydown event listener. import { getFocusableElements, trapFocus } from '@splendidlabz/utils/dom' const dialog = document.querySelector('dialog') // Get all focusable content const focusables = getFocusableElements(node) // Traps focus within the dialog dialog.addEventListener('keydown', event => { trapFocus({ event, focusables }) }) The above code snippet makes focus trapping extremely easy. But, since you’re reading this, I’m sure you wanna know the details that go within each of these functions. Perhaps you wanna build your own, or learn what’s going on. Either way, both are cool — so let’s dive into it. Selecting all focusable elements I did research when I wrote about this some time ago. It seems like you could only focus an a handful of elements: a button input textarea select details iframe embed object summary dialog audio[controls] video[controls] [contenteditable] [tabindex] So, the first step in getFocusableElements is to search for all focusable elements within a container: export function getFocusableElements(container = document.body ) { return { get all () { const elements = Array.from( container.querySelectorAll( `a, button, input, textarea, select, details, iframe, embed, object, summary, dialog, audio[controls], video[controls], [contenteditable], [tabindex] `, ), ) } } } Next, we want to filter away elements that are disabled, hidden or set with display: none, since they cannot be focused on. We can do this with a simple filter function. export function getFocusableElements(container = document.body ) { return { get all () { // ... return elements.filter(el => { if (el.hasAttribute('disabled')) return false if (el.hasAttribute('hidden')) return false if (window.getComputedStyle(el).display === 'none') return false return true }) } } } Next, since we want to trap keyboard focus, it’s only natural to retrieve a list of keyboard-only focusable elements.\n\n## Key Takeaways\n\n1. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one\n2. If the user tries to Shift + Tab out of the first element, we return focus back to the last one\n3. Simple and easy focus trapping with Splendid Labz If you are not averse to using code built by others, you might want to consider this snippet with the code I’ve created in Splendid Labz\n4. It seems like you could only focus an a handful of elements: a button input textarea select details iframe embed object summary dialog audio[controls] video[controls] [contenteditable] [tabindex] So, the first step in getFocusableElements is to search for all focusable elements within a container: export function getFocusableElements(container = document\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [A Primer on Focus Trapping](https://css-tricks.com/a-primer-on-focus-trapping/)*\n\n*Tags: html, backend, api, ui, mobile*\n",
+    "keyTakeaways": [
+      "Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one",
+      "If the user tries to Shift + Tab out of the first element, we return focus back to the last one",
+      "Simple and easy focus trapping with Splendid Labz If you are not averse to using code built by others, you might want to consider this snippet with the code I’ve created in Splendid Labz",
+      "It seems like you could only focus an a handful of elements: a button input textarea select details iframe embed object summary dialog audio[controls] video[controls] [contenteditable] [tabindex] So, the first step in getFocusableElements is to search for all focusable elements within a container: export function getFocusableElements(container = document"
+    ],
+    "date": "Jul 21, 2025",
+    "category": "html",
+    "tags": [
+      "html",
+      "backend",
+      "api",
+      "ui",
+      "mobile"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 21, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": "accelerating-s3-assets-with-cloudfront-c",
+    "title": "Accelerating S3 Assets With CloudFront CDN: A Step-by-Step Guide",
+    "img": "/img/blog/5.jpg",
+    "detailsImg": "/img/blog/blog-5.jpg",
+    "smallImg": "/img/blog/post-thumb-5.jpg",
     "desc": "Introduction In this guide, we'll walk through the process of setting up Amazon CloudFront as a Content Delivery Network (CDN) for assets store in Amazon S3. This will help improve the performance and availability of your website or application by reducing latency and distributing content across multiple edge locations. Project overview Creating an S3 bucket Uploading Assets to the S3 bucket Creating a CloudFront distribution Configuring CloudFront to use S3 as the origin Testing the setup Step-by-Step Guide Step 1: Create an S3 bucket Login to your AWS Management Console Search S3 and click on it Click on create Name it Uncheck the block all public access Scroll down to bucket versioning and enable Scroll down to bucket key and enable Click on advance settings Click on disable under object lock Then click on create Step 2: Uploading Assets to the S3 bucket After creating the S3 bucket, click on it Click on properties Scroll down and click on Static website hosting edit Click enable In hosting type, select host a static Website Under index document, put in your index name (index.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -165,9 +208,9 @@
   {
     "id": "azure-fundamentals-microsoft-aad",
     "title": "Azure Fundamentals: Microsoft.AAD",
-    "img": "/img/blog/5.jpg",
-    "detailsImg": "/img/blog/blog-5.jpg",
-    "smallImg": "/img/blog/post-thumb-5.jpg",
+    "img": "/img/blog/6.jpg",
+    "detailsImg": "/img/blog/blog-6.jpg",
+    "smallImg": "/img/blog/post-thumb-6.jpg",
     "desc": "Mastering Microsoft. AAD: Your Comprehensive Guide to Azure Active Directory 1. Engaging Introduction Imagine a world where accessing your work applications is seamless, secure, and personalized, regardless of your location or device.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -208,9 +251,9 @@
   {
     "id": "better-css-shapes-using-shape-part-4-clo",
     "title": "Better CSS Shapes Using shape() — Part 4: Close and Move",
-    "img": "/img/blog/6.jpg",
-    "detailsImg": "/img/blog/blog-6.jpg",
-    "smallImg": "/img/blog/post-thumb-6.jpg",
+    "img": "/img/blog/7.jpg",
+    "detailsImg": "/img/blog/blog-7.jpg",
+    "smallImg": "/img/blog/post-thumb-7.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. This is the fourth post in a series about the new CSS shape() function. So far, we’ve covered the most common commands you will use to draw various shapes, including lines, arcs, and curves.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -247,9 +290,9 @@
   {
     "id": "browser-tab-leader-pattern-stop-wasting-",
     "title": "Browser Tab Leader Pattern: Stop Wasting API Calls Across Browser Tabs",
-    "img": "/img/blog/7.jpg",
-    "detailsImg": "/img/blog/blog-7.jpg",
-    "smallImg": "/img/blog/post-thumb-7.jpg",
+    "img": "/img/blog/8.jpg",
+    "detailsImg": "/img/blog/blog-8.jpg",
+    "smallImg": "/img/blog/post-thumb-8.jpg",
     "desc": "What I'm Going to Teach You\nI'm going to show you how to implement a tab leader pattern that eliminates redundant API polling across multiple browser tabs.\nYou'll learn to build a system where only one tab handles data fetching while all others benefit from shared cache updates through localStorage and the BroadcastChannel API.\nBy the end of this post, you'll have a complete TypeScript implementation that: \"\"\n  - Automatically elects a \"leader\" tab to handle API polling\n  - Shares cached data across all tabs instantly\n  - Handles edge cases like tab closure and leadership transitions\n  - Integrates seamlessly with React and Redux/RTK Query\nWhy This Matters to You\nEvery additional API call incurs a cost and degrades the user experience.\n",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -283,11 +326,53 @@
     "comments": []
   },
   {
+    "id": "building-a-kanban-board-with-drag-and-dr",
+    "title": "Building a Kanban Board with Drag and Drop in React",
+    "img": "/img/blog/9.jpg",
+    "detailsImg": "/img/blog/blog-9.jpg",
+    "smallImg": "/img/blog/post-thumb-9.jpg",
+    "desc": "TL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving.",
+    "desc1": "Technical tutorials and coding tips to start the day",
+    "desc2": "energetic and practical",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# Building a Kanban Board with Drag and Drop in React\n\n## Essential insights for developers to start the day\n\n### Summary\nTL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving.\n\n---\n\nTL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving. Additionally, it can be helpful when multiple actions are needed to perform, making it easy to drag and drop. The Kanban Board is one of those examples where you can see the drag-and-drop of a component in its peak form. Most of the to-do lists use this Kanban board to manage the order and progress of tasks. As developers, we have seen it multiple times in JIRA boards. So, today we are going to build our kanban board that can be used at multiple places as per requirement. So, let’s get started. Prerequisite and Project Setup To build this, we should have some basic knowledge about the following: JavaScript React TailwindCSS If you have this knowledge, you are good to go with the building of the kanban board. As per the project setup, we are using NextJS, a framework of React. You can set up the project with the following command: npx create-next-app@latest Enter fullscreen mode Exit fullscreen mode We'll use the following packages: @dnd-kit/core: This is for the drag and drop functionality. sonner: This is a toast component to display any message regarding an update or error. You can install these libraries using the following command: npm install @dnd-kit/core sonner Enter fullscreen mode Exit fullscreen mode Dnd-Kit @dnd-kit – A lightweight, modular, performant, accessible, and extensible drag & drop toolkit for React. This kit can be divided into 4 major topics. Here are those: : This is used as the main provided that wraps the functionality of draggable and droppable. Sensors: It is used to map which actions should trigger the draggable action. These actions can be done by mouse, touch, keyboard, etc. Droppable: This marks which zone is droppable and which is not. In the case of Kanban, it can be columns. Draggable: Draggable items are the items that can be dragged from one drop zone to another. We are going to use this to build our Kanban board. Code Now, let's start coding by defining the context Draggable and Droppable that can be used by others too. draggable.tsx The code below is for the Draggable Component that uses the useDraggable hook from dnd-kit. Using this component, we can wrap any item that can be draggable. Create a draggable.tsx file to add the below code. import { useDraggable } from \"@dnd-kit/core\"; import React from \"react\"; export function Draggable({ id, children, }: { id: string; children: React.ReactNode; }) { const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, }); const style = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`, } : undefined; return (  {children}  ); } Enter fullscreen mode Exit fullscreen mode droppable.tsx Below is t\n\n## Key Takeaways\n\n1. Additionally, it can be helpful when multiple actions are needed to perform, making it easy to drag and drop\n2. As developers, we have seen it multiple times in JIRA boards\n3. So, today we are going to build our kanban board that can be used at multiple places as per requirement\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [Building a Kanban Board with Drag and Drop in React](https://dev.to/surajondev/building-a-kanban-board-with-drag-and-drop-in-react-2pop)*\n\n*Tags: ui, react, mobile, javascript, design*\n",
+    "keyTakeaways": [
+      "Additionally, it can be helpful when multiple actions are needed to perform, making it easy to drag and drop",
+      "As developers, we have seen it multiple times in JIRA boards",
+      "So, today we are going to build our kanban board that can be used at multiple places as per requirement"
+    ],
+    "date": "Jul 21, 2025",
+    "category": "ui",
+    "tags": [
+      "ui",
+      "react",
+      "mobile",
+      "javascript",
+      "design"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 21, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
     "id": "charm-of-method-chaining-fluent-interfac",
     "title": "Charm of Method Chaining Fluent Interface Patterns in Frameworks",
-    "img": "/img/blog/8.jpg",
-    "detailsImg": "/img/blog/blog-8.jpg",
-    "smallImg": "/img/blog/post-thumb-8.jpg",
+    "img": "/img/blog/10.jpg",
+    "detailsImg": "/img/blog/blog-10.jpg",
+    "smallImg": "/img/blog/post-thumb-10.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of developer_experience development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -325,9 +410,9 @@
   {
     "id": "code-review-and-team-collaboration-best-",
     "title": "Code Review and Team Collaboration Best Practices Methods for Improving Code Quality",
-    "img": "/img/blog/9.jpg",
-    "detailsImg": "/img/blog/blog-9.jpg",
-    "smallImg": "/img/blog/post-thumb-9.jpg",
+    "img": "/img/blog/11.jpg",
+    "detailsImg": "/img/blog/blog-11.jpg",
+    "smallImg": "/img/blog/post-thumb-11.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of developer_experience development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -365,9 +450,9 @@
   {
     "id": "configuration-management-evolution",
     "title": "Configuration Management Evolution",
-    "img": "/img/blog/10.jpg",
-    "detailsImg": "/img/blog/blog-10.jpg",
-    "smallImg": "/img/blog/post-thumb-10.jpg",
+    "img": "/img/blog/12.jpg",
+    "detailsImg": "/img/blog/blog-12.jpg",
+    "smallImg": "/img/blog/post-thumb-12.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of architecture development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -405,9 +490,9 @@
   {
     "id": "cross-platform-quality-assurance",
     "title": "Cross-Platform Quality Assurance",
-    "img": "/img/blog/11.jpg",
-    "detailsImg": "/img/blog/blog-11.jpg",
-    "smallImg": "/img/blog/post-thumb-11.jpg",
+    "img": "/img/blog/13.jpg",
+    "detailsImg": "/img/blog/blog-13.jpg",
+    "smallImg": "/img/blog/post-thumb-13.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of cross_platform development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -445,9 +530,9 @@
   {
     "id": "css-intelligence-speculating-on-the-futu",
     "title": "CSS Intelligence: Speculating On The Future Of A Smarter Language",
-    "img": "/img/blog/12.jpg",
-    "detailsImg": "/img/blog/blog-12.jpg",
-    "smallImg": "/img/blog/post-thumb-12.jpg",
+    "img": "/img/blog/14.jpg",
+    "detailsImg": "/img/blog/blog-14.jpg",
+    "smallImg": "/img/blog/post-thumb-14.jpg",
     "desc": "16 min readCSS, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorGabriel is a front-end developer and technical writer. He specializes in HTML, CSS, JavaScript, React, Vue, TailwindCSS, and BootStrap, with a track record of … More about Gabriel ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -487,9 +572,9 @@
   {
     "id": "decoding-the-svg-code-path-code-element-",
     "title": "Decoding The SVG <code>path</code> Element: Curve And Arc Commands",
-    "img": "/img/blog/13.jpg",
-    "detailsImg": "/img/blog/blog-13.jpg",
-    "smallImg": "/img/blog/post-thumb-13.jpg",
+    "img": "/img/blog/15.jpg",
+    "detailsImg": "/img/blog/blog-15.jpg",
+    "smallImg": "/img/blog/post-thumb-15.jpg",
     "desc": "13 min readCSS, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorMyriam Frisano is a Swiss lover of words who has fallen head over heels for the world of CSS when she realized it could make one of her biggest dreams as a … More about Myriam ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks. UX Strategy in Action, with Susan and Guthrie Weinschenk How To Measure UX and Design Impact, 8h video + UX training Accessible Typography for Web & UI Design Masterclass, with Oliver Schöndorfer Dataviz Accessibility Workshop, with Sarah L.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -530,9 +615,9 @@
   {
     "id": "deploying-a-voting-app-on-aws-eks",
     "title": "Deploying a Voting App on AWS EKS",
-    "img": "/img/blog/14.jpg",
-    "detailsImg": "/img/blog/blog-14.jpg",
-    "smallImg": "/img/blog/post-thumb-14.jpg",
+    "img": "/img/blog/16.jpg",
+    "detailsImg": "/img/blog/blog-16.jpg",
+    "smallImg": "/img/blog/post-thumb-16.jpg",
     "desc": "I wanted to refresh my EKS knowledge and deploy an app manually to a cluster. I followed this video and decided to experiment with EKS Auto Mode. The app uses a MongoDB backend with persistent EBS volumes deployed as a StatefulSet with a primary and two secondary replicas.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -570,9 +655,9 @@
   {
     "id": "docker-port-mapping-cli-flag-cheatsheet",
     "title": "🧭 Docker Port Mapping & CLI Flag CheatSheet",
-    "img": "/img/blog/15.jpg",
-    "detailsImg": "/img/blog/blog-15.jpg",
-    "smallImg": "/img/blog/post-thumb-15.jpg",
+    "img": "/img/blog/17.jpg",
+    "detailsImg": "/img/blog/blog-17.jpg",
+    "smallImg": "/img/blog/post-thumb-17.jpg",
     "desc": "🧭 Docker Port Mapping & CLI Flag CheatSheet 🚪 Port Mapping 101: -p vs -P Flag Meaning Analogy Example -p : Map host port to container port Custom Door Mapping 🚪 -p 8080:3000 -P (uppercase) Auto-map all exposed ports to random host ports 🔀 Auto Door Mapping -P 🎯 Example 1: Manual Mapping with -p docker run -p 8080:3000 my-app Enter fullscreen mode Exit fullscreen mode 🔧 Host port 8080 mapped to container's 3000 Access via localhost:8080 🎲 Example 2: Auto Mapping with -P docker run -P my-app Enter fullscreen mode Exit fullscreen mode Maps ALL EXPOSEd ports to random available host ports View with docker ps 🌍 Multiple Port Mappings docker run -p 3000:3000 -p 5000:5000 my-multi-app Enter fullscreen mode Exit fullscreen mode Maps multiple services/APIs or frontend/backend apps Great for full-stack containers. 📡 Exposing Ports in Dockerfile EXPOSE 3000 5000 7000 Enter fullscreen mode Exit fullscreen mode 🧠 Note: EXPOSE is just documentation for which ports the container listens to. It does not publish or map ports.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -613,28 +698,28 @@
   {
     "id": "droip-the-modern-website-builder-wordpre",
     "title": "Droip: The Modern Website Builder WordPress Needed",
-    "img": "/img/blog/16.jpg",
-    "detailsImg": "/img/blog/blog-16.jpg",
-    "smallImg": "/img/blog/post-thumb-16.jpg",
+    "img": "/img/blog/18.jpg",
+    "detailsImg": "/img/blog/blog-18.jpg",
+    "smallImg": "/img/blog/post-thumb-18.jpg",
     "desc": "12 min readWordPress, Tools, FrameworksShare on Twitter, LinkedInAbout The AuthorZareen Tasnim is a member of the Droip team and currently serves as Head of Content. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
     "desc3": "Educational foundations for continuous learning",
-    "content": "# Droip: The Modern Website Builder WordPress Needed\n\n## Educational foundations for continuous learning\n\n### Summary\n12 min readWordPress, Tools, FrameworksShare on Twitter, LinkedInAbout The AuthorZareen Tasnim is a member of the Droip team and currently serves as Head of Content. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.\n\n---\n\n12 min readWordPress, Tools, FrameworksShare on Twitter, LinkedInAbout The AuthorZareen Tasnim is a member of the Droip team and currently serves as Head of Content. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks.Traditional page builders have shaped how we build WordPress sites for years. Let’s take a closer look at Droip, a modern, no-code visual builder, and explore how it redefines the experience with cleaner performance, full design freedom, and zero plugin dependency.This article has been kindly supported by our dear friends at Droip who makes designing and building websites a lot easier than ever. Thank you!Traditional WordPress page builders had their moment. Builders like Elementor, Divi, and Oxygen have been around for years. So long, in fact, that many of us just accepted their limitations as the cost of using WordPress.But Droip, a relatively new no-code website builder, steps in with a completely different philosophy. It is built to provide Webflow and Framer-level power in WordPress, complete design freedom, built-in performance, and no reliance on third-party plugins.In this review, we’re putting Droip head-to-head with traditional builders according to all the things that matter when choosing a website builder:Price,Affect on website performance,User-friendliness vs flexibility,Features,Theme and layout options.What Is Droip?Droip is a no-code visual website builder for WordPress, designed to bridge the gap where other page builders fall short.Unlike other page builders, Droip is an all-in-one solution that aims to provide everything you need to build websites without any third-party dependencies, shifting from the norm in WordPress!And the best part? It’s all included in your subscription, so you won’t be hit with surprise upgrades.Pricing: A Smarter Investment with All Features IncludedWhile most page builders upsell critical features or require multiple add-ons, Droip keeps it simple: one platform, all features, no hidden costs.Overview of Droip’s affordable and transparent pricing plans. (Large preview)It’s surprisingly affordable for the value it delivers. The Starter plan is just $34.50/year (currently at 50% off) for one site and includes all premium features.If you compare it with Elementor, that’s almost half the cost of Elementor Pro’s Essential plan, which starts at $60/year and still keeps several essentials behind paywalls.Droip also has a Lifetime plan. For a one-time payment of $299.50, you get unlimited use, forever. No renewals, no upcharges.All Droip Pro plans are fully featured from the start. You don’t need to stack plugins or pay extra to unlock dynamic content support, pop-up builders, or submission forms. You also get access to the entire growing template library from day one.Note: Explore Droip pricing.Website Performance ComparisonPerformance directly impacts user exp\n\n## Key Takeaways\n\n1. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX\n2. It is built to provide Webflow and Framer-level power in WordPress, complete design freedom, built-in performance, and no reliance on third-party plugins\n3. Unlike other page builders, Droip is an all-in-one solution that aims to provide everything you need to build websites without any third-party dependencies, shifting from the norm in WordPress\n4. Pricing: A Smarter Investment with All Features IncludedWhile most page builders upsell critical features or require multiple add-ons, Droip keeps it simple: one platform, all features, no hidden costs\n5. Note: Explore Droip pricing\n\n---\n\n*This content was curated using the **Educational content for late-night learners** strategy (0-5 hours) with a educational and foundational focus.*\n\n*Original source: [Droip: The Modern Website Builder WordPress Needed](https://smashingmagazine.com/2025/07/modern-website-builder-wordpress-droip/)*\n\n*Tags: web, html, performance, ux, tools*\n",
+    "content": "# Droip: The Modern Website Builder WordPress Needed\n\n## Educational foundations for continuous learning\n\n### Summary\n12 min readWordPress, Tools, FrameworksShare on Twitter, LinkedInAbout The AuthorZareen Tasnim is a member of the Droip team and currently serves as Head of Content. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.\n\n---\n\n12 min readWordPress, Tools, FrameworksShare on Twitter, LinkedInAbout The AuthorZareen Tasnim is a member of the Droip team and currently serves as Head of Content. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks.Traditional page builders have shaped how we build WordPress sites for years. Let’s take a closer look at Droip, a modern, no-code visual builder, and explore how it redefines the experience with cleaner performance, full design freedom, and zero plugin dependency.This article has been kindly supported by our dear friends at Droip who makes designing and building websites a lot easier than ever. Thank you!Traditional WordPress page builders had their moment. Builders like Elementor, Divi, and Oxygen have been around for years. So long, in fact, that many of us just accepted their limitations as the cost of using WordPress.But Droip, a relatively new no-code website builder, steps in with a completely different philosophy. It is built to provide Webflow and Framer-level power in WordPress, complete design freedom, built-in performance, and no reliance on third-party plugins.In this review, we’re putting Droip head-to-head with traditional builders according to all the things that matter when choosing a website builder:Price,Affect on website performance,User-friendliness vs flexibility,Features,Theme and layout options.What Is Droip?Droip is a no-code visual website builder for WordPress, designed to bridge the gap where other page builders fall short.Unlike other page builders, Droip is an all-in-one solution that aims to provide everything you need to build websites without any third-party dependencies, shifting from the norm in WordPress!And the best part? It’s all included in your subscription, so you won’t be hit with surprise upgrades.Pricing: A Smarter Investment with All Features IncludedWhile most page builders upsell critical features or require multiple add-ons, Droip keeps it simple: one platform, all features, no hidden costs.Overview of Droip’s affordable and transparent pricing plans. (Large preview)It’s surprisingly affordable for the value it delivers. The Starter plan is just $34.50/year (currently at 50% off) for one site and includes all premium features.If you compare it with Elementor, that’s almost half the cost of Elementor Pro’s Essential plan, which starts at $60/year and still keeps several essentials behind paywalls.Droip also has a Lifetime plan. For a one-time payment of $299.50, you get unlimited use, forever. No renewals, no upcharges.All Droip Pro plans are fully featured from the start. You don’t need to stack plugins or pay extra to unlock dynamic content support, pop-up builders, or submission forms. You also get access to the entire growing template library from day one.Note: Explore Droip pricing.Website Performance ComparisonPerformance directly impacts user exp\n\n## Key Takeaways\n\n1. She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX\n2. It is built to provide Webflow and Framer-level power in WordPress, complete design freedom, built-in performance, and no reliance on third-party plugins\n3. Unlike other page builders, Droip is an all-in-one solution that aims to provide everything you need to build websites without any third-party dependencies, shifting from the norm in WordPress\n4. Pricing: A Smarter Investment with All Features IncludedWhile most page builders upsell critical features or require multiple add-ons, Droip keeps it simple: one platform, all features, no hidden costs\n5. Note: Explore Droip pricing\n\n---\n\n*This content was curated using the **Educational content for late-night learners** strategy (0-5 hours) with a educational and foundational focus.*\n\n*Original source: [Droip: The Modern Website Builder WordPress Needed](https://smashingmagazine.com/2025/07/modern-website-builder-wordpress-droip/)*\n\n*Tags: tools, html, performance, ui, ux*\n",
     "keyTakeaways": [
       "She’s passionate about turning complex web-building concepts into clear, … More about Zareen ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX",
       "It is built to provide Webflow and Framer-level power in WordPress, complete design freedom, built-in performance, and no reliance on third-party plugins",
       "Unlike other page builders, Droip is an all-in-one solution that aims to provide everything you need to build websites without any third-party dependencies, shifting from the norm in WordPress",
       "Pricing: A Smarter Investment with All Features IncludedWhile most page builders upsell critical features or require multiple add-ons, Droip keeps it simple: one platform, all features, no hidden costs"
     ],
-    "date": "Jul 19, 2025",
-    "category": "web",
+    "date": "Jul 21, 2025",
+    "category": "tools",
     "tags": [
-      "web",
+      "tools",
       "html",
       "performance",
-      "ux",
-      "tools"
+      "ui",
+      "ux"
     ],
     "author_role": "Analysis",
     "author": "mohansagar",
@@ -642,7 +727,7 @@
     "blogTopList": [
       {
         "iconName": "fa-regular fa-calendar-days",
-        "name": "Jul 19, 2025",
+        "name": "Jul 21, 2025",
         "path": false
       },
       {
@@ -656,9 +741,9 @@
   {
     "id": "enhancing-my-project-laxia-using-kiro",
     "title": "Enhancing my Project \"Laxia\" using KIRO!!!!",
-    "img": "/img/blog/17.jpg",
-    "detailsImg": "/img/blog/blog-17.jpg",
-    "smallImg": "/img/blog/post-thumb-17.jpg",
+    "img": "/img/blog/19.jpg",
+    "detailsImg": "/img/blog/blog-19.jpg",
+    "smallImg": "/img/blog/post-thumb-19.jpg",
     "desc": "LAXIA – Legal AI Assistant 👩‍⚖️⚖️ LAXIA is a voice-enabled, location-aware, AI-powered legal assistant built to democratize access to legal knowledge. Whether you're a law student, traveler, or an everyday citizen, LAXIA helps you understand laws, your rights, and legal processes through an intuitive mobile app. 🚀 What It Does Understand complex legal queries with natural language using OpenAI Speak directly to LAXIA using voice AI powered by ElevenLabs Get local laws based on real-time geolocation Browse constitution & IPC sections for multiple countries Practice legal quizzes, flashcards, and test prep for law exams Integrates Reddit discussions for real-world legal opinions Beautifully built with Expo, Bolt.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -698,9 +783,9 @@
   {
     "id": "event-driven-architecture-pattern-applic",
     "title": "Event Driven Architecture Pattern Application Practice in Web Frameworks",
-    "img": "/img/blog/18.jpg",
-    "detailsImg": "/img/blog/blog-18.jpg",
-    "smallImg": "/img/blog/post-thumb-18.jpg",
+    "img": "/img/blog/20.jpg",
+    "detailsImg": "/img/blog/blog-20.jpg",
+    "smallImg": "/img/blog/post-thumb-20.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of architecture development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -738,9 +823,9 @@
   {
     "id": "from-zero-to-chat-my-journey-building-a-",
     "title": "From Zero to Chat: My Journey Building a MERN App (and Yours Can Be Too!)",
-    "img": "/img/blog/19.jpg",
-    "detailsImg": "/img/blog/blog-19.jpg",
-    "smallImg": "/img/blog/post-thumb-19.jpg",
+    "img": "/img/blog/21.jpg",
+    "detailsImg": "/img/blog/blog-21.jpg",
+    "smallImg": "/img/blog/post-thumb-21.jpg",
     "desc": "Hey developers. 👋 I'm excited to share a project I just finished — a real-time chat application built using the MERN stack, complete with messaging, image sharing, theme switching, emoji support, and more. Whether you're into full-stack development or just looking to explore a real-world example of React + Node + Socket.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -779,9 +864,9 @@
   {
     "id": "future-proof-your-career-in-ai-era",
     "title": "Future-Proof Your Career In AI Era",
-    "img": "/img/blog/20.jpg",
-    "detailsImg": "/img/blog/blog-20.jpg",
-    "smallImg": "/img/blog/post-thumb-20.jpg",
+    "img": "/img/blog/22.jpg",
+    "detailsImg": "/img/blog/blog-22.jpg",
+    "smallImg": "/img/blog/post-thumb-22.jpg",
     "desc": "It's 2025; you are young, ambitious, and preparing for a career in programming. However, seems like everybody in the industry is discussing how AI will replace programmers. Maybe it's right about them, but not about you.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -820,26 +905,26 @@
   {
     "id": "getting-clarity-on-apples-liquid-glass",
     "title": "Getting Clarity on Apple’s Liquid Glass",
-    "img": "/img/blog/21.jpg",
-    "detailsImg": "/img/blog/blog-21.jpg",
-    "smallImg": "/img/blog/post-thumb-21.jpg",
+    "img": "/img/blog/23.jpg",
+    "detailsImg": "/img/blog/blog-23.jpg",
+    "smallImg": "/img/blog/post-thumb-23.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Folks have a lot to say about “liquid glass,” the design aesthetic that Apple introduced at WWDC 2025. Some love it, some hate it, and others jumped straight into seeing how to they could create it in CSS.",
-    "desc1": "Technical tutorials and coding tips to start the day",
-    "desc2": "energetic and practical",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
     "desc3": "Essential insights for developers to start the day",
-    "content": "# Getting Clarity on Apple’s Liquid Glass\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Folks have a lot to say about “liquid glass,” the design aesthetic that Apple introduced at WWDC 2025. Some love it, some hate it, and others jumped straight into seeing how to they could create it in CSS.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Folks have a lot to say about “liquid glass,” the design aesthetic that Apple introduced at WWDC 2025. Some love it, some hate it, and others jumped straight into seeing how to they could create it in CSS. There’s a lot to love, hate, and experience with liquid glass. You can love the way content reflects against backgrounds. You can hate the poor contrast between foreground and background. And you can be eager to work with it. All of those can be true at the same time. Image credit: Apple I, for one, am generally neutral with things like this for that exact reason. I’m intrigued by liquid glass, but hold some concern about legibility, particularly as someone who already struggles with the legibility of Apple’s existing design system (notably in Control Center). And I love looking at the many and clever ways that devs have tried to replicate liquid glass in their own experiments. So, I’m in the process of gathering notes on the topic as I wrap my head around this “new” (or not-so-new, depending on who’s talking) thing and figure out where it fits in my own work. These links are a choice selection of posts that I’ve found helpful and definitely not meant to be an exhaustive list of what’s out there. WWDC Introduction Always a good idea to start with information straight from the horse’s mouth. In short: It’s the first design system that is universally applied to all of Apple’s platforms, as opposed to a single platform like Apple’s last major overhaul, iOS 7. It’s designed to refract light and dynamically react to user interactions. By “dynamic” we’re referring to UI elements updating into others as the context changes, such as displaying additional controls. This sounds a lot like the Dynamic Island, supporting shape-shifting animations. There’s a focus on freeing up space by removing hard rectangular edges, allowing UI elements to become part of the content and respond to context. Apple also released a more in-depth video aimed at introducing liquid glass to designers and developers. In short: Liquid glass is an evolution of the “aqua” blue interface from macOS 10, the real-time introduced in iOS 7, the “fluidity” of iOS 10, the flexibility of the Dynamic Island, and the immersive interface of visionOS. It’s a “digital meta-material” that dynamically bends and shapes light while moving fluidly like water. It’s at least partially a response to hardware devices adopting deeper rounded corners. Lensing: Background elements are bended and warped rather than scattering light as it’s been in previous designs. There’s gel-like feel to elements. Translucence helps reveal what is underneath a control, such as a progress indicator you can scrub more precisely by seeing what is behind the surface. Controls are persistent between views for establishing a relationship between controls and states. This reminds me of the View Transition API. Elements automatica\n\n## Key Takeaways\n\n1. So, I’m in the process of gathering notes on the topic as I wrap my head around this “new” (or not-so-new, depending on who’s talking) thing and figure out where it fits in my own work\n2. In short: It’s the first design system that is universally applied to all of Apple’s platforms, as opposed to a single platform like Apple’s last major overhaul, iOS 7\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [Getting Clarity on Apple’s Liquid Glass](https://css-tricks.com/getting-clarity-on-apples-liquid-glass/)*\n\n*Tags: angular, career, design, tools, react*\n",
+    "content": "# Getting Clarity on Apple’s Liquid Glass\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Folks have a lot to say about “liquid glass,” the design aesthetic that Apple introduced at WWDC 2025. Some love it, some hate it, and others jumped straight into seeing how to they could create it in CSS.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Folks have a lot to say about “liquid glass,” the design aesthetic that Apple introduced at WWDC 2025. Some love it, some hate it, and others jumped straight into seeing how to they could create it in CSS. There’s a lot to love, hate, and experience with liquid glass. You can love the way content reflects against backgrounds. You can hate the poor contrast between foreground and background. And you can be eager to work with it. All of those can be true at the same time. Image credit: Apple I, for one, am generally neutral with things like this for that exact reason. I’m intrigued by liquid glass, but hold some concern about legibility, particularly as someone who already struggles with the legibility of Apple’s existing design system (notably in Control Center). And I love looking at the many and clever ways that devs have tried to replicate liquid glass in their own experiments. So, I’m in the process of gathering notes on the topic as I wrap my head around this “new” (or not-so-new, depending on who’s talking) thing and figure out where it fits in my own work. These links are a choice selection of posts that I’ve found helpful and definitely not meant to be an exhaustive list of what’s out there. WWDC Introduction Always a good idea to start with information straight from the horse’s mouth. In short: It’s the first design system that is universally applied to all of Apple’s platforms, as opposed to a single platform like Apple’s last major overhaul, iOS 7. It’s designed to refract light and dynamically react to user interactions. By “dynamic” we’re referring to UI elements updating into others as the context changes, such as displaying additional controls. This sounds a lot like the Dynamic Island, supporting shape-shifting animations. There’s a focus on freeing up space by removing hard rectangular edges, allowing UI elements to become part of the content and respond to context. Apple also released a more in-depth video aimed at introducing liquid glass to designers and developers. In short: Liquid glass is an evolution of the “aqua” blue interface from macOS 10, the real-time introduced in iOS 7, the “fluidity” of iOS 10, the flexibility of the Dynamic Island, and the immersive interface of visionOS. It’s a “digital meta-material” that dynamically bends and shapes light while moving fluidly like water. It’s at least partially a response to hardware devices adopting deeper rounded corners. Lensing: Background elements are bended and warped rather than scattering light as it’s been in previous designs. There’s gel-like feel to elements. Translucence helps reveal what is underneath a control, such as a progress indicator you can scrub more precisely by seeing what is behind the surface. Controls are persistent between views for establishing a relationship between controls and states. This reminds me of the View Transition API. Elements automatica\n\n## Key Takeaways\n\n1. So, I’m in the process of gathering notes on the topic as I wrap my head around this “new” (or not-so-new, depending on who’s talking) thing and figure out where it fits in my own work\n2. In short: It’s the first design system that is universally applied to all of Apple’s platforms, as opposed to a single platform like Apple’s last major overhaul, iOS 7\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [Getting Clarity on Apple’s Liquid Glass](https://css-tricks.com/getting-clarity-on-apples-liquid-glass/)*\n\n*Tags: api, backend, ui, react, tools*\n",
     "keyTakeaways": [
       "So, I’m in the process of gathering notes on the topic as I wrap my head around this “new” (or not-so-new, depending on who’s talking) thing and figure out where it fits in my own work",
       "In short: It’s the first design system that is universally applied to all of Apple’s platforms, as opposed to a single platform like Apple’s last major overhaul, iOS 7"
     ],
-    "date": "Jul 19, 2025",
-    "category": "angular",
+    "date": "Jul 21, 2025",
+    "category": "api",
     "tags": [
-      "angular",
-      "career",
-      "design",
-      "tools",
-      "react"
+      "api",
+      "backend",
+      "ui",
+      "react",
+      "tools"
     ],
     "author_role": "Analysis",
     "author": "mohansagar",
@@ -847,7 +932,50 @@
     "blogTopList": [
       {
         "iconName": "fa-regular fa-calendar-days",
-        "name": "Jul 19, 2025",
+        "name": "Jul 21, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
+    "id": "getting-creative-with-versal-letters",
+    "title": "Getting Creative With Versal Letters",
+    "img": "/img/blog/24.jpg",
+    "detailsImg": "/img/blog/blog-24.jpg",
+    "smallImg": "/img/blog/post-thumb-24.jpg",
+    "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. A while back, our man Geoff Graham treated us to a refresher on the CSS initial-letter property, but how can you style drop and initial caps to reflect a brand’s visual identity and help to tell its stories. Here’s how I do it in CSS by combining ::first-letter and initial-letter with other unexpected properties, including border-image, and clip-path.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# Getting Creative With Versal Letters\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. A while back, our man Geoff Graham treated us to a refresher on the CSS initial-letter property, but how can you style drop and initial caps to reflect a brand’s visual identity and help to tell its stories. Here’s how I do it in CSS by combining ::first-letter and initial-letter with other unexpected properties, including border-image, and clip-path.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. A while back, our man Geoff Graham treated us to a refresher on the CSS initial-letter property, but how can you style drop and initial caps to reflect a brand’s visual identity and help to tell its stories? Here’s how I do it in CSS by combining ::first-letter and initial-letter with other unexpected properties, including border-image, and clip-path. Patty Meltt is an up-and-coming country music sensation. My brief: Patty Meltt is an up-and-coming country music sensation, and she needed a website to launch her new album. She wanted it to be distinctive-looking and memorable, so she called Stuff & Nonsense. Patty’s not real, but the challenges of designing and developing sites like hers are. First, a drop cap recap. Chris Coyier wrote about drop caps several years ago. They are a decorative letter at the beginning of a paragraph, often spanning several lines of text. It’s a typographic flourish found in illuminated manuscripts and traditional book design, where it adds visual interest and helps guide a reader’s eye to where they should begin. Study manuscripts from the Middle Ages onwards, and you’ll find hand-decorated illuminated capitals. The artists who made these initial letters were fabulously called “illuminators.” These medieval versals went beyond showing someone where to start reading; historiated letters also illustrated the stories, which was especially useful since most people in the Middle Ages couldn’t read. A basic drop cap On the web, drop caps can improve readability and reflect a brand’s visual identity. A brief refresher on properties and values In CSS, drop caps are created using the ::first-letter pseudo-element in combination with initial-letter. As you might expect, ::first-letter targets the very first letter of a block of text, enabling you to style it independently from the rest of a paragraph. The first number sets how many lines tall the letter appears, and the second controls its baseline alignment — that is, which line of text the bottom of the cap sits on. p::first-letter { -webkit-initial-letter: 3 3; initial-letter: 3 3; } Because browser support still varies, it’s common to include both the unprefixed and -webkit- prefixed properties for maximum compatibility. And speaking of browser support, it’s also sensible to wrap the initial-letter property inside an @supports CSS at-rule so we can check for browser support and provide a fallback, if needed: @supports (initial-letter:2) or (-webkit-initial-letter:2) { p::first-letter { -webkit-initial-letter: 3 3; initial-letter: 3 3; } } The initial-letter property automatically calculates the font size to match the number of lines a drop cap spans. On its own, this can make for quite a first impression. However, drop caps really start to come to life when you combine initial-letter with other CSS properties. Tip: Interactive examples from this article are available in my\n\n## Key Takeaways\n\n1. Here’s how I do it in CSS by combining ::first-letter and initial-letter with other unexpected properties, including border-image, and clip-path\n2. First, a drop cap recap\n3. A brief refresher on properties and values In CSS, drop caps are created using the ::first-letter pseudo-element in combination with initial-letter\n4. As you might expect, ::first-letter targets the very first letter of a block of text, enabling you to style it independently from the rest of a paragraph\n5. The first number sets how many lines tall the letter appears, and the second controls its baseline alignment — that is, which line of text the bottom of the cap sits on\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [Getting Creative With Versal Letters](https://css-tricks.com/getting-creative-with-versal-letters/)*\n\n*Tags: api, backend, ui, web, css*\n",
+    "keyTakeaways": [
+      "Here’s how I do it in CSS by combining ::first-letter and initial-letter with other unexpected properties, including border-image, and clip-path",
+      "First, a drop cap recap",
+      "A brief refresher on properties and values In CSS, drop caps are created using the ::first-letter pseudo-element in combination with initial-letter",
+      "As you might expect, ::first-letter targets the very first letter of a block of text, enabling you to style it independently from the rest of a paragraph"
+    ],
+    "date": "Jul 21, 2025",
+    "category": "api",
+    "tags": [
+      "api",
+      "backend",
+      "ui",
+      "web",
+      "css"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 21, 2025",
         "path": false
       },
       {
@@ -861,9 +989,9 @@
   {
     "id": "how-i-built-a-python-scraper-for-walmart",
     "title": "How I Built a Python Scraper for Walmart (and Beat Their Anti-Bot System) 🚀",
-    "img": "/img/blog/22.jpg",
-    "detailsImg": "/img/blog/blog-22.jpg",
-    "smallImg": "/img/blog/post-thumb-22.jpg",
+    "img": "/img/blog/25.jpg",
+    "detailsImg": "/img/blog/blog-25.jpg",
+    "smallImg": "/img/blog/post-thumb-25.jpg",
     "desc": "Introduction: The Real-world Demand and Technical Challenges of a Walmart Scraping Tool In the realm of modern e-commerce data analytics, the Walmart scraping tool plays a crucial role. As market competition in e-commerce intensifies, the corporate demand for real-time, accurate product data has become more urgent than ever. As one of the world's largest retailers, Walmart's platform contains a vast amount of product data with immense business value.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -901,9 +1029,9 @@
   {
     "id": "how-to-stay-relevant-in-2025-mastering-m",
     "title": "🔥 How to Stay Relevant in 2025: Mastering Modern Skills for the Future Job Market",
-    "img": "/img/blog/23.jpg",
-    "detailsImg": "/img/blog/blog-23.jpg",
-    "smallImg": "/img/blog/post-thumb-23.jpg",
+    "img": "/img/blog/26.jpg",
+    "detailsImg": "/img/blog/blog-26.jpg",
+    "smallImg": "/img/blog/post-thumb-26.jpg",
     "desc": "The job market in 2025 is faster, smarter, and more competitive than ever. AI is reshaping industries, remote work is the norm, and employers expect modern skills beyond just degrees or years of experience. If you’re worried about being left behind — don’t panic.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -944,9 +1072,9 @@
   {
     "id": "http-fundamentals-for-frontend-developer",
     "title": "HTTP Fundamentals for Frontend Developers",
-    "img": "/img/blog/24.jpg",
-    "detailsImg": "/img/blog/blog-24.jpg",
-    "smallImg": "/img/blog/post-thumb-24.jpg",
+    "img": "/img/blog/27.jpg",
+    "detailsImg": "/img/blog/blog-27.jpg",
+    "smallImg": "/img/blog/post-thumb-27.jpg",
     "desc": "Why HTTP Matters to Frontend Developers As a frontend developer, you might not write backend code, but you interact with backend systems constantly through HTTP. Every time your application fetches user data, submits a form, loads an image, or pings an API, it's speaking HTTP. HTTP stands for Hypertext Transfer Protocol, and it's the foundation of communication between web clients (like browsers) and servers.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -987,9 +1115,9 @@
   {
     "id": "i-built-a-reactive-no-code-flow-engine-t",
     "title": "I built a reactive no-code flow engine that runs entirely in your browser, no login, no backend",
-    "img": "/img/blog/25.jpg",
-    "detailsImg": "/img/blog/blog-25.jpg",
-    "smallImg": "/img/blog/post-thumb-25.jpg",
+    "img": "/img/blog/28.jpg",
+    "detailsImg": "/img/blog/blog-28.jpg",
+    "smallImg": "/img/blog/post-thumb-28.jpg",
     "desc": "to 👋 I’ve been working on a side project that started from a simple frustration: I just wanted to build a chatbot but every tool forced me to write complex code, bury logic inside nodes, or sign up for yet another cloud service. So I built my own. Introducing Wanderer Flow – a reactive, visual, and open flow engine that runs 100% in the browser.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1027,9 +1155,9 @@
   {
     "id": "i-quit-leetcode-and-got-better-at-coding",
     "title": "I Quit LeetCode and Got Better at Coding",
-    "img": "/img/blog/26.jpg",
-    "detailsImg": "/img/blog/blog-26.jpg",
-    "smallImg": "/img/blog/post-thumb-26.jpg",
+    "img": "/img/blog/29.jpg",
+    "detailsImg": "/img/blog/blog-29.jpg",
+    "smallImg": "/img/blog/post-thumb-29.jpg",
     "desc": "It was around 11:47 PM on a random Tuesday night when I stared at the same LeetCode problem for the third hour in a row. “Hard” problems had started feeling less like a challenge and more like mental torture. I was tired.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1067,9 +1195,9 @@
   {
     "id": "javascript-closures-explained-simply-wit",
     "title": "JavaScript Closures Explained Simply (with Real Examples)",
-    "img": "/img/blog/27.jpg",
-    "detailsImg": "/img/blog/blog-27.jpg",
-    "smallImg": "/img/blog/post-thumb-27.jpg",
+    "img": "/img/blog/30.jpg",
+    "detailsImg": "/img/blog/blog-30.jpg",
+    "smallImg": "/img/blog/post-thumb-30.jpg",
     "desc": "Ever wondered… How functions remember things… even after they've “forgotten” them. 🚀 Ever Seen JavaScript Do Magic. Imagine if a function could remember everything it once knew — even after it’s long gone.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1109,9 +1237,9 @@
   {
     "id": "jstack-appwrite-a-match-made-in-heaven-f",
     "title": "JStack + Appwrite: A Match Made in Heaven for Modern Web Development",
-    "img": "/img/blog/28.jpg",
-    "detailsImg": "/img/blog/blog-28.jpg",
-    "smallImg": "/img/blog/post-thumb-28.jpg",
+    "img": "/img/blog/31.jpg",
+    "detailsImg": "/img/blog/blog-31.jpg",
+    "smallImg": "/img/blog/post-thumb-31.jpg",
     "desc": "If I had a penny for each time a youtuber has launched his own tech stack, I would have 2 pennies, which isn't much but its weird that it happened twice. I am talking about T3 Stack launched a while back by everyone's favourite Theo, but recently a new player has entered the market called JStack, by Josh who is the lead Devrel at Upstash. To be fair, its not even that recent, but as always I am late to the party I try to give a framework time to mature and gather feedback from community before giving it a shot.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1149,9 +1277,9 @@
   {
     "id": "kelpui",
     "title": "KelpUI",
-    "img": "/img/blog/29.jpg",
-    "detailsImg": "/img/blog/blog-29.jpg",
-    "smallImg": "/img/blog/post-thumb-29.jpg",
+    "img": "/img/blog/32.jpg",
+    "detailsImg": "/img/blog/blog-32.jpg",
+    "smallImg": "/img/blog/post-thumb-32.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. KelpUI is new library that Chris Ferdinandi is developing, designed to leverage newer CSS features and Web Components. I’ve enjoyed following Chris as he’s published an ongoing series of articles detailing his thought process behind the library, getting deep into his approach.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1192,9 +1320,9 @@
   {
     "id": "mcp-in-action-seamless-ai-integration-fo",
     "title": "MCP in Action: Seamless AI Integration for Automation and Beyond",
-    "img": "/img/blog/30.jpg",
-    "detailsImg": "/img/blog/blog-30.jpg",
-    "smallImg": "/img/blog/post-thumb-30.jpg",
+    "img": "/img/blog/33.jpg",
+    "detailsImg": "/img/blog/blog-33.jpg",
+    "smallImg": "/img/blog/post-thumb-33.jpg",
     "desc": "Curious about how the latest AI applications are connecting seamlessly with real-world tools and platforms. In my latest article, I decoded the Model Context Protocol (MCP), an open-source framework from Anthropic that's changing how Large Language Models (LLMs) integrate with files, APIs, databases, and business applications. I cover the essentials: What is MCP.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1232,9 +1360,9 @@
   {
     "id": "model-mondays-s2e04-ai-developer-experie",
     "title": "Model Mondays S2E04 - AI Developer Experiences",
-    "img": "/img/blog/31.jpg",
-    "detailsImg": "/img/blog/blog-31.jpg",
-    "smallImg": "/img/blog/post-thumb-31.jpg",
+    "img": "/img/blog/34.jpg",
+    "detailsImg": "/img/blog/blog-34.jpg",
+    "smallImg": "/img/blog/post-thumb-34.jpg",
     "desc": "🧪 | Some parts of this blog were generated with AI assistance, and reviewed manually before publishing. To learn more about the why and the how, please refer to this document in our website. Model Mondays is a weekly series that helps you build your AI Model IQ with 5-min news recaps, 15-min tech spotlights and 30-min AMA sessions with subject matter experts.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1272,9 +1400,9 @@
   {
     "id": "navigating-the-node-js-package-manager-m",
     "title": "Navigating the Node.js Package Manager Maze: npm vs. pnpm vs. Yarn",
-    "img": "/img/blog/32.jpg",
-    "detailsImg": "/img/blog/blog-32.jpg",
-    "smallImg": "/img/blog/post-thumb-32.jpg",
+    "img": "/img/blog/35.jpg",
+    "detailsImg": "/img/blog/blog-35.jpg",
+    "smallImg": "/img/blog/post-thumb-35.jpg",
     "desc": "For anyone stepping into the world of Node. js development, the term \"package manager\" quickly becomes a familiar one. These tools are the lifeblood of modern JavaScript projects, handling the intricate web of dependencies your project relies on.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1313,9 +1441,9 @@
   {
     "id": "nodejs-fundamentals-debugger",
     "title": "NodeJS Fundamentals: debugger",
-    "img": "/img/blog/33.jpg",
-    "detailsImg": "/img/blog/blog-33.jpg",
-    "smallImg": "/img/blog/post-thumb-33.jpg",
+    "img": "/img/blog/36.jpg",
+    "detailsImg": "/img/blog/blog-36.jpg",
+    "smallImg": "/img/blog/post-thumb-36.jpg",
     "desc": "Debugging Node. js in Production: Beyond console. log Introduction Imagine a production incident: intermittent 500 errors in a critical payment processing microservice.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1354,11 +1482,52 @@
     "comments": []
   },
   {
+    "id": "oltp-vs-olap-when-transaction-meets-anal",
+    "title": "🧱 OLTP vs OLAP: When Transaction Meets Analytics",
+    "img": "/img/blog/37.jpg",
+    "detailsImg": "/img/blog/blog-37.jpg",
+    "smallImg": "/img/blog/post-thumb-37.jpg",
+    "desc": "🤔 Why This Matters If you're working with data at any scale — engineering, analytics, AI, or product — you need to understand how systems handle transactions versus analytics. Many architectural decisions hinge on this: what data to collect, how to store it, and how to process it. In this post, we’ll break down OLTP and OLAP — their purposes, patterns, and when to use each.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# 🧱 OLTP vs OLAP: When Transaction Meets Analytics\n\n## Essential insights for developers to start the day\n\n### Summary\n🤔 Why This Matters If you're working with data at any scale — engineering, analytics, AI, or product — you need to understand how systems handle transactions versus analytics. Many architectural decisions hinge on this: what data to collect, how to store it, and how to process it. In this post, we’ll break down OLTP and OLAP — their purposes, patterns, and when to use each.\n\n---\n\n🤔 Why This Matters If you're working with data at any scale — engineering, analytics, AI, or product — you need to understand how systems handle transactions versus analytics. Many architectural decisions hinge on this: what data to collect, how to store it, and how to process it. In this post, we’ll break down OLTP and OLAP — their purposes, patterns, and when to use each. 💳 What is OLTP? OLTP stands for Online Transaction Processing. Purpose: Real-time transactional operations (e.g., purchases, inserts, updates). Workload: High volume of small, fast reads and writes. Common in: Web apps, banking systems, e-commerce platforms. Design Focus: Fast inserts and updates High availability Low latency Data normalization 🛠️ Examples Customer checkout on an e-commerce site Banking withdrawal or deposit Creating a user account ⚙️ Tech Examples PostgreSQL MySQL SQL Server MongoDB CockroachDB 📊 What is OLAP? OLAP stands for Online Analytical Processing. Purpose: Complex queries and aggregations over large volumes of historical data. Workload: Read-heavy, batch or near-real-time analytics. Common in: Dashboards, data warehouses, business intelligence. Design Focus: Optimized for aggregations and joins Denormalized schemas (e.g., star/snowflake) High throughput 🧠 Examples Monthly revenue reporting Customer segmentation Product performance dashboards ⚙️ Tech Examples Snowflake BigQuery Redshift Apache Druid ClickHouse 🔁 Key Differences at a Glance Feature OLTP OLAP Use Case Transactions Analytics Workload Type High-frequency reads/writes Read-heavy, batch queries Data Freshness Real-time Historical (near real-time) Schema Highly normalized Denormalized (star/snowflake) Query Speed Fast on small queries Fast on large aggregations Storage Optimization Write-optimized Read-optimized Examples MySQL, PostgreSQL Snowflake, BigQuery, ClickHouse 🧬 Can They Work Together? Yes — in most modern architectures: OLTP handles operations, writing to a production database. ETL/ELT jobs extract data to an OLAP system for analytics. Some platforms (like HTAP databases) blur this line — but separation of concerns is still a best practice for scale and performance. ✅ Final Thoughts Understanding the distinction between OLTP and OLAP helps you: Design the right data models Choose appropriate technologies Avoid performance issues in production or analytics Coming up next: Data Mesh vs Data Fabric — are they just buzzwords, or real solutions for modern teams? 📚 Data Architecture Foundations Series ✅ Data Lake vs Data Warehouse vs Data Mart 🧪 Data Lakehouse: Bridging Flexibility and Structure ✅ OLTP vs OLAP: When Transaction Meets Analytics 🧭 Data Mesh vs Data Fabric: Modern Decentralization 🔐 Data Governance: From Chaos to Control 🏗️ Designing Your Modern Data Platform (Cloud-Native Edition) Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment? It will become hidden in your post, but will\n\n## Key Takeaways\n\n1. , star/snowflake) High throughput 🧠 Examples Monthly revenue reporting Customer segmentation Product performance dashboards ⚙️ Tech Examples Snowflake BigQuery Redshift Apache Druid ClickHouse 🔁 Key Differences at a Glance Feature OLTP OLAP Use Case Transactions Analytics Workload Type High-frequency reads/writes Read-heavy, batch queries Data Freshness Real-time Historical (near real-time) Schema Highly normalized Denormalized (star/snowflake) Query Speed Fast on small queries Fast on large aggregations Storage Optimization Write-optimized Read-optimized Examples MySQL, PostgreSQL Snowflake, BigQuery, ClickHouse 🧬 Can They Work Together\n2. Some platforms (like HTAP databases) blur this line — but separation of concerns is still a best practice for scale and performance\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [🧱 OLTP vs OLAP: When Transaction Meets Analytics](https://dev.to/qvfagundes/oltp-vs-olap-when-transaction-meets-analytics-1ic7)*\n\n*Tags: web, database, ui, performance, databases*\n",
+    "keyTakeaways": [
+      ", star/snowflake) High throughput 🧠 Examples Monthly revenue reporting Customer segmentation Product performance dashboards ⚙️ Tech Examples Snowflake BigQuery Redshift Apache Druid ClickHouse 🔁 Key Differences at a Glance Feature OLTP OLAP Use Case Transactions Analytics Workload Type High-frequency reads/writes Read-heavy, batch queries Data Freshness Real-time Historical (near real-time) Schema Highly normalized Denormalized (star/snowflake) Query Speed Fast on small queries Fast on large aggregations Storage Optimization Write-optimized Read-optimized Examples MySQL, PostgreSQL Snowflake, BigQuery, ClickHouse 🧬 Can They Work Together",
+      "Some platforms (like HTAP databases) blur this line — but separation of concerns is still a best practice for scale and performance"
+    ],
+    "date": "Jul 20, 2025",
+    "category": "web",
+    "tags": [
+      "web",
+      "database",
+      "ui",
+      "performance",
+      "databases"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 20, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
     "id": "perfect-combination-of-message-queue-and",
     "title": "Perfect Combination of Message Queue and Real-Time Communication Distributed Practice（1751557889400100）",
-    "img": "/img/blog/34.jpg",
-    "detailsImg": "/img/blog/blog-34.jpg",
-    "smallImg": "/img/blog/post-thumb-34.jpg",
+    "img": "/img/blog/38.jpg",
+    "detailsImg": "/img/blog/blog-38.jpg",
+    "smallImg": "/img/blog/post-thumb-38.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of realtime development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1396,9 +1565,9 @@
   {
     "id": "provide-private-storage-for-internal-com",
     "title": "Provide private storage for internal company documents",
-    "img": "/img/blog/35.jpg",
-    "detailsImg": "/img/blog/blog-35.jpg",
-    "smallImg": "/img/blog/post-thumb-35.jpg",
+    "img": "/img/blog/39.jpg",
+    "detailsImg": "/img/blog/blog-39.jpg",
+    "smallImg": "/img/blog/post-thumb-39.jpg",
     "desc": "Provide Private Storage for Internal Company Documents Using Microsoft Azure Storing sensitive internal documents demands more than convenience—it requires robust security, scalability, and controlled access. Microsoft Azure offers a trusted, enterprise-grade solution through Storage Accounts, allowing businesses to securely store and manage internal content while maintaining full control over visibility and access. This guide walks you through: What a Storage Account is Why it's perfect for private document storage How to configure secure access Tips for optimizing reliability and recovery What Is a Storage Account in Azure.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1438,9 +1607,9 @@
   {
     "id": "scroll-driven-sticky-heading",
     "title": "Scroll-Driven Sticky Heading",
-    "img": "/img/blog/36.jpg",
-    "detailsImg": "/img/blog/blog-36.jpg",
-    "smallImg": "/img/blog/post-thumb-36.jpg",
+    "img": "/img/blog/40.jpg",
+    "detailsImg": "/img/blog/blog-40.jpg",
+    "smallImg": "/img/blog/post-thumb-40.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Scroll-driven animations are great. They’re a powerful tool that lets developers tie the movement and transformation of elements directly to the user’s scroll position.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1481,9 +1650,9 @@
   {
     "id": "setting-line-length-in-css-and-fitting-t",
     "title": "Setting Line Length in CSS (and Fitting Text to a Container)",
-    "img": "/img/blog/37.jpg",
-    "detailsImg": "/img/blog/blog-37.jpg",
-    "smallImg": "/img/blog/post-thumb-37.jpg",
+    "img": "/img/blog/41.jpg",
+    "detailsImg": "/img/blog/blog-41.jpg",
+    "smallImg": "/img/blog/post-thumb-41.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. First, what is line length. Line length is the length of a container that holds a body of multi-line text.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1522,9 +1691,9 @@
   {
     "id": "single-core-high-concurrency",
     "title": "Single Core High Concurrency",
-    "img": "/img/blog/38.jpg",
-    "detailsImg": "/img/blog/blog-38.jpg",
-    "smallImg": "/img/blog/post-thumb-38.jpg",
+    "img": "/img/blog/42.jpg",
+    "detailsImg": "/img/blog/blog-42.jpg",
+    "smallImg": "/img/blog/post-thumb-42.jpg",
     "desc": "As a junior computer science student, I have experienced a complete transformation in my understanding of performance development. This journey has taught me valuable lessons about modern web framework design and implementation. Project Information 🚀 Hyperlane Framework: GitHub Repository 📧 Author Contact: root@ltpp.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1562,9 +1731,9 @@
   {
     "id": "the-gap-strikes-back-now-stylable",
     "title": "The Gap Strikes Back: Now Stylable",
-    "img": "/img/blog/39.jpg",
-    "detailsImg": "/img/blog/blog-39.jpg",
-    "smallImg": "/img/blog/post-thumb-39.jpg",
+    "img": "/img/blog/43.jpg",
+    "detailsImg": "/img/blog/blog-43.jpg",
+    "smallImg": "/img/blog/post-thumb-43.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Four years ago, I wrote an article titled Minding the “gap”, where I talked about the CSS gap property, where it applied, and how it worked with various CSS layouts. At the time, I described how easy it was to evenly space items out in a flex, grid, or multi-column layout, by using the gap property.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1603,9 +1772,9 @@
   {
     "id": "the-layout-maestro-course",
     "title": "The Layout Maestro Course",
-    "img": "/img/blog/40.jpg",
-    "detailsImg": "/img/blog/blog-40.jpg",
-    "smallImg": "/img/blog/post-thumb-40.jpg",
+    "img": "/img/blog/44.jpg",
+    "detailsImg": "/img/blog/blog-44.jpg",
+    "smallImg": "/img/blog/post-thumb-44.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. It’s one of those easy-to-learn, difficult-to-master things, like they say about playing bass. Not because it’s innately difficult to, say, place two elements next to each other, but because there are many, many ways to tackle it.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1643,11 +1812,54 @@
     "comments": []
   },
   {
+    "id": "the-power-of-html-part-17-html-in-modern",
+    "title": "The Power of HTML - Part 17: HTML in Modern Frameworks: React, Vue, and Beyond",
+    "img": "/img/blog/45.jpg",
+    "detailsImg": "/img/blog/blog-45.jpg",
+    "smallImg": "/img/blog/post-thumb-45.jpg",
+    "desc": "Sup, framework fans. 🛠️ We've analyzed real-world sites in Part 16 of our The Power of HTML series. Now, in Part 17, we're bridging HTML with modern frameworks like React, Vue, and others—showing how HTML remains the core even in component-based worlds.",
+    "desc1": "Technical tutorials and coding tips to start the day",
+    "desc2": "energetic and practical",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# The Power of HTML - Part 17: HTML in Modern Frameworks: React, Vue, and Beyond\n\n## Essential insights for developers to start the day\n\n### Summary\nSup, framework fans. 🛠️ We've analyzed real-world sites in Part 16 of our The Power of HTML series. Now, in Part 17, we're bridging HTML with modern frameworks like React, Vue, and others—showing how HTML remains the core even in component-based worlds.\n\n---\n\nSup, framework fans! 🛠️ We've analyzed real-world sites in Part 16 of our The Power of HTML series. Now, in Part 17, we're bridging HTML with modern frameworks like React, Vue, and others—showing how HTML remains the core even in component-based worlds. JSX in React or templates in Vue are essentially HTML supercharged with JS logic, enabling reusable UIs without losing markup's essence. In 2025, frameworks dominate, but HTML's semantics and structure keep things accessible and performant. We'll touch AI frameworks too, like Vercel AI SDK for dynamic content. Tools like ChatGPT (go-to for generating component code) or Grok (top-notch for refining with AI integrations) make experimentation quick. Prompt: \"Create a React component using HTML-like JSX for a button.\" Let's framework it up! How HTML Fits into Modern Frameworks Frameworks abstract HTML but build on it—ensuring you don't forget fundamentals like semantics (Part 2) or accessibility (Part 5). React: Uses JSX (HTML-ish syntax) compiled to JS. HTML elements become components. Vue: Template syntax mixes HTML with directives (e.g., v-if) for reactivity. Beyond: Angular uses HTML templates with bindings; Svelte compiles to vanilla JS/HTML. AI Twist: Vercel AI SDK lets you render AI-generated HTML in frameworks, like dynamic UIs from prompts. This keeps dev fast—focus on logic, let HTML handle rendering. Frameworks in action: HTML at the heart of component code. (Image via Unsplash) React: JSX as Enhanced HTML In React, JSX lets you write HTML-like code with JS expressions. Import and render components. Example: A simple counter component. import React, { useState } from 'react'; function Counter() { const [count, setCount] = useState(0); return (  Count: {count}  setCount(count + 1)}>Increment  ); } export default Counter; Enter fullscreen mode Exit fullscreen mode HTML here: , , —with events (Part 13). Render in App.js. AI help: ChatGPT: \"Generate React JSX for a todo list.\" Grok: \"Optimize this component with memoization.\" Vue: Templates Blending HTML and Logic Vue's single-file components (.vue) separate template (HTML), script, style. Example: A greeting component.   Hello, {{ name }}!     export default { data() { return { name: 'Vue Dev' }; } };   h1 { color: blue; }  Enter fullscreen mode Exit fullscreen mode HTML base with {{ }} interpolation and v-model binding. For AI: ChatGPT or Grok: \"Vue template for dynamic form with HTML semantics.\" Beyond: Angular, Svelte, and AI Frameworks Angular: HTML templates with *ngIf, [(ngModel)]—e.g., Visible!. Svelte: Writes like HTML but compiles away framework code:  let count = 0;   count++}>{count}. AI Integration: Vercel AI SDK in Next.js (React-based) renders AI outputs as HTML: Use useChat ho\n\n## Key Takeaways\n\n1. Understanding The Power of HTML - Part 17: HTML in Modern Frameworks: React, Vue, and Beyond is essential for modern web development\n2. This technology/approach can improve your development workflow\n3. Consider implementing these concepts in your next project\n4. Stay updated with the latest trends and best practices\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [The Power of HTML - Part 17: HTML in Modern Frameworks: React, Vue, and Beyond](https://dev.to/karthikeyans21/the-power-of-html-part-17-html-in-modern-frameworks-react-vue-and-beyond-48de)*\n\n*Tags: html, angular, mobile, ux, tools*\n",
+    "keyTakeaways": [
+      "Understanding The Power of HTML - Part 17: HTML in Modern Frameworks: React, Vue, and Beyond is essential for modern web development",
+      "This technology/approach can improve your development workflow",
+      "Consider implementing these concepts in your next project",
+      "Stay updated with the latest trends and best practices"
+    ],
+    "date": "Jul 20, 2025",
+    "category": "html",
+    "tags": [
+      "html",
+      "angular",
+      "mobile",
+      "ux",
+      "tools"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 20, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
     "id": "the-rise-of-react-from-outrage-to-domina",
     "title": "The Rise of React: From Outrage to Dominance",
-    "img": "/img/blog/41.jpg",
-    "detailsImg": "/img/blog/blog-41.jpg",
-    "smallImg": "/img/blog/post-thumb-41.jpg",
+    "img": "/img/blog/46.jpg",
+    "detailsImg": "/img/blog/blog-46.jpg",
+    "smallImg": "/img/blog/post-thumb-46.jpg",
     "desc": "A Shocking Idea: HTML in JavaScript. When Facebook introduced React in 2013, the reaction wasn’t applause it was outrage. Developers mocked it at conferences, online forums exploded with criticism, and even Facebook’s own engineers doubted it would succeed.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1685,11 +1897,52 @@
     "comments": []
   },
   {
+    "id": "tiny-screens-big-impact-the-forgotten-ar",
+    "title": "Tiny Screens, Big Impact: The Forgotten Art Of Developing Web Apps For Feature Phones",
+    "img": "/img/blog/47.jpg",
+    "detailsImg": "/img/blog/blog-47.jpg",
+    "smallImg": "/img/blog/post-thumb-47.jpg",
+    "desc": "13 min readMobile, Design, AppsShare on Twitter, LinkedInAbout The AuthorTom Barrasso is a seasoned web & mobile developer and independent consultant with a passion for inclusive technology and responsible innovation. His current … More about Tom ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
+    "desc3": "Essential insights for developers to start the day",
+    "content": "# Tiny Screens, Big Impact: The Forgotten Art Of Developing Web Apps For Feature Phones\n\n## Essential insights for developers to start the day\n\n### Summary\n13 min readMobile, Design, AppsShare on Twitter, LinkedInAbout The AuthorTom Barrasso is a seasoned web & mobile developer and independent consultant with a passion for inclusive technology and responsible innovation. His current … More about Tom ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.\n\n---\n\n13 min readMobile, Design, AppsShare on Twitter, LinkedInAbout The AuthorTom Barrasso is a seasoned web & mobile developer and independent consultant with a passion for inclusive technology and responsible innovation. His current … More about Tom ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks. How To Measure UX and Design Impact, 8h video + UX training Advertise on Smashing Magazine Figma Workflow Masterclass, with Christine Vallaure Accessible Typography for Web & UI Design Masterclass, with Oliver SchöndorferLearn why flip phones still matter in 2025, and how you can build and launch web apps for these tiny devices.Flip phones aren’t dead. On the contrary, 200+ million non-smartphones are sold annually. That’s roughly equivalent to the number of iPhones sold in 2024. Even in the United States, millions of flip phones are sold each year. As network operators struggle to shut down 2G service, new incentives are offered to encourage device upgrades that further increase demand for budget-friendly flip phones. This is especially true across South Asia and Africa, where an iPhone is unaffordable for the vast majority of the population (it takes two months of work on an average Indian salary to afford the cheapest iPhone).Like their “smart” counterparts, flip phones (technically, this category is called “Feature Phones”) are becoming increasingly more capable. They now offer features you’d expect from a smartphone, like 4G, WiFi, Bluetooth, and the ability to run apps. If you are targeting users in South Asia and Africa, or niches in Europe and North America, there are flip phone app platforms like Cloud Phone and KaiOS. Building for these platforms is similar to developing a Progressive Web App (PWA), with distribution managed across several app stores.Jargon BustingFlip phones go by many names. Non-smartphones are jokingly called “dumb phones”. The technology industry calls this device category “feature phones”. Regionally, they are also known as button phones or basic mobiles in Europe, and keypad mobiles in India. They all share a few traits: they are budget phones with small screens and physical buttons.Why Build Apps For Flip Phones?It’s a common misconception that people who use flip phones do not want apps. In fact, many first-time internet users are eager to discover new content and services. While this market isn’t as lucrative as Apple’s App Store, there are a few reasons why you should build for flip phones.Organic GrowthYou do not need to pay to acquire flip phone users. Unlike Android or IOS, where the cost per install (CPI) averages around $2.5-3.3 per install according to GoGoChart, flip phone apps generate substantial organic downloads.Brand IntroductionWhen flip phone users eventually upgrade to smartphones, they will search for the apps they are already familiar with. This will, in turn, generate more installs on the Google Play Store and, to a lesser extent, the Apple App Store.Low C\n\n## Key Takeaways\n\n1. His current … More about Tom ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX\n2. In fact, many first-time internet users are eager to discover new content and services\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [Tiny Screens, Big Impact: The Forgotten Art Of Developing Web Apps For Feature Phones](https://smashingmagazine.com/2025/07/tiny-screens-big-impact-developing-web-apps-feature-phones/)*\n\n*Tags: ui, career, mobile, productivity, web*\n",
+    "keyTakeaways": [
+      "His current … More about Tom ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX",
+      "In fact, many first-time internet users are eager to discover new content and services"
+    ],
+    "date": "Jul 19, 2025",
+    "category": "ui",
+    "tags": [
+      "ui",
+      "career",
+      "mobile",
+      "productivity",
+      "web"
+    ],
+    "author_role": "Analysis",
+    "author": "mohansagar",
+    "status": "Tutorial",
+    "blogTopList": [
+      {
+        "iconName": "fa-regular fa-calendar-days",
+        "name": "Jul 19, 2025",
+        "path": false
+      },
+      {
+        "iconName": "fa-regular fa-user",
+        "name": "mohansagar",
+        "path": true
+      }
+    ],
+    "comments": []
+  },
+  {
     "id": "top-7-featured-dev-posts-of-the-week",
     "title": "Top 7 Featured DEV Posts of the Week",
-    "img": "/img/blog/42.jpg",
-    "detailsImg": "/img/blog/blog-42.jpg",
-    "smallImg": "/img/blog/post-thumb-42.jpg",
+    "img": "/img/blog/48.jpg",
+    "detailsImg": "/img/blog/blog-48.jpg",
+    "smallImg": "/img/blog/post-thumb-48.jpg",
     "desc": "Welcome to this week's Top 7, where the DEV editorial team handpicks their favorite posts from the previous week. Congrats to all the authors that made it onto the list 👏 Who Moved My Cookies. Of Cookies On Subdomains Jen Chan ・ Jul 9 #cookies #webdev #http @jenc walks us through a frustrating debugging session where cookie authentication failed on subdomains due to browser security restrictions.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1728,9 +1981,9 @@
   {
     "id": "understanding-derivatives-the-slope-of-c",
     "title": "Understanding Derivatives: The Slope of Change",
-    "img": "/img/blog/43.jpg",
-    "detailsImg": "/img/blog/blog-43.jpg",
-    "smallImg": "/img/blog/post-thumb-43.jpg",
+    "img": "/img/blog/49.jpg",
+    "detailsImg": "/img/blog/blog-49.jpg",
+    "smallImg": "/img/blog/post-thumb-49.jpg",
     "desc": "Unveiling the Secrets of Derivatives and Gradients in Machine Learning Have you ever wondered how a self-driving car navigates a busy street, or how Netflix recommends your next binge-worthy show. The magic behind these seemingly intelligent systems often lies in the power of derivatives and gradients. These fundamental concepts from calculus form the bedrock of many machine learning algorithms, allowing them to learn and improve from data.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1770,28 +2023,28 @@
   {
     "id": "unmasking-the-magic-the-wizard-of-oz-met",
     "title": "Unmasking The Magic: The Wizard Of Oz Method For UX Research",
-    "img": "/img/blog/44.jpg",
-    "detailsImg": "/img/blog/blog-44.jpg",
-    "smallImg": "/img/blog/post-thumb-44.jpg",
+    "img": "/img/blog/50.jpg",
+    "detailsImg": "/img/blog/blog-50.jpg",
+    "smallImg": "/img/blog/post-thumb-50.jpg",
     "desc": "19 min readUX, Design, User ResearchShare on Twitter, LinkedInAbout The AuthorVictor Yocco, PhD, has over a decade of experience as a UX researcher and research director. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
     "desc3": "Essential insights for developers to start the day",
-    "content": "# Unmasking The Magic: The Wizard Of Oz Method For UX Research\n\n## Essential insights for developers to start the day\n\n### Summary\n19 min readUX, Design, User ResearchShare on Twitter, LinkedInAbout The AuthorVictor Yocco, PhD, has over a decade of experience as a UX researcher and research director. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.\n\n---\n\n19 min readUX, Design, User ResearchShare on Twitter, LinkedInAbout The AuthorVictor Yocco, PhD, has over a decade of experience as a UX researcher and research director. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks. SmashingConf Amsterdam 2026 Behavioral Design Workshop, with Susan and Guthrie Weinschenk Accessible Typography for Web & UI Design Masterclass, with Oliver Schöndorfer SmashingConf New York 2025, October 6–9, 2025The Wizard of Oz method is a proven UX research tool that simulates real interactions to uncover authentic user behavior. Victor Yocco explores its fundamentals, advanced techniques, and critical considerations, including its relevance in the emerging field of agentic AI.New technologies and innovative concepts frequently enter the product development lifecycle, promising to revolutionize user experiences. However, even the most ingenious ideas risk failure without a fundamental grasp of user interaction with these new experiences.Consider the plight of the Nintendo Power Glove. Despite being a commercial success (selling over 1 million units), its release in late 1989 was followed by its discontinuation less than a full year later in 1990. The two games created solely for the Power Glove sold poorly, and there was little use for the Glove with Nintendo’s already popular traditional console games.A large part of the failure was due to audience reaction once the product (which allegedly was developed in 8 weeks) was cumbersome and unintuitive. Users found syncing the glove to the moves in specific games to be extremely frustrating, as it required a process of coding the moves into the glove’s preset move buttons and then remembering which buttons would generate which move. With the more modern success of Nintendo’s WII and other movement-based controller consoles and games, we can see the Power Glove was a concept ahead of its time.The Nintendo Power Glove: A Fistful of Frustration. (Image source: ACMI) (Large preview)If Power Glove’s developers wanted to conduct effective research prior to building it out, they would have needed to look beyond traditional methods, such as surveys and interviews, to understand how a user might truly interact with the Glove. How could this have been done without a functional prototype and slowing down the overall development process?Enter the Wizard of Oz method, a potent tool for bridging the chasm between abstract concepts and tangible user understanding, as one potential option. This technique simulates a fully functional system, yet a human operator (“the Wizard”) discreetly orchestrates the experience. This allows researchers to gather authentic user reactions and insights without the prerequisite of a fully built product.The Wizard of Oz (WOZ) method is named in tribute to the similarly named book by Frank L. Baum. In the book, the Wizard is simply a man h\n\n## Key Takeaways\n\n1. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX\n2. Victor Yocco explores its fundamentals, advanced techniques, and critical considerations, including its relevance in the emerging field of agentic AI\n3. Consider the plight of the Nintendo Power Glove\n4. Users found syncing the glove to the moves in specific games to be extremely frustrating, as it required a process of coding the moves into the glove’s preset move buttons and then remembering which buttons would generate which move\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [Unmasking The Magic: The Wizard Of Oz Method For UX Research](https://smashingmagazine.com/2025/07/unmasking-magic-wizard-oz-method-ux-research/)*\n\n*Tags: career, design, ux, react, ui*\n",
+    "content": "# Unmasking The Magic: The Wizard Of Oz Method For UX Research\n\n## Essential insights for developers to start the day\n\n### Summary\n19 min readUX, Design, User ResearchShare on Twitter, LinkedInAbout The AuthorVictor Yocco, PhD, has over a decade of experience as a UX researcher and research director. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.\n\n---\n\n19 min readUX, Design, User ResearchShare on Twitter, LinkedInAbout The AuthorVictor Yocco, PhD, has over a decade of experience as a UX researcher and research director. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks. SmashingConf Amsterdam 2026 Smart Interface Design Patterns, 40 lessons + UX training Accessible Typography for Web & UI Design Masterclass, with Oliver Schöndorfer How To Measure UX and Design Impact, 8h video + UX trainingThe Wizard of Oz method is a proven UX research tool that simulates real interactions to uncover authentic user behavior. Victor Yocco explores its fundamentals, advanced techniques, and critical considerations, including its relevance in the emerging field of agentic AI.New technologies and innovative concepts frequently enter the product development lifecycle, promising to revolutionize user experiences. However, even the most ingenious ideas risk failure without a fundamental grasp of user interaction with these new experiences.Consider the plight of the Nintendo Power Glove. Despite being a commercial success (selling over 1 million units), its release in late 1989 was followed by its discontinuation less than a full year later in 1990. The two games created solely for the Power Glove sold poorly, and there was little use for the Glove with Nintendo’s already popular traditional console games.A large part of the failure was due to audience reaction once the product (which allegedly was developed in 8 weeks) was cumbersome and unintuitive. Users found syncing the glove to the moves in specific games to be extremely frustrating, as it required a process of coding the moves into the glove’s preset move buttons and then remembering which buttons would generate which move. With the more modern success of Nintendo’s WII and other movement-based controller consoles and games, we can see the Power Glove was a concept ahead of its time.The Nintendo Power Glove: A Fistful of Frustration. (Image source: ACMI) (Large preview)If Power Glove’s developers wanted to conduct effective research prior to building it out, they would have needed to look beyond traditional methods, such as surveys and interviews, to understand how a user might truly interact with the Glove. How could this have been done without a functional prototype and slowing down the overall development process?Enter the Wizard of Oz method, a potent tool for bridging the chasm between abstract concepts and tangible user understanding, as one potential option. This technique simulates a fully functional system, yet a human operator (“the Wizard”) discreetly orchestrates the experience. This allows researchers to gather authentic user reactions and insights without the prerequisite of a fully built product.The Wizard of Oz (WOZ) method is named in tribute to the similarly named book by Frank L. Baum. In the book, the Wizard is simp\n\n## Key Takeaways\n\n1. He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX\n2. Victor Yocco explores its fundamentals, advanced techniques, and critical considerations, including its relevance in the emerging field of agentic AI\n3. Consider the plight of the Nintendo Power Glove\n4. Users found syncing the glove to the moves in specific games to be extremely frustrating, as it required a process of coding the moves into the glove’s preset move buttons and then remembering which buttons would generate which move\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [Unmasking The Magic: The Wizard Of Oz Method For UX Research](https://smashingmagazine.com/2025/07/unmasking-magic-wizard-oz-method-ux-research/)*\n\n*Tags: ui, react, ux, design, web*\n",
     "keyTakeaways": [
       "He is currently affiliated with Allelo Design and is taking on … More about Victor ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX",
       "Victor Yocco explores its fundamentals, advanced techniques, and critical considerations, including its relevance in the emerging field of agentic AI",
       "Consider the plight of the Nintendo Power Glove",
       "Users found syncing the glove to the moves in specific games to be extremely frustrating, as it required a process of coding the moves into the glove’s preset move buttons and then remembering which buttons would generate which move"
     ],
-    "date": "Jul 19, 2025",
-    "category": "career",
+    "date": "Jul 21, 2025",
+    "category": "ui",
     "tags": [
-      "career",
-      "design",
-      "ux",
+      "ui",
       "react",
-      "ui"
+      "ux",
+      "design",
+      "web"
     ],
     "author_role": "Analysis",
     "author": "mohansagar",
@@ -1799,7 +2052,7 @@
     "blogTopList": [
       {
         "iconName": "fa-regular fa-calendar-days",
-        "name": "Jul 19, 2025",
+        "name": "Jul 21, 2025",
         "path": false
       },
       {
@@ -1813,9 +2066,9 @@
   {
     "id": "upstox-frontend-interview-r1-for-javascr",
     "title": "🔥 Upstox Frontend Interview (R1) for JavaScript Developers",
-    "img": "/img/blog/45.jpg",
-    "detailsImg": "/img/blog/blog-45.jpg",
-    "smallImg": "/img/blog/post-thumb-45.jpg",
+    "img": "/img/blog/51.jpg",
+    "detailsImg": "/img/blog/blog-51.jpg",
+    "smallImg": "/img/blog/post-thumb-51.jpg",
     "desc": "💡 Topics they asked me & my solutions: ** Note: This is exactly the answers that I provided during the interview. ** ✅ What is a closure. const counter = () => { let count = 0; const inner = () => { count++; return count } count = 2; return inner; } const c = counter(); console.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1855,9 +2108,9 @@
   {
     "id": "use-codecrafters-to-learn-by-building-th",
     "title": "Use codecrafters to learn by building the most fundamental concepts of computer science",
-    "img": "/img/blog/46.jpg",
-    "detailsImg": "/img/blog/blog-46.jpg",
-    "smallImg": "/img/blog/post-thumb-46.jpg",
+    "img": "/img/blog/52.jpg",
+    "detailsImg": "/img/blog/blog-52.jpg",
+    "smallImg": "/img/blog/post-thumb-52.jpg",
     "desc": "Sign in to view linked content Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment. It will become hidden in your post, but will still be visible via the comment's permalink.",
     "desc1": "Educational content for late-night learners",
     "desc2": "educational and foundational",
@@ -1892,9 +2145,9 @@
   {
     "id": "using-css-cascade-layers-with-tailwind-u",
     "title": "Using CSS Cascade Layers With Tailwind Utilities",
-    "img": "/img/blog/47.jpg",
-    "detailsImg": "/img/blog/blog-47.jpg",
-    "smallImg": "/img/blog/post-thumb-47.jpg",
+    "img": "/img/blog/53.jpg",
+    "detailsImg": "/img/blog/blog-53.jpg",
+    "smallImg": "/img/blog/post-thumb-53.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Adam Wathan has (very cleverly) built Tailwind with CSS Cascade Layers, making it extremely powerful for organizing styles by priority. @layer theme, base, components, utilities; @import 'tailwindcss/theme.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -1933,9 +2186,9 @@
   {
     "id": "visual-studio-code",
     "title": "visual studio code",
-    "img": "/img/blog/48.jpg",
-    "detailsImg": "/img/blog/blog-48.jpg",
-    "smallImg": "/img/blog/post-thumb-48.jpg",
+    "img": "/img/blog/54.jpg",
+    "detailsImg": "/img/blog/blog-54.jpg",
+    "smallImg": "/img/blog/post-thumb-54.jpg",
     "desc": "Hello everyone, I'm having a serious issue with a full-stack project on my MacBook Air (Apple Silicon chip, M1/M2). The project uses Vite + Tailwind CSS for the frontend, and Node. js + Express + pg-promise for the backend.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -1973,26 +2226,26 @@
   {
     "id": "what-i-took-from-the-state-of-dev-2025-s",
     "title": "What I Took From the State of Dev 2025 Survey",
-    "img": "/img/blog/49.jpg",
-    "detailsImg": "/img/blog/blog-49.jpg",
-    "smallImg": "/img/blog/post-thumb-49.jpg",
+    "img": "/img/blog/55.jpg",
+    "detailsImg": "/img/blog/blog-55.jpg",
+    "smallImg": "/img/blog/post-thumb-55.jpg",
     "desc": "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. State of Devs 2025 survey results are out. While the survey isn’t directly related to the code part of what we do for work, I do love the focus Devographics took ever since its inception in 2020.",
-    "desc1": "Technical tutorials and coding tips to start the day",
-    "desc2": "energetic and practical",
+    "desc1": "Deep technical content for focused work hours",
+    "desc2": "detailed and informative",
     "desc3": "Essential insights for developers to start the day",
-    "content": "# What I Took From the State of Dev 2025 Survey\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. State of Devs 2025 survey results are out. While the survey isn’t directly related to the code part of what we do for work, I do love the focus Devographics took ever since its inception in 2020.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. State of Devs 2025 survey results are out! While the survey isn’t directly related to the code part of what we do for work, I do love the focus Devographics took ever since its inception in 2020. And this year it brought us some rather interesting results through the attendance of 8,717 developers, lots of data, and even more useful insights that I think everyone can look up and learn from. I decided to look at the survey results with an analytical mindset, but wound up pouring my heart out because, well, I am a developer, and the entire survey affects me in a way. I have some personal opinions, it turns out. So, sit back, relax, and indulge me for a bit as we look at a few choice pieces of the survey. And it’s worth noting that this is only part one of the survey results. A second data dump will be published later and I’m interested to poke at those numbers, too. An opportunity to connect One thing I noticed from the Demographics section is how much tech connects us all. The majority of responses come from the U.S. (26%) but many other countries, including Italy, Germany, France, Estonia, Austria, South Africa and many more, account for the remaining 74%. I mean, I am working and communicating with you right now, all the way from Nigeria! Isn’t that beautiful, to be able to communicate with people around the world through this wonderful place we call CSS-Tricks? And into the bigger community of developers that keeps it so fun? I think this is a testament to how much we want to connect. More so, the State of Devs survey gives us an opportunity to express our pain points on issues surrounding our experiences, workplace environments, quality of health, and even what hobbies we have as developers. And while I say developers, the survey makes it clear it’s more than that. Behind anyone’s face is someone encountering life challenges. We’re all people and people are capable of pure emotion. We are all just human. It’s also one of the reasons I decided to open a Bluesky account: to connect with more developers. I think this survey offers insights into how much we care about ourselves in tech, and how eager we are to solve issues rarely talked about. And the fact that it’s global in nature illustrates how much in common we all have. More women participated this year From what I noticed, fewer women participated in the 2024 State of JavaScript and State of CSS fewer women (around 6%), while women represented a bigger share in this year’s State of Devs survey. I’d say 15% is still far too low to fairly “represent” an entire key segment of people, but it is certainly encouraging to see a greater slice in this particular survey. We need more women in this male-dominated industry. Experience over talent Contrary to popular opinion, personal performance does not usually equate to higher pay, and this is reflected in the results of this survey. It’s more like, t\n\n## Key Takeaways\n\n1. A second data dump will be published later and I’m interested to poke at those numbers, too\n2. Isn’t that beautiful, to be able to communicate with people around the world through this wonderful place we call CSS-Tricks\n\n---\n\n*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*\n\n*Original source: [What I Took From the State of Dev 2025 Survey](https://css-tricks.com/what-i-took-from-the-state-of-dev-2025-survey/)*\n\n*Tags: career, javascript, performance, cloud, html*\n",
+    "content": "# What I Took From the State of Dev 2025 Survey\n\n## Essential insights for developers to start the day\n\n### Summary\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. State of Devs 2025 survey results are out. While the survey isn’t directly related to the code part of what we do for work, I do love the focus Devographics took ever since its inception in 2020.\n\n---\n\nGet affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. State of Devs 2025 survey results are out! While the survey isn’t directly related to the code part of what we do for work, I do love the focus Devographics took ever since its inception in 2020. And this year it brought us some rather interesting results through the attendance of 8,717 developers, lots of data, and even more useful insights that I think everyone can look up and learn from. I decided to look at the survey results with an analytical mindset, but wound up pouring my heart out because, well, I am a developer, and the entire survey affects me in a way. I have some personal opinions, it turns out. So, sit back, relax, and indulge me for a bit as we look at a few choice pieces of the survey. And it’s worth noting that this is only part one of the survey results. A second data dump will be published later and I’m interested to poke at those numbers, too. An opportunity to connect One thing I noticed from the Demographics section is how much tech connects us all. The majority of responses come from the U.S. (26%) but many other countries, including Italy, Germany, France, Estonia, Austria, South Africa and many more, account for the remaining 74%. I mean, I am working and communicating with you right now, all the way from Nigeria! Isn’t that beautiful, to be able to communicate with people around the world through this wonderful place we call CSS-Tricks? And into the bigger community of developers that keeps it so fun? I think this is a testament to how much we want to connect. More so, the State of Devs survey gives us an opportunity to express our pain points on issues surrounding our experiences, workplace environments, quality of health, and even what hobbies we have as developers. And while I say developers, the survey makes it clear it’s more than that. Behind anyone’s face is someone encountering life challenges. We’re all people and people are capable of pure emotion. We are all just human. It’s also one of the reasons I decided to open a Bluesky account: to connect with more developers. I think this survey offers insights into how much we care about ourselves in tech, and how eager we are to solve issues rarely talked about. And the fact that it’s global in nature illustrates how much in common we all have. More women participated this year From what I noticed, fewer women participated in the 2024 State of JavaScript and State of CSS fewer women (around 6%), while women represented a bigger share in this year’s State of Devs survey. I’d say 15% is still far too low to fairly “represent” an entire key segment of people, but it is certainly encouraging to see a greater slice in this particular survey. We need more women in this male-dominated industry. Experience over talent Contrary to popular opinion, personal performance does not usually equate to higher pay, and this is reflected in the results of this survey. It’s more like, t\n\n## Key Takeaways\n\n1. A second data dump will be published later and I’m interested to poke at those numbers, too\n2. Isn’t that beautiful, to be able to communicate with people around the world through this wonderful place we call CSS-Tricks\n\n---\n\n*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*\n\n*Original source: [What I Took From the State of Dev 2025 Survey](https://css-tricks.com/what-i-took-from-the-state-of-dev-2025-survey/)*\n\n*Tags: html, javascript, career, cloud, performance*\n",
     "keyTakeaways": [
       "A second data dump will be published later and I’m interested to poke at those numbers, too",
       "Isn’t that beautiful, to be able to communicate with people around the world through this wonderful place we call CSS-Tricks"
     ],
-    "date": "Jul 19, 2025",
-    "category": "career",
+    "date": "Jul 21, 2025",
+    "category": "html",
     "tags": [
-      "career",
+      "html",
       "javascript",
-      "performance",
+      "career",
       "cloud",
-      "html"
+      "performance"
     ],
     "author_role": "Analysis",
     "author": "mohansagar",
@@ -2000,7 +2253,7 @@
     "blogTopList": [
       {
         "iconName": "fa-regular fa-calendar-days",
-        "name": "Jul 19, 2025",
+        "name": "Jul 21, 2025",
         "path": false
       },
       {
@@ -2014,9 +2267,9 @@
   {
     "id": "what-is-html",
     "title": "What is HTML?",
-    "img": "/img/blog/50.jpg",
-    "detailsImg": "/img/blog/blog-50.jpg",
-    "smallImg": "/img/blog/post-thumb-50.jpg",
+    "img": "/img/blog/56.jpg",
+    "detailsImg": "/img/blog/blog-56.jpg",
+    "smallImg": "/img/blog/post-thumb-56.jpg",
     "desc": "What is HTML. If you’ve ever wondered how websites are made, the answer starts with HTML. Whether it’s a blog, an online store, or a social media site — they all use HTML in the background.",
     "desc1": "Technical tutorials and coding tips to start the day",
     "desc2": "energetic and practical",
@@ -2054,9 +2307,9 @@
   {
     "id": "what-is-o4-mini-high-all-you-need-to-kno",
     "title": "What is o4-mini-high? All You Need to Know",
-    "img": "/img/blog/51.jpg",
-    "detailsImg": "/img/blog/blog-51.jpg",
-    "smallImg": "/img/blog/post-thumb-51.jpg",
+    "img": "/img/blog/57.jpg",
+    "detailsImg": "/img/blog/blog-57.jpg",
+    "smallImg": "/img/blog/post-thumb-57.jpg",
     "desc": "In April 2025, OpenAI introduced two new reasoning-focused language models—o3 and o4‑mini—marking a significant evolution in generative AI’s ability to “think” before replying. Among these, the o4‑mini model—and its enhanced variant, o4‑mini‑high—has garnered attention for combining compactness, speed, and tool‐enabled reasoning. What is o4-mini-high.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -2097,9 +2350,9 @@
   {
     "id": "why-risc-v-is-perfect-for-your-next-scri",
     "title": "Why RISC-V is Perfect for Your Next Scripting Engine Backend",
-    "img": "/img/blog/52.jpg",
-    "detailsImg": "/img/blog/blog-52.jpg",
-    "smallImg": "/img/blog/post-thumb-52.jpg",
+    "img": "/img/blog/58.jpg",
+    "detailsImg": "/img/blog/blog-58.jpg",
+    "smallImg": "/img/blog/post-thumb-58.jpg",
     "desc": "A RISC-V Backend for a Scripting Engine Seeing this title, you may have a lot of questions, like \"What. Why not WASM. \" All of these are valid questions, and in this article, I will be answering them and a lot more.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -2137,9 +2390,9 @@
   {
     "id": "wrangler-deploy-usage-in-git-mcp-codebas",
     "title": "`wrangler deploy` usage in git-mcp codebase.",
-    "img": "/img/blog/53.jpg",
-    "detailsImg": "/img/blog/blog-53.jpg",
-    "smallImg": "/img/blog/post-thumb-53.jpg",
+    "img": "/img/blog/59.jpg",
+    "detailsImg": "/img/blog/blog-59.jpg",
+    "smallImg": "/img/blog/post-thumb-59.jpg",
     "desc": "In this article, we will review wrangler deploy usage in git-mcp codebase. We will look at: Deploy script in git-mcp package. json What is Wrangler.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
@@ -2180,9 +2433,9 @@
   {
     "id": "wwdc-2025-wi-fi-aware-framework-revoluti",
     "title": "WWDC 2025 - Wi-Fi Aware Framework: Revolutionizing Device-to-Device Communication on iOS",
-    "img": "/img/blog/54.jpg",
-    "detailsImg": "/img/blog/blog-54.jpg",
-    "smallImg": "/img/blog/post-thumb-54.jpg",
+    "img": "/img/blog/60.jpg",
+    "detailsImg": "/img/blog/blog-60.jpg",
+    "smallImg": "/img/blog/post-thumb-60.jpg",
     "desc": "Apple's introduction of the Wi-Fi Aware framework at WWDC 2025 marks a significant milestone in peer-to-peer device communication for iOS and iPadOS applications. This comprehensive guide explores the framework's capabilities, implementation patterns, and best practices for building robust device-to-device experiences. Understanding Wi-Fi Aware Technology Wi-Fi Aware is a global standard maintained by the Wi-Fi Alliance that enables direct device-to-device communication without requiring traditional infrastructure like routers or central servers.",
     "desc1": "Deep technical content for focused work hours",
     "desc2": "detailed and informative",
