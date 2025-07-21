@@ -1,0 +1,39 @@
+---
+title: "A Primer on Focus Trapping"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one."
+slug: "a-primer-on-focus-trapping"
+date: "2025-07-21"
+time: "15:44"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["html", "backend", "api", "ui", "mobile"]
+image_suggestion: "Professional illustration representing A Primer on Focus Trapping"
+source_url: "https://css-tricks.com/a-primer-on-focus-trapping/"
+published_date: "Mon, 21 Jul 2025 13:14:17 +0000"
+---
+# A Primer on Focus Trapping
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one. If the user tries to Shift + Tab out of the first element, we return focus back to the last one. This whole focus trap thing is used to create accessible modal dialogs since it’s a whole ‘nother trouble to inert everything else — but you don’t need it anymore if you’re building modals with the dialog API (assuming you do it right). Anyway, back to focus trapping. The whole process sounds simple in theory, but it can quite difficult to build in practice, mostly because of the numerous parts to you got to manage. Simple and easy focus trapping with Splendid Labz If you are not averse to using code built by others, you might want to consider this snippet with the code I’ve created in Splendid Labz. The basic idea is: We detect all focusable elements within an element. We manage focus with a keydown event listener. import { getFocusableElements, trapFocus } from '@splendidlabz/utils/dom' const dialog = document.querySelector('dialog') // Get all focusable content const focusables = getFocusableElements(node) // Traps focus within the dialog dialog.addEventListener('keydown', event => { trapFocus({ event, focusables }) }) The above code snippet makes focus trapping extremely easy. But, since you’re reading this, I’m sure you wanna know the details that go within each of these functions. Perhaps you wanna build your own, or learn what’s going on. Either way, both are cool — so let’s dive into it. Selecting all focusable elements I did research when I wrote about this some time ago. It seems like you could only focus an a handful of elements: a button input textarea select details iframe embed object summary dialog audio[controls] video[controls] [contenteditable] [tabindex] So, the first step in getFocusableElements is to search for all focusable elements within a container: export function getFocusableElements(container = document.body ) { return { get all () { const elements = Array.from( container.querySelectorAll( `a, button, input, textarea, select, details, iframe, embed, object, summary, dialog, audio[controls], video[controls], [contenteditable], [tabindex] `, ), ) } } } Next, we want to filter away elements that are disabled, hidden or set with display: none, since they cannot be focused on. We can do this with a simple filter function. export function getFocusableElements(container = document.body ) { return { get all () { // ... return elements.filter(el => { if (el.hasAttribute('disabled')) return false if (el.hasAttribute('hidden')) return false if (window.getComputedStyle(el).display === 'none') return false return true }) } } } Next, since we want to trap keyboard focus, it’s only natural to retrieve a list of keyboard-only focusable elements.
+
+## Key Takeaways
+
+1. Focus trapping is a term that refers to managing focus within an element, such that focus always stays within it: If a user tries to tab out from the last element, we return focus to the first one
+2. If the user tries to Shift + Tab out of the first element, we return focus back to the last one
+3. Simple and easy focus trapping with Splendid Labz If you are not averse to using code built by others, you might want to consider this snippet with the code I’ve created in Splendid Labz
+4. It seems like you could only focus an a handful of elements: a button input textarea select details iframe embed object summary dialog audio[controls] video[controls] [contenteditable] [tabindex] So, the first step in getFocusableElements is to search for all focusable elements within a container: export function getFocusableElements(container = document
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [A Primer on Focus Trapping](https://css-tricks.com/a-primer-on-focus-trapping/)*
+
+*Tags: html, backend, api, ui, mobile*
