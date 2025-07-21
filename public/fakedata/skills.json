@@ -1,32 +1,92 @@
 [
   {
-    "name": "Figma",
-    "img": "/img/icons/figma.png",
-    "perchant": "92%"
-  },
-  {
-    "name": "Sketch",
-    "img": "/img/icons/sketch.png",
-    "perchant": "80%"
-  },
-  {
-    "name": "XD",
-    "img": "/img/icons/xd.png",
-    "perchant": "85%"
-  },
-  {
-    "name": "WordPress",
-    "img": "/img/icons/wp.png",
-    "perchant": "99%"
-  },
-  {
-    "name": "React",
+    "name": "React.js",
     "img": "/img/icons/react.png",
-    "perchant": "89%"
+    "perchant": "95%"
+  },
+  {
+    "name": "React Native",
+    "img": "/img/icons/reactnative.svg",
+    "perchant": "85%"
   },
   {
     "name": "JavaScript",
     "img": "/img/icons/js.png",
-    "perchant": "93%"
+    "perchant": "95%"
+  },
+  {
+    "name": "Next.js",
+    "img": "/img/icons/nextjs.webp",
+    "perchant": "90%"
+  },
+  {
+    "name": "TypeScript",
+    "img": "/img/icons/typescript.svg",
+    "perchant": "85%"
+  },
+  {
+    "name": "Node.js",
+    "img": "/img/icons/nodejs.svg",
+    "perchant": "85%"
+  },
+  {
+    "name": "Python",
+    "img": "/img/icons/python.svg",
+    "perchant": "80%"
+  },
+  {
+    "name": "AWS",
+    "img": "/img/icons/aws.svg",
+    "perchant": "80%"
+  },
+  {
+    "name": "Azure",
+    "img": "/img/icons/azure.svg",
+    "perchant": "75%"
+  },
+  {
+    "name": "Docker",
+    "img": "/img/icons/docker.svg",
+    "perchant": "75%"
+  },
+  {
+    "name": "MongoDB",
+    "img": "/img/icons/mongodb.svg",
+    "perchant": "80%"
+  },
+  {
+    "name": "PostgreSQL",
+    "img": "/img/icons/postgresql.svg",
+    "perchant": "75%"
+  },
+  {
+    "name": "Git",
+    "img": "/img/icons/git.svg",
+    "perchant": "90%"
+  },
+  {
+    "name": "Bitbucket",
+    "img": "/img/icons/bitbucket.svg",
+    "perchant": "85%"
+  },
+  {
+    "name": "GraphQL",
+    "img": "/img/icons/graphql.svg",
+    "perchant": "70%"
+  },
+  {
+    "name": "HTML",
+    "img": "/img/icons/html.svg",
+    "perchant": "95%"
+  },
+  {
+    "name": "CSS",
+    "img": "/img/icons/css.svg",
+    "perchant": "90%"
+  },
+  {
+    "name": "Redux",
+    "img": "/img/icons/redux.svg",
+    "perchant": "85%"
   }
 ]
