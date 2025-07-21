@@ -1,0 +1,38 @@
+---
+title: "Building a Kanban Board with Drag and Drop in React"
+subtitle: "Essential insights for developers to start the day"
+summary: "TL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving."
+slug: "building-a-kanban-board-with-drag-and-dr"
+date: "2025-07-21"
+time: "11:44"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["ui", "react", "mobile", "javascript", "design"]
+image_suggestion: "Professional illustration representing Building a Kanban Board with Drag and Drop in React"
+source_url: "https://dev.to/surajondev/building-a-kanban-board-with-drag-and-drop-in-react-2pop"
+published_date: "Mon, 21 Jul 2025 11:30:00 +0000"
+---
+# Building a Kanban Board with Drag and Drop in React
+
+## Essential insights for developers to start the day
+
+### Summary
+TL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving.
+
+---
+
+TL;DR Drag-and-drop features are now common across modern web applications. They can be used to arrange items in order, categorize things, and perform other tasks. This makes a visual impact on the user, indicating that they are working and something is moving. Additionally, it can be helpful when multiple actions are needed to perform, making it easy to drag and drop. The Kanban Board is one of those examples where you can see the drag-and-drop of a component in its peak form. Most of the to-do lists use this Kanban board to manage the order and progress of tasks. As developers, we have seen it multiple times in JIRA boards. So, today we are going to build our kanban board that can be used at multiple places as per requirement. So, let’s get started. Prerequisite and Project Setup To build this, we should have some basic knowledge about the following: JavaScript React TailwindCSS If you have this knowledge, you are good to go with the building of the kanban board. As per the project setup, we are using NextJS, a framework of React. You can set up the project with the following command: npx create-next-app@latest Enter fullscreen mode Exit fullscreen mode We'll use the following packages: @dnd-kit/core: This is for the drag and drop functionality. sonner: This is a toast component to display any message regarding an update or error. You can install these libraries using the following command: npm install @dnd-kit/core sonner Enter fullscreen mode Exit fullscreen mode Dnd-Kit @dnd-kit – A lightweight, modular, performant, accessible, and extensible drag & drop toolkit for React. This kit can be divided into 4 major topics. Here are those: : This is used as the main provided that wraps the functionality of draggable and droppable. Sensors: It is used to map which actions should trigger the draggable action. These actions can be done by mouse, touch, keyboard, etc. Droppable: This marks which zone is droppable and which is not. In the case of Kanban, it can be columns. Draggable: Draggable items are the items that can be dragged from one drop zone to another. We are going to use this to build our Kanban board. Code Now, let's start coding by defining the context Draggable and Droppable that can be used by others too. draggable.tsx The code below is for the Draggable Component that uses the useDraggable hook from dnd-kit. Using this component, we can wrap any item that can be draggable. Create a draggable.tsx file to add the below code. import { useDraggable } from "@dnd-kit/core"; import React from "react"; export function Draggable({ id, children, }: { id: string; children: React.ReactNode; }) { const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id, }); const style = transform ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`, } : undefined; return (  {children}  ); } Enter fullscreen mode Exit fullscreen mode droppable.tsx Below is t
+
+## Key Takeaways
+
+1. Additionally, it can be helpful when multiple actions are needed to perform, making it easy to drag and drop
+2. As developers, we have seen it multiple times in JIRA boards
+3. So, today we are going to build our kanban board that can be used at multiple places as per requirement
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [Building a Kanban Board with Drag and Drop in React](https://dev.to/surajondev/building-a-kanban-board-with-drag-and-drop-in-react-2pop)*
+
+*Tags: ui, react, mobile, javascript, design*
