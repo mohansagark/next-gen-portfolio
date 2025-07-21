@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark ">
       <body
         className={`font-sora  dark:bg-dark-color overflow-x-hidden  relative`}
+        suppressHydrationWarning={true}
       >
         <Suspense fallback={<></>}>{children}</Suspense>
         <ThmeModeSwither />
