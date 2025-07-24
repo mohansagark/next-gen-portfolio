@@ -35,16 +35,6 @@
     "perchant": "80%"
   },
   {
-    "name": "AWS",
-    "img": "/img/icons/aws.svg",
-    "perchant": "80%"
-  },
-  {
-    "name": "Azure",
-    "img": "/img/icons/azure.svg",
-    "perchant": "75%"
-  },
-  {
     "name": "Docker",
     "img": "/img/icons/docker.svg",
     "perchant": "75%"
@@ -83,10 +73,5 @@
     "name": "CSS",
     "img": "/img/icons/css.svg",
     "perchant": "90%"
-  },
-  {
-    "name": "Redux",
-    "img": "/img/icons/redux.svg",
-    "perchant": "85%"
   }
 ]
