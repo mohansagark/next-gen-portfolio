@@ -1,7 +1,7 @@
-import skills from "../../public/fakedata/skills";
+import { skillsData } from "../data/adminData";
 
 const getSkills = () => {
-  return skills;
+  return skillsData || [];
 };
 
 export default getSkills;

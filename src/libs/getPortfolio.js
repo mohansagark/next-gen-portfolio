@@ -1,7 +1,7 @@
-import portfolio from "../../public/fakedata/portfolio";
+import { portfolioData } from "../data/adminData";
 
 const getPortfolio = () => {
-  return portfolio;
+  return portfolioData || [];
 };
 
 export default getPortfolio;

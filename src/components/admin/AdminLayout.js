@@ -56,6 +56,11 @@ const AdminLayout = ({ children }) => {
       href: "/admin/settings",
       icon: "fa-solid fa-gear",
     },
+    {
+      name: "UI Demo",
+      href: "/admin/demo",
+      icon: "fa-solid fa-sparkles",
+    },
   ];
 
   return (
@@ -79,9 +84,11 @@ const AdminLayout = ({ children }) => {
                 pathname === item.href
                   ? "bg-primary-color text-white"
                   : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-              } group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1 transition-colors duration-200`}
+              } group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1 transition-all duration-300 nav-link-animate transform hover:translate-x-1`}
             >
-              <i className={`${item.icon} mr-3 flex-shrink-0 h-4 w-4`}></i>
+              <i
+                className={`${item.icon} mr-3 flex-shrink-0 h-4 w-4 transition-transform duration-300 group-hover:scale-110`}
+              ></i>
               {item.name}
             </Link>
           ))}
@@ -114,10 +121,26 @@ const AdminLayout = ({ children }) => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <i className="fa-solid fa-user-circle text-gray-400 text-xl"></i>
+              <div className="flex items-center space-x-3">
+                <div className="flex-shrink-0">
+                  <img
+                    src="/img/hero/me.png"
+                    alt="Mohan Sagar"
+                    className="w-8 h-8 rounded-full object-cover border-2 border-gray-300 dark:border-gray-600"
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                      e.target.nextSibling.style.display = "flex";
+                    }}
+                  />
+                  <div
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center border-2 border-gray-300 dark:border-gray-600"
+                    style={{ display: "none" }}
+                  >
+                    <span className="text-white text-xs font-bold">MS</span>
+                  </div>
+                </div>
                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Welcome, {user?.name}
+                  Welcome, Mohan Sagar
                 </span>
               </div>
               <button
@@ -132,9 +155,9 @@ const AdminLayout = ({ children }) => {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+        <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 admin-main-content">
           <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-enter">
               {children}
             </div>
           </div>

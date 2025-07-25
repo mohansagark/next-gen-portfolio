@@ -6,11 +6,13 @@ import {
   useAdminAuth,
 } from "@/context_api/AdminAuthContext";
 import AdminLayout from "@/components/admin/AdminLayout";
+import useScrollAnimation from "@/hooks/useScrollAnimation";
 import getPortfolio from "@/libs/getPortfolio";
 
 const PortfolioContent = () => {
   const { isAuthenticated, isLoading } = useAdminAuth();
   const router = useRouter();
+  const scrollRef = useScrollAnimation();
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,9 +83,9 @@ const PortfolioContent = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div ref={scrollRef} className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center scroll-animate">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Portfolio Management

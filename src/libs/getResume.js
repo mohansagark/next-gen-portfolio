@@ -1,7 +1,7 @@
-import resume from "../../public/fakedata/resume";
+import { resumeData } from "../data/adminData";
 
 const getResume = () => {
-  return resume;
+  return resumeData;
 };
 
 export default getResume;

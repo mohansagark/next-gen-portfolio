@@ -1,7 +1,7 @@
-import testimonials from "../../public/fakedata/testimonials";
+import { testimonialsData } from "../data/adminData";
 
 const getTestimonials = () => {
-  return testimonials;
+  return testimonialsData || [];
 };
 
 export default getTestimonials;
