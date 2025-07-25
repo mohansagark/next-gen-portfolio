@@ -32,9 +32,8 @@ const RecentBlogWidget = () => {
                         <div className="relative z-10">
                           <ul className="flex gap-15px md:gap-25px items-center mb-5px">
                             {blogTopList?.length
-                              ? blogTopList
-                                  ?.slice(1, 3)
-                                  ?.map(({ iconName, name, path }, idx) => (
+                              ? blogTopList?.map(
+                                  ({ iconName, name, path }, idx) => (
                                     <li
                                       key={20000000 + idx}
                                       className="text-primary-color dark:text-white-color transition-all duration-500"
@@ -43,18 +42,28 @@ const RecentBlogWidget = () => {
                                         className={`${iconName} mr-1 text-primary-color`}
                                       ></i>{" "}
                                       {path ? (
-                                        <Link
-                                          href={`/blogs/${id}#comment-reply`}
-                                          className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500"
-                                        >
-                                          ({countCommentLength(comments)})
-                                        </Link>
+                                        <span className="text-primary-color dark:text-white-color">
+                                          By {name}
+                                        </span>
                                       ) : (
                                         name
                                       )}
                                     </li>
-                                  ))
+                                  )
+                                )
                               : ""}
+                            {/* Only show comments if there are any */}
+                            {comments && comments.length > 0 && (
+                              <li className="text-primary-color dark:text-white-color transition-all duration-500">
+                                <i className="fa-regular fa-comments mr-1 text-primary-color"></i>{" "}
+                                <Link
+                                  href={`/blogs/${id}#comment-reply`}
+                                  className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500"
+                                >
+                                  ({countCommentLength(comments)})
+                                </Link>
+                              </li>
+                            )}
                           </ul>
                           <h3>
                             <Link

@@ -85,16 +85,10 @@ const BlogSingle = ({ blog }) => {
                           ></i>{" "}
                           {path ? (
                             <Link
-                              href={`/blogs${
-                                idx === 2
-                                  ? `/${id}#comment-reply`
-                                  : `?author=${makePath(author)}`
-                              }`}
+                              href={`/blogs?author=${makePath(author)}`}
                               className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500 capitalize"
                             >
-                              {idx === 2
-                                ? `${name} (${countCommentLength(comments)})`
-                                : `By ${name}`}
+                              By {name}
                             </Link>
                           ) : (
                             name
@@ -102,6 +96,18 @@ const BlogSingle = ({ blog }) => {
                         </li>
                       ))
                     : ""}
+                  {/* Comments count as separate item */}
+                  {comments && comments.length > 0 && (
+                    <li className="text-primary-color dark:text-white-color">
+                      <i className="fa-regular fa-comments mr-1 text-primary-color transition-all duration-500"></i>{" "}
+                      <Link
+                        href={`/blogs/${id}#comment-reply`}
+                        className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500"
+                      >
+                        Comments ({countCommentLength(comments)})
+                      </Link>
+                    </li>
+                  )}
                 </ul>
                 <h3 className="mb-15px md:mb-5">
                   <Link

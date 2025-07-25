@@ -1,4 +1,3 @@
-import countCommentLength from "@/libs/countCommentLength";
 import countDataLength from "@/libs/countDataLength";
 import filterItems from "@/libs/filterItems";
 import getBlogCategories from "@/libs/getBlogCategories";
@@ -32,7 +31,7 @@ const BlogCategoriesWidget = () => {
                     className={`${
                       idx === 0
                         ? "pb-2 md:pb-10px pt-0"
-                        : idx + 1 === countCommentLength(categories)
+                        : idx + 1 === categories.length
                         ? "pt-2 md:pt-10px"
                         : "py-2 md:py-10px"
                     }  text-primary-color-light dark:text-white-color hover:text-primary-color dark:hover:text-primary-color  transition-all duration-500`}
