@@ -43,7 +43,13 @@ const BlogDetailsPrimary = ({
               >
                 <div className="rounded-lg relative overflow-hidden">
                   <div className="rounded-t-lg overflow-hidden">
-                    <Image src={detailsImg} alt="" width={2000} height={2000} />
+                    <Image
+                      src={detailsImg}
+                      alt={title || "Blog post image"}
+                      width={2000}
+                      height={2000}
+                      className="w-full h-auto object-cover"
+                    />
                   </div>
                   <Link
                     href={`/blogs?category=${makePath(category)}`}

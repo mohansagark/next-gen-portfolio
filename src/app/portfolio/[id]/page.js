@@ -13,8 +13,9 @@ export const metadata = {
 export default async function PortfolioDetails({ params }) {
   const { id } = await params;
 
+  // Check if portfolio exists by slug first, then by ID
   const isExistPortfolio = portfolio?.find(
-    ({ id: id1 }) => id1 === parseInt(id)
+    ({ slug, id: id1 }) => slug === id || id1 === parseInt(id)
   );
   if (!isExistPortfolio) {
     notFound();
@@ -26,5 +27,5 @@ export default async function PortfolioDetails({ params }) {
   );
 }
 export async function generateStaticParams() {
-  return portfolio?.map(({ id }) => ({ id: id.toString() }));
+  return portfolio?.map(({ id, slug }) => ({ id: slug || id.toString() }));
 }

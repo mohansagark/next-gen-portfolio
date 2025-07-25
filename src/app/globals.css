@@ -1001,6 +1001,48 @@ img {
 .portfolio-box .portfolio-item {
   margin-bottom: 4%;
   width: 48%;
+  height: 280px;
+  overflow: hidden;
+}
+
+/* Fix for consistent portfolio image heights */
+.portfolio-box .portfolio-item img {
+  width: 100% !important;
+  height: 280px;
+  object-fit: cover;
+  background-color: #f8f9fa;
+  display: block;
+}
+
+/* Specific styling for project images (PNG files) */
+.portfolio-box .portfolio-item img[src*="/img/project/"] {
+  object-fit: contain;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .portfolio-box .portfolio-item {
+    height: 320px;
+  }
+  .portfolio-box .portfolio-item img {
+    height: 320px;
+  }
+  .portfolio-box .portfolio-item img[src*="/img/project/"] {
+    padding: 25px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .portfolio-box .portfolio-item {
+    height: 360px;
+  }
+  .portfolio-box .portfolio-item img {
+    height: 360px;
+  }
+  .portfolio-box .portfolio-item img[src*="/img/project/"] {
+    padding: 30px;
+  }
 }
 .portfolio-box--2 .portfolio-item {
   margin-bottom: 25px;
@@ -1080,6 +1122,13 @@ img {
   .portfolio-box .portfolio-item {
     width: 100%;
     margin-bottom: 30px;
+    height: 240px;
+  }
+  .portfolio-box .portfolio-item img {
+    height: 240px;
+  }
+  .portfolio-box .portfolio-item img[src*="/img/project/"] {
+    padding: 15px;
   }
 }
 /* testimonials css */
