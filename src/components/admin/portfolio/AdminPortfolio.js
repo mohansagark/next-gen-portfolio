@@ -85,27 +85,28 @@ const PortfolioContent = () => {
     <AdminLayout>
       <div ref={scrollRef} className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center scroll-animate">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 scroll-animate">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
               Portfolio Management
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
               Manage your portfolio projects and showcase items
             </p>
           </div>
           <button
             onClick={() => router.push("/admin/portfolio/new")}
-            className="bg-primary-color hover:bg-primary-color/90 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+            className="bg-primary-color hover:bg-primary-color/90 text-white px-4 py-2 rounded-lg transition-colors duration-200 w-full sm:w-auto text-center flex items-center justify-center"
           >
             <i className="fa-solid fa-plus mr-2"></i>
-            Add New Project
+            <span className="hidden xs:inline">Add New Project</span>
+            <span className="xs:hidden">Add Project</span>
           </button>
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Search Projects
@@ -115,7 +116,7 @@ const PortfolioContent = () => {
                 placeholder="Search by title or description..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               />
             </div>
             <div>
@@ -125,7 +126,7 @@ const PortfolioContent = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               >
                 <option value="all">All Categories</option>
                 {categories.map((category) => (
@@ -169,11 +170,11 @@ const PortfolioContent = () => {
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredItems.map((item) => (
                   <div
                     key={item.id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200"
+                    className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200 bg-white dark:bg-gray-800"
                   >
                     <div className="aspect-video bg-gray-100 dark:bg-gray-700 relative">
                       {item.img ? (
@@ -184,49 +185,52 @@ const PortfolioContent = () => {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <i className="fa-solid fa-image text-4xl text-gray-400"></i>
+                          <i className="fa-solid fa-image text-3xl sm:text-4xl text-gray-400"></i>
                         </div>
                       )}
                       <div className="absolute top-2 right-2">
-                        <span className="bg-primary-color text-white px-2 py-1 rounded-full text-xs">
+                        <span className="bg-primary-color text-white px-2 py-1 rounded-full text-xs font-medium">
                           {item.category}
                         </span>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1">
+                    <div className="p-3 sm:p-4">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1 text-sm sm:text-base">
                         {item.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                      <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
                         {item.desc}
                       </p>
-                      <div className="flex justify-between items-center">
-                        <div className="flex space-x-2">
+                      <div className="flex flex-col space-y-3 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+                        <div className="flex space-x-3 justify-center sm:justify-start">
                           <button
                             onClick={() => handleEdit(item.id)}
-                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
                             title="Edit"
                           >
-                            <i className="fa-solid fa-edit"></i>
+                            <i className="fa-solid fa-edit mr-1"></i>
+                            <span className="sm:hidden">Edit</span>
                           </button>
                           <button
                             onClick={() => handleDelete(item.id)}
-                            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
+                            className="flex items-center text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm"
                             title="Delete"
                           >
-                            <i className="fa-solid fa-trash"></i>
+                            <i className="fa-solid fa-trash mr-1"></i>
+                            <span className="sm:hidden">Delete</span>
                           </button>
                         </div>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-3 justify-center sm:justify-start">
                           {item.livePreview && (
                             <a
                               href={item.livePreview}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
+                              className="flex items-center text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 text-sm"
                               title="Live Preview"
                             >
-                              <i className="fa-solid fa-external-link-alt"></i>
+                              <i className="fa-solid fa-external-link-alt mr-1"></i>
+                              <span className="sm:hidden">View</span>
                             </a>
                           )}
                           {item.githubUrl && (
@@ -234,10 +238,11 @@ const PortfolioContent = () => {
                               href={item.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                              className="flex items-center text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-300 text-sm"
                               title="GitHub"
                             >
-                              <i className="fa-brands fa-github"></i>
+                              <i className="fa-brands fa-github mr-1"></i>
+                              <span className="sm:hidden">Code</span>
                             </a>
                           )}
                         </div>

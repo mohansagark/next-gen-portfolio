@@ -189,43 +189,45 @@ const DashboardContent = () => {
             <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
           </div>
 
-          <div className="relative px-8 py-8 sm:px-12 sm:py-12">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-6">
+          <div className="relative px-6 py-6 sm:px-8 sm:py-8 md:px-12 md:py-12">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <div className="flex-shrink-0">
                   <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
                     <img
                       src="/img/hero/me.png"
                       alt="Mohan Sagar"
-                      className="w-16 h-16 rounded-xl object-cover border-2 border-white/30"
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl object-cover border-2 border-white/30"
                       onError={(e) => {
                         e.target.style.display = "none";
                         e.target.nextSibling.style.display = "flex";
                       }}
                     />
                     <div
-                      className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center border-2 border-white/30"
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center border-2 border-white/30"
                       style={{ display: "none" }}
                     >
-                      <span className="text-white text-xl font-bold">MS</span>
+                      <span className="text-white text-lg sm:text-xl font-bold">
+                        MS
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div>
-                  <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+                <div className="text-center sm:text-left">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
                     Welcome Mohan Sagar
                   </h1>
-                  <p className="text-blue-100 text-lg mt-2 opacity-90">
+                  <p className="text-blue-100 text-base sm:text-lg mt-2 opacity-90">
                     Manage your portfolio content and settings from here
                   </p>
-                  <div className="flex items-center mt-4 space-x-4">
+                  <div className="flex flex-col sm:flex-row items-center mt-4 space-y-2 sm:space-y-0 sm:space-x-4">
                     <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                       <span className="text-white text-sm font-medium">
                         System Online
                       </span>
                     </div>
-                    <div className="text-white/70 text-sm">
+                    <div className="text-white/70 text-xs sm:text-sm text-center sm:text-left">
                       Last login: {new Date().toLocaleString()}
                     </div>
                   </div>
@@ -233,9 +235,9 @@ const DashboardContent = () => {
               </div>
 
               {/* Quick Stats Mini Cards */}
-              <div className="hidden lg:flex space-x-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-2xl font-bold text-white">
+              <div className="flex justify-center lg:flex space-x-4 mt-4 lg:mt-0">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-white">
                     {stats.blogs +
                       stats.portfolio +
                       stats.skills +
@@ -243,8 +245,10 @@ const DashboardContent = () => {
                   </div>
                   <div className="text-xs text-blue-100 mt-1">Total Items</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-                  <div className="text-2xl font-bold text-white">100%</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-white">
+                    100%
+                  </div>
                   <div className="text-xs text-blue-100 mt-1">Uptime</div>
                 </div>
               </div>
@@ -253,14 +257,14 @@ const DashboardContent = () => {
         </div>
 
         {/* System Status Widget */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-100 dark:border-gray-700 p-6 admin-card-hover">
-              <div className="flex items-center justify-between mb-6">
+            <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-100 dark:border-gray-700 p-4 sm:p-6 admin-card-hover">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 space-y-3 sm:space-y-0">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   System Overview
                 </h3>
-                <div className="flex items-center space-x-2 bg-green-100 dark:bg-green-900/20 rounded-full px-3 py-1">
+                <div className="flex items-center space-x-2 bg-green-100 dark:bg-green-900/20 rounded-full px-3 py-1 self-start">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-green-700 dark:text-green-400 text-sm font-medium">
                     All Systems Operational
@@ -268,25 +272,25 @@ const DashboardContent = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl">
-                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl">
+                  <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400">
                     99.9%
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                     Uptime
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
+                  <div className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
                     2.3s
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
                     Load Time
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-xl">
-                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-xl">
+                  <div className="text-xl sm:text-2xl font-bold text-purple-600 dark:text-purple-400">
                     {stats.blogs +
                       stats.portfolio +
                       stats.skills +
@@ -296,8 +300,8 @@ const DashboardContent = () => {
                     Total Items
                   </div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl">
-                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                <div className="text-center p-3 sm:p-4 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl">
+                  <div className="text-xl sm:text-2xl font-bold text-orange-600 dark:text-orange-400">
                     4.2 GB
                   </div>
                   <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
@@ -308,15 +312,15 @@ const DashboardContent = () => {
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Quick Stats */}
-            <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-100 dark:border-gray-700 p-6 admin-card-hover">
+            <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-100 dark:border-gray-700 p-4 sm:p-6 admin-card-hover">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Quick Stats
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                     Today's Views
                   </span>
                   <div className="flex items-center space-x-2">
@@ -327,7 +331,7 @@ const DashboardContent = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                     New Messages
                   </span>
                   <div className="flex items-center space-x-2">
@@ -338,7 +342,7 @@ const DashboardContent = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                     Active Sessions
                   </span>
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -349,28 +353,28 @@ const DashboardContent = () => {
             </div>
 
             {/* Weather Widget */}
-            <div className="bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 shadow-xl rounded-2xl p-6 text-white admin-card-hover">
+            <div className="bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 shadow-xl rounded-2xl p-4 sm:p-6 text-white admin-card-hover">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-lg font-semibold">Current Weather</h3>
-                  <p className="text-blue-100">Your Location</p>
+                  <p className="text-blue-100 text-sm">Your Location</p>
                 </div>
-                <i className="fa-solid fa-sun text-3xl opacity-80"></i>
+                <i className="fa-solid fa-sun text-2xl sm:text-3xl opacity-80"></i>
               </div>
               <div className="mt-4">
-                <div className="text-3xl font-bold">72°F</div>
-                <div className="text-blue-100">Sunny & Clear</div>
+                <div className="text-2xl sm:text-3xl font-bold">72°F</div>
+                <div className="text-blue-100 text-sm">Sunny & Clear</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Statistics Cards */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {dashboardCards.map((card, index) => (
             <div
               key={index}
-              className="group relative bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700 admin-card-hover min-h-[200px]"
+              className="group relative bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700 admin-card-hover min-h-[180px] sm:min-h-[200px]"
               style={{
                 animationDelay: `${index * 100}ms`,
               }}
@@ -378,23 +382,25 @@ const DashboardContent = () => {
               {/* Background Pattern */}
               <div className={`absolute inset-0 ${card.bgPattern} opacity-50`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-transparent to-white/10"></div>
-                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-white/5"></div>
-                <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-16 h-16 rounded-full bg-white/5"></div>
+                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-white/5"></div>
+                <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-white/5"></div>
               </div>
 
-              <div className="relative p-6">
+              <div className="relative p-4 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
                     <div
-                      className={`bg-gradient-to-r ${card.color} rounded-xl p-3 shadow-lg transform group-hover:scale-110 transition-transform duration-300`}
+                      className={`bg-gradient-to-r ${card.color} rounded-xl p-2.5 sm:p-3 shadow-lg transform group-hover:scale-110 transition-transform duration-300 self-start`}
                     >
-                      <i className={`${card.icon} text-white text-xl`}></i>
+                      <i
+                        className={`${card.icon} text-white text-lg sm:text-xl`}
+                      ></i>
                     </div>
                     <div>
-                      <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                      <dt className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                         {card.title}
                       </dt>
-                      <dd className="text-3xl font-bold text-gray-900 dark:text-white mt-1 font-mono">
+                      <dd className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1 font-mono">
                         {card.count}
                       </dd>
                     </div>
@@ -415,12 +421,12 @@ const DashboardContent = () => {
                           : "fa-arrow-trend-down"
                       }`}
                     ></i>
-                    <span>{card.trend}</span>
+                    <span className="hidden sm:inline">{card.trend}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="relative bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 px-6 py-4 border-t border-gray-100 dark:border-gray-600">
+              <div className="relative bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 dark:border-gray-600">
                 <div className="text-sm">
                   <a
                     href={card.href}
@@ -440,29 +446,29 @@ const DashboardContent = () => {
 
         {/* Quick Actions */}
         <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl border border-gray-100 dark:border-gray-700 admin-card-hover">
-          <div className="px-8 py-8">
-            <div className="flex items-center justify-between mb-8">
+          <div className="px-6 py-6 sm:px-8 sm:py-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 space-y-4 sm:space-y-0">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                   Quick Actions
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mt-1">
                   Get things done faster with these shortcuts
                 </p>
               </div>
-              <div className="hidden sm:block">
+              <div className="self-start sm:self-auto">
                 <div className="bg-gradient-to-r from-primary-color to-blue-600 rounded-full p-3">
                   <i className="fa-solid fa-rocket text-white text-xl"></i>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {quickActions.map((action, index) => (
                 <a
                   key={index}
                   href={action.href}
-                  className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-gray-200 dark:border-gray-600 overflow-hidden admin-card-hover"
+                  className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 p-6 sm:p-8 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-gray-200 dark:border-gray-600 overflow-hidden admin-card-hover"
                   style={{
                     animationDelay: `${index * 150}ms`,
                   }}
@@ -471,15 +477,17 @@ const DashboardContent = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   {/* Floating Elements */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-color/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-                  <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-125 transition-transform duration-500"></div>
+                  <div className="absolute top-0 right-0 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-primary-color/10 to-transparent rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700"></div>
+                  <div className="absolute bottom-0 left-0 w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-125 transition-transform duration-500"></div>
 
                   <div className="relative">
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between mb-4 sm:mb-6">
                       <div
-                        className={`${action.color} rounded-2xl p-4 shadow-lg group-hover:shadow-xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                        className={`${action.color} rounded-2xl p-3 sm:p-4 shadow-lg group-hover:shadow-xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
                       >
-                        <i className={`${action.icon} text-white text-2xl`}></i>
+                        <i
+                          className={`${action.icon} text-white text-xl sm:text-2xl`}
+                        ></i>
                       </div>
                       <div className="opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
                         <i className="fa-solid fa-arrow-up-right text-gray-400 dark:text-gray-500 text-lg"></i>
@@ -487,10 +495,10 @@ const DashboardContent = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-color transition-colors duration-300">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 group-hover:text-primary-color transition-colors duration-300">
                         {action.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed">
                         {action.description}
                       </p>
                     </div>

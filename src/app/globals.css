@@ -2420,6 +2420,47 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mobile Responsive Improvements */
+@media (max-width: 768px) {
+  .admin-main-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .admin-card-hover:hover {
+    transform: translateY(-2px) scale(1.005);
+  }
+
+  /* Reduce transform intensity on mobile */
+  .nav-link-animate:hover {
+    transform: translateX(0.5rem);
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .admin-card-hover {
+    margin-bottom: 1rem;
+  }
+
+  .admin-card-hover:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .admin-card-hover:hover {
+    transform: none;
+  }
+
+  .admin-card-hover:active {
+    transform: scale(0.98);
+  }
+}
+
 /* Card Hover with Smooth Transform */
 .admin-card-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2456,4 +2497,143 @@ html {
 .nav-link-animate:hover::before {
   left: 100%;
 }
+
+/* Admin Mobile Responsive Utilities */
+.admin-mobile-card {
+  @media (max-width: 640px) {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.admin-mobile-text {
+  @media (max-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.admin-mobile-button {
+  @media (max-width: 640px) {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Responsive Grid Improvements */
+.admin-responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .admin-responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .admin-responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile-first approach for admin tables */
+.admin-table-mobile {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.admin-cards-mobile {
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+/* Improved mobile touch targets */
+.admin-touch-target {
+  @media (max-width: 768px) {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Mobile modal improvements */
+@media (max-width: 640px) {
+  .fixed.inset-0 > div {
+    margin: 1rem;
+    max-width: none;
+    width: auto;
+  }
+}
+
+/* Responsive form improvements */
+.admin-form-responsive {
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .admin-form-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .admin-form-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Responsive table alternatives */
+.admin-responsive-table {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.admin-responsive-cards {
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+/* Improved text scaling */
+@media (max-width: 480px) {
+  .admin-responsive-text {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .admin-responsive-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Better spacing for mobile */
+@media (max-width: 640px) {
+  .admin-mobile-spacing {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .admin-mobile-spacing > * {
+    margin-bottom: 0.75rem;
+  }
+}
+
 /* !END: Theme cursor CSS */
