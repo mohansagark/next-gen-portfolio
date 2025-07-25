@@ -46,7 +46,7 @@ function convertFrontmatterToJson(data, content, index) {
     category: parsedTags?.[0] || "general",
     tags: parsedTags,
     author_role: "Analysis",
-    author: "mohansagar",
+    author: data.author || "mohansagar",
     status: "Tutorial",
     blogTopList: [
       {
@@ -55,8 +55,11 @@ function convertFrontmatterToJson(data, content, index) {
         path: false,
       },
       {
-        iconName: "fa-regular fa-user",
-        name: "mohansagar",
+        iconName:
+          data.author === "Agent Bot"
+            ? "fa-solid fa-robot"
+            : "fa-regular fa-user",
+        name: data.author || "mohansagar",
         path: true,
       },
     ],

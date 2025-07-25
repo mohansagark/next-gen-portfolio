@@ -1,10 +1,24 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import BlogCategoriesWidget from "./widgets/BlogCategoriesWidget";
 import BlogTagsWidget from "./widgets/BlogTagsWidget";
 import RecentBlogWidget from "./widgets/RecentBlogWidget";
+import makePath from "@/libs/makePath";
 
 const BlogSidebar = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/blogs?search=${makePath(searchTerm)}`);
+    }
+  };
+
   return (
     <div className="sidebar lg:col-start-9 lg:col-span-4 pt-10 lg:pt-0 mt-60px lg:mt-0 border-t border-gray-color-3 lg:border-none">
       <div className="flex flex-col gap-30px">
@@ -13,13 +27,15 @@ const BlogSidebar = () => {
           className="px-15px md:px-25px py-30px bg-cream-light-color dark:bg-primary-color-light rounded-lg wow fadeInUp"
           data-wow-delay=".3s"
         >
-          <form>
+          <form onSubmit={handleSearch}>
             <div className="flex">
-              {/* <!-- first name --> */}
+              {/* <!-- search input --> */}
               <div className="flex-grow">
                 <input
                   type="search"
-                  placeholder="Search..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search blogs & categories..."
                   className="text-white-color w-full pl-5 py-4 border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-l-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
                 />
               </div>

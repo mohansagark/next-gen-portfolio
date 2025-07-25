@@ -2,6 +2,7 @@ import makePath from "@/libs/makePath";
 import Link from "next/link";
 import React from "react";
 import countCommentLength from "@/libs/countCommentLength";
+import AuthorDisplay from "@/components/shared/AuthorDisplay";
 
 const BlogSingle = ({ blog }) => {
   const { id, title, desc, blogTopList, category, author, comments } = blog

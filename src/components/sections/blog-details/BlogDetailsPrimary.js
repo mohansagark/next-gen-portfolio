@@ -1,8 +1,8 @@
 import BlogSidebar from "@/components/shared/sidebar/BlogSidebar";
+import AuthorDisplay from "@/components/shared/AuthorDisplay";
 import countCommentLength from "@/libs/countCommentLength";
 import makePath from "@/libs/makePath";
 import sliceText from "@/libs/sliceText";
-import Image from "next/image";
 import Link from "next/link";
 
 const BlogDetailsPrimary = ({
@@ -42,23 +42,15 @@ const BlogDetailsPrimary = ({
                 data-wow-delay=".3s"
               >
                 <div className="rounded-lg relative overflow-hidden">
-                  <div className="rounded-t-lg overflow-hidden">
-                    <Image
-                      src={detailsImg}
-                      alt={title || "Blog post image"}
-                      width={2000}
-                      height={2000}
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
+                  {/* Blog detail image removed as requested */}
                   <Link
                     href={`/blogs?category=${makePath(category)}`}
-                    className="text-size-13 uppercase px-15px py-10px rounded-50px leading-1 absolute top-[15px] right-[15px] text-white-color bg-gradient-secondary-2 bg-200 hover:bg-100"
+                    className="text-size-13 uppercase px-15px py-10px rounded-50px leading-1 inline-block mb-4 text-white-color bg-gradient-secondary-2 bg-200 hover:bg-100"
                   >
                     {category}
                   </Link>
 
-                  <div className="pt-25px md:pt-30px -mt-10px">
+                  <div className="pt-25px md:pt-30px">
                     <div className="transition-all duration-500">
                       <div className="relative z-0">
                         <div className="relative z-10">
@@ -124,7 +116,10 @@ const BlogDetailsPrimary = ({
                                     </p>
                                     <p className="text-white-color mb-2">
                                       <cite className="text-xl relative inline-block before:inline-block before:w-[35px] before:h-0.5 before:bg-primary-color before:rounded-[2px] before:relative before:-top-[6px] before:mr-15px">
-                                        {author || "Mohan Sagar"}
+                                        <AuthorDisplay
+                                          author={author || "Agent Bot"}
+                                          className="text-white-color"
+                                        />
                                       </cite>
                                     </p>
                                   </div>
@@ -294,35 +289,19 @@ const BlogDetailsPrimary = ({
                           <div>
                             <Link
                               href={isPrevBlog ? `/blogs/${prevId}` : "#"}
-                              className="overflow-hidden w-85px h-85px"
+                              className="uppercase text-primary-color mb-1.5 inline-flex gap-2 items-center"
                             >
-                              <Image
-                                src={prevBlogImg}
-                                alt=""
-                                className="w-85px h-85px"
-                                width={2000}
-                                height={2000}
-                              />
+                              <i className="fa-regular fa-angle-double-left"></i>
+                              <span> previous</span>
                             </Link>
-                          </div>
-                          <div>
-                            <div className="relative z-10">
+                            <h3>
                               <Link
                                 href={isPrevBlog ? `/blogs/${prevId}` : "#"}
-                                className="uppercase text-primary-color mb-1.5 inline-flex gap-2 items-center"
+                                className="text-primary-color-light dark:text-white-color hover:text-primary-color dark:hover:text-primary-color capitalize relative z-0 text-lg font-medium"
                               >
-                                <i className="fa-regular fa-angle-double-left"></i>
-                                <span> previous</span>
+                                {sliceText(prevBlogTitle, 45)}
                               </Link>
-                              <h3>
-                                <Link
-                                  href={isPrevBlog ? `/blogs/${prevId}` : "#"}
-                                  className="text-primary-color-light dark:text-white-color hover:text-primary-color dark:hover:text-primary-color capitalize relative z-0 text-lg font-medium"
-                                >
-                                  {sliceText(prevBlogTitle, 45)}
-                                </Link>
-                              </h3>
-                            </div>
+                            </h3>
                           </div>
                         </div>
                       </>
@@ -352,20 +331,6 @@ const BlogDetailsPrimary = ({
                               </Link>
                             </h3>
                           </div>
-                        </div>
-                        <div>
-                          <Link
-                            href={isNextBlog ? `/blogs/${nextId}` : "#"}
-                            className="overflow-hidden w-85px h-85px"
-                          >
-                            <Image
-                              src={nextBlogImg}
-                              alt=""
-                              className="w-85px h-85px"
-                              width={2000}
-                              height={2000}
-                            />
-                          </Link>
                         </div>
                       </div>
                     ) : (

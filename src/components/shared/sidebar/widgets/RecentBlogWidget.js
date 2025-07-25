@@ -1,7 +1,6 @@
 import countCommentLength from "@/libs/countCommentLength";
 import getBlogs from "@/libs/getBlogs";
 import sliceText from "@/libs/sliceText";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -27,21 +26,6 @@ const RecentBlogWidget = () => {
                   key={idx}
                   className="group flex gap-x-5 relative overflow-hidden bg-cream-light-color dark:bg-primary-color-light"
                 >
-                  <div>
-                    <Link
-                      href={`/blogs/${id}`}
-                      className="overflow-hidden w-20 h-20"
-                    >
-                      <Image
-                        src={smallImg}
-                        alt=""
-                        width={142}
-                        height={142}
-                        className="w-20 h-20 group-hover:scale-110 transition-all duration-[.8s]"
-                      />
-                    </Link>
-                  </div>
-
                   <div>
                     <div className="transition-all duration-500">
                       <div className="relative z-0">
