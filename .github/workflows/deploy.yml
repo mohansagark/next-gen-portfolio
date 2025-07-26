@@ -99,7 +99,7 @@ jobs:
       - name: ✅ Production deployment complete
         run: |
           echo "🎉 Production deployment successful!"
-          echo "🌍 Live URL: https://your-domain.com"
+          echo "🌍 Live URL: https://devmohan.in"
           echo "⏰ Deployed at: $(date)"
 
       - name: 📧 Notify deployment success
