@@ -1,4 +1,4 @@
-import { testimonialsData } from "../data/adminData";
+import testimonialsData from "../../public/fakedata/testimonials.json";
 
 const getTestimonials = () => {
   return testimonialsData || [];

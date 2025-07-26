@@ -1,7 +1,7 @@
-import { servicesData } from "../data/adminData";
+import servicesData from "../../public/fakedata/services.json";
 
 const getALlServices = () => {
-  return servicesData;
+  return servicesData || [];
 };
 
 export default getALlServices;

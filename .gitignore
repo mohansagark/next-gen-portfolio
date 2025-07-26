@@ -1,4 +1,8 @@
 node_modules
 yarn.lock
 .next
+.DS_Storeout/
+out
+# macOS system files
 .DS_Store
+**/.DS_Store

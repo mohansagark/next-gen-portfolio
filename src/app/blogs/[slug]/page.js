@@ -27,5 +27,5 @@ export default async function BlogDetails(context) {
 }
 
 export async function generateStaticParams() {
-  return blogs?.map(({ id }) => ({ slug: id }));
+  return blogs?.map(({ id }) => ({ slug: String(id) }));
 }

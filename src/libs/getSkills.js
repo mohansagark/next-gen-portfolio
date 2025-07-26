@@ -1,4 +1,4 @@
-import { skillsData } from "../data/adminData";
+import skillsData from "../../public/fakedata/skills.json";
 
 const getSkills = () => {
   return skillsData || [];

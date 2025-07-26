@@ -1,4 +1,4 @@
-import { portfolioData } from "../data/adminData";
+import portfolioData from "../../public/fakedata/portfolio.json";
 
 const getPortfolio = () => {
   return portfolioData || [];

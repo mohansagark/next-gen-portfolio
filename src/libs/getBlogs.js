@@ -1,4 +1,4 @@
-import { blogsData } from "../data/adminData";
+import blogsData from "../../public/blogs.json";
 
 const getBlogs = () => {
   return blogsData || [];
