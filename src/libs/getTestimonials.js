@@ -1,7 +1,7 @@
-import testimonials from "../../public/fakedata/testimonials";
+import testimonialsData from "../../public/fakedata/testimonials.json";
 
 const getTestimonials = () => {
-  return testimonials;
+  return testimonialsData || [];
 };
 
 export default getTestimonials;

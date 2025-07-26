@@ -1,7 +1,7 @@
-import blogs from "../../public/blogs.json";
+import blogsData from "../../public/blogs.json";
 
 const getBlogs = () => {
-  return blogs;
+  return blogsData || [];
 };
 
 export default getBlogs;
