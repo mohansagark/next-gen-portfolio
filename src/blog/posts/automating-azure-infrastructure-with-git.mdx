@@ -1,0 +1,37 @@
+---
+title: "Automating Azure infrastructure With GitHub Actions and Terraform."
+subtitle: "Essential insights for developers to start the day"
+summary: "Introduction to GitHub Actions Git actions is a continuous integration and continuous delivery platform that allows us to build, test, deploy our tasks. It is an automation tool. Practical Section Step 1: Create a private GitHub repository Go to your GitHub and create a private repository Step 2: Generate a workflow token in GitHub Go to your GitHub and click on your profile Scroll down and click on settings Scroll down and click on developers by your left Click on personal access token drop down and select tokens (classic) Click on generate tokens Name your token Scroll down and enable workflow Scroll down and click on generate tokens Before you exist that page, make sure you copy your token Step 3: Create a file Create a file on your laptop Right click on it and open it with VS code Create a backend."
+slug: "automating-azure-infrastructure-with-git"
+date: "2025-07-26"
+time: "15:42"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["ui", "devops", "cloud", "api", "backend"]
+image_suggestion: "Professional illustration representing Automating Azure infrastructure With GitHub Actions and Terraform."
+source_url: "https://dev.to/christiana_orji/automating-azure-infrastructure-with-github-actions-and-terraform-1aki"
+published_date: "Sat, 26 Jul 2025 15:24:12 +0000"
+---
+# Automating Azure infrastructure With GitHub Actions and Terraform.
+
+## Essential insights for developers to start the day
+
+### Summary
+Introduction to GitHub Actions Git actions is a continuous integration and continuous delivery platform that allows us to build, test, deploy our tasks. It is an automation tool. Practical Section Step 1: Create a private GitHub repository Go to your GitHub and create a private repository Step 2: Generate a workflow token in GitHub Go to your GitHub and click on your profile Scroll down and click on settings Scroll down and click on developers by your left Click on personal access token drop down and select tokens (classic) Click on generate tokens Name your token Scroll down and enable workflow Scroll down and click on generate tokens Before you exist that page, make sure you copy your token Step 3: Create a file Create a file on your laptop Right click on it and open it with VS code Create a backend.
+
+---
+
+Introduction to GitHub Actions Git actions is a continuous integration and continuous delivery platform that allows us to build, test, deploy our tasks. It is an automation tool. Practical Section Step 1: Create a private GitHub repository Go to your GitHub and create a private repository Step 2: Generate a workflow token in GitHub Go to your GitHub and click on your profile Scroll down and click on settings Scroll down and click on developers by your left Click on personal access token drop down and select tokens (classic) Click on generate tokens Name your token Scroll down and enable workflow Scroll down and click on generate tokens Before you exist that page, make sure you copy your token Step 3: Create a file Create a file on your laptop Right click on it and open it with VS code Create a backend.tf file Create a HCP terraform account, create an organization and workspace. Then copy the backend code Go back to your VS code and paste it in the backend.tf file and do the necessary editing Step 4: Let's push this to our GitHub repository After doing the above, type git init Type git add . Type git commit -m "azure backend file added" Type git remote add origin https://your GitHub username:your workflow token@github.com Type git push -u origin main Step 5: GitHub Action Firstly, we will install the code pipeline in our repository Go to your GitHub repository, click on Action at the top Click on terraform configure (because we want to use terraform) Go back to your VS code and create a folder. Let's name it .github, workflows Click the workflows folder and create a file under it. Let's name it cicd.yml Go back to your GitHub terraform configure and copy from name: terraform to the end Click on the cicd.yml on your VS code and paste those things you copied Start editing it Change the name to terraform infrastructure deployment to Azure cloud (or anything) Remove pull_request under branch ["main"] Remove permission: and contents:read Name: under jobs, put terraform azure cloud Go to your GitHub repository Click settings on top of it Click on secret and variables Click actions Click on secret, and click on create new repository Let's name it TF_API_TOKEN Go to your HCP terraform, create a new token in your HCP terraform, name it git actions pipeline token Copy the token Go to the git actions secret you were creating in GitHub and paste the token you created in HCP terraform Click add go to your VS code, remove terraform format and terraform fmt-check Scroll down and remove if github.ref== type git add. type git commit -m "pipeline code added" type git push This is what it should look like Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's permalink. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+## Key Takeaways
+
+1. com Type git push -u origin main Step 5: GitHub Action Firstly, we will install the code pipeline in our repository Go to your GitHub repository, click on Action at the top Click on terraform configure (because we want to use terraform) Go back to your VS code and create a folder
+2. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Automating Azure infrastructure With GitHub Actions and Terraform.](https://dev.to/christiana_orji/automating-azure-infrastructure-with-github-actions-and-terraform-1aki)*
+
+*Tags: ui, devops, cloud, api, backend*
