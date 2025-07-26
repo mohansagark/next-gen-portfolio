@@ -2,7 +2,7 @@ name: 🚀 Deploy Portfolio
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch: # Allow manual triggering
 
 jobs:
