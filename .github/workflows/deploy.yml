@@ -50,13 +50,13 @@ jobs:
       - name: ✅ Staging deployment complete
         run: |
           echo "🎉 Staging deployment successful!"
-          echo "📍 Preview URL: https://your-project.vercel.app"
+          echo "📍 Preview URL: https://mohansagar.vercel.app"
 
   production:
     name: 🛑 Deploy to Production
     runs-on: ubuntu-latest
     needs: staging
-    environment: production # This creates the approval requirement
+    environment: Production # This creates the approval requirement
 
     steps:
       - name: 📥 Download build artifacts
