@@ -1,14 +1,46 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+/* Custom theme for nice-select dropdown */
+.nice-select-dropdown {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(135, 80, 247, 0.08);
+}
+.nice-select-dropdown .list {
+  background: #fff;
+  color: #2a1454;
+}
+.nice-select-dropdown .list .option {
+  /* padding: 12px 20px; */
+  color: #2a1454;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 1rem;
+  border-bottom: 1px solid #f6f3fc;
+}
+.nice-select-dropdown .list .option.selected,
+.nice-select-dropdown .list .option:hover {
+  background: #8750f7;
+  color: #fff;
+}
+/* Force nice-select dropdown and list to be full width */
+.nice-select-dropdown {
+  width: 100% !important;
+  min-width: 0 !important;
+  left: 0 !important;
+}
+.nice-select-dropdown .list {
+  width: 100% !important;
+  min-width: 0 !important;
+}
 /*-----------------------------------------------------------------------------------
 
 /************ TABLE OF CONTENTS ***************
 
   font family
-	tailwind derectives
-	variable
-	default css
-	header css
+  tailwind derectives
+  variable
+  default css
+  header css
   hero css
   sevices css
   portfolio css

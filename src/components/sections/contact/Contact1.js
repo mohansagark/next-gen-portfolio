@@ -1,6 +1,52 @@
+import React, { useRef, useState } from "react";
 import FormSelect from "@/components/shared/Inputs/FormSelect";
+import { sendContactEmail } from "@/libs/sendContactEmail";
 
 const Contact1 = () => {
+  const form = useRef();
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    user_email: "",
+    phone: "",
+    select: "",
+    message: "",
+  });
+  const [sending, setSending] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setSending(true);
+    setSuccess(null);
+    sendContactEmail(formData)
+      .then((response) => {
+        if (response.ok) {
+          setSuccess(true);
+          setFormData({
+            first_name: "",
+            last_name: "",
+            user_email: "",
+            phone: "",
+            select: "",
+            message: "",
+          });
+        } else {
+          setSuccess(false);
+        }
+        setSending(false);
+      })
+      .catch(() => {
+        setSuccess(false);
+        setSending(false);
+      });
+  };
+
   return (
     <section id="contact">
       <div className="bg-cream-light-color dark:bg-black-color py-60px md:py-20 lg:py-100px xl:py-30">
@@ -9,7 +55,11 @@ const Contact1 = () => {
             {/* <!-- section heading --> */}
             <div className="md:col-start-1 md:col-span-7 lg:col-span-6">
               <div className=" wow fadeInLeft" data-wow-delay=".3s">
-                <form className="contact px-15px py-30px md:px-5 lg:px-30px lg:py-10 xl:px-10 bg-white-color dark:bg-primary-color-light rounded-15px">
+                <form
+                  ref={form}
+                  onSubmit={sendEmail}
+                  className="contact px-15px py-30px md:px-5 lg:px-30px lg:py-10 xl:px-10 bg-white-color dark:bg-primary-color-light rounded-15px"
+                >
                   <div className="mb-25px text-center">
                     <h2 className="text-3xl md:text-size-35 lg:text-size-40 xl:text-size-45 bg-gradient-text-light dark:bg-gradient-text bg-clip-text xl:leading-1.2 text-transparent mb-15px">
                       Let’s work together!
@@ -31,52 +81,96 @@ const Contact1 = () => {
                     <div>
                       <input
                         type="text"
+                        name="first_name"
+                        value={formData.first_name}
+                        onChange={handleChange}
                         placeholder="First name"
                         className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+                        required
                       />
                     </div>
                     {/* <!-- Last name --> */}
                     <div>
                       <input
                         type="text"
+                        name="last_name"
+                        value={formData.last_name}
+                        onChange={handleChange}
                         placeholder="Last name"
                         className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+                        required
                       />
                     </div>
                     {/* <!-- Email address --> */}
                     <div>
                       <input
                         type="email"
+                        name="user_email"
+                        value={formData.user_email}
+                        onChange={handleChange}
                         placeholder="Email address"
                         className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+                        required
                       />
                     </div>
                     {/* <!-- Phone number --> */}
                     <div>
                       <input
                         type="text"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         placeholder="Phone number"
                         className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+                        required
                       />
                     </div>
-                    <div className="form_group sm:col-start-1 sm:col-span-2">
-                      <FormSelect />
+                    {/* FormSelect removed as requested */}
+                    <div className="sm:col-start-1 sm:col-span-2">
+                      <FormSelect
+                        name="select"
+                        value={formData.select}
+                        onChange={handleChange}
+                        options={[
+                          "General Inquiry",
+                          "Project Request",
+                          "Feedback",
+                          "Other",
+                        ]}
+                        className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1 mb-15px"
+                        required
+                      />
                     </div>
                     <div className="sm:col-start-1 sm:col-span-2">
                       <textarea
+                        name="message"
                         cols="1"
                         rows="10"
+                        value={formData.message}
+                        onChange={handleChange}
                         placeholder="Message"
                         className="text-white-color w-full px-5 py-14px border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+                        required
                       />
                     </div>
                     <div className="sm:col-start-1 sm:col-span-2">
                       <button
                         type="submit"
                         className="text-size-15 font-bold text-white-color capitalize py-17px px-35px bg-200 bg-gradient-secondary hover:bg-[-100%] rounded-full leading-1 transition-all duration-300"
+                        disabled={sending}
                       >
-                        Send Message
+                        {sending ? "Sending..." : "Send Message"}
                       </button>
+                      {success === true && (
+                        <p className="text-green-500 mt-2">
+                          Message sent successfully!
+                        </p>
+                      )}
+                      {success === false && (
+                        <p className="text-red-500 mt-2">
+                          Failed to send message. Please try again.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </form>
