@@ -12,7 +12,7 @@ export function getContactEmailTemplate(formData) {
     <div style="font-family: 'Inter', Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 580px; margin: auto; box-shadow: 0 4px 24px rgba(99,102,241,0.08); border: 1px solid ${primary};">
       <!-- Header -->
       <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-        <img src='https://devmohan.in/img/logo/logo-dark.png' alt='Logo' style='width:40px;height:40px;border-radius:8px;border:2px solid ${secondary};background:${primary};object-fit:contain;' />
+        <img src='https://devmohan.in/img/logo/logo.png' alt='Logo' style='width:40px;height:40px;border-radius:8px;border:2px solid ${secondary};background:${primary};object-fit:contain;' />
         <h2 style="background: linear-gradient(90deg, ${primary}, ${secondary}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.7rem; font-weight: 700; margin: 0;">New Contact Form Submission</h2>
       </div>
 
