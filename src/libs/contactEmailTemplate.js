@@ -2,15 +2,15 @@
 // Returns a neat HTML email template for contact form submissions
 
 export function getContactEmailTemplate(formData) {
-  // Portfolio branding colors
-  const primary = "#4f46e5"; // Example: gradient start
-  const secondary = "#eab308"; // Example: gradient end
-  const bg = "#f5f3ff"; // Example: cream-light-color
-  const dark = "#18181b"; // Example: black-color
+  // Portfolio theme colors (from tailwind.config.cjs and site branding)
+  const primary = "#6366f1"; // Tailwind indigo-500, matches bg-gradient-primary-2
+  const secondary = "#f43f5e"; // Tailwind rose-500, matches bg-gradient-secondary
+  const bg = "#f5f3ff"; // cream-light-color
+  const dark = "#18181b"; // black-color
   return `
-    <div style="font-family: 'Inter', Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 520px; margin: auto; box-shadow: 0 4px 24px rgba(79,70,229,0.08); border: 1px solid ${primary};">
+    <div style="font-family: 'Inter', Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 520px; margin: auto; box-shadow: 0 4px 24px rgba(99,102,241,0.08); border: 1px solid ${primary};">
       <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-        <img src='https://devmohan.in/favicon.png' alt='Logo' style='width:40px;height:40px;border-radius:8px;border:2px solid ${secondary};background:${primary};' />
+        <img src='https://devmohan.in/img/logo/logo-dark.png' alt='Logo' style='width:40px;height:40px;border-radius:8px;border:2px solid ${secondary};background:${primary};object-fit:contain;' />
         <h2 style="background: linear-gradient(90deg, ${primary}, ${secondary}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.7rem; font-weight: 700; margin: 0;">New Contact Form Submission</h2>
       </div>
       <table style="width: 100%; border-collapse: collapse; font-size: 1rem;">
