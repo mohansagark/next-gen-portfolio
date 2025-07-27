@@ -24,7 +24,11 @@ const Contact1 = () => {
     e.preventDefault();
     setSending(true);
     setSuccess(null);
-    sendContactEmail(formData)
+    const mergedFormData = {
+      ...formData,
+      name: `${formData.first_name} ${formData.last_name}`.trim(),
+    };
+    sendContactEmail(mergedFormData)
       .then((response) => {
         if (response.ok) {
           setSuccess(true);
