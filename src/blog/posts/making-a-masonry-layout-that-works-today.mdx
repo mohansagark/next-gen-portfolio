@@ -1,0 +1,40 @@
+---
+title: "Making a Masonry Layout That Works Today"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Many CSS experts have weighed heavily on possible syntaxes for a new masonry layout feature last year. There were two main camps and a third camp that strikes a balance between the two: Use display: masonry Use grid-template-rows: masonry Use item-pack: collapse I don’t think they’ve came up with a resolution yet."
+slug: "making-a-masonry-layout-that-works-today"
+date: "2025-07-29"
+time: "07:47"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["frontend", "javascript", "backend", "web", "mobile"]
+image_suggestion: "Professional illustration representing Making a Masonry Layout That Works Today"
+source_url: "https://css-tricks.com/making-a-masonry-layout-that-works-today/"
+published_date: "Mon, 28 Jul 2025 12:42:16 +0000"
+---
+# Making a Masonry Layout That Works Today
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Many CSS experts have weighed heavily on possible syntaxes for a new masonry layout feature last year. There were two main camps and a third camp that strikes a balance between the two: Use display: masonry Use grid-template-rows: masonry Use item-pack: collapse I don’t think they’ve came up with a resolution yet.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Many CSS experts have weighed heavily on possible syntaxes for a new masonry layout feature last year. There were two main camps and a third camp that strikes a balance between the two: Use display: masonry Use grid-template-rows: masonry Use item-pack: collapse I don’t think they’ve came up with a resolution yet. But you might want to know that Firefox already supports the masonry layout with the second syntax. And Chrome is testing it with the first syntax. While it’s cool to see native support for CSS Masonry evolving, we can’t really use it in production if other browsers don’t support the same implementation… So, instead of adding my voice to one of those camps, I went on to figure out how make masonry work today with other browsers. I’m happy to report I’ve found a way — and, bonus! — that support can be provided with only 66 lines of JavaScript. In this article, I’m gonna show you how it works. But first, here’s a demo for you to play with, just to prove that I’m not spewing nonsense. Note that there’s gonna be a slight delay since we’re waiting for an image to load first. If you’re placing a masonry at the top fold, consider skipping including images because of this! Anyway, here’s the demo: CodePen Embed Fallback What in the magic is this?! Now, there are a ton of things I’ve included in this demo, even though there are only 66 lines of JavaScript: You can define the masonry with any number of columns. Each item can span multiple columns. We wait for media to load before calculating the size of each item. We made it responsive by listening to changes with the ResizeObserver. These make my implementation incredibly robust and ready for production use, while also way more flexible than many Flexbox masonry knockoffs out there on the interwebs. Now, a hot tip. If you combine this with Tailwind’s responsive variants and arbitrary values, you can include even more flexibility into this masonry grid without writing more CSS. Okay, before you get hyped up any further, let’s come back to the main question: How the heck does this work? Let’s start with a polyfill Firefox already supports masonry layouts via the second camp’s syntax. Here’s the CSS you need to create a CSS masonry grid layout in Firefox. .masonry { display: grid; grid-template-columns: repeat( auto-fit, minmax(min(var(--item-width, 200px), 100%), 1fr) ); grid-template-rows: masonry; grid-auto-flow: dense; /* Optional, but recommended */ } Since Firefox already has native masonry support, naturally we shouldn’t mess around with it. The best way to check if masonry is supported by default is to check if grid-template-rows can hold the masonry value. function isMasonrySupported(container) { return getComputedStyle(container).gridTemplateRows === 'masonry' } If masonry is supported, we’ll skip our implementation. Otherwise, we’ll do something about it. const containers = document.query
+
+## Key Takeaways
+
+1. There were two main camps and a third camp that strikes a balance between the two: Use display: masonry Use grid-template-rows: masonry Use item-pack: collapse I don’t think they’ve came up with a resolution yet
+2. But you might want to know that Firefox already supports the masonry layout with the second syntax
+3. And Chrome is testing it with the first syntax
+4. But first, here’s a demo for you to play with, just to prove that I’m not spewing nonsense
+5. Note that there’s gonna be a slight delay since we’re waiting for an image to load first
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [Making a Masonry Layout That Works Today](https://css-tricks.com/making-a-masonry-layout-that-works-today/)*
+
+*Tags: frontend, javascript, backend, web, mobile*
