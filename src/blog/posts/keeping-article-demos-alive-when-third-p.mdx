@@ -1,0 +1,39 @@
+---
+title: "Keeping Article Demos Alive When Third-Party APIs Die"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. After four years, the demos in my “Headless Form Submission with the WordPress REST API” article finally stopped working. The article includes CodePen embeds that demonstrate how to use the REST API endpoints of popular WordPress form plugins to capture and display validation errors and submission feedback when building a completely custom front-end."
+slug: "keeping-article-demos-alive-when-third-p"
+date: "2025-07-30"
+time: "15:46"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["ui", "mobile", "web", "backend", "api"]
+image_suggestion: "Professional illustration representing Keeping Article Demos Alive When Third-Party APIs Die"
+source_url: "https://css-tricks.com/keeping-article-demos-alive-when-third-party-apis-die/"
+published_date: "Wed, 30 Jul 2025 13:21:05 +0000"
+---
+# Keeping Article Demos Alive When Third-Party APIs Die
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. After four years, the demos in my “Headless Form Submission with the WordPress REST API” article finally stopped working. The article includes CodePen embeds that demonstrate how to use the REST API endpoints of popular WordPress form plugins to capture and display validation errors and submission feedback when building a completely custom front-end.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. After four years, the demos in my “Headless Form Submission with the WordPress REST API” article finally stopped working. The article includes CodePen embeds that demonstrate how to use the REST API endpoints of popular WordPress form plugins to capture and display validation errors and submission feedback when building a completely custom front-end. The pens relied on a WordPress site I had running in the background. But during a forced infrastructure migration, the site failed to transfer properly, and, even worse, I lost access to my account. Sure, I could have contacted support or restored a backup elsewhere. But the situation made me wonder: what if this had not been WordPress? What if it were a third-party service I couldn’t self-host or fix? Is there a way to build demos that do not break when the services they rely on fail? How can we ensure educational demos stay available for as long as possible? Or is this just inevitable? Are demos, like everything else on the web, doomed to break eventually? Parallels with software testing Those who write tests for their code have long wrestled with similar questions, though framed differently. At the core, the issue is the same. Dependencies, especially third-party ones, become hurdles because they are outside the bounds of control. Not surprisingly, the most reliable way to eliminate issues stemming from external dependencies is to remove the external service entirely from the equation, effectively decoupling from it. Of course, how this is done, and whether it’s always possible, depends on the context. As it happens, techniques for handling dependencies can be just as useful when it comes to making demos more resilient. To keep things concrete, I’ll be using the mentioned CodePen demos as an example. But the same approach works just as well in many other contexts. Decoupling REST API dependencies While there are many strategies and tricks, the two most common approaches to breaking reliance on a REST API are: Mocking the HTTP calls in code and, instead of performing real network requests, returning stubbed responses Using a mock API server as a stand-in for the real service and serving predefined responses in a similar manner Both have trade-offs, but let’s look at those later. Mocking a response with an interceptor Modern testing frameworks, whether for unit or end-to-end testing, such as Jest or Playwright, offer built-in mocking capabilities. However, we don’t necessarily need these, and we can’t use them in the pens anyway. Instead, we can monkey patch the Fetch API to intercept requests and return mock responses. With monkey patching, when changing the original source code isn’t feasible, we can introduce new behavior by overwriting existing functions. Implementing it looks like this: const fetchWPFormsRestApiInterceptor = (fetch) => async ( resource, options = {} ) => { // To make sure we are
+
+## Key Takeaways
+
+1. After four years, the demos in my “Headless Form Submission with the WordPress REST API” article finally stopped working
+2. What if it were a third-party service I couldn’t self-host or fix
+3. Dependencies, especially third-party ones, become hurdles because they are outside the bounds of control
+4. Decoupling REST API dependencies While there are many strategies and tricks, the two most common approaches to breaking reliance on a REST API are: Mocking the HTTP calls in code and, instead of performing real network requests, returning stubbed responses Using a mock API server as a stand-in for the real service and serving predefined responses in a similar manner Both have trade-offs, but let’s look at those later
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Keeping Article Demos Alive When Third-Party APIs Die](https://css-tricks.com/keeping-article-demos-alive-when-third-party-apis-die/)*
+
+*Tags: ui, mobile, web, backend, api*
