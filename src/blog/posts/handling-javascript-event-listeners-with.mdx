@@ -1,39 +1,39 @@
 ---
 title: "Handling JavaScript Event Listeners With Parameters"
-subtitle: "Essential insights for developers to start the day"
+subtitle: "Educational foundations for continuous learning"
 summary: "5 min readJavaScript, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorAmejimaobari is a front-end developer with a deep passion for learning, building, and problem-solving. He thrives on the challenges presented by the … More about Amejimaobari ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks."
 slug: "handling-javascript-event-listeners-with"
-date: "2025-08-02"
-time: "11:41"
-content_strategy: "Technical tutorials and coding tips to start the day"
-writing_style: "energetic and practical"
-tags: ["ui", "frontend", "mobile", "ux", "design"]
+date: "2025-08-03"
+time: "04:00"
+content_strategy: "Educational content for late-night learners"
+writing_style: "educational and foundational"
+tags: ["ux", "web", "javascript", "career", "frontend"]
 image_suggestion: "Professional illustration representing Handling JavaScript Event Listeners With Parameters"
 source_url: "https://smashingmagazine.com/2025/07/handling-javascript-event-listeners-parameters/"
 published_date: "Mon, 21 Jul 2025 10:00:00 GMT"
 ---
 # Handling JavaScript Event Listeners With Parameters
 
-## Essential insights for developers to start the day
+## Educational foundations for continuous learning
 
 ### Summary
 5 min readJavaScript, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorAmejimaobari is a front-end developer with a deep passion for learning, building, and problem-solving. He thrives on the challenges presented by the … More about Amejimaobari ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX. Trusted by 200,000+ folks.
 
 ---
 
-5 min readJavaScript, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorAmejimaobari is a front-end developer with a deep passion for learning, building, and problem-solving. He thrives on the challenges presented by the … More about Amejimaobari ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks. Smart Interface Design Patterns, 40 lessons + UX training Behavioral Design Workshop, with Susan and Guthrie Weinschenk Accessible Typography for Web & UI Design Masterclass, with Oliver Schöndorfer How To Measure UX and Design Impact, 8h video + UX trainingEvent listeners are essential for interactivity in JavaScript, but they can quietly cause memory leaks if not removed properly. And what if your event listener needs parameters? That’s where things get interesting. Amejimaobari Ollornwi shares which JavaScript features make handling parameters with event handlers both possible and well-supported.JavaScript event listeners are very important, as they exist in almost every web application that requires interactivity. As common as they are, it is also essential for them to be managed properly. Improperly managed event listeners can lead to memory leaks and can sometimes cause performance issues in extreme cases.Here’s the real problem: JavaScript event listeners are often not removed after they are added. And when they are added, they do not require parameters most of the time — except in rare cases, which makes them a little trickier to handle.A common scenario where you may need to use parameters with event handlers is when you have a dynamic list of tasks, where each task in the list has a “Delete” button attached to an event handler that uses the task’s ID as a parameter to remove the task. In a situation like this, it is a good idea to remove the event listener once the task has been completed to ensure that the deleted element can be successfully cleaned up, a process known as garbage collection.A Common Mistake When Adding Event ListenersA very common mistake when adding parameters to event handlers is calling the function with its parameters inside the addEventListener() method. This is what I mean:button.addEventListener('click', myFunction(param1, param2)); The browser responds to this line by immediately calling the function, irrespective of whether or not the click event has happened. In other words, the function is invoked right away instead of being deferred, so it never fires when the click event actually occurs.You may also receive the following console error in some cases:Uncaught TypeError: Failed to execute. addEventListener on EventTarget: parameter is not of type Object. (Large preview)This error makes sense because the second parameter of the addEventListener method can only accept a JavaScript function, an object with a handleEvent() method, or simply null. A quick and easy way to avoid this error is by changing the second parameter of the addEventListener method to an arrow or
+5 min readJavaScript, Coding, TechniquesShare on Twitter, LinkedInAbout The AuthorAmejimaobari is a front-end developer with a deep passion for learning, building, and problem-solving. He thrives on the challenges presented by the … More about Amejimaobari ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX.Trusted by 200,000+ folks. SmashingConf New York 2025, October 6–9, 2025 Accessible Front-End Components, with Stephanie Eckles How To Measure UX and Design Impact, 8h video + UX training UX Strategy in Action, with Susan and Guthrie WeinschenkEvent listeners are essential for interactivity in JavaScript, but they can quietly cause memory leaks if not removed properly. And what if your event listener needs parameters? That’s where things get interesting. Amejimaobari Ollornwi shares which JavaScript features make handling parameters with event handlers both possible and well-supported.JavaScript event listeners are very important, as they exist in almost every web application that requires interactivity. As common as they are, it is also essential for them to be managed properly. Improperly managed event listeners can lead to memory leaks and can sometimes cause performance issues in extreme cases.Here’s the real problem: JavaScript event listeners are often not removed after they are added. And when they are added, they do not require parameters most of the time — except in rare cases, which makes them a little trickier to handle.A common scenario where you may need to use parameters with event handlers is when you have a dynamic list of tasks, where each task in the list has a “Delete” button attached to an event handler that uses the task’s ID as a parameter to remove the task. In a situation like this, it is a good idea to remove the event listener once the task has been completed to ensure that the deleted element can be successfully cleaned up, a process known as garbage collection.A Common Mistake When Adding Event ListenersA very common mistake when adding parameters to event handlers is calling the function with its parameters inside the addEventListener() method. This is what I mean:button.addEventListener('click', myFunction(param1, param2)); The browser responds to this line by immediately calling the function, irrespective of whether or not the click event has happened. In other words, the function is invoked right away instead of being deferred, so it never fires when the click event actually occurs.You may also receive the following console error in some cases:Uncaught TypeError: Failed to execute. addEventListener on EventTarget: parameter is not of type Object. (Large preview)This error makes sense because the second parameter of the addEventListener method can only accept a JavaScript function, an object with a handleEvent() method, or simply null. A quick and easy way to avoid this error is by changing the second parameter of the addEventListener method to an arrow or anonymous function.button.addEventListen
 
 ## Key Takeaways
 
 1. He thrives on the challenges presented by the … More about Amejimaobari ↬Email NewsletterYour (smashing) email Weekly tips on front-end & UX
 2. And when they are added, they do not require parameters most of the time — except in rare cases, which makes them a little trickier to handle
 3. (Large preview)This error makes sense because the second parameter of the addEventListener method can only accept a JavaScript function, an object with a handleEvent() method, or simply null
-4. A quick and easy way to avoid this error is by changing the second parameter of the addEventListener method to an arrow or
+4. A quick and easy way to avoid this error is by changing the second parameter of the addEventListener method to an arrow or anonymous function
 
 ---
 
-*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+*This content was curated using the **Educational content for late-night learners** strategy (0-5 hours) with a educational and foundational focus.*
 
 *Original source: [Handling JavaScript Event Listeners With Parameters](https://smashingmagazine.com/2025/07/handling-javascript-event-listeners-parameters/)*
 
-*Tags: ui, frontend, mobile, ux, design*
+*Tags: ux, web, javascript, career, frontend*
