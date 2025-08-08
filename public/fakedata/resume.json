@@ -4,18 +4,23 @@
     "iconName": "flaticon-recommendation",
     "resumeItems": [
       {
-        "date": "Jul 2024 – Present",
-        "title": "Senior Software Engineer II",
+        "date": "Aug 2025 – Present",
+        "title": "Senior Software Engineer",
+        "desc": "ServiceNow"
+      },
+      {
+        "date": "Jul 2024 – Aug 2025",
+        "title": "Senior Software Engineer",
         "desc": "Invesco India Pvt. Ltd. (Hyderabad)"
       },
       {
         "date": "Sep 2022 – Jul 2024",
-        "title": "Senior Software Engineer (SDE-3)",
+        "title": "SDE 3",
         "desc": "Reliance Jio Platforms Ltd. (Bangalore)"
       },
       {
         "date": "Feb 2021 – Sep 2022",
-        "title": "Senior Software Engineer",
+        "title": "SDE 2",
         "desc": "Zentree Labs (Remote)"
       },
       {
