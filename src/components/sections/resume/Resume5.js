@@ -88,13 +88,16 @@ const Resume5 = ({ type, title }) => {
                         <div className="flex flex-col sm:flex-row gap-4 w-full">
                           <div className="w-12 h-12 flex-shrink-0">
                             <img
-                              src={`/img/icons/${
-                                section.title.includes("Experience")
-                                  ? "h4-work"
-                                  : section.title.includes("Education")
-                                  ? "h5-resume"
-                                  : "h4-award"
-                              }-${i + 1}.png`}
+                              src={
+                                item.logo ||
+                                `/img/icons/${
+                                  section.title.includes("Experience")
+                                    ? "h4-work"
+                                    : section.title.includes("Education")
+                                    ? "h5-resume"
+                                    : "h4-award"
+                                }-${i + 1}.png`
+                              }
                               alt="icon"
                               className="w-full h-full object-contain"
                             />

@@ -12,11 +12,6 @@ const nextConfig = {
   // Configure trailing slash for better static hosting
   trailingSlash: true,
 
-  // Disable server-side features for static export
-  experimental: {
-    appDir: true,
-  },
-
   // Configure asset prefix for production builds
   assetPrefix: process.env.NODE_ENV === "production" ? "" : "",
 

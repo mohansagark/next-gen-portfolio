@@ -6,32 +6,38 @@
       {
         "date": "Aug 2025 – Present",
         "title": "Senior Software Engineer",
-        "desc": "ServiceNow"
+        "desc": "ServiceNow",
+        "logo": "/img/brand/servicenow.jpeg"
       },
       {
         "date": "Jul 2024 – Aug 2025",
         "title": "Senior Software Engineer",
-        "desc": "Invesco India Pvt. Ltd. (Hyderabad)"
+        "desc": "Invesco India Pvt. Ltd. (Hyderabad)",
+        "logo": "/img/brand/invesco.png"
       },
       {
         "date": "Sep 2022 – Jul 2024",
         "title": "SDE 3",
-        "desc": "Reliance Jio Platforms Ltd. (Bangalore)"
+        "desc": "Reliance Jio Platforms Ltd. (Bangalore)",
+        "logo": "/img/brand/reliance.png"
       },
       {
         "date": "Feb 2021 – Sep 2022",
         "title": "SDE 2",
-        "desc": "Zentree Labs (Remote)"
+        "desc": "Zentree Labs (Remote)",
+        "logo": "/img/brand/zentreelabs.png"
       },
       {
         "date": "Mar 2019 – Dec 2020",
         "title": "Software Analyst",
-        "desc": "Shell India Markets Pvt. Ltd. (Bangalore)"
+        "desc": "Shell India Markets Pvt. Ltd. (Bangalore)",
+        "logo": "/img/brand/shell.png"
       },
       {
         "date": "Jan 2017 – Mar 2019",
         "title": "Application Development Analyst",
-        "desc": "Accenture Solutions (Bangalore)"
+        "desc": "Accenture Solutions (Bangalore)",
+        "logo": "/img/brand/accenture.png"
       }
     ]
   },
