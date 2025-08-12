@@ -1,0 +1,36 @@
+---
+title: "How to check if the browser is Safari programmatically?"
+subtitle: "Essential insights for developers to start the day"
+summary: "In this article, we review how you can check if the browser is Safari programmatically. We will look at: isSafari function navigator. userAgent isSafari function I found the following code in the snapdom/src/utils/helpers."
+slug: "how-to-check-if-the-browser-is-safari-pr"
+date: "2025-08-12"
+time: "15:43"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["architecture", "career", "frontend", "backend", "web"]
+image_suggestion: "Professional illustration representing How to check if the browser is Safari programmatically?"
+source_url: "https://dev.to/ramunarasinga-11/how-to-check-if-the-browser-is-safari-programmatically-1ga5"
+published_date: "Tue, 12 Aug 2025 15:30:00 +0000"
+---
+# How to check if the browser is Safari programmatically?
+
+## Essential insights for developers to start the day
+
+### Summary
+In this article, we review how you can check if the browser is Safari programmatically. We will look at: isSafari function navigator. userAgent isSafari function I found the following code in the snapdom/src/utils/helpers.
+
+---
+
+In this article, we review how you can check if the browser is Safari programmatically. We will look at: isSafari function navigator.userAgent isSafari function I found the following code in the snapdom/src/utils/helpers.js export function isSafari() { return /^((?!chrome|android).)*safari/i.test(navigator.userAgent); } Enter fullscreen mode Exit fullscreen mode This function uses a regular expression to determine if the browser is Safari and uses the navigator.userAgent API. navigator.userAgent The Navigator.userAgent read-only property returns the user agent string for the current browser. This is a test I ran to see this function in action in my Google chrome’s browser. I found an interesting point in the MDN docs: Browser identification based on detecting the user agent string is unreliable and is not recommended, as the user agent string is user configurable. For example: In Firefox, you can change the preference general.useragent.override in about:config. Some Firefox extensions do that; however, this only changes the HTTP header that gets sent and that is returned by navigator.userAgent. There might be other methods that utilize JavaScript code to identify the browser. Opera 6+ allows users to set the browser identification string via a menu. Learn more about navigator.userAgent. About me: Hey, my name is Ramu Narasinga. I study codebase architecture in large open-source projects. Email: ramu.narasinga@gmail.com Want to learn from open-source? Solve challenges inspired by open-source projects. References: https://github.com/zumerlab/snapdom/blob/main/src/utils/helpers.js#L284 https://github.com/zumerlab/snapdom/blob/main/src/api/snapdom.js#L8 https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent Create template Templates let you quickly answer FAQs or store snippets for re-use. Submit Preview Dismiss Are you sure you want to hide this comment? It will become hidden in your post, but will still be visible via the comment's permalink. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+## Key Takeaways
+
+1. Hide child comments as well Confirm For further actions, you may consider blocking this person and/or reporting abuse
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [How to check if the browser is Safari programmatically?](https://dev.to/ramunarasinga-11/how-to-check-if-the-browser-is-safari-programmatically-1ga5)*
+
+*Tags: architecture, career, frontend, backend, web*
