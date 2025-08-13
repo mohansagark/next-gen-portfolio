@@ -1,0 +1,40 @@
+---
+title: "We Might Need Something Between Root and Relative CSS Units for “Base Elements”"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. CSS provides us with root and relative values. Root values are like rem and rlh — they’re tied to the values written in the :root selector (the most common one would be the html element)."
+slug: "we-might-need-something-between-root-and"
+date: "2025-08-13"
+time: "15:37"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["mobile", "design", "ui", "html", "cloud"]
+image_suggestion: "Professional illustration representing We Might Need Something Between Root and Relative CSS Units for “Base Elements”"
+source_url: "https://css-tricks.com/we-might-need-something-between-root-and-relative-css-units-for-base-elements/"
+published_date: "Wed, 13 Aug 2025 13:24:55 +0000"
+---
+# We Might Need Something Between Root and Relative CSS Units for “Base Elements”
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. CSS provides us with root and relative values. Root values are like rem and rlh — they’re tied to the values written in the :root selector (the most common one would be the html element).
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. CSS provides us with root and relative values. Root values are like rem and rlh — they’re tied to the values written in the :root selector (the most common one would be the html element). Relative values are like em, lh, ch and various others — they’re tied to the font-size in that specific element. I’ve come to realize that perhaps we need to have a unit between root and relative values. Having such a unit allows us to size things without complex em or lh calculations. Let me give you an example: Prose Earlier this year, Jen Simmons wrote about the using the lh unit to style margin and padding for better typographical vertical rhythm. p { margin-block: 1lh; } We can expand the concept a little further to include all other spaces around the text. One way of doing this is the “Lobotomized Owl” technique that Heydon Pickering popularized a while ago. * + * { margin-top: 1lh; } Today, we can also use the :not(:first-child) to achieve the same effect — and that might be a tad more readable. *:not(:first-child) { margin-top: 1lh; } Often, we need to constrain these selectors so they don’t spill everywhere and break the rest of the page. One great class for this is .prose. .prose { *:not(:first-child) { margin-top: 1lh; } } This is simple and good — but what happens if you include typography of other sizes…? You’ll see this break down incredibly quickly (because 1lh of a  element can be incredibly big). CodePen Embed Fallback One way around this issue is to use Flexbox on the parent element. By doing so, we can set gap to 1lh and we don’t have to deal with the value of 1lh changing on the h2 element. (Bonus, we also don’t have to deal with margin collapse.) .prose { display: flex; flex-direction: column; gap: 1lh; } CodePen Embed Fallback But we introduce a new problem here: proximity confusion. Content below  belongs within the . But content above the  belongs with the previous section header. We should, ideally, make the spacing different to clarify their relationship. The simplest way is to add a little margin above the . But we can’t add margin above  with lh since the lh value on  will be different from that of the surrounding elements. CodePen Embed Fallback We have to use a little CSS trickery and margin-bottom (or the logical equivalent) on the element above the . Here, we simply set margin-bottom to 1lh since we use Flexbox and don’t have to deal with margin collapse. (If you had to deal with margin collapse, you’d have to set margin-bottom to 2lh.) CodePen Embed Fallback Is there a better way? Well, that’s what this article is about! But before we go there, let’s consider a different UI that has similar problems so you can begin to see the greater ramifications of this problem (and the importance of the solution). Here’s a second example: Card component Now let’s say we have a card component that’s divided into
+
+## Key Takeaways
+
+1. * + * { margin-top: 1lh; } Today, we can also use the :not(:first-child) to achieve the same effect — and that might be a tad more readable
+2. *:not(:first-child) { margin-top: 1lh; } Often, we need to constrain these selectors so they don’t spill everywhere and break the rest of the page
+3. prose { *:not(:first-child) { margin-top: 1lh; } } This is simple and good — but what happens if you include typography of other sizes…
+4. CodePen Embed Fallback We have to use a little CSS trickery and margin-bottom (or the logical equivalent) on the element above the
+5. But before we go there, let’s consider a different UI that has similar problems so you can begin to see the greater ramifications of this problem (and the importance of the solution)
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [We Might Need Something Between Root and Relative CSS Units for “Base Elements”](https://css-tricks.com/we-might-need-something-between-root-and-relative-css-units-for-base-elements/)*
+
+*Tags: mobile, design, ui, html, cloud*
