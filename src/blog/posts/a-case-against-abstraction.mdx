@@ -1,0 +1,36 @@
+---
+title: "A Case Against Abstraction"
+subtitle: "Essential insights for developers to start the day"
+summary: "Recently, I was knee-deep in a very complex project. The problem wasn't just the size of the codebase, it was the endless forest of indirection. Factory functions, Providers, Managers, Registries, Mixins; everywhere I turned, there was another layer."
+slug: "a-case-against-abstraction"
+date: "2025-08-19"
+time: "07:42"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["react", "backend", "angular", "ux", "ui"]
+image_suggestion: "Professional illustration representing A Case Against Abstraction"
+source_url: "https://dev.to/puritanic/a-case-against-abstraction-118o"
+published_date: "Tue, 19 Aug 2025 07:32:18 +0000"
+---
+# A Case Against Abstraction
+
+## Essential insights for developers to start the day
+
+### Summary
+Recently, I was knee-deep in a very complex project. The problem wasn't just the size of the codebase, it was the endless forest of indirection. Factory functions, Providers, Managers, Registries, Mixins; everywhere I turned, there was another layer.
+
+---
+
+Recently, I was knee-deep in a very complex project. The problem wasn't just the size of the codebase, it was the endless forest of indirection. Factory functions, Providers, Managers, Registries, Mixins; everywhere I turned, there was another layer. Following the flow of data felt less like tracing logic and more like spelunking through a cave system with no map. At one point, I leaned on an LLM to help me debug. And it failed. Not because the model was weak, but because the architecture was so fragmented and implicit that even an AI couldn't piece it together. Abstraction, the thing we've always leaned on to tame complexity, had itself become the source of complexity. In this specific case, abstraction didn't clarify; it obscured. For both me and the AI. Yesterday's Cure, Today's Disease "Sufficiently advanced abstractions are indistinguishable from obfuscation." — @raganwald Historically, abstraction was our main defense against cognitive overload. Humans only hold so much detail in working memory, so we built neat layers that hid what we didn't need to see. Encapsulation, state management, factories, etc. they weren't just patterns, they were survival mechanisms. But in the AI era, the tradeoffs have shifted. We hit cognitive limits quickly, while an LLM can plow through raw detail without ever getting tired. What they can't handle is fragmentation. Implicit behavior scattered across dozens of files. Context broken into 15 layers of indirection. The result? Abstraction no longer reduces cognitive load. It multiplies it. It takes effort that should go into problem-solving and reroutes it into archaeology. Case Study: When the Russian Dolls Collapse Note: The project details and code samples in this case study have been obfuscated and anonymized. The patterns, complexity, and architectural issues described here are real, but the identifiers and structures are adjusted so the example remains relatable without exposing proprietary code. To see how this plays out, here's a snapshot from a real-world TypeScript/React project I worked on. It's not a hypothetical; it's a cautionary tale of what happens when abstractions pile up unchecked. 40,000+ files in total, ~5,800 lines in core files 233+ files matching abstraction patterns (Providers, Managers, Factories, Handlers) 20+ Redux reducers with complex interdependencies 15+ mixin compositions in the components layer State object with 80+ properties, spanning UI, business logic, networking, and persistence 800+ unit test files with 200-400 lines each 200+ E2E test files with 300-500 lines each Abstraction Layer Explosion A simple user action could bounce through a chain like: User Action → Component → Action → Reducer → Manager → Provider → Backend Enter fullscreen mode Exit fullscreen mode That's not architecture, that's bureaucracy. Debugging usually requires going through at least 6 to 8 files just to locate the root cause. Example chain: Some data → DataManager → DataProvider → EntityManager → Sta
+
+## Key Takeaways
+
+1. Case Study: When the Russian Dolls Collapse Note: The project details and code samples in this case study have been obfuscated and anonymized
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [A Case Against Abstraction](https://dev.to/puritanic/a-case-against-abstraction-118o)*
+
+*Tags: react, backend, angular, ux, ui*
