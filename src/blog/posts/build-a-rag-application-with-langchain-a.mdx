@@ -1,0 +1,37 @@
+---
+title: "Build a RAG application with LangChain and Local LLMs powered by Ollama"
+subtitle: "Essential insights for developers to start the day"
+summary: "Local large language models (LLMs) provide significant advantages for developers and organizations. Key benefits include enhanced data privacy, as sensitive information remains entirely within your own infrastructure, and offline functionality, enabling uninterrupted work even without internet access. While cloud-based LLM services are convenient, running models locally gives you full control over model behavior, performance tuning, and potential cost savings."
+slug: "build-a-rag-application-with-langchain-a"
+date: "2025-08-22"
+time: "15:38"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["ux", "performance", "cloud", "database", "tools"]
+image_suggestion: "Professional illustration representing Build a RAG application with LangChain and Local LLMs powered by Ollama"
+source_url: "https://dev.to/abhirockzz/build-a-rag-application-with-langchain-and-local-llms-powered-by-ollama-3el5"
+published_date: "Fri, 22 Aug 2025 14:12:59 +0000"
+---
+# Build a RAG application with LangChain and Local LLMs powered by Ollama
+
+## Essential insights for developers to start the day
+
+### Summary
+Local large language models (LLMs) provide significant advantages for developers and organizations. Key benefits include enhanced data privacy, as sensitive information remains entirely within your own infrastructure, and offline functionality, enabling uninterrupted work even without internet access. While cloud-based LLM services are convenient, running models locally gives you full control over model behavior, performance tuning, and potential cost savings.
+
+---
+
+Local large language models (LLMs) provide significant advantages for developers and organizations. Key benefits include enhanced data privacy, as sensitive information remains entirely within your own infrastructure, and offline functionality, enabling uninterrupted work even without internet access. While cloud-based LLM services are convenient, running models locally gives you full control over model behavior, performance tuning, and potential cost savings. This make them ideal for experimentation before running production workloads. The ecosystem for local LLMs has matured significantly, with several excellent options available, such as Ollama, Foundry Local, Docker Model Runner, and more. Most popular AI/Agent frameworks including LangChain and LangGraph provide integration with these local model runners, making it easier to integrate them into your projects. What will you learn? This blog post will illustrate how to use local LLMs with Azure Cosmos DB as a vector database for retrieval-augmented generation (RAG) scenarios. It will guide you through setting up a local LLM solution, configuring Azure Cosmos DB, loading data, performing vector searches, and executing RAG queries. You can either use the Azure Cosmos DB emulator for local development or connecting to an Azure Cosmos DB account in the cloud. You will be using Ollama (open-source solution) to run LLMs locally on your own machine. It lets you download, run, and interact with a variety of LLMs (like Llama 3, Mistral, and others) using simple commands, without needing cloud access or complex setup. By the end of this blog post, you will have a working local RAG setup that leverages Ollama and Azure Cosmos DB. the sample app uses LangChain integration with Azure Cosmos DB to perform embedding, data loading, and vector search. You can easily adapt it to other frameworks like LlamaIndex. Alright, lets dive in! Setup Ollama To get started with Ollama, follow the official installation guide on GitHub to install it on your system. The installation process is straightforward across different platforms. For example, on Linux systems, you can install Ollama with a single command: curl -fsSL https://ollama.com/install.sh | sh Enter fullscreen mode Exit fullscreen mode Once installed, start the Ollama service by running: ollama serve Enter fullscreen mode Exit fullscreen mode This blog post demonstrates the integration using two specific models from the Ollama library: mxbai-embed-large - A high-quality embedding model with 1024 dimensions, ideal for generating vector representations of text llama3 - The 8B parameter variant of Meta's Llama 3, which serves as our chat model for the RAG pipeline Download both models using the following commands. Note that this process may take several minutes depending on your internet connection speed, as these are substantial model files: ollama pull mxbai-embed-large ollama pull llama3:8b Enter fullscreen mode Exit fullscreen mode Something to keep in mind ..
+
+## Key Takeaways
+
+1. Key benefits include enhanced data privacy, as sensitive information remains entirely within your own infrastructure, and offline functionality, enabling uninterrupted work even without internet access
+2. Note that this process may take several minutes depending on your internet connection speed, as these are substantial model files: ollama pull mxbai-embed-large ollama pull llama3:8b Enter fullscreen mode Exit fullscreen mode Something to keep in mind
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Build a RAG application with LangChain and Local LLMs powered by Ollama](https://dev.to/abhirockzz/build-a-rag-application-with-langchain-and-local-llms-powered-by-ollama-3el5)*
+
+*Tags: ux, performance, cloud, database, tools*
