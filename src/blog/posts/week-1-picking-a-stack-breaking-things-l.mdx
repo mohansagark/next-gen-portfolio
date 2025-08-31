@@ -1,0 +1,38 @@
+---
+title: "Week 1: Picking a Stack, Breaking Things, Learning Fast"
+subtitle: "Essential insights for developers to start the day"
+summary: "I want to document my journey creating a Web App, from start to finish. I will cover the stacks I use, why and where I use them, the issues I run into, how I solved them (or how I tried to), and a simple weekly update on where the app is. This is for other developers who want to learn from the process, or just follow along through each week, and maybe give feedback."
+slug: "week-1-picking-a-stack-breaking-things-l"
+date: "2025-08-31"
+time: "07:39"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["javascript", "mobile", "career", "backend", "react"]
+image_suggestion: "Professional illustration representing Week 1: Picking a Stack, Breaking Things, Learning Fast"
+source_url: "https://dev.to/shaq_attack/week-1-picking-a-stack-breaking-things-learning-fast-a7c"
+published_date: "Sun, 31 Aug 2025 07:24:01 +0000"
+---
+# Week 1: Picking a Stack, Breaking Things, Learning Fast
+
+## Essential insights for developers to start the day
+
+### Summary
+I want to document my journey creating a Web App, from start to finish. I will cover the stacks I use, why and where I use them, the issues I run into, how I solved them (or how I tried to), and a simple weekly update on where the app is. This is for other developers who want to learn from the process, or just follow along through each week, and maybe give feedback.
+
+---
+
+I want to document my journey creating a Web App, from start to finish. I will cover the stacks I use, why and where I use them, the issues I run into, how I solved them (or how I tried to), and a simple weekly update on where the app is. This is for other developers who want to learn from the process, or just follow along through each week, and maybe give feedback. The Past few weeks When I first set out to build something meaningful, I didn’t have all the answers. All I knew was that I wanted to create a project that added value to people’s lives — something beyond another throwaway side project. What followed was a winding journey through brainstorming, tech stack debates, monorepo headaches, and small victories that brought me closer to turning the idea into reality. Below is a simple account of what I did, why I chose things, the problems I ran into, and what I’m shipping next. I’m still learning, so if you see something I missed, please tell me. Brainstorming I had a long list of ideas: utilities, productivity apps, small SaaS things. I settled on an idea that needs group interaction, simple decision mechanics, and a clear outcome people can share. I’m keeping the product details intentionally vague for now — I want to show progress before showing the full idea. Main goals that guided decisions: Very low friction onboarding. Users must sign in quickly. Group interaction must be obvious and simple. Outcomes should be clear and impactful. Those goals changed what I picked for the stack. The stack I chose Once the concept felt real, the next big question was: what tech stack should I use? I started with my own idea: Backend: Golang + Gin Frontend: React + TypeScript Database: MongoDB CI/CD: GitHub Actions Cloud: AWS It looked solid on paper, but it was heavy — too much too soon for an MVP. With feedback and some research, I pivoted. The stack simplified: Frontend: Next.js (React 19) UI: ShadCN + Tailwind CSS v4 State & Data: React Query + Supabase Backend: Not separate at first — lean on Supabase (auth + database + APIs) Infra: ShadCN Monorepo for structure, pnpm for package management Deployment: Vercel for frontend, Supabase for backend services This stripped-down stack let me move faster, learn less at once, and focus on the app’s value. The Problems Then came the monorepo learning curve. At first, the concept of a monorepo felt like a buzzword. Why not just build a single app and call it a day? But the benefits — shared UI, consistent tooling, easy scaling — became clear once I imagined the project growing. apps/web → the Next.js frontend packages/ui → shared ShadCN/Tailwind components (future) apps/api → backend if needed Of course, this wasn’t painless. I hit walls: Passing event handlers between apps/web and packages/ui caused React’s Server/Client component errors. Tailwind v3 vs v4 caused confusion. I learned that v4 was cutting-edge but not yet production-hardened. But since ShadCN docs used v4, I committed to it. Even simple command
+
+## Key Takeaways
+
+1. The Past few weeks When I first set out to build something meaningful, I didn’t have all the answers
+2. js (React 19) UI: ShadCN + Tailwind CSS v4 State & Data: React Query + Supabase Backend: Not separate at first — lean on Supabase (auth + database + APIs) Infra: ShadCN Monorepo for structure, pnpm for package management Deployment: Vercel for frontend, Supabase for backend services This stripped-down stack let me move faster, learn less at once, and focus on the app’s value
+3. At first, the concept of a monorepo felt like a buzzword
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [Week 1: Picking a Stack, Breaking Things, Learning Fast](https://dev.to/shaq_attack/week-1-picking-a-stack-breaking-things-learning-fast-a7c)*
+
+*Tags: javascript, mobile, career, backend, react*
