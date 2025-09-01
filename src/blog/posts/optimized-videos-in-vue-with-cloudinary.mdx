@@ -1,0 +1,36 @@
+---
+title: "Optimized Videos in Vue with Cloudinary"
+subtitle: "Essential insights for developers to start the day"
+summary: "Performance isn’t just about speed—it’s about user experience. Delivering videos efficiently can make your app feel snappy and polished, while poorly optimized media can slow it down and frustrate users. With Cloudinary’s AdvancedVideo component in Vue."
+slug: "optimized-videos-in-vue-with-cloudinary"
+date: "2025-09-01"
+time: "07:41"
+content_strategy: "Technical tutorials and coding tips to start the day"
+writing_style: "energetic and practical"
+tags: ["vue", "cloud", "ui", "mobile", "performance"]
+image_suggestion: "Professional illustration representing Optimized Videos in Vue with Cloudinary"
+source_url: "https://dev.to/jacobandrewsky/optimized-videos-in-vue-with-cloudinary-1g5j"
+published_date: "Mon, 01 Sep 2025 07:27:32 +0000"
+---
+# Optimized Videos in Vue with Cloudinary
+
+## Essential insights for developers to start the day
+
+### Summary
+Performance isn’t just about speed—it’s about user experience. Delivering videos efficiently can make your app feel snappy and polished, while poorly optimized media can slow it down and frustrate users. With Cloudinary’s AdvancedVideo component in Vue.
+
+---
+
+Performance isn’t just about speed—it’s about user experience. Delivering videos efficiently can make your app feel snappy and polished, while poorly optimized media can slow it down and frustrate users. With Cloudinary’s AdvancedVideo component in Vue.js, you can serve optimized videos with ease, ensuring smooth playback across devices. This guide covers practical techniques for using Cloudinary AdvancedVideo in Vue, including transformations, HTML attributes, and event handling. Enjoy! 🤔 What Is Cloudinary AdvancedVideo? The AdvancedVideo component from @cloudinary/vue allows you to deliver optimized videos directly to your users. It handles: Transformations like resizing, cropping, or adding effects Native HTML video attributes such as controls and loop Video player events for interactive experiences This gives you full control over video performance and user experience. 🟢 Optimized Videos in Vue with Cloudinary For this tutorial, we built a simple Vue 3 + Vite + TailwindCSS app.     import { AdvancedVideo } from "@cloudinary/vue"; import { Cloudinary } from "@cloudinary/url-gen"; const cld = new Cloudinary({ cloud: { cloudName: 'demo' } }); const myVideo = cld.video('dog');  Enter fullscreen mode Exit fullscreen mode If you would like to see a video version of this tutorial, check out the following link. ✅ Tips: Keep the video component simple for testing basic playback. Later, we’ll add transformations, HTML attributes, and event handling. Transform Videos for Better Performance Transformations help you serve right-sized, optimized videos. Here’s how to do it: 1. Resize a Video import { fill } from "@cloudinary/url-gen/actions/resize"; myVideo.resize( fill() .width(350) .height(250) ); Enter fullscreen mode Exit fullscreen mode This ensures your video loads only at the dimensions you need, improving performance. Alternative Transformation Approaches Raw transformation string: myVideo.addTransformation('c_thumb,g_face,h_150,w_150/r_20'); Enter fullscreen mode Exit fullscreen mode Object-based transformation (converted to string): import { transformationStringFromObject } from "@cloudinary/url-gen"; const transformation = transformationStringFromObject([ { gravity: "face", height: 150, width: 150, crop: "thumb" }, { radius: 20 } ]); myVideo.addTransformation(transformation); Enter fullscreen mode Exit fullscreen mode Native HTML Video Attributes You can also pass standard HTML attributes:  Enter fullscreen mode Exit fullscreen mode Examples: controls → show video controls loop → replay automatically muted → start muted for autoplay compliance These small tweaks enhance user experience without extra JavaScript. React to Video Player Events AdvancedVideo lets you handle player events like play and pause:  console.log('play')" :onPause="() => console.
+
+## Key Takeaways
+
+1. ✅ Tips: Keep the video component simple for testing basic playback
+
+---
+
+*This content was curated using the **Technical tutorials and coding tips to start the day** strategy (6-11 hours) with a energetic and practical focus.*
+
+*Original source: [Optimized Videos in Vue with Cloudinary](https://dev.to/jacobandrewsky/optimized-videos-in-vue-with-cloudinary-1g5j)*
+
+*Tags: vue, cloud, ui, mobile, performance*
