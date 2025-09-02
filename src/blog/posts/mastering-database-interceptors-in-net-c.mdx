@@ -1,0 +1,39 @@
+---
+title: "Mastering Database Interceptors in .NET Core Web API (Beginner to Hero)"
+subtitle: "Essential insights for developers to start the day"
+summary: "Introduction When building modern. NET Web API applications, database operations are at the heart of everything. But have you ever wondered: What SQL queries are being executed."
+slug: "mastering-database-interceptors-in-net-c"
+date: "2025-09-02"
+time: "15:40"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["performance", "api", "mobile", "web", "database"]
+image_suggestion: "Professional illustration representing Mastering Database Interceptors in .NET Core Web API (Beginner to Hero)"
+source_url: "https://dev.to/madusanka_bandara/mastering-database-interceptors-in-net-core-web-api-beginner-to-hero-18g8"
+published_date: "Tue, 02 Sep 2025 15:19:14 +0000"
+---
+# Mastering Database Interceptors in .NET Core Web API (Beginner to Hero)
+
+## Essential insights for developers to start the day
+
+### Summary
+Introduction When building modern. NET Web API applications, database operations are at the heart of everything. But have you ever wondered: What SQL queries are being executed.
+
+---
+
+1. Introduction When building modern .NET Web API applications, database operations are at the heart of everything. But have you ever wondered: What SQL queries are being executed? How can I log or measure query performance? Can I stop dangerous commands before they hit the database? The answer lies in database interceptors. In this article, we’ll explore database interception in Entity Framework Core (EF Core) across .NET 6, 7, 8, and 9. We’ll start at a beginner level (just logging queries) and work our way up to hero-level scenarios like performance monitoring, auditing, and blocking harmful SQL. 2. Prerequisites A working .NET 6, 7, 8, or 9 Web API project Basic knowledge of Entity Framework Core Installed EF Core NuGet packages: Microsoft.EntityFrameworkCore Microsoft.EntityFrameworkCore.SqlServer Enter fullscreen mode Exit fullscreen mode 3. Beginner Level: Setting Up a Web API with EF Core Let’s start with a simple User entity and DbContext. public class User { public int Id { get; set; } public string Name { get; set; } } Enter fullscreen mode Exit fullscreen mode public class AppDbContext : DbContext { public AppDbContext(DbContextOptions options) : base(options) { } public DbSet Users { get; set; } } Enter fullscreen mode Exit fullscreen mode In Program.cs, register the context: var builder = WebApplication.CreateBuilder(args); builder.Services.AddDbContext(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); var app = builder.Build(); app.MapGet("/users", async (AppDbContext db) => await db.Users.ToListAsync()); app.Run(); Enter fullscreen mode Exit fullscreen mode 4. Creating a Simple Logging Interceptor An interceptor lets us hook into SQL commands before they are sent to the database. using Microsoft.EntityFrameworkCore.Diagnostics; using System.Data.Common; public class LoggingInterceptor : DbCommandInterceptor { public override InterceptionResult ReaderExecuting( DbCommand command, CommandEventData eventData, InterceptionResult result) { Console.WriteLine($"[SQL LOG] ReaderExecuting: {command.CommandText}"); return base.ReaderExecuting(command, eventData, result); } public override InterceptionResult NonQueryExecuting( DbCommand command, CommandEventData eventData, InterceptionResult result) { Console.WriteLine($"[SQL LOG] NonQueryExecuting: {command.CommandText}"); return base.NonQueryExecuting(command, eventData, result); } } Enter fullscreen mode Exit fullscreen mode 5. Intermediate Level: Measuring Performance We can go beyond logging and measure query execution time. using Microsoft.EntityFrameworkCore.Diagnostics; using System.Data.Common; public class PerformanceInterceptor: DbCommandInterceptor { public override DbDataReader ReaderExecuted( DbCommand command, CommandExecutedEventData eventData, DbDataReader result) { var elapsed = eventData?.Duration.TotalMilliseconds ?? 0; Console.WriteLine($"[PERF] Query t
+
+## Key Takeaways
+
+1. Understanding Mastering Database Interceptors in .NET Core Web API (Beginner to Hero) is essential for modern web development
+2. This technology/approach can improve your development workflow
+3. Consider implementing these concepts in your next project
+4. Stay updated with the latest trends and best practices
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Mastering Database Interceptors in .NET Core Web API (Beginner to Hero)](https://dev.to/madusanka_bandara/mastering-database-interceptors-in-net-core-web-api-beginner-to-hero-18g8)*
+
+*Tags: performance, api, mobile, web, database*

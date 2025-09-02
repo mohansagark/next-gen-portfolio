@@ -1,0 +1,36 @@
+---
+title: "Should the CSS light-dark() Function Support More Than Light and Dark Values?"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. One of the newer CSS features that has piqued my interest: the light-dark() function. And I’ve been closely following it ever since it became Baseline back in May 2024."
+slug: "should-the-css-light-dark-function-suppo"
+date: "2025-09-02"
+time: "15:40"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["mobile", "frontend", "cloud", "css", "tools"]
+image_suggestion: "Professional illustration representing Should the CSS light-dark() Function Support More Than Light and Dark Values?"
+source_url: "https://css-tricks.com/should-the-css-light-dark-function-support-more-than-light-and-dark-values/"
+published_date: "Tue, 02 Sep 2025 14:44:26 +0000"
+---
+# Should the CSS light-dark() Function Support More Than Light and Dark Values?
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. One of the newer CSS features that has piqued my interest: the light-dark() function. And I’ve been closely following it ever since it became Baseline back in May 2024.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. One of the newer CSS features that has piqued my interest: the light-dark() function. And I’ve been closely following it ever since it became Baseline back in May 2024. The light-dark() function, briefly If you don’t know, the light-dark() function takes two color arguments: one for light mode and one for dark mode. Hence, the name light-dark(). It toggles between the two light and dark values based on a user’s preferences. Sara Joy has a wonderful article where you can get a much more detailed explanation. The key thing is that the function requires you to use the color-scheme property to activate those two color modes: :root { color-scheme: light dark; } .element { color: light-dark(brown, black); } And, depending on the user’s preference, one of those two modes is applied. Just two modes? That said, I’ve been wondering for a while now: Should the light-dark() function support more than light and dark color modes? I wrote about light-dark() for the CSS-Tricks Almanac. During my research, I found myself wishing the function could do more, specifically that it lacks support for other types of color schemes that a user might prefer, such as grayscale, high contrast, and low contrast. Does light-dark() even need a high-contrast mode? I’d say both yes and no. Let’s go back in time to when light-dark() was initially proposed somewhere around 2022. Emilio Cobos asked for a function to support light and dark mode changes, and it was added to the specifications. Done and handled, right? Not so fast. The ticket was indeed closed when Jacob Miller chimed in: Just saw this from @bramus‘s post, and I suspect that things are already closed / there’s no changing things now, but I see this as an approach that doesn’t actually solve for the issues people are facing with theming, and does so in a way that will create a trap for them when pursuing proper theming support. […] We shouldn’t ship single-purpose tools for the browser, but rather ones that scale and we can build upon. Good thing he chimed in, because that prompted Bramus to reopen the ticket: I think this was mistakingly done so. The end goal is to have something like schemed-value(), with light-dark() being an intermediary step towards the final solution. That’s a big deal! Bramus is saying that the light-dark() function is an intermediary solution on the way to a schemed-value() function. In other words, shipping light-dark() was never the intended end goal. It’s a step along the way to this other more robust schemed-value() feature. Custom color schemes Bramus has already written a bunch about the schemed-value() concept. It could look something like this: :root { color-scheme: dark light custom; } body { color: schemed-value( light lightblue, /* Value used for light color-scheme */ dark crimson, /* Value used for dark color-scheme */ --custom green /* Value used for --custom color-scheme */ ); } Thi
+
+## Key Takeaways
+
+1. I wrote about light-dark() for the CSS-Tricks Almanac
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Should the CSS light-dark() Function Support More Than Light and Dark Values?](https://css-tricks.com/should-the-css-light-dark-function-support-more-than-light-and-dark-values/)*
+
+*Tags: mobile, frontend, cloud, css, tools*
