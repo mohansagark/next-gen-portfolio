@@ -1,0 +1,37 @@
+---
+title: "Composition in CSS"
+subtitle: "Essential insights for developers to start the day"
+summary: "Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Tailwind and other utility libraries have been huge proponents of composition. But, to me, their version of composition has always carried a heavy sense of naïveté."
+slug: "composition-in-css"
+date: "2025-09-08"
+time: "15:39"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["cloud", "mobile", "html", "ui", "career"]
+image_suggestion: "Professional illustration representing Composition in CSS"
+source_url: "https://css-tricks.com/composition-in-css/"
+published_date: "Mon, 08 Sep 2025 13:55:26 +0000"
+---
+# Composition in CSS
+
+## Essential insights for developers to start the day
+
+### Summary
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Tailwind and other utility libraries have been huge proponents of composition. But, to me, their version of composition has always carried a heavy sense of naïveté.
+
+---
+
+Get affordable and hassle-free WordPress hosting plans with Cloudways — start your free trial today. Tailwind and other utility libraries have been huge proponents of composition. But, to me, their version of composition has always carried a heavy sense of naïveté. I mean, utility composition is basically adding CSS values to the element, one at a time…  ...  If we’re honest for a minute, how is this composition different from adding CSS rules directly into a class? /* This is composition too! */ .card { padding: 1rem; border: 2px solid var(—color-blue-500) } That said, I can’t deny the fact that I’ve been thinking a lot more about composition ever since I began using Tailwind. So, here are a couple of notes that I’ve gathered together about CSS composition. It’s not a new concept CSS is a composable language by nature. This composition nature is already built into the cascade. Let’s say you’ve decided to style a button with a few properties: .button { display: inline-flex; padding: 0.75em 1.5em; /* other styles... */ } You can always tag on other classes to modify the button’s appearance:  ...   ...  .primary { background: orange; } .secondary { background: pink; } You can even change the appearance of other elements to a button by adding the .button class:  ...  Composition is happening in both cases: We composed .button onto a We composed .red onto .button So, CSS composition has been in existence since forever. We simply don’t talk about composition as a Big Thing because it’s the nature of the language. Developers take a pretty narrow view of composition When developers talk about composition in CSS, they always seem to always restrict the definition of composition to the addition of classes in the HTML.  ...  What’s interesting is that few people, if any, speak about composition within CSS files — from the angle of using Sass mixins or advanced Tailwind utilities. In these cases, we are also composing styles… just not directly in the HTML! @mixin button () { display: inline-flex; padding: 0.75em 1.5em; /* other styles ... */ } .button { @include button; } What is composition? Composition comes from two possible words: Compose: Put together Composite: Made up of distinct parts or elements Both words come from the same Latin root componere, which means to arrange or direct. In other words… all work is put together in some way, so all work is composed. This makes me wonder why composition is used in such a limited context. 🤔 Moving on… Composition doesn’t reduce bloat Class composition reduces CSS bloat only if you’re using utility classes. However, class composition with utility classes is likely to create HTML bloat. ... ... ... On the ot
+
+## Key Takeaways
+
+1. So, here are a couple of notes that I’ve gathered together about CSS composition
+2. secondary { background: pink; } You can even change the appearance of other elements to a button by adding the
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Composition in CSS](https://css-tricks.com/composition-in-css/)*
+
+*Tags: cloud, mobile, html, ui, career*
