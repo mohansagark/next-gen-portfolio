@@ -1,0 +1,36 @@
+---
+title: "Part-51: 🚀To Configure VPC Firewall Rules with Target All Instances in GCP Cloud"
+subtitle: "Essential insights for developers to start the day"
+summary: "Step-01: Introduction By default, Ingress traffic is denied in GCP VPC (implied rule). If you deploy a VM with a webserver on port 80 (HTTP), it won’t be reachable from the internet until you explicitly allow it with a firewall ingress rule. In this lab, we’ll: Deploy a VM with Nginx."
+slug: "part-51-to-configure-vpc-firewall-rules-"
+date: "2025-09-13"
+time: "15:35"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["mobile", "frontend", "web", "cloud", "devops"]
+image_suggestion: "Professional illustration representing Part-51: 🚀To Configure VPC Firewall Rules with Target All Instances in GCP Cloud"
+source_url: "https://dev.to/latchudevops/part-51-to-configure-vpc-firewall-rules-with-target-all-instances-in-gcp-cloud-342j"
+published_date: "Sat, 13 Sep 2025 15:25:13 +0000"
+---
+# Part-51: 🚀To Configure VPC Firewall Rules with Target All Instances in GCP Cloud
+
+## Essential insights for developers to start the day
+
+### Summary
+Step-01: Introduction By default, Ingress traffic is denied in GCP VPC (implied rule). If you deploy a VM with a webserver on port 80 (HTTP), it won’t be reachable from the internet until you explicitly allow it with a firewall ingress rule. In this lab, we’ll: Deploy a VM with Nginx.
+
+---
+
+Step-01: Introduction By default, Ingress traffic is denied in GCP VPC (implied rule). If you deploy a VM with a webserver on port 80 (HTTP), it won’t be reachable from the internet until you explicitly allow it with a firewall ingress rule. In this lab, we’ll: Deploy a VM with Nginx. Try to access it → fails (no firewall rule). Create an Ingress firewall rule with target = All Instances. Try again → works. Step-02: Create VM Instance Upload nginx-webserver.sh (startup script) to Cloud Shell. #!/bin/bash sudo apt install -y telnet sudo apt install -y nginx sudo systemctl enable nginx sudo chmod -R 755 /var/www/html HOSTNAME=$(hostname) sudo echo "   Welcome to Latchu@DevOps - WebVM App1  VM Hostname: $HOSTNAME VM IP Address: $(hostname -I) Application Version: V1 Google Cloud Platform - Demos " | sudo tee /var/www/html/index.html Enter fullscreen mode Exit fullscreen mode Create VM: gcloud compute instances create myvm1-allinstances \ --zone=us-central1-a \ --machine-type=e2-micro \ --network-interface=subnet=mysubnet1 \ --metadata-from-file=startup-script=nginx-webserver.sh Enter fullscreen mode Exit fullscreen mode Verify: gcloud compute instances list Enter fullscreen mode Exit fullscreen mode Confirm VM is in vpc2-custom → mysubnet1. Note Internal and External IP. Test before firewall rule: telnet  80 # Should fail curl  # Should fail Enter fullscreen mode Exit fullscreen mode Observation: Application not reachable (blocked by implied ingress rule). Step-03: Create Ingress Firewall Rule Go to VPC Networks → vpc2-custom → FIREWALLS → ADD FIREWALL RULE. Name: fw-ingress-80-allinstances Description: Allow inbound port 80 for all instances in the network Network: vpc2-custom Priority: 1000 Direction of traffic: Ingress Action on match: Allow Targets: All instances in the network Source filter: IPv4 ranges Source IPv4 range: 0.0.0.0/0 Protocols and ports: TCP → 80 Click Create. Step-04: Access Application Verify VM list again: gcloud compute instances list Enter fullscreen mode Exit fullscreen mode Test after firewall rule: telnet  80 # Should connect curl  # Should return HTML page Enter fullscreen mode Exit fullscreen mode Browser test: http:// Enter fullscreen mode Exit fullscreen mode Step-05: Cleanup # Delete firewall rule gcloud compute firewall-rules delete fw-ingress-80-allinstances # Delete VM gcloud compute instances delete myvm1-allinstances --zone=us-central1-a --delete-disks=all Enter fullscreen mode Exit fullscreen mode ✅ Key Learning: Without a firewall rule → Ingress traffic is denied by default. With Target = All Instances → Every VM in the VPC can receive traffic on the allowed port. For production, it’s better to use tags or service accounts instead of “all instances” to limit exposure. Create
+
+## Key Takeaways
+
+1. Note Internal and External IP
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Part-51: 🚀To Configure VPC Firewall Rules with Target All Instances in GCP Cloud](https://dev.to/latchudevops/part-51-to-configure-vpc-firewall-rules-with-target-all-instances-in-gcp-cloud-342j)*
+
+*Tags: mobile, frontend, web, cloud, devops*
