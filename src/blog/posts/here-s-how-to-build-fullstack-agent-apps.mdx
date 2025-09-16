@@ -1,0 +1,39 @@
+---
+title: "Here's How To Build Fullstack Agent Apps (Gemini, CopilotKit & LangGraph)"
+subtitle: "Essential insights for developers to start the day"
+summary: "AI agents are getting close to real world applications, but most developers still find it complex to build one. So we are going to build two practical agents: Post Generator that drafts LinkedIn/X content using live web search & Stack Analyzer that inspects GitHub repos and creates structured reports. We will be using Next."
+slug: "here-s-how-to-build-fullstack-agent-apps"
+date: "2025-09-16"
+time: "15:39"
+content_strategy: "Deep technical content for focused work hours"
+writing_style: "detailed and informative"
+tags: ["web", "backend", "tools", "api", "ui"]
+image_suggestion: "Professional illustration representing Here's How To Build Fullstack Agent Apps (Gemini, CopilotKit & LangGraph)"
+source_url: "https://dev.to/copilotkit/heres-how-to-build-fullstack-agent-apps-gemini-copilotkit-langgraph-15jb"
+published_date: "Tue, 16 Sep 2025 15:08:37 +0000"
+---
+# Here's How To Build Fullstack Agent Apps (Gemini, CopilotKit & LangGraph)
+
+## Essential insights for developers to start the day
+
+### Summary
+AI agents are getting close to real world applications, but most developers still find it complex to build one. So we are going to build two practical agents: Post Generator that drafts LinkedIn/X content using live web search & Stack Analyzer that inspects GitHub repos and creates structured reports. We will be using Next.
+
+---
+
+AI agents are getting close to real world applications, but most developers still find it complex to build one. So we are going to build two practical agents: Post Generator that drafts LinkedIn/X content using live web search & Stack Analyzer that inspects GitHub repos and creates structured reports. We will be using Next.js frontend, FastAPI backend, CopilotKit, LangGraph workflows, and Google Gemini. You will find architecture, concepts, prompts, and practical stuff. Let's build it. Check out the CopilotKit GitHub ⭐️ 1. What are we building? We are building two practical agents using a full-stack setup: ✅ Post Generator Agent : creates LinkedIn/X posts grounded in live Google Search results. Here's a simplified call sequence of what will happen when a user generates a post. [User types prompt] ↓ Next.js UI (CopilotChat) ↓ (POST /api/copilotkit → GraphQL) Next.js API route (copilotkit) ↓ (forwards) FastAPI backend (/copilotkit) ↓ (LangGraph workflow) Post Generator graph nodes ↓ (calls → Google Gemini + web search) Streaming responses & tool‑logs ↓ Frontend UI renders chat + tool logs + final postcards Enter fullscreen mode Exit fullscreen mode ✅ Stack Analyzer Agent: analyzes a public GitHub repo (metadata, README, code manifests) and infers its stack. Here's a simplified call sequence of what will happen when a user analyzes the tech stack of a repo. [User pastes GitHub URL] ↓ Next.js UI (/stack‑analyzer) ↓ /api/copilotkit → FastAPI ↓ Stack Analysis graph nodes (gather_context → analyze → end) ↓ Streaming tool‑logs & structured analysis cards Enter fullscreen mode Exit fullscreen mode Here's what we'll be building! 2. Tech Stack & Architecture At the core, we are going to use this stack for building these agents. Next.js 15 : frontend framework with TypeScript CopilotKit SDK : embed agents into UI (@copilotkit/react-core, @copilotkit/runtime, @copilotkit/react-ui) FastAPI & Uvicorn : backend framework for serving agents as APIs LangGraph (StateGraphs) : for building stateful agent workflows Google Gemini via google-genai (official SDK) : LLM for reasoning & text generation LangChain’s Google adapter : to plug Gemini into LangChain workflows Pydantic : for structured JSON tool outputs Here's the high-level architecture of the project. Project structure This is how our directory will look. The agent directory will hold the Python/FastAPI backend hosting the LangGraph agents, and the frontend directory hosts the Next.js 15 application, including UI routes, API routes, and shared components. . ├── assets/ ├── frontend/ ← Next.js 15 App (UI + API routes) │ ├── app/ │ │ ├── layout.tsx ← Wraps the app with `` │ │ ├── post-generator/ ← Post Generator UI routes │ │ ├── stack-analyzer/ ← Stack Analyzer UI routes │ │ └── api/ ← Next.js API routes used by the UI │ │ ... │ ├── contexts/LayoutContext.tsx │ ├── wrapper.tsx ← CopilotKit provider wrapper │ ├── components/ ← Shared UI components │ │ ... ├── agent/ ← FastAPI + LangGraph “agents” (Py
+
+## Key Takeaways
+
+1. Understanding Here's How To Build Fullstack Agent Apps (Gemini, CopilotKit & LangGraph) is essential for modern web development
+2. This technology/approach can improve your development workflow
+3. Consider implementing these concepts in your next project
+4. Stay updated with the latest trends and best practices
+
+---
+
+*This content was curated using the **Deep technical content for focused work hours** strategy (12-17 hours) with a detailed and informative focus.*
+
+*Original source: [Here's How To Build Fullstack Agent Apps (Gemini, CopilotKit & LangGraph)](https://dev.to/copilotkit/heres-how-to-build-fullstack-agent-apps-gemini-copilotkit-langgraph-15jb)*
+
+*Tags: web, backend, tools, api, ui*
