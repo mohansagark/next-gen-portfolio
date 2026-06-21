@@ -17,7 +17,7 @@
     "glightbox": "^3.3.0",
     "gsap": "^3.12.7",
     "isotope-layout": "^3.0.6",
-    "next": "^15.4.2",
+    "next": "15.4.10",
     "nice-select2": "^2.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
