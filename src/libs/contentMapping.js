@@ -28,13 +28,16 @@ export function mapSkills(skills) {
   );
 }
 
-export function mapResume(experience, education, bundledResume) {
+export function mapResume(experience, education, achievements, bundledResume) {
   const expSkeleton =
     bundledResume.find((s) => /experience/i.test(s.title)) ||
     { title: "My Experience", iconName: "flaticon-recommendation" };
   const eduSkeleton =
     bundledResume.find((s) => /education/i.test(s.title)) ||
     { title: "My Education & Certifications", iconName: "flaticon-graduation-cap" };
+  const achSkeleton =
+    bundledResume.find((s) => /achievement/i.test(s.title)) ||
+    { title: "Key Achievements", iconName: "flaticon-trophy" };
 
   const expItems = experience.jobs.map((j) => ({
     date: fmtRange(j.startDate, j.endDate, j.current),
@@ -60,9 +63,20 @@ export function mapResume(experience, education, bundledResume) {
     .sort((a, b) => (a.sort < b.sort ? 1 : -1))
     .map(({ sort, ...item }) => item);
 
+  // Prefer canonical achievements; fall back to the bundled section's items
+  // so the section survives a failed achievements fetch.
+  const achItems = achievements
+    ? achievements.items.map((a) => ({
+        date: a.year,
+        title: a.title,
+        desc: a.description,
+      }))
+    : achSkeleton.resumeItems || [];
+
   return [
     { title: expSkeleton.title, iconName: expSkeleton.iconName, resumeItems: expItems },
     { title: eduSkeleton.title, iconName: eduSkeleton.iconName, resumeItems: eduItems },
+    { title: achSkeleton.title, iconName: achSkeleton.iconName, resumeItems: achItems },
   ];
 }
 

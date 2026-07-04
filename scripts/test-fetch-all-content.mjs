@@ -7,6 +7,7 @@ const canon = {
   profile: { firstName: 'M', lastName: 'K', headline: 'H', bio: '', avatar: '', email: 'a@b.c', phone: '', location: '', resumeUrl: '' },
   experience: { jobs: [] },
   education: { degrees: [], certifications: [] },
+  achievements: { items: [{ title: 'A', description: 'D', year: '2024' }] },
   skills: { categories: [] },
   projects: { items: [] },
   services: { items: [] },
@@ -25,8 +26,9 @@ const bundle = await fetchAllContent();
 
 assert.equal(bundle.skills, undefined, 'failed fetch leaves key absent');
 assert.ok(Array.isArray(bundle.portfolio), 'portfolio mapped');
-assert.ok(Array.isArray(bundle.resume) && bundle.resume.length === 2, 'resume mapped from 2 files');
+assert.ok(Array.isArray(bundle.resume) && bundle.resume.length === 3, 'resume mapped incl. achievements section');
 assert.equal(bundle.resume[0].title, bundledResume[0].title);
+assert.deepEqual(bundle.resume[2].resumeItems, [{ date: '2024', title: 'A', desc: 'D' }]);
 assert.ok(Array.isArray(bundle.services));
 assert.ok(Array.isArray(bundle.socials));
 assert.ok(Array.isArray(bundle.testimonials));

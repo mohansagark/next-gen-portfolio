@@ -16,9 +16,16 @@ const resume = mapResume(
   { jobs: [{ company: 'ServiceNow', role: 'Senior Software Engineer', location: '', startDate: '2025-08', endDate: '', current: true, description: '', highlights: [], technologies: [], logo: '/images/experience/servicenow.jpeg', companyUrl: '' }] },
   { degrees: [{ institution: 'VIT University', degree: 'B.Tech', field: 'Mechanical Engineering', startDate: '2012-08', endDate: '2016-05', grade: '86.2%', location: 'Tamil Nadu', logo: '' }],
     certifications: [{ title: 'React Native', provider: 'LinkedIn', issueDate: '2024-03', expiryDate: '2030-03', credentialUrl: '', badge: '' }] },
+  { items: [{ title: 'Engineering Excellence Award', description: 'Awarded at Invesco', year: '2024' }] },
   bundledResume
 );
-assert.equal(resume.length, 2);
+assert.equal(resume.length, 3);
+assert.equal(resume[2].title, 'Key Achievements');
+assert.equal(resume[2].iconName, 'flaticon-trophy');
+assert.deepEqual(resume[2].resumeItems[0], { date: '2024', title: 'Engineering Excellence Award', desc: 'Awarded at Invesco' });
+// achievements fetch failure -> bundled items survive
+const resumeFallback = mapResume({ jobs: [] }, { degrees: [], certifications: [] }, undefined, bundledResume);
+assert.equal(resumeFallback[2].resumeItems.length, 5);
 assert.equal(resume[0].title, bundledResume[0].title);
 assert.equal(resume[0].iconName, bundledResume[0].iconName);
 assert.equal(resume[0].resumeItems[0].date, 'Aug 2025 – Present');

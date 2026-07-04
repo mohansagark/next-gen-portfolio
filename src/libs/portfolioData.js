@@ -14,7 +14,7 @@ import {
 } from "./contentMapping.js";
 
 const FILES = [
-  "profile", "experience", "education", "skills",
+  "profile", "experience", "education", "achievements", "skills",
   "projects", "services", "testimonials", "socials",
 ];
 
@@ -43,7 +43,12 @@ export async function fetchAllContent() {
   const bundle = {};
   if (canon.skills) bundle.skills = mapSkills(canon.skills);
   if (canon.experience && canon.education) {
-    bundle.resume = mapResume(canon.experience, canon.education, bundled("resume"));
+    bundle.resume = mapResume(
+      canon.experience,
+      canon.education,
+      canon.achievements,
+      bundled("resume")
+    );
   }
   if (canon.projects) bundle.portfolio = mapPortfolio(canon.projects, canon.profile);
   if (canon.services) bundle.services = mapServices(canon.services, bundled("services"));
