@@ -1,7 +1,8 @@
+import { getContent } from "./contentStore";
 import testimonialsData from "../../public/fakedata/testimonials.json";
 
 const getTestimonials = () => {
-  return testimonialsData || [];
+  return getContent("testimonials") || testimonialsData || [];
 };
 
 export default getTestimonials;

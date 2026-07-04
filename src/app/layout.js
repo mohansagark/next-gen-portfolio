@@ -1,6 +1,9 @@
 import ThmeModeSwither from "@/components/shared/others/ThmeModeSwither";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import ContentProvider from "@/components/providers/ContentProvider";
+import { fetchAllContent } from "@/libs/portfolioData";
+import { seedContent } from "@/libs/contentStore";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,14 +22,18 @@ export const metadata = {
   description: "Dev Mohan - Personal Portfolio React  NextJs Template",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const content = await fetchAllContent();
+  seedContent(content); // server-side store, for SSR of client components
   return (
     <html lang="en" className="dark ">
       <body
         className={`font-sora  dark:bg-dark-color overflow-x-hidden  relative`}
         suppressHydrationWarning={true}
       >
-        <Suspense fallback={<></>}>{children}</Suspense>
+        <ContentProvider content={content}>
+          <Suspense fallback={<></>}>{children}</Suspense>
+        </ContentProvider>
         <ThmeModeSwither />
         <Analytics />
       </body>
