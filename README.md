@@ -1,294 +1,176 @@
-# 🚀 Next-Gen Portfolio
+# 3D Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 15, featuring dynamic blog management, multiple homepage layouts, and a comprehensive design system.
+This repository contains the source code for a personal 3D portfolio built with React, TypeScript, Three.js, React Three Fiber, and GSAP. It includes animated page sections, a character scene, custom cursor interactions, and smooth transitions designed for a modern portfolio experience.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.1.2-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?style=for-the-badge&logo=javascript)
+Live site: [https://akashrmalhotra.netlify.app/](https://akashrmalhotra.netlify.app/)
 
-## ✨ Features
+![Portfolio Preview](public/images/preview1.png)
 
-### 🎨 **Multiple Homepage Layouts**
+## Table of Contents
 
-- 10 unique homepage variants (home-2 through home-10)
-- Customizable hero sections and layouts
-- Responsive design across all devices
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [GSAP License Note](#gsap-license-note)
+- [Customization Guide](#customization-guide)
+- [Troubleshooting](#troubleshooting)
+- [Deployment](#deployment)
+- [License](#license)
 
-### 📝 **Dynamic Blog System**
+## Features
 
-- **MDX-Powered**: Write blogs in MDX format with frontmatter support
-- **Auto-Generation**: Automatic conversion from MDX to JSON
-- **Rich Content**: Support for code blocks, images, and interactive components
-- **SEO Optimized**: Meta tags, structured data, and social sharing
-- **Tag & Category System**: Organized content with filtering capabilities
+- Responsive one-page portfolio layout with reusable section components.
+- 3D character scene rendering powered by React Three Fiber and Three.js.
+- GSAP-powered animations and transitions for interactive storytelling.
+- Custom cursor, hover interactions, and scroll-driven visual effects.
+- Organized component architecture with dedicated utilities and style modules.
 
-### 🛠 **Advanced Components**
+## Tech Stack
 
-- **Portfolio Gallery**: Filterable project showcase
-- **Services Section**: Highlight your offerings
-- **Testimonials**: Client feedback carousel
-- **Skills & Resume**: Professional experience display
-- **Contact Forms**: Integrated contact functionality
+### Core
 
-### 🌙 **Modern UX/UI**
+- React 18
+- TypeScript
+- Vite
 
-- **Dark/Light Mode**: Seamless theme switching
-- **Smooth Animations**: GSAP and CSS animations
-- **Interactive Elements**: Vanilla Tilt, Intersection Observer
-- **Mobile-First**: Responsive design principles
+### Animation and 3D
 
-### ⚡ **Performance Optimized**
+- GSAP + `@gsap/react`
+- Three.js
+- `@react-three/fiber`
+- `@react-three/drei`
+- `@react-three/postprocessing`
+- `@react-three/cannon`
+- `@react-three/rapier`
 
-- **Next.js 15**: Latest features and optimizations
-- **Image Optimization**: Next.js Image component
-- **Code Splitting**: Automatic bundle optimization
-- **Analytics Ready**: Vercel Analytics integration
+### Supporting Libraries
 
-## 🚀 Quick Start
+- `react-icons`
+- `react-fast-marquee`
+- `@vercel/analytics`
+
+## Project Structure
+
+```text
+.
+├── public/                    # Static assets
+├── src/
+│   ├── assets/                # Local media/assets
+│   ├── components/
+│   │   ├── Character/         # 3D scene + character logic/utilities
+│   │   ├── styles/            # Section/component CSS files
+│   │   ├── About.tsx
+│   │   ├── Career.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Landing.tsx
+│   │   ├── MainContainer.tsx  # Main page composition
+│   │   ├── Navbar.tsx
+│   │   ├── TechStack.tsx
+│   │   ├── WhatIDo.tsx
+│   │   └── Work.tsx
+│   ├── context/               # Global providers (loading state, etc.)
+│   ├── data/                  # Static data/content definitions
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+└── vite.config.ts
+```
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- npm package manager
+- Node.js 18+ (recommended)
+- npm 9+ (or compatible)
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/mohansagark/next-gen-portfolio.git
-   cd next-gen-portfolio
+   git clone <your-repository-url>
+   cd 3d-portfolio
    ```
 
-2. **Install dependencies**
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-3. **Generate blog data**
-
-   ```bash
-   npm run generate:blogs
-   ```
-
-4. **Start development server**
+3. Start the local development server:
 
    ```bash
    npm run dev
    ```
 
-5. **Open in browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+4. Open the URL shown in the terminal (typically `http://localhost:5173`).
 
-## 📁 Project Structure
+## Available Scripts
 
-```
-next-gen-portfolio/
-├── 📂 public/
-│   ├── 📄 blogs.json              # Generated blog data
-│   ├── 📂 img/                    # Static images
-│   └── 📂 fakedata/               # Demo data files
-├── 📂 src/
-│   ├── 📂 app/                    # Next.js app directory
-│   │   ├── 📄 page.js             # Homepage
-│   │   ├── 📂 blogs/              # Blog routes
-│   │   │   ├── 📄 page.js         # Blog listing
-│   │   │   └── 📂 [slug]/         # Dynamic blog pages
-│   │   ├── 📂 portfolio/          # Portfolio pages
-│   │   ├── 📂 services/           # Services pages
-│   │   └── 📂 home-{2-10}/        # Alternative homepages
-│   ├── 📂 blog/posts/             # MDX blog files
-│   ├── 📂 components/             # React components
-│   │   ├── 📂 layout/             # Layout components
-│   │   ├── 📂 sections/           # Page sections
-│   │   └── 📂 shared/             # Reusable components
-│   ├── 📂 context_api/            # React contexts
-│   ├── 📂 hooks/                  # Custom React hooks
-│   └── 📂 libs/                   # Utility functions
-├── 📂 scripts/
-│   └── 📄 convert-mdx-to-json.mjs # Blog generation script
-└── 📄 package.json
-```
+- `npm run dev`  
+  Starts Vite dev server and exposes host for local network testing.
 
-## ✍️ Blog Management
+- `npm run build`  
+  Type-checks and builds a production-ready bundle.
 
-### Writing Blog Posts
+- `npm run preview`  
+  Serves the production build locally for verification.
 
-1. **Create MDX file** in `src/blog/posts/`
+- `npm run lint`  
+  Runs ESLint checks across the project.
 
-   ```markdown
-   ---
-   title: "Your Blog Title"
-   subtitle: "Brief description"
-   summary: "Detailed summary for SEO and previews"
-   slug: "your-blog-slug"
-   date: "2025-01-17"
-   content_strategy: "Technical tutorials and coding tips"
-   writing_style: "energetic and practical"
-   tags: '["javascript", "react", "nextjs"]'
-   image_url: "https://example.com/image.jpg"
-   source_url: "https://original-source.com"
-   ---
+## GSAP License Note
 
-   # Your Blog Content
+This project uses the standard `gsap` package, including bonus plugins now available in the core package.
 
-   Write your blog content here using Markdown and JSX!
-   ```
+- Install dependencies with `npm install`.
+- If migrating from older setups, remove `gsap-trial` from your project.
 
-2. **Generate blog data**
+Read official installation guidance here: [GSAP Installation Docs](https://gsap.com/docs/v3/Installation/)
+
+## Customization Guide
+
+You can adapt this portfolio to your own profile by updating the following areas:
+
+- **Content sections**: Edit files in `src/components/` such as `About.tsx`, `Career.tsx`, `WhatIDo.tsx`, and `Work.tsx`.
+- **Data source**: Update static values in files under `src/data/`.
+- **Styling**: Modify component styles in `src/components/styles/` and global styles in `src/index.css` / `src/App.css`.
+- **3D scene behavior**: Adjust scene logic in `src/components/Character/` and related utilities.
+- **Animations**: Tweak GSAP utilities under `src/components/utils/`.
+
+## Troubleshooting
+
+- **Blank screen in development**  
+  Check browser console for module import errors and verify all dependencies are installed.
+
+- **3D performance issues on low-end devices**  
+  Reduce scene complexity and post-processing effects in the character/scene utilities.
+
+- **GSAP plugin errors**  
+  Ensure you have the correct plugin package and license configuration for your target environment.
+
+- **TypeScript build failures**  
+  Run `npm run build` and address reported type errors before deploying.
+
+## Deployment
+
+1. Create a production build:
 
    ```bash
-   npm run generate:blogs
+   npm run build
    ```
 
-3. **Blog Features**
-   - ✅ Automatic slug generation
-   - ✅ Tag and category extraction
-   - ✅ Key takeaways extraction
-   - ✅ SEO metadata generation
-   - ✅ Image optimization
-   - ✅ Social sharing
+2. Validate locally:
 
-### Blog Structure
+   ```bash
+   npm run preview
+   ```
 
-Each blog post includes:
+3. Deploy the generated `dist/` folder to your hosting provider (for example Vercel, Netlify, or Cloudflare Pages).
 
-- **Frontmatter**: Metadata and configuration
-- **Content**: Main blog content in MDX
-- **Auto-generated**: Tags, categories, key points
-- **Navigation**: Previous/next blog links
-- **Social**: Sharing buttons and metadata
+## License
 
-## 🎨 Customization
-
-### Homepage Layouts
-
-Switch between different homepage styles:
-
-- `/` - Default homepage
-- `/home-2` through `/home-10` - Alternative layouts
-
-### Styling
-
-- **Tailwind CSS**: Utility-first CSS framework
-- **Custom Components**: Modular design system
-- **Theme Configuration**: Easy color and typography changes
-
-### Content Management
-
-- **Static Data**: JSON files in `public/fakedata/`
-- **Dynamic Content**: MDX blog posts
-- **Images**: Optimized with Next.js Image component
-
-## 🔧 Available Scripts
-
-| Command                  | Description                             |
-| ------------------------ | --------------------------------------- |
-| `npm run dev`            | Start development server with Turbopack |
-| `npm run build`          | Build production application            |
-| `npm start`              | Start production server                 |
-| `npm run lint`           | Run ESLint code analysis                |
-| `npm run generate:blogs` | Convert MDX files to JSON               |
-
-## 📦 Dependencies
-
-### Core
-
-- **Next.js 15.1.2**: React framework
-- **React 19.0.0**: UI library
-- **TailwindCSS 3.4.1**: Styling framework
-
-### Animation & Interaction
-
-- **GSAP 3.12.7**: Advanced animations
-- **WOW.js**: Scroll animations
-- **Vanilla Tilt**: 3D tilt effects
-- **Swiper**: Touch sliders
-
-### Utilities
-
-- **Gray Matter**: MDX frontmatter parsing
-- **Isotope Layout**: Filterable layouts
-- **React Intersection Observer**: Scroll detection
-- **Nice Select**: Custom select components
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Connect repository to Vercel
-2. Configure build settings:
-   - Build Command: `npm run build`
-   - Output Directory: `.next`
-3. Deploy automatically on push
-
-### Manual Deployment
-
-```bash
-npm run build
-npm start
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create `.env.local` for environment-specific settings:
-
-```env
-NEXT_PUBLIC_SITE_URL=https://devmohan.in
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
-```
-
-### Next.js Configuration
-
-Customize `next.config.mjs` for:
-
-- Image domains
-- Redirects
-- Headers
-- Performance optimizations
-
-## 📱 Browser Support
-
-- ✅ Chrome (latest)
-- ✅ Firefox (latest)
-- ✅ Safari (latest)
-- ✅ Edge (latest)
-- ✅ Mobile browsers
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Mohan Sagar**
-
-- GitHub: [@mohansagark](https://github.com/mohansagark)
-- Website: [devmohan.in](https://devmohan.in)
-
-## 🙏 Acknowledgments
-
-- [Next.js](https://nextjs.org/) for the amazing framework
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS
-- [Vercel](https://vercel.com/) for hosting and deployment
-- All open-source contributors
-
----
-
-⭐ **Star this repository if you found it helpful!**
-
-🐛 **Found a bug?** [Open an issue](https://github.com/mohansagark/next-gen-portfolio/issues)
-
-💡 **Have a suggestion?** [Start a discussion](https://github.com/mohansagark/next-gen-portfolio/discussions)
+This project is open source and available under the [MIT License](LICENSE).
