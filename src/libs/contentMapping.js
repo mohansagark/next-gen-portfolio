@@ -1,0 +1,162 @@
+// Pure canonical→presentational mapping. No JSON imports and no Next.js
+// dependencies here: plain Node must be able to import this file for tests.
+export const RAW_BASE = "https://raw.githubusercontent.com/mohansagark/portfolio-data/main";
+
+const img = (p) => (p ? `${RAW_BASE}${p}` : "");
+
+const MONTH_NAMES = {
+  "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",
+  "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec",
+};
+
+export function fmtMonth(ym) {
+  if (!ym) return "";
+  const [y, m] = ym.split("-");
+  return `${MONTH_NAMES[m] || ""} ${y}`.trim();
+}
+
+export function fmtRange(startDate, endDate, current) {
+  return `${fmtMonth(startDate)} – ${current ? "Present" : fmtMonth(endDate)}`;
+}
+
+export const slugify = (s) =>
+  (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+export function mapSkills(skills) {
+  return skills.categories.flatMap((c) =>
+    c.skills.map((s) => ({ name: s.name, img: img(s.icon), perchant: `${s.proficiency}%` }))
+  );
+}
+
+export function mapResume(experience, education, bundledResume) {
+  const expSkeleton =
+    bundledResume.find((s) => /experience/i.test(s.title)) ||
+    { title: "My Experience", iconName: "flaticon-recommendation" };
+  const eduSkeleton =
+    bundledResume.find((s) => /education/i.test(s.title)) ||
+    { title: "My Education & Certifications", iconName: "flaticon-graduation-cap" };
+
+  const expItems = experience.jobs.map((j) => ({
+    date: fmtRange(j.startDate, j.endDate, j.current),
+    title: j.role,
+    desc: j.location ? `${j.company} (${j.location})` : j.company,
+    ...(j.logo ? { logo: img(j.logo) } : {}),
+  }));
+
+  const eduItems = [
+    ...education.degrees.map((d) => ({
+      sort: d.endDate || d.startDate,
+      date: fmtRange(d.startDate, d.endDate, false),
+      title: [d.degree, d.field].filter(Boolean).join(", "),
+      desc: d.location ? `${d.institution}, ${d.location}` : d.institution,
+    })),
+    ...education.certifications.map((c) => ({
+      sort: c.issueDate,
+      date: fmtMonth(c.issueDate),
+      title: c.title,
+      desc: c.provider,
+    })),
+  ]
+    .sort((a, b) => (a.sort < b.sort ? 1 : -1))
+    .map(({ sort, ...item }) => item);
+
+  return [
+    { title: expSkeleton.title, iconName: expSkeleton.iconName, resumeItems: expItems },
+    { title: eduSkeleton.title, iconName: eduSkeleton.iconName, resumeItems: eduItems },
+  ];
+}
+
+export function mapPortfolio(projects, profile) {
+  const employee = profile
+    ? {
+        name: `${profile.firstName} ${profile.lastName}`,
+        desig: profile.headline,
+        img: img(profile.avatar),
+      }
+    : undefined;
+
+  return projects.items.map((p, i) => {
+    const image = img(p.image);
+    return {
+      id: i + 1,
+      slug: p.slug,
+      title: p.title,
+      title2: p.subtitle,
+      img: image,
+      img2: image,
+      imgLarge: image,
+      detailsImg: image,
+      desc: p.description,
+      shortDesc: p.shortDescription,
+      desc1: p.sections[0]?.body || "",
+      desc2: p.sections[1]?.body || "",
+      descItems: p.sections.slice(2).map((s) => ({ title: s.title, desc: s.body })),
+      category: p.category,
+      dataFilter: slugify(p.category),
+      tags: p.technologies,
+      githubUrl: p.githubUrl,
+      url: p.liveUrl,
+      featured: p.featured,
+      featuredDesc: p.shortDescription,
+      featuredImg: image,
+      ...(employee ? { employee } : {}),
+      statusItem: [
+        { title: "Category", desc: p.category || "—" },
+        { title: "Technology", desc: (p.technologies || []).slice(0, 3).join(", ") || "—" },
+        { title: "Status", desc: "Completed" },
+      ],
+    };
+  });
+}
+
+export function mapServices(services, bundledServices) {
+  return services.items.map((s, i) => {
+    const skel = bundledServices[i] || bundledServices[0] || {};
+    const skelProcess = skel.process || {};
+    return {
+      id: i + 1,
+      title: s.title,
+      img: img(s.image) || skel.img || "",
+      imgSm: skel.imgSm || "",
+      iconName: skel.iconName || "",
+      desc: s.description,
+      shortDesc: s.shortDescription,
+      desc1: s.details[0] || "",
+      desc2: s.details[1] || "",
+      totalProject: s.projectCount,
+      process: {
+        title: s.process.title,
+        img: skelProcess.img || "",
+        imgSm: skelProcess.imgSm || "",
+        iconName: skelProcess.iconName || "",
+        desc: s.process.description,
+        processItems: s.process.steps,
+      },
+    };
+  });
+}
+
+const SOCIAL_ICONS = {
+  facebook: "fa-brands fa-facebook-f",
+  instagram: "fa-brands fa-instagram",
+  linkedin: "fa-brands fa-linkedin-in",
+  github: "fa-brands fa-github",
+};
+
+export function mapSocials(socials) {
+  return socials.links.map((l) => ({
+    id: l.platform,
+    iconName: SOCIAL_ICONS[l.platform] || `fa-brands fa-${l.platform}`,
+    path: l.url,
+  }));
+}
+
+export function mapTestimonials(testimonials) {
+  return testimonials.items.map((t, i) => ({
+    id: i + 1,
+    authorName: t.author,
+    authorDesig: t.role,
+    img: img(t.avatar),
+    desc: t.quote,
+  }));
+}
