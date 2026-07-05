@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import FormSelect from "@/components/shared/Inputs/FormSelect";
 import { sendContactEmail } from "@/libs/sendContactEmail";
+import getProfile from "@/libs/getProfile";
 
 const Contact1 = () => {
+  const profile = getProfile();
   const form = useRef();
   const [formData, setFormData] = useState({
     first_name: "",
@@ -196,10 +198,10 @@ const Contact1 = () => {
                         Phone
                       </p>
                       <a
-                        href="tel:0123456789"
+                        href={`tel:${profile.phone.replace(/\s/g, "")}`}
                         className="text-primary-color-light dark:text-white-color text-lg lg:text-xl font-medium hover:text-primary-color"
                       >
-                        +91 9790427138
+                        {profile.phone}
                       </a>
                     </div>
                   </li>
@@ -215,10 +217,10 @@ const Contact1 = () => {
                         Email
                       </p>
                       <a
-                        href="mailto:contact@devmohan.in"
+                        href={`mailto:${profile.email}`}
                         className="text-primary-color-light dark:text-white-color text-lg lg:text-xl font-medium hover:text-primary-color"
                       >
-                        contact@devmohan.in
+                        {profile.email}
                       </a>
                     </div>
                   </li>
@@ -237,8 +239,7 @@ const Contact1 = () => {
                         href="#"
                         className="text-primary-color-light dark:text-white-color text-lg lg:text-xl font-medium hover:text-primary-color"
                       >
-                        Hyderabad, Telangana, <br />
-                        India
+                        {profile.location}
                       </a>
                     </div>
                   </li>
