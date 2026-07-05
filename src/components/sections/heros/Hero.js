@@ -2,8 +2,10 @@ import ButtonSeondary from "@/components/shared/buttons/ButtonSeondary";
 import FunFact from "@/components/shared/fun-fact/FunFact";
 import Socials from "@/components/shared/socials/Socials";
 import Image from "next/image";
+import getProfile from "@/libs/getProfile";
 
 const Hero = () => {
+  const profile = getProfile();
   return (
     <section className="hero-section relative pt-130px lg:pt-40 xl:pt-200px pb-10 md:pb-30px lg:pb-50px after:absolute after:top-0 after:right-0 after:w-322px after:h-308px after:blur-[150px] after:rounded-50% after:bg-gradient-circle after:-z-1 after:-mt-5% after:-mr-5% overflow-hidden">
       {/* <!-- intro tex --> */}
@@ -18,11 +20,10 @@ const Hero = () => {
         <div className="hidded md:grid md:grid-cols-2 md:items-center gap-30px">
           <div>
             <h4 className="text-seondary-color dark:text-body-color text-size-22 md:text-size-25 lg:text-4xl lg:leading-1.5 font-bold mb-1.5 xl:mb-10px">
-              I am Mohan Sagar
+              I am {profile.firstName}
             </h4>
             <h1 className="text-size-35 md:text-size-38 lg:text-size-50 xl:text-6xl 2xl:text-size-65 bg-gradient-text-light dark:bg-gradient-text bg-clip-text xl:leading-1.2 text-transparent mb-15px">
-              Next-Level Web <br />
-              Developer.
+              {profile.headline}.
             </h1>
             <div className="flex md:hidden justify-center items-center my-30px">
               <Image
@@ -34,13 +35,12 @@ const Hero = () => {
               />
             </div>
             <p className="text-xl leading-1.5 text-primary-color-light dark:text-body-color max-w-540px">
-              I break down complex user experinece problems to create integritiy
-              focussed solutions that connect billions of people
+              {profile.bio}
             </p>
             {/* <!-- action and social --> */}
             <div className="flex items-center gap-30px lg:gap-25px mt-5 flex-wrap lg:flex-nowrap md:mt-30px lg:mt-50px">
               <div>
-                <ButtonSeondary url="resume.pdf">
+                <ButtonSeondary url={profile.resumeUrl || "resume.pdf"}>
                   Download CV{" "}
                   <i className="flaticon-download ml-0.5 text-size-17"></i>
                 </ButtonSeondary>
