@@ -1,6 +1,15 @@
 // Pure canonical→presentational mapping. No JSON imports and no Next.js
 // dependencies here: plain Node must be able to import this file for tests.
 export const RAW_BASE = "https://raw.githubusercontent.com/mohansagark/portfolio-data/main";
+// Uploaded files (e.g. the resume PDF) are served by the admin site's Vercel
+// deployment, which serves the portfolio-data repo statically with proper
+// content types (GitHub raw would force a download).
+export const FILES_BASE = "https://admin.devmohan.in";
+
+// Repo-relative file paths (from the admin's file-upload widget) resolve to
+// the admin file host; absolute URLs pass through.
+export const resolveFileUrl = (p) =>
+  p && p.startsWith("/") ? `${FILES_BASE}${p}` : p || "";
 
 const img = (p) => (p ? `${RAW_BASE}${p}` : "");
 

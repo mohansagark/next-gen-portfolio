@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   RAW_BASE,
+  resolveFileUrl,
   mapSkills,
   mapResume,
   mapPortfolio,
@@ -54,6 +55,11 @@ export async function fetchAllContent() {
   if (canon.services) bundle.services = mapServices(canon.services, bundled("services"));
   if (canon.socials) bundle.socials = mapSocials(canon.socials);
   if (canon.testimonials) bundle.testimonials = mapTestimonials(canon.testimonials);
-  if (canon.profile) bundle.profile = canon.profile;
+  if (canon.profile) {
+    bundle.profile = {
+      ...canon.profile,
+      resumeUrl: resolveFileUrl(canon.profile.resumeUrl),
+    };
+  }
   return bundle;
 }
