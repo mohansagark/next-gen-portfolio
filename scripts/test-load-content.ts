@@ -38,6 +38,11 @@ assert.equal(
   "/Mohan_Sagar_Resume.pdf",
   "empty canonical resumeUrl falls back to bundled default"
 );
+assert.equal(
+  mapProfile({ firstName: "", lastName: "", headline: "", bio: "", avatar: "", email: "", phone: "", location: "", resumeUrl: "/files/resume.pdf" }).resumeUrl,
+  "https://admin.devmohan.in/files/resume.pdf",
+  "repo-relative resume path resolves to admin site file host"
+);
 assert.deepEqual(mapSocials({ links: [{ platform: "github", url: "https://g" }] }), [{ platform: "github", url: "https://g" }]);
 
 // education

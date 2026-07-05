@@ -4,6 +4,10 @@
 import { defaultContent, setContent, type Job, type Project, type Social, type SiteContent } from "./content";
 
 export const RAW_BASE = "https://raw.githubusercontent.com/mohansagark/portfolio-data/main";
+// Uploaded files (e.g. the resume PDF) are served by the admin site's Vercel
+// deployment, which serves the portfolio-data repo statically with proper
+// content types (GitHub raw would force a download).
+export const FILES_BASE = "https://admin.devmohan.in";
 const TIMEOUT_MS = 3000;
 
 interface CanonJob {
@@ -68,10 +72,15 @@ export function mapProjects(proj: { items: CanonProject[] }): Project[] {
 }
 
 export function mapProfile(prof: CanonProfile): { bio: string; email: string; resumeUrl: string } {
+  const resumeUrl = prof.resumeUrl
+    ? prof.resumeUrl.startsWith("/")
+      ? `${FILES_BASE}${prof.resumeUrl}`
+      : prof.resumeUrl
+    : defaultContent.resumeUrl;
   return {
     bio: prof.bio,
     email: prof.email || defaultContent.email,
-    resumeUrl: prof.resumeUrl || defaultContent.resumeUrl,
+    resumeUrl,
   };
 }
 
