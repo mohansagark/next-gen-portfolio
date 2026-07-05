@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  mapSkills, mapResume, mapPortfolio, mapServices, mapSocials, mapTestimonials, RAW_BASE,
+  mapSkills, mapResume, mapPortfolio, mapServices, mapSocials, mapTestimonials, RAW_BASE, resolveFileUrl,
 } from '../src/libs/contentMapping.js';
 
 const bundledResume = JSON.parse(readFileSync('public/fakedata/resume.json', 'utf8'));
@@ -73,5 +73,11 @@ assert.deepEqual(socials[1], { id: 'youtube', iconName: 'fa-brands fa-youtube', 
 // testimonials
 const t = mapTestimonials({ items: [{ author: 'A', role: 'R', quote: 'Q', avatar: '/images/testimonials/a.jpg' }] })[0];
 assert.deepEqual(t, { id: 1, authorName: 'A', authorDesig: 'R', img: `${RAW_BASE}/images/testimonials/a.jpg`, desc: 'Q' });
+
+// file-url resolution
+import assert2 from 'node:assert/strict';
+assert2.equal(resolveFileUrl('/files/resume.pdf'), 'https://admin.devmohan.in/files/resume.pdf');
+assert2.equal(resolveFileUrl('https://x.y/r.pdf'), 'https://x.y/r.pdf');
+assert2.equal(resolveFileUrl(''), '');
 
 console.log('content mapping OK');
