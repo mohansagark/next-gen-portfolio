@@ -10,7 +10,7 @@ const LABELS: Record<string, string> = {
 };
 
 const Contact = () => {
-  const { socials } = getContent();
+  const { socials, education } = getContent();
   const linkedin = socials.find((s) => s.platform === "linkedin");
   const linkedinHandle =
     linkedin?.url.split("/in/")[1]?.replace(/\/$/, "") || "mohansagark";
@@ -32,12 +32,11 @@ const Contact = () => {
               </a>
             </p>
             <h4>Education</h4>
-            <p>
-              B.Tech, Mechanical Engineering — Vellore Institute of Technology,
-              2012–2016
-            </p>
+            {education.degrees.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
             <h4>Certifications</h4>
-            <p>React: Software Architecture · AMD: AI Developer</p>
+            <p>{education.certifications.join(" · ")}</p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>

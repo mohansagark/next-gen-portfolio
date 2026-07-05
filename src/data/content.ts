@@ -25,6 +25,8 @@ export interface SiteContent {
   bio: string;
   email: string;
   socials: Social[];
+  education: { degrees: string[]; certifications: string[] };
+  resumeUrl: string;
 }
 
 export const defaultContent: SiteContent = {
@@ -123,12 +125,19 @@ export const defaultContent: SiteContent = {
     },
   ],
   bio: "I'm a Senior Software Engineer with 9+ years building AI-powered products and high-performance frontend systems at scale—specializing in LLM integrations, agentic workflows, and real-time interfaces. At Invesco I led IVYGPT, an internal AI platform used by 8,000+ users that cut report analysis from 30 days to 30 minutes. At Reliance Jio I led 10 engineers on platforms serving 5M+ users, improving performance ~90%. Now at ServiceNow I build agentic AI platforms with React, Next.js, Python and Node.",
-  email: "mohansgr3@gmail.com",
+  email: "contact@devmohan.in",
   socials: [
     { platform: "github", url: "https://github.com/mohansagark" },
     { platform: "linkedin", url: "https://www.linkedin.com/in/mohansagark/" },
     { platform: "instagram", url: "https://www.instagram.com/mohansagark" },
   ],
+  education: {
+    degrees: [
+      "B.Tech, Mechanical Engineering — Vellore Institute of Technology, 2012–2016",
+    ],
+    certifications: ["React: Software Architecture", "AMD: AI Developer"],
+  },
+  resumeUrl: "/Mohan_Sagar_Resume.pdf",
 };
 
 let content: SiteContent = defaultContent;

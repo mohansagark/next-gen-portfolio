@@ -25,6 +25,16 @@ interface CanonProfile {
 interface CanonSocials {
   links: { platform: string; url: string }[];
 }
+interface CanonEducation {
+  degrees: {
+    institution: string; degree: string; field: string;
+    startDate: string; endDate: string; grade: string; location: string; logo: string;
+  }[];
+  certifications: {
+    title: string; provider: string; issueDate: string; expiryDate: string;
+    credentialUrl: string; badge: string;
+  }[];
+}
 
 export function period(startDate: string, endDate: string, current: boolean): string {
   if (current) return "NOW";
@@ -57,8 +67,23 @@ export function mapProjects(proj: { items: CanonProject[] }): Project[] {
   }));
 }
 
-export function mapProfile(prof: CanonProfile): { bio: string; email: string } {
-  return { bio: prof.bio, email: prof.email };
+export function mapProfile(prof: CanonProfile): { bio: string; email: string; resumeUrl: string } {
+  return {
+    bio: prof.bio,
+    email: prof.email || defaultContent.email,
+    resumeUrl: prof.resumeUrl || defaultContent.resumeUrl,
+  };
+}
+
+export function mapEducation(edu: CanonEducation): { degrees: string[]; certifications: string[] } {
+  return {
+    degrees: edu.degrees.map((d) => {
+      const title = [d.degree, d.field].filter(Boolean).join(", ");
+      const years = `${d.startDate.slice(0, 4)}–${d.endDate.slice(0, 4)}`;
+      return `${title} — ${d.institution}, ${years}`;
+    }),
+    certifications: edu.certifications.map((c) => c.title),
+  };
 }
 
 export function mapSocials(soc: CanonSocials): Social[] {
@@ -74,21 +99,38 @@ export async function loadContent(): Promise<void> {
     return res.json();
   };
   try {
-    const [exp, proj, prof, soc] = await Promise.allSettled([
+    const [exp, proj, prof, soc, edu] = await Promise.allSettled([
       get("experience"),
       get("projects"),
       get("profile"),
       get("socials"),
+      get("education"),
     ]);
     const partial: Partial<SiteContent> = {};
-    if (exp.status === "fulfilled") partial.jobs = mapJobs(exp.value as { jobs: CanonJob[] });
-    if (proj.status === "fulfilled") partial.projects = mapProjects(proj.value as { items: CanonProject[] });
-    if (prof.status === "fulfilled") {
-      const p = mapProfile(prof.value as CanonProfile);
-      partial.bio = p.bio;
-      partial.email = p.email;
-    }
-    if (soc.status === "fulfilled") partial.socials = mapSocials(soc.value as CanonSocials);
+    // Each mapping is guarded so one malformed payload can't discard the
+    // other files' updates — that key simply keeps its bundled default.
+    const attempt = (fn: () => void) => {
+      try {
+        fn();
+      } catch {
+        /* keep default for this key */
+      }
+    };
+    if (exp.status === "fulfilled")
+      attempt(() => (partial.jobs = mapJobs(exp.value as { jobs: CanonJob[] })));
+    if (proj.status === "fulfilled")
+      attempt(() => (partial.projects = mapProjects(proj.value as { items: CanonProject[] })));
+    if (prof.status === "fulfilled")
+      attempt(() => {
+        const p = mapProfile(prof.value as CanonProfile);
+        partial.bio = p.bio;
+        partial.email = p.email;
+        partial.resumeUrl = p.resumeUrl;
+      });
+    if (soc.status === "fulfilled")
+      attempt(() => (partial.socials = mapSocials(soc.value as CanonSocials)));
+    if (edu.status === "fulfilled")
+      attempt(() => (partial.education = mapEducation(edu.value as CanonEducation)));
     setContent(partial);
   } catch {
     // allSettled never rejects; this guards fetch-setup errors. Defaults stand.
