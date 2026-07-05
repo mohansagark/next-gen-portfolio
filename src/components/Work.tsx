@@ -2,53 +2,10 @@ import { useState, useCallback } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
-
-const projects = [
-  {
-    title: "AI Stock Analysis Bot",
-    category: "Automated Stock Market Intelligence",
-    tools: "Python, OpenAI GPT, GitHub Actions, Financial APIs",
-    image: "/images/stock-bot.png",
-    link: "https://github.com/mohansagark/stock-bot",
-  },
-  {
-    title: "Daily Dev Digest",
-    category: "AI-Curated Developer Newsletter",
-    tools: "Python, Web Scraping, OpenAI, GitHub Actions",
-    image: "/images/dev-digest.png",
-    link: "https://github.com/mohansagark/daily-dev-digest",
-  },
-  {
-    title: "Portfolio Backend API",
-    category: "Authenticated Content Management System",
-    tools: "Node.js, Express, JWT, Database",
-    image: "/images/backend-service.png",
-    link: "https://github.com/mohansagark/next-gen-portfolio-api",
-  },
-  {
-    title: "Modern Portfolio Website",
-    category: "Next.js Portfolio with Theme System",
-    tools: "Next.js, React, TailwindCSS, Theme System",
-    image: "/images/next-gen-portfolio.png",
-    link: "https://github.com/mohansagark/next-gen-portfolio",
-  },
-  {
-    title: "Smart Expense Tracker",
-    category: "AI-Powered Mobile Expense App",
-    tools: "Android Studio, Python, OpenAI, Mobile Development",
-    image: "/images/expense-tracker.png",
-    link: "https://github.com/mohansagark/ai-expense-tracker",
-  },
-  {
-    title: "React Mini-Games",
-    category: "Interactive Browser Games Collection",
-    tools: "React, JavaScript, Game Development, Interactive UI",
-    image: "/images/react-mini-games.png",
-    link: "https://github.com/mohansagark/bitblaze",
-  },
-];
+import { getContent } from "../data/content";
 
 const Work = () => {
+  const projects = getContent().projects;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 

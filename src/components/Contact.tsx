@@ -1,7 +1,19 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import "./styles/Contact.css";
+import { getContent } from "../data/content";
+
+const LABELS: Record<string, string> = {
+  github: "GitHub",
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  facebook: "Facebook",
+};
 
 const Contact = () => {
+  const { socials } = getContent();
+  const linkedin = socials.find((s) => s.platform === "linkedin");
+  const linkedinHandle =
+    linkedin?.url.split("/in/")[1]?.replace(/\/$/, "") || "mohansagark";
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
@@ -11,12 +23,12 @@ const Contact = () => {
             <h4>Connect</h4>
             <p>
               <a
-                href="https://www.linkedin.com/in/mohansagark/"
+                href={linkedin?.url || "https://www.linkedin.com/in/mohansagark/"}
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="disable"
               >
-                LinkedIn — mohansagark
+                LinkedIn — {linkedinHandle}
               </a>
             </p>
             <h4>Education</h4>
@@ -29,33 +41,18 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h4>Social</h4>
-            <a
-              href="https://github.com/mohansagark"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              GitHub <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/mohansagark/"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              LinkedIn <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com/mohansagark"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Instagram <MdArrowOutward />
-            </a>
+            {socials.map((s) => (
+              <a
+                key={s.platform}
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
+                data-cursor="disable"
+                className="contact-social"
+              >
+                {LABELS[s.platform] ?? s.platform} <MdArrowOutward />
+              </a>
+            ))}
             <a
               href="https://devmohan.in"
               target="_blank"

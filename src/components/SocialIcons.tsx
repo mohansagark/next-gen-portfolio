@@ -1,10 +1,20 @@
-import { FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
-import { useEffect } from "react";
+import { useEffect, type ReactElement } from "react";
 import HoverLinks from "./HoverLinks";
+import { getContent } from "../data/content";
+
+const ICONS: Record<string, ReactElement> = {
+  github: <FaGithub />,
+  linkedin: <FaLinkedinIn />,
+  instagram: <FaInstagram />,
+  facebook: <FaFacebookF />,
+};
 
 const SocialIcons = () => {
+  const socials = getContent().socials.filter((s) => ICONS[s.platform]);
+
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
 
@@ -54,33 +64,13 @@ const SocialIcons = () => {
   return (
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
-        <span>
-          <a
-            href="https://github.com/mohansagark"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub />
-          </a>
-        </span>
-        <span>
-          <a
-            href="https://www.linkedin.com/in/mohansagark/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaLinkedinIn />
-          </a>
-        </span>
-        <span>
-          <a
-            href="https://www.instagram.com/mohansagark"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaInstagram />
-          </a>
-        </span>
+        {socials.map((s) => (
+          <span key={s.platform}>
+            <a href={s.url} target="_blank" rel="noreferrer">
+              {ICONS[s.platform]}
+            </a>
+          </span>
+        ))}
       </div>
       <a
         className="resume-button"
