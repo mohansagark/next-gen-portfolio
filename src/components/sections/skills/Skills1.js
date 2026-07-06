@@ -118,7 +118,7 @@ const Skills1 = ({ type, subTitle, isNotDesc }) => {
                             <div className="mb-4 w-16 h-16 flex justify-center items-center">
                               <Image
                                 className="grayscale-[90%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110 w-16 h-16 object-contain"
-                                src={img}
+                                src={img || `/img/icons/skills-${(idx % 12) + 1}.svg`}
                                 alt={name}
                                 width={64}
                                 height={64}

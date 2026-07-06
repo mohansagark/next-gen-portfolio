@@ -29,7 +29,7 @@ const TestimonialsCard = ({ testimonial }) => {
         <div className="max-w-120px w-2/5">
           <Image
             className="rounded-5px rounded-bl-125px w-full"
-            src={img}
+            src={img || "/img/testimonials/1.png"}
             alt=""
             width={500}
             height={500}
