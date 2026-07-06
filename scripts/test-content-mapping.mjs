@@ -14,7 +14,9 @@ assert.deepEqual(skills, [{ name: 'Next.js', img: `${RAW_BASE}/images/skills/nex
 // resume
 const resume = mapResume(
   { jobs: [{ company: 'ServiceNow', role: 'Senior Software Engineer', location: '', startDate: '2025-08', endDate: '', current: true, description: '', highlights: [], technologies: [], logo: '/images/experience/servicenow.jpeg', companyUrl: '' }] },
-  { degrees: [{ institution: 'VIT University', degree: 'B.Tech', field: 'Mechanical Engineering', startDate: '2012-08', endDate: '2016-05', grade: '86.2%', location: 'Tamil Nadu', logo: '' }],
+  { degrees: [
+      { institution: 'Vellore Institute of Technology', degree: 'B.Tech', field: 'Mechanical Engineering', startDate: '2012-08', endDate: '2016-05', grade: '86.2%', location: 'Tamil Nadu', logo: '' },
+    ],
     certifications: [{ title: 'React Native', provider: 'LinkedIn', issueDate: '2024-03', expiryDate: '2030-03', credentialUrl: '', badge: '' }] },
   { items: [{ title: 'Engineering Excellence Award', description: 'Awarded at Invesco', year: '2024' }] },
   bundledResume
@@ -31,10 +33,11 @@ assert.equal(resume[0].iconName, bundledResume[0].iconName);
 assert.equal(resume[0].resumeItems[0].date, 'Aug 2025 – Present');
 assert.equal(resume[0].resumeItems[0].desc, 'ServiceNow');
 assert.equal(resume[0].resumeItems[0].logo, `${RAW_BASE}/images/experience/servicenow.jpeg`);
-// certification (2024) sorts before degree (2016)
-assert.equal(resume[1].resumeItems[0].title, 'React Native');
-assert.equal(resume[1].resumeItems[1].title, 'B.Tech, Mechanical Engineering');
-assert.equal(resume[1].resumeItems[1].desc, 'VIT University, Tamil Nadu');
+// certifications are excluded from the Education section — that split is
+// decided by the admin CMS's separate Degrees/Certifications fields, not here.
+assert.equal(resume[1].resumeItems.length, 1);
+assert.equal(resume[1].resumeItems[0].title, 'B.Tech, Mechanical Engineering');
+assert.equal(resume[1].resumeItems[0].desc, 'Vellore Institute of Technology, Tamil Nadu');
 
 // portfolio
 const portfolio = mapPortfolio(

@@ -55,20 +55,16 @@ export function mapResume(experience, education, achievements, bundledResume) {
     ...(j.logo ? { logo: img(j.logo) } : {}),
   }));
 
-  const eduItems = [
-    ...education.degrees.map((d) => ({
+  // Education vs. certifications is decided by the admin CMS at data-entry
+  // time (config.yml has two separate list fields) — trust the split as
+  // scraped rather than re-filtering by institution name here.
+  const eduItems = education.degrees
+    .map((d) => ({
       sort: d.endDate || d.startDate,
       date: fmtRange(d.startDate, d.endDate, false),
       title: [d.degree, d.field].filter(Boolean).join(", "),
       desc: d.location ? `${d.institution}, ${d.location}` : d.institution,
-    })),
-    ...education.certifications.map((c) => ({
-      sort: c.issueDate,
-      date: fmtMonth(c.issueDate),
-      title: c.title,
-      desc: c.provider,
-    })),
-  ]
+    }))
     .sort((a, b) => (a.sort < b.sort ? 1 : -1))
     .map(({ sort, ...item }) => item);
 

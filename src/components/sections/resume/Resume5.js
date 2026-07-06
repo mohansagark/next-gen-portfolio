@@ -90,13 +90,17 @@ const Resume5 = ({ type, title }) => {
                             <img
                               src={
                                 item.logo ||
-                                `/img/icons/${
-                                  section.title.includes("Experience")
-                                    ? "h4-work"
+                                (() => {
+                                  // Each icon set has a fixed number of files; wrap the
+                                  // index so a long list (e.g. many certifications)
+                                  // never requests a file that doesn't exist.
+                                  const [name, count] = section.title.includes("Experience")
+                                    ? ["h4-work", 9]
                                     : section.title.includes("Education")
-                                    ? "h5-resume"
-                                    : "h4-award"
-                                }-${i + 1}.png`
+                                    ? ["h5-resume", 4]
+                                    : ["h4-award", 5];
+                                  return `/img/icons/${name}-${(i % count) + 1}.png`;
+                                })()
                               }
                               alt="icon"
                               className="w-full h-full object-contain"
