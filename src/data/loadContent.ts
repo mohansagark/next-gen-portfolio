@@ -84,13 +84,17 @@ export function mapProfile(prof: CanonProfile): { bio: string; email: string; re
   };
 }
 
+// The 3D portfolio shows only the VIT degree for now — other education
+// entries (bootcamps, school) are noise for this art-directed surface.
 export function mapEducation(edu: CanonEducation): { degrees: string[]; certifications: string[] } {
   return {
-    degrees: edu.degrees.map((d) => {
-      const title = [d.degree, d.field].filter(Boolean).join(", ");
-      const years = `${d.startDate.slice(0, 4)}–${d.endDate.slice(0, 4)}`;
-      return `${title} — ${d.institution}, ${years}`;
-    }),
+    degrees: edu.degrees
+      .filter((d) => d.institution.includes("Vellore Institute of Technology"))
+      .map((d) => {
+        const title = [d.degree, d.field].filter(Boolean).join(", ");
+        const years = `${d.startDate.slice(0, 4)}–${d.endDate.slice(0, 4)}`;
+        return `${title} — ${d.institution}, ${years}`;
+      }),
     certifications: edu.certifications.map((c) => c.title),
   };
 }

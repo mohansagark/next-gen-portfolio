@@ -35,8 +35,7 @@ const Contact = () => {
             {education.degrees.map((line) => (
               <p key={line}>{line}</p>
             ))}
-            <h4>Certifications</h4>
-            <p>{education.certifications.join(" · ")}</p>
+            {/* Certifications hidden for now — pending a dedicated view (see task notes). */}
           </div>
           <div className="contact-box">
             <h4>Social</h4>
