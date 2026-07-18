@@ -2669,3 +2669,96 @@ html {
 }
 
 /* !END: Theme cursor CSS */
+
+/* ==========================================================================
+   Blog post body — code blocks + highlight.js (github-dark) syntax colors.
+   Post HTML is precompiled with rehype-highlight, which emits `hljs`/`hljs-*`
+   classes; these rules give code a distinct box and colored tokens.
+   ========================================================================== */
+.prose pre {
+  background: #0d1117;
+  color: #e6edf3;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #30363d;
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+}
+/* inline code (not inside a pre) */
+.prose :not(pre) > code {
+  background: rgba(110, 118, 129, 0.22);
+  color: inherit;
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+/* strip prose's default backtick pseudo-elements around inline code */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
+/* the global `a { display: inline-block }` breaks inline links inside prose */
+.prose a {
+  display: inline;
+}
+
+/* highlight.js github-dark token palette */
+.hljs-comment,
+.hljs-quote {
+  color: #8b949e;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag {
+  color: #ff7b72;
+}
+.hljs-string,
+.hljs-meta .hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #a5d6ff;
+}
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attr,
+.hljs-attribute,
+.hljs-variable,
+.hljs-template-variable {
+  color: #79c0ff;
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.function_,
+.hljs-section {
+  color: #d2a8ff;
+}
+.hljs-built_in,
+.hljs-type,
+.hljs-name {
+  color: #ffa657;
+}
+.hljs-tag {
+  color: #7ee787;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+.hljs-deletion {
+  color: #ffdcd7;
+}
