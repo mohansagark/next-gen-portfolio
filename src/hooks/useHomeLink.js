@@ -26,6 +26,9 @@ export default function useHomeLink() {
 
   return (path = "/") => {
     if (!base) return path;
+    // Absolute URLs (e.g. the Blog item -> https://blog.devmohan.in) are already
+    // where they should point — never prefix them with the main-site host.
+    if (/^https?:\/\//i.test(path)) return path;
     if (path === "/" || path === "#" || path === "") return base;
     return path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
   };

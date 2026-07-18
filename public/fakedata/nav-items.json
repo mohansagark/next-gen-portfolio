@@ -25,6 +25,11 @@
     "path2": "/#testimonials"
   },
   {
+    "name": "Blog",
+    "path": "https://blog.devmohan.in",
+    "path2": "https://blog.devmohan.in"
+  },
+  {
     "name": "Contact",
     "path": "#contact",
     "path2": "/#contact"
