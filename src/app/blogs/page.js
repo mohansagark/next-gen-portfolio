@@ -6,6 +6,9 @@ export const metadata = {
   title: "Blog - Dev Mohan",
   description:
     "Developer blog on frontend, backend, cloud, AI, and engineering practices.",
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_BLOG_URL || "https://blog.devmohan.in",
+  },
 };
 
 export default function Blogs() {

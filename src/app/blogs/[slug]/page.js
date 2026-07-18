@@ -5,11 +5,23 @@ import { notFound } from "next/navigation";
 
 const blogs = getBlogs();
 
-export const metadata = {
-  title: "Blog Details - Dev Mohan - Personal Portfolio React NextJs Template",
-  description:
-    "Blog Details - Dev Mohan - Personal Portfolio React NextJs Template",
-};
+const BLOG_BASE = process.env.NEXT_PUBLIC_BLOG_URL || "https://blog.devmohan.in";
+
+export async function generateMetadata(context) {
+  const { slug } = await context.params;
+  const blog = blogs?.find((b) => b.id === slug);
+  return {
+    title: blog?.title ? `${blog.title} — Dev Mohan` : "Blog — Dev Mohan",
+    description: blog?.summary || "Developer blog by Mohan Sagar.",
+    alternates: { canonical: `${BLOG_BASE}/${slug}` },
+    openGraph: {
+      title: blog?.title,
+      description: blog?.summary,
+      url: `${BLOG_BASE}/${slug}`,
+      type: "article",
+    },
+  };
+}
 
 export default async function BlogDetails(context) {
   const { slug } = await context.params;
