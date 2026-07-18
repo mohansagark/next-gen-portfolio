@@ -38,7 +38,10 @@ const filterItems = (items, collection, filterItem, isProducts) => {
 
     case "search":
       if (!filterItem) return [];
-      const searchText = new RegExp(makeText(filterItem), "i");
+      // Escape regex metacharacters — live search feeds partial input (e.g. a
+      // lone "(" or "+") straight in, and an unescaped one would throw.
+      const escaped = makeText(filterItem).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const searchText = new RegExp(escaped, "i");
       return items?.filter(
         ({ title, category }) =>
           searchText.test(title) || searchText.test(category)

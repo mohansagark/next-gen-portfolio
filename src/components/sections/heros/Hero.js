@@ -3,9 +3,17 @@ import FunFact from "@/components/shared/fun-fact/FunFact";
 import Socials from "@/components/shared/socials/Socials";
 import Image from "next/image";
 import getProfile from "@/libs/getProfile";
+import { RAW_BASE } from "@/libs/contentMapping";
 
 const Hero = () => {
   const profile = getProfile();
+  // Use the CMS-managed headshot (admin.devmohan.in -> portfolio-data), falling
+  // back to the bundled image only when no avatar is set.
+  const avatarSrc = profile.avatar
+    ? profile.avatar.startsWith("http")
+      ? profile.avatar
+      : `${RAW_BASE}${profile.avatar}`
+    : "/img/hero/me.png";
   return (
     <section className="hero-section relative pt-130px lg:pt-40 xl:pt-200px pb-10 md:pb-30px lg:pb-50px after:absolute after:top-0 after:right-0 after:w-322px after:h-308px after:blur-[150px] after:rounded-50% after:bg-gradient-circle after:-z-1 after:-mt-5% after:-mr-5% overflow-hidden">
       {/* <!-- intro tex --> */}
@@ -27,7 +35,7 @@ const Hero = () => {
             </h1>
             <div className="flex md:hidden justify-center items-center my-30px">
               <Image
-                src="/img/hero/me.png"
+                src={avatarSrc}
                 width={437}
                 height={475}
                 alt="banner image"
@@ -51,7 +59,7 @@ const Hero = () => {
           </div>
           <div className="hidden md:flex md:justify-center md:items-center relative after:absolute after:bottom-0 after:left-0 after:w-220px after:h-220px after:blur-[150px] after:rounded-50% after:bg-gradient-circle after:-z-1 after:-mt-5% after:-mr-5%">
             <Image
-              src="/img/hero/me.png"
+              src={avatarSrc}
               width={437}
               height={475}
               alt="banner image"

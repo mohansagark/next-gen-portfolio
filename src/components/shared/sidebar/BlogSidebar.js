@@ -1,22 +1,45 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useRef, useState } from "react";
 import BlogCategoriesWidget from "./widgets/BlogCategoriesWidget";
 import BlogTagsWidget from "./widgets/BlogTagsWidget";
 import RecentBlogWidget from "./widgets/RecentBlogWidget";
 import makePath from "@/libs/makePath";
+import makeText from "@/libs/makeText";
 
 const BlogSidebar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
+  // Seed the box from the URL so a shared/reloaded ?search= link stays in sync.
+  const initialSearch = useSearchParams()?.get("search");
+  const [searchTerm, setSearchTerm] = useState(
+    initialSearch ? makeText(initialSearch) : ""
+  );
+  const debounceRef = useRef(null);
+
+  // Live search: the /blogs list filters purely client-side off the ?search=
+  // query param, so we just keep the URL in step with the box as the user
+  // types (and as they delete). replace() keeps history from filling up with a
+  // stop per keystroke.
+  const applySearch = (value) => {
+    router.replace(
+      value.trim() ? `/blogs?search=${makePath(value)}` : "/blogs"
+    );
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => applySearch(value), 250);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchTerm.trim()) {
-      router.push(`/blogs?search=${makePath(searchTerm)}`);
-    }
+    // Submitting applies immediately (skip the debounce).
+    clearTimeout(debounceRef.current);
+    applySearch(searchTerm);
   };
 
   return (
@@ -34,7 +57,7 @@ const BlogSidebar = () => {
                 <input
                   type="search"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleChange}
                   placeholder="Search blogs & categories..."
                   className="text-white-color w-full pl-5 py-4 border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-l-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
                 />
