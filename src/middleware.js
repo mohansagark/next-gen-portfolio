@@ -10,12 +10,17 @@ export function middleware(request) {
   const { pathname } = request.nextUrl;
 
   if (host === BLOG_HOST) {
-    // Internal links (and the /blogs pages) already carry the /blogs prefix —
-    // serve them as-is so navigation inside the app keeps working.
+    // The /blogs prefix is internal-only on the subdomain. Bounce any /blogs or
+    // /blogs/<slug> request (incl. the app's own links) to the clean short URL,
+    // so there's a single canonical form (no /blogs duplicate).
+    //   blog.devmohan.in/blogs         -> blog.devmohan.in/
+    //   blog.devmohan.in/blogs/<slug>  -> blog.devmohan.in/<slug>
     if (pathname === "/blogs" || pathname.startsWith("/blogs/")) {
-      return NextResponse.next();
+      const url = request.nextUrl.clone();
+      url.pathname = pathname.replace(/^\/blogs/, "") || "/";
+      return NextResponse.redirect(url, 308);
     }
-    // Map the subdomain root + short post URLs onto the real /blogs routes:
+    // Serve the clean short URLs by rewriting onto the real /blogs routes:
     //   blog.devmohan.in/          -> /blogs
     //   blog.devmohan.in/<slug>    -> /blogs/<slug>
     const url = request.nextUrl.clone();
