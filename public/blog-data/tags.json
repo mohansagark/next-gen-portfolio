@@ -127,9 +127,33 @@
     {
       "tag": "theory",
       "count": 3
+    },
+    {
+      "tag": "ai",
+      "count": 1
+    },
+    {
+      "tag": "cloudflare",
+      "count": 1
+    },
+    {
+      "tag": "cost-efficiency",
+      "count": 1
+    },
+    {
+      "tag": "user-experience",
+      "count": 1
+    },
+    {
+      "tag": "video-pipeline",
+      "count": 1
     }
   ],
   "categories": [
+    {
+      "category": "ai",
+      "count": 1
+    },
     {
       "category": "angular",
       "count": 2
