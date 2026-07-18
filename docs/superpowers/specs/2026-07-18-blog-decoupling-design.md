@@ -124,16 +124,31 @@ MDX modules:
 
 ## Sub-Projects (each its own implementation plan)
 
-1. **Create `portfolio-blog` (private) + migrate** the 236 `.mdx` from `master:src/blog/posts/`.
-2. **`portfolio-blog` CI:** validate frontmatter/body; precompile md→sanitized HTML + syntax
-   highlight; emit `posts.json` / `search-index.json` / `tags.json` (fail-soft on bad files).
-3. **Repoint pipeline:** clone `portfolio-blog` (not `next-gen-portfolio`); cron 1×/day;
-   `MAX_TOTAL=1`; best-candidate selection; keep the deploy-hook trigger.
-4. **AI refine step:** Bedrock Converse (Sonnet 5, configurable) + rewrite prompt + source
-   attribution; AWS OIDC auth in Actions; swap `openai` dep for `boto3`.
-5. **`next-gen-portfolio` build + reads:** authenticated pull of `portfolio-blog`; consume index
-   artifact; render precompiled HTML via `prose` inside site layout; client-side search/tag/
-   pagination; SSG; remove the 236 committed `.mdx`.
+1. **DONE (2026-07-18).** Created private `github.com/mohansagark/portfolio-blog`; migrated all
+   236 `.mdx` into `posts/` (byte-verified). README + `.gitignore`.
+2. **DONE (2026-07-18).** `portfolio-blog` CI: `build-index.mjs` (fail-soft validation — quarantine
+   bad posts, fail only if zero valid; precompile md→**sanitized** HTML + highlight) emits
+   `generated/{blogs.json,search-index.json,tags.json}`; `verify-safety.mjs` (tree-based no-exec-node
+   assertion) as a CI gate; GitHub Actions rebuilds + commits artifacts on content/tooling push.
+   Verified: 235 built, 1 quarantined (empty-body post), 0 unsafe, no commit loop.
+   - Artifacts live at `generated/` in the repo (committed by CI). The app reads them directly —
+     no Markdown processing in the app build. Deploy-hook ownership moves here in SP4 so it fires
+     **after** artifacts are committed (no stale-content race).
+3. **Repoint pipeline:** `daily-dev-digest` pushes to `portfolio-blog` (not `next-gen-portfolio`);
+   cron 4×/day → 1×/day; `MAX_TOTAL=1`; best-candidate selection.
+4. **AI refine step + pipeline redesign** (output-optimized, lean — 2 LLM calls, not a 12-agent
+   chain). Deterministic: scrape → content-clean (readability) → dedupe (content similarity, not
+   just URL) → citation-extract. Then **LLM #1 (Nova Pro, Converse/boto3): structured generate** —
+   one call outputs `{headline, subtitle, meta, tags, body}` (folds outline / SEO keywords /
+   headline / meta into the generate). Then **LLM #2: fact-grounding verify** against the source
+   (fresh-context critic; flag/strip unsupported claims, regenerate if needed). Deterministic:
+   Markdown export (`.mdx` + front-matter) → commit → CI. **Grammar pass dropped** (redundant with a
+   capable model). Model configurable via env; AWS OIDC auth in Actions; swap `openai` → `boto3`.
+   Move the Vercel deploy-hook trigger into `portfolio-blog` CI (fires after artifacts committed).
+5. **`next-gen-portfolio` build + reads:** authenticated pull of private `portfolio-blog`; consume
+   `generated/*.json`; **actually render the post body** (the current `BlogDetailsPrimary.js` is a
+   static template that never renders `content`) as precompiled HTML via `prose` inside the site
+   layout; client-side search/tag/pagination; SSG; remove the 236 committed `.mdx`.
 6. **(Optional) `blog.devmohan.in`:** middleware host routing + redirects + sitemap/robots/
    canonical + `NEXT_PUBLIC_SITE_URL`.
 
