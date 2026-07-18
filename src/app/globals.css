@@ -2707,6 +2707,11 @@ html {
   content: none;
 }
 
+/* the global `a { display: inline-block }` breaks inline links inside prose */
+.prose a {
+  display: inline;
+}
+
 /* highlight.js github-dark token palette */
 .hljs-comment,
 .hljs-quote {

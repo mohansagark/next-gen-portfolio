@@ -111,9 +111,10 @@ const BlogDetailsPrimary = ({
                           key={idx}
                           className="pl-25px mb-10px relative before:content-['\f058'] before:font-fontawesome before:absolute before:left-0 before:top-0 before:text-primary-color before:font-bold"
                         >
-                          <span className="text-primary-color-light dark:text-white-color">
-                            {takeaway}
-                          </span>
+                          <span
+                            className="text-primary-color-light dark:text-white-color"
+                            dangerouslySetInnerHTML={{ __html: takeaway }}
+                          />
                         </li>
                       ))}
                     </ul>
