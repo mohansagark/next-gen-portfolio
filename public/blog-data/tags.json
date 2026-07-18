@@ -1,0 +1,278 @@
+{
+  "tags": [
+    {
+      "tag": "ui",
+      "count": 138
+    },
+    {
+      "tag": "mobile",
+      "count": 103
+    },
+    {
+      "tag": "tools",
+      "count": 68
+    },
+    {
+      "tag": "backend",
+      "count": 65
+    },
+    {
+      "tag": "javascript",
+      "count": 64
+    },
+    {
+      "tag": "career",
+      "count": 60
+    },
+    {
+      "tag": "web",
+      "count": 58
+    },
+    {
+      "tag": "cloud",
+      "count": 55
+    },
+    {
+      "tag": "design",
+      "count": 50
+    },
+    {
+      "tag": "performance",
+      "count": 48
+    },
+    {
+      "tag": "react",
+      "count": 45
+    },
+    {
+      "tag": "frontend",
+      "count": 44
+    },
+    {
+      "tag": "html",
+      "count": 44
+    },
+    {
+      "tag": "api",
+      "count": 38
+    },
+    {
+      "tag": "ux",
+      "count": 33
+    },
+    {
+      "tag": "productivity",
+      "count": 31
+    },
+    {
+      "tag": "css",
+      "count": 29
+    },
+    {
+      "tag": "security",
+      "count": 28
+    },
+    {
+      "tag": "devops",
+      "count": 27
+    },
+    {
+      "tag": "angular",
+      "count": 22
+    },
+    {
+      "tag": "database",
+      "count": 16
+    },
+    {
+      "tag": "learning",
+      "count": 16
+    },
+    {
+      "tag": "architecture",
+      "count": 15
+    },
+    {
+      "tag": "node.js",
+      "count": 11
+    },
+    {
+      "tag": "python",
+      "count": 9
+    },
+    {
+      "tag": "concepts",
+      "count": 8
+    },
+    {
+      "tag": "typescript",
+      "count": 8
+    },
+    {
+      "tag": "databases",
+      "count": 7
+    },
+    {
+      "tag": "vue",
+      "count": 6
+    },
+    {
+      "tag": "tutorials",
+      "count": 4
+    },
+    {
+      "tag": "fundamentals",
+      "count": 3
+    },
+    {
+      "tag": "theory",
+      "count": 3
+    },
+    {
+      "tag": "ai",
+      "count": 1
+    },
+    {
+      "tag": "cloudflare",
+      "count": 1
+    },
+    {
+      "tag": "cost-efficiency",
+      "count": 1
+    },
+    {
+      "tag": "user-experience",
+      "count": 1
+    },
+    {
+      "tag": "video-pipeline",
+      "count": 1
+    }
+  ],
+  "categories": [
+    {
+      "category": "ai",
+      "count": 1
+    },
+    {
+      "category": "angular",
+      "count": 2
+    },
+    {
+      "category": "api",
+      "count": 7
+    },
+    {
+      "category": "architecture",
+      "count": 8
+    },
+    {
+      "category": "backend",
+      "count": 12
+    },
+    {
+      "category": "career",
+      "count": 13
+    },
+    {
+      "category": "cloud",
+      "count": 12
+    },
+    {
+      "category": "concepts",
+      "count": 1
+    },
+    {
+      "category": "css",
+      "count": 4
+    },
+    {
+      "category": "database",
+      "count": 3
+    },
+    {
+      "category": "databases",
+      "count": 2
+    },
+    {
+      "category": "design",
+      "count": 9
+    },
+    {
+      "category": "devops",
+      "count": 4
+    },
+    {
+      "category": "frontend",
+      "count": 6
+    },
+    {
+      "category": "fundamentals",
+      "count": 1
+    },
+    {
+      "category": "html",
+      "count": 12
+    },
+    {
+      "category": "javascript",
+      "count": 13
+    },
+    {
+      "category": "learning",
+      "count": 4
+    },
+    {
+      "category": "mobile",
+      "count": 20
+    },
+    {
+      "category": "node.js",
+      "count": 2
+    },
+    {
+      "category": "performance",
+      "count": 12
+    },
+    {
+      "category": "productivity",
+      "count": 8
+    },
+    {
+      "category": "python",
+      "count": 1
+    },
+    {
+      "category": "react",
+      "count": 10
+    },
+    {
+      "category": "security",
+      "count": 9
+    },
+    {
+      "category": "tools",
+      "count": 8
+    },
+    {
+      "category": "typescript",
+      "count": 2
+    },
+    {
+      "category": "ui",
+      "count": 27
+    },
+    {
+      "category": "ux",
+      "count": 7
+    },
+    {
+      "category": "vue",
+      "count": 1
+    },
+    {
+      "category": "web",
+      "count": 15
+    }
+  ]
+}

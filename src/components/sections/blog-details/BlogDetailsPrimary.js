@@ -131,23 +131,11 @@ const BlogDetailsPrimary = ({
                               </div>
                             </blockquote>
                           </div>
-                          {/* <!-- role of technology --> */}
-                          <div>
-                            <h3 className="mb-15px mt-5 md:mt-30px">
-                              <span className="text-primary-color-light dark:text-white-color capitalize relative z-0 text-size-22 md:text-2xl font-bold">
-                                {title}
-                              </span>
-                            </h3>
-                            <p className="text-primary-color-light dark:text-white-color mb-15px md:mb-5">
-                              {desc}
-                            </p>
-                            <p className="text-primary-color-light dark:text-white-color mb-15px md:mb-5">
-                              {desc1}
-                            </p>
-                            <p className="text-primary-color-light dark:text-white-color mb-15px md:mb-5">
-                              {desc2}
-                            </p>
-                          </div>
+                          {/* <!-- post body: precompiled, sanitized HTML from portfolio-blog, styled by Tailwind Typography --> */}
+                          <article
+                            className="prose prose-lg dark:prose-invert max-w-none mb-5 prose-headings:text-primary-color-light dark:prose-headings:text-white-color prose-p:text-primary-color-light dark:prose-p:text-white-color prose-a:text-primary-color prose-li:text-primary-color-light dark:prose-li:text-white-color"
+                            dangerouslySetInnerHTML={{ __html: blog?.html || "" }}
+                          />
 
                           {/* <!-- keypoint --> */}
                           <div className="mb-5">

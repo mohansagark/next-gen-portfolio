@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate:blogs": "node scripts/convert-mdx-to-json.mjs",
-    "prebuild": "npm run generate:blogs",
+    "fetch:blogs": "node scripts/fetch-blog-content.mjs",
+    "prebuild": "npm run fetch:blogs",
     "dev": "next dev --turbopack",
     "build": "next build",
     "export": "next build",
