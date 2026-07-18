@@ -1,11 +1,13 @@
 "use client";
 import Socials4 from "@/components/shared/socials/Socials4";
 import { useFooterContext } from "@/context_api/FooterContext";
+import useHomeLink from "@/hooks/useHomeLink";
 import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
   const { footerType } = useFooterContext();
+  const homeLink = useHomeLink();
   return (
     <footer>
       <div
@@ -19,7 +21,7 @@ const Footer = () => {
             {footerType === 3 ? <Socials4 type={2} /> : ""}
             {/* logo */}
             <div className="footer-logo w-75px h-75px mb-6">
-              <Link href="/">
+              <Link href={homeLink("/")}>
                 <Image
                   src="/img/logo/logo.png"
                   alt=""
@@ -33,7 +35,7 @@ const Footer = () => {
               <ul className="nav flex flex-wrap justify-center items-center gap-x-35px">
                 <li className="nav_item group relative">
                   <Link
-                    href="#about"
+                    href={homeLink("#about")}
                     className="text-size-15 font-medium text-white-color capitalize py-10px md:py-15px lg:py-25px 2xl:py-30px relative z-0 after:w-0 after:h-0.5 after:bg-gradient-primary after:absolute after:right-0 hover:after:left-0 after:bottom-[25px] after:transition-all after:duration-500 group-hover:after:w-full"
                   >
                     About
@@ -41,7 +43,7 @@ const Footer = () => {
                 </li>
                 <li className="nav_item group relative">
                   <Link
-                    href="#services"
+                    href={homeLink("#services")}
                     className="text-size-15 font-medium text-white-color capitalize py-10px md:py-15px lg:py-25px 2xl:py-30px relative z-0 after:w-0 after:h-0.5 after:bg-gradient-primary after:absolute after:right-0 hover:after:left-0 after:bottom-[25px] after:transition-all after:duration-500 group-hover:after:w-full"
                   >
                     Services
@@ -49,7 +51,7 @@ const Footer = () => {
                 </li>
                 <li className="nav_item group relative">
                   <Link
-                    href="#portfolio"
+                    href={homeLink("#portfolio")}
                     className="text-size-15 font-medium text-white-color capitalize py-10px md:py-15px lg:py-25px 2xl:py-30px relative z-0 after:w-0 after:h-0.5 after:bg-gradient-primary after:absolute after:right-0 hover:after:left-0 after:bottom-[25px] after:transition-all after:duration-500 group-hover:after:w-full"
                   >
                     Portfolios
@@ -58,7 +60,7 @@ const Footer = () => {
 
                 <li className="nav_item group relative">
                   <Link
-                    href="#contact"
+                    href={homeLink("#contact")}
                     className="text-size-15 font-medium text-white-color capitalize py-10px md:py-15px lg:py-25px 2xl:py-30px relative z-0 after:w-0 after:h-0.5 after:bg-gradient-primary after:absolute after:right-0 hover:after:left-0 after:bottom-[25px] after:transition-all after:duration-500 group-hover:after:w-full"
                   >
                     Contact
@@ -75,7 +77,7 @@ const Footer = () => {
             >
               © 2025 All rights reserved by{" "}
               <Link
-                href="/"
+                href={homeLink("/")}
                 className={`${
                   footerType === 2 || footerType === 3
                     ? "text-primary-color "

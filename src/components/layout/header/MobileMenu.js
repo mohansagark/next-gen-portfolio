@@ -1,11 +1,13 @@
 "use client";
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import getNavItems from "@/libs/getNavItems";
+import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 
 const MobileMenu = ({ isActiveMobileMenu }) => {
   const { isIndexPage } = useHeaderContext();
   const navItems = getNavItems();
+  const homeLink = useHomeLink();
   return (
     <div
       className={`mobile-menu absolute left-0 top-full min-h-screen-90 w-full bg-seondary-color block origin-top-left lg:hidden ${
@@ -18,7 +20,7 @@ const MobileMenu = ({ isActiveMobileMenu }) => {
             ? navItems?.map(({ name, path, path2 }, idx) => (
                 <li key={idx}>
                   <Link
-                    href={isIndexPage ? path : path2}
+                    href={isIndexPage ? path : homeLink(path2)}
                     className="text-size-25 text-white-color uppercase leading-1.2 py-15px"
                   >
                     {name}

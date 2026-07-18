@@ -5,6 +5,7 @@ import ButtonPrimary2 from "@/components/shared/buttons/ButtonPrimary2";
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import getNavItems from "@/libs/getNavItems";
 import indexingAndActiveLink from "@/libs/indexingAndActiveLink";
+import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 import { useEffect } from "react";
 import MobileMenuController from "./MobileMenuController";
@@ -13,6 +14,7 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 	const { isIndexPage, isInnerPage, isResumeBtn, headerType } =
 		useHeaderContext();
 	const navItems = getNavItems();
+	const homeLink = useHomeLink();
 	useEffect(() => {
 		// mobileMenuController();
 		indexingAndActiveLink();
@@ -37,7 +39,7 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 					? navItems?.map(({ name, path, path2 }, idx) => (
 							<li key={idx} className="nav_item group relative hidden lg:block">
 								<Link
-									href={isIndexPage ? path : path2}
+									href={isIndexPage ? path : homeLink(path2)}
 									className={`text-size-15 font-medium  ${
 										isInnerPage && !isSticky
 											? "text-white-color"
@@ -89,7 +91,7 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 						) : (
 							<ButtonPrimary
 								isIcon={headerType === 6 ? true : false}
-								url={isIndexPage ? "#contact" : "/#contact"}
+								url={isIndexPage ? "#contact" : homeLink("/#contact")}
 							>
 								{headerType === 6 ? "Lets Talk" : "Hire Me!"}
 							</ButtonPrimary>

@@ -2,11 +2,13 @@
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import Image from "next/image";
 import Link from "next/link";
+import useHomeLink from "@/hooks/useHomeLink";
 
 const Logo = ({ isSticky }) => {
 	const { isInnerPage, headerType } = useHeaderContext();
+	const homeLink = useHomeLink();
 	return (
-		<Link href="/" className="logo">
+		<Link href={homeLink("/")} className="logo">
 			<Image
 				className={`${
 					headerType === 9 || headerType === 10
