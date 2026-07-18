@@ -1,7 +1,10 @@
+"use client";
 import sliceText from "@/libs/sliceText";
+import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 
 const HeroBreadcarumb = ({ title, text, actualItem, path }) => {
+  const homeLink = useHomeLink();
   return (
     <section>
       <div className="hero-breadcurmb pt-150px md:pt-40 lg:pt-200px pb-50px md:pb-60px lg:b-100px bg-[url('/img/breadcrumb/breadcrumb-bg.jpg')] bg-cover bg-center bg-no-repeat relative z-1 after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primary-color-light after:-z-1 after:opacity-70">
@@ -14,7 +17,7 @@ const HeroBreadcarumb = ({ title, text, actualItem, path }) => {
             <ul className="nav flex flex-wrap justify-center items-center gap-x-3">
               <li className="nav_item group relative">
                 <Link
-                  href="/"
+                  href={homeLink("/")}
                   className="font-medium text-white-color capitalize relative z-0 after:w-0 after:h-1px after:bg-white-color after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-500 group-hover:after:w-full"
                 >
                   Home

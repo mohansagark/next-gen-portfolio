@@ -2,23 +2,13 @@
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import useHomeLink from "@/hooks/useHomeLink";
 
 const Logo = ({ isSticky }) => {
 	const { isInnerPage, headerType } = useHeaderContext();
-	const [homeHref, setHomeHref] = useState("/");
-	useEffect(() => {
-		// On the blog subdomain, "/" maps to the blog list — send the logo to the
-		// main site instead.
-		if (
-			typeof window !== "undefined" &&
-			window.location.hostname === "blog.devmohan.in"
-		) {
-			setHomeHref("https://devmohan.in");
-		}
-	}, []);
+	const homeLink = useHomeLink();
 	return (
-		<Link href={homeHref} className="logo">
+		<Link href={homeLink("/")} className="logo">
 			<Image
 				className={`${
 					headerType === 9 || headerType === 10
