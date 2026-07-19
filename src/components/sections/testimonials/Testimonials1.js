@@ -6,7 +6,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const Testimonials1 = () => {
-  const recommendations = getRecommendations()?.slice(0, 5);
+  const recommendations = getRecommendations();
   return (
     <section id="testimonials">
       <div className="bg-cream-light-color dark:bg-black-color py-60px md:py-20 lg:py-30">
