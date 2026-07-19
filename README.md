@@ -2,6 +2,8 @@
 
 A modern, responsive portfolio website built with Next.js 15, featuring dynamic blog management, multiple homepage layouts, and a comprehensive design system.
 
+> 📐 **System design, data/AI flows, and the full tool list:** see **[ARCHITECTURE.md](./ARCHITECTURE.md)** — how the portfolio, the AI‑written blog, and the git‑based CMS fit together across four repos (with diagrams).
+
 ![Next.js](https://img.shields.io/badge/Next.js-15.1.2-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css)
