@@ -120,24 +120,87 @@ sequenceDiagram
     App-->>Me: devmohan.in renders updated profile
 ```
 
-## Blog flow (autonomous)
+## Blog flow (autonomous) — step by step
+
+The pipeline (`daily-dev-digest`) runs unattended once a day and turns a scraped
+source article into a fully rewritten, fact‑checked, styled blog post that goes
+live — with **two LLM calls** wrapped in deterministic Python and no human in
+the loop.
 
 ```mermaid
-sequenceDiagram
-    participant Cron as GitHub Actions (daily)
-    participant Bedrock as Bedrock · Nova Pro
-    participant Blog as portfolio-blog 🔒
-    participant CI as build-index CI
-    participant App as Next.js (Vercel)
+flowchart TD
+    Cron["⏰ GitHub Actions<br/>cron 30 2 * * * (8:00 AM IST)<br/>+ manual workflow_dispatch"] --> Auth
 
-    Cron->>Cron: scrape · clean · dedupe · cite
-    Cron->>Bedrock: generate {title, body, tags…} then fact-verify
-    Cron->>Blog: commit posts/<slug>.mdx
-    Blog->>CI: rebuild generated/*.json (sanitized HTML)
-    CI->>App: fire Vercel deploy hook
-    App->>Blog: fetch generated JSON at build
-    App-->>App: blog.devmohan.in updated
+    subgraph Auth["🔐 Auth — no long-lived keys"]
+        direction LR
+        OIDC["OIDC → assume IAM role<br/>gha-daily-dev-digest-bedrock<br/>(bedrock:InvokeModel)"]
+        PAT["BLOG_REPO_TOKEN (PAT)<br/>push to portfolio-blog"]
+    end
+
+    Auth --> Prep
+
+    subgraph Prep["📥 Deterministic prep (Python)"]
+        direction TB
+        S1["1️⃣ Scrape — pull candidate dev articles from feeds"]
+        S2["2️⃣ Clean — trafilatura extracts main text, strips boilerplate"]
+        S3["3️⃣ Dedupe — difflib vs existing posts, drop near-duplicates"]
+        S4["4️⃣ Select + cite — best candidate (MAX_TOTAL=1), keep source URL"]
+        S1 --> S2 --> S3 --> S4
+    end
+
+    S4 --> LLM
+
+    subgraph LLM["🤖 Amazon Bedrock · Nova Pro (boto3 Converse)"]
+        direction TB
+        L1["5️⃣ Generate — structured JSON:<br/>{title, subtitle, summary, tags, body_markdown}"]
+        L2["6️⃣ Fact-verify — re-check the rewrite against the source<br/>(no fabricated claims)"]
+        L1 --> L2
+    end
+
+    L2 --> Ex["7️⃣ Export — build posts/&lt;slug&gt;.mdx<br/>(frontmatter + markdown body, forced byline)"]
+    Ex --> Push["8️⃣ Commit + push → portfolio-blog 🔒"]
+
+    Push --> CI
+
+    subgraph CI["⚙️ portfolio-blog CI (GitHub Actions)"]
+        direction TB
+        B1["9️⃣ build-index.mjs — gray-matter parse,<br/>md → sanitized + highlighted HTML"]
+        B2["🔟 emit generated/{blogs,search-index,tags}.json + commit"]
+        B3["1️⃣1️⃣ verify-safety gate (no executable/unsafe content)"]
+        B1 --> B2 --> B3
+    end
+
+    B3 --> Hook["1️⃣2️⃣ Fire Vercel deploy hook (gated on change)"]
+    Hook --> Rebuild["1️⃣3️⃣ Next.js rebuild — fetch generated JSON at build"]
+    Rebuild --> Live["🌐 blog.devmohan.in updated"]
 ```
+
+### What each step does
+
+| # | Step | Tool | Detail |
+|---|------|------|--------|
+| — | **Trigger** | GitHub Actions | `cron: 30 2 * * *` (once/day) or manual `workflow_dispatch`. |
+| — | **Auth** | OIDC + PAT | The job assumes an AWS IAM role via **OIDC** (short‑lived creds, no stored AWS keys) for Bedrock, and uses a GitHub PAT to push to `portfolio-blog`. |
+| 1 | **Scrape** | Python | Fetch candidate articles from developer sources/feeds. |
+| 2 | **Clean** | `trafilatura` | Extract the main article text, strip nav/ads/boilerplate. |
+| 3 | **Dedupe** | `difflib` | Compare against already‑published posts; skip near‑duplicates. |
+| 4 | **Select + cite** | Python | Pick the single best candidate (`MAX_TOTAL=1`) and record the **source URL** for attribution. |
+| 5 | **Generate** | **Bedrock · Nova Pro** | One Converse call returns *structured JSON* — `title, subtitle, summary, tags, body_markdown` — an original rewrite, not a copy (`max_tokens ≈ 5000`, ~600–1000 words). |
+| 6 | **Fact‑verify** | **Bedrock · Nova Pro** | A second call checks the rewritten post against the source so no claim is fabricated. |
+| 7 | **Export** | Python | Assemble `posts/<slug>.mdx` — frontmatter (`title, subtitle, summary, slug, date, tags, source_url…`) + the markdown body; byline forced to “Mohan Sagar”. |
+| 8 | **Commit + push** | git / PAT | Push the new `.mdx` to the private `portfolio-blog` repo. |
+| 9–11 | **Index + safety** | `build-index.mjs` (CI) | `gray-matter` frontmatter parse → **sanitized, syntax‑highlighted HTML** (`rehype-sanitize` + `rehype-highlight`); emit `generated/{blogs,search-index,tags}.json`, commit them; `verify-safety.mjs` blocks unsafe content. *This runs in the content repo, so a bad post can't break the app build.* |
+| 12 | **Deploy hook** | Vercel | CI fires the “Rebuild on Blog Update” Vercel hook — only when the index actually changed. |
+| 13 | **Rebuild** | Next.js / Vercel | The app rebuilds, pulling the fresh `generated/*.json`, and `blog.devmohan.in` shows the new post. |
+
+> **Why two LLM calls, not an agent?** The pipeline is intentionally
+> *output‑optimized*: deterministic Python owns scraping/dedupe/citation (cheap,
+> predictable), and Nova Pro is used only where a model is genuinely needed —
+> **generate** then **verify**. Cost is ~\$0.30/month against a \$200 credit.
+
+> **Model note:** Anthropic models are blocked at the account level on this AWS
+> account, so the rewrite runs on **Amazon Nova Pro** (`us.amazon.nova-pro-v1:0`).
+> Swapping to another Bedrock model is a single env var (`BEDROCK_MODEL_ID`).
 
 ---
 
