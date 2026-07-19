@@ -1,8 +1,42 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+// Collapsed quotes are clamped to this many lines so every card starts at a
+// consistent height regardless of testimonial length. Cards whose quote
+// overflows the clamp get a Read more / Read less toggle that expands the tile.
+const CLAMP_LINES = 6;
 
 const TestimonialsCard = ({ testimonial }) => {
   const { authorName, authorDesig, desc, img, logoImg, logoImgLight } =
     testimonial ? testimonial : {};
+
+  const quoteRef = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+  const [overflowing, setOverflowing] = useState(false);
+
+  // Detect overflow only while collapsed: if the clamped paragraph's content
+  // is taller than its box, the quote is longer than CLAMP_LINES lines. Skip
+  // when expanded so the toggle stays visible; re-measure on resize.
+  useEffect(() => {
+    if (expanded) return;
+    const el = quoteRef.current;
+    if (!el) return;
+    const check = () => setOverflowing(el.scrollHeight > el.clientHeight + 1);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [desc, expanded]);
+
+  const clampStyle = expanded
+    ? undefined
+    : {
+        display: "-webkit-box",
+        WebkitLineClamp: CLAMP_LINES,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      };
   return (
     <div className="p-25px bg-white-color dark:bg-primary-color-light rounded-15px relative z-0 group">
       <div className="flex justify-between gap-30px mb-5">
@@ -91,9 +125,25 @@ const TestimonialsCard = ({ testimonial }) => {
             </defs>
           </svg>
         </div>
-        <p className="text-primary-color-light dark:text-body-color mb-30px md:mb-50px">
-          {desc}
-        </p>
+        <div className="mb-30px md:mb-50px">
+          <p
+            ref={quoteRef}
+            style={clampStyle}
+            className="text-primary-color-light dark:text-body-color"
+          >
+            {desc}
+          </p>
+          {overflowing && (
+            <button
+              type="button"
+              onClick={() => setExpanded((v) => !v)}
+              style={{ color: "var(--tj-theme-primary)" }}
+              className="mt-2 text-sm font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity focus:outline-none"
+            >
+              {expanded ? "Read less" : "Read more"}
+            </button>
+          )}
+        </div>
         <h4 className="text-lg mb-2">{authorName}</h4>
 
         <p className="text-primary-color-light dark:text-body-color text-sm">
