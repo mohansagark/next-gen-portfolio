@@ -1,6 +1,9 @@
 // Pure canonical→presentational mapping. No JSON imports and no Next.js
 // dependencies here: plain Node must be able to import this file for tests.
-export const RAW_BASE = "https://raw.githubusercontent.com/mohansagark/portfolio-data/main";
+// Content + images are served publicly by the portfolio-data Vercel deploy
+// (admin.devmohan.in), independent of the GitHub repo's visibility. Using it
+// instead of raw.githubusercontent lets portfolio-data be a private repo.
+export const RAW_BASE = "https://admin.devmohan.in";
 // Uploaded files (e.g. the resume PDF) are served by the admin site's Vercel
 // deployment, which serves the portfolio-data repo statically with proper
 // content types (GitHub raw would force a download).
