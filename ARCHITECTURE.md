@@ -103,22 +103,83 @@ daily AI pipeline are the two ways new content lands in those repos.
 
 ---
 
-## Content flow (profile)
+## CMS deep-dive (content editing)
+
+The CMS is **[Sveltia CMS](https://github.com/sveltia/sveltia-cms)** — a git‑based
+editor with **no backend and no database**: it's just a static page that talks to
+GitHub with the editor's own OAuth token and commits content directly. One login
+drives **two surfaces** (profile + blog), and a custom `enhance.js` layers the
+tailored UX on top.
 
 ```mermaid
-sequenceDiagram
-    participant Me
-    participant Sveltia as Sveltia CMS
-    participant Data as portfolio-data 🔒
-    participant Admin as admin.devmohan.in
-    participant App as Next.js (Vercel)
+flowchart TD
+    Me["✍️ Me (browser)"] --> Portal
 
-    Me->>Sveltia: edit Profile / Experience / …
-    Sveltia->>Data: commit data/*.json via GitHub OAuth
-    Data->>Admin: Vercel redeploys (serves /data + /images publicly)
-    App->>Admin: fetch content + media at build (RAW_BASE)
-    App-->>Me: devmohan.in renders updated profile
+    subgraph Portal["🖥️ admin.devmohan.in — Sveltia CMS (one login, two surfaces)"]
+        direction TB
+        PS["/  →  Profile admin<br/>backend repo: portfolio-data"]
+        BS["/blog  →  Blog admin<br/>backend repo: portfolio-blog"]
+        EN["enhance.js — read-only preview panes, blog category<br/>view, filter/sort, tri-state select, rebrand, clean URLs"]
+    end
+
+    subgraph OAuth["🔐 GitHub OAuth — serverless proxy on Vercel"]
+        direction TB
+        O1["api/oauth  →  redirect to GitHub authorize (scope: repo)"]
+        O2["api/callback  →  exchange code for access token"]
+        O1 --> O2
+    end
+
+    Portal -->|"1 sign in"| OAuth
+    OAuth -->|"2 user token (in-browser)"| Portal
+
+    PS -->|"3a commit data/*.json"| PData["portfolio-data 🔒"]
+    BS -->|"3b commit posts/*.mdx"| PBlog["portfolio-blog 🔒"]
+
+    PData -->|"4a Vercel redeploy"| Admin["admin.devmohan.in<br/>serves /data + /images publicly"]
+    PBlog -->|"4b build-index CI"| BlogGen["portfolio-blog<br/>generated/*.json"]
+
+    Admin -.->|"5a fetch content + media at build (RAW_BASE)"| App["Next.js build (Vercel)"]
+    BlogGen -.->|"5b fetch generated JSON at build (token)"| App
+    App --> Sites["🌐 devmohan.in + blog.devmohan.in"]
 ```
+
+### How it works
+
+1. **Sign in** — clicking *Login* opens the GitHub OAuth flow. A tiny serverless
+   proxy (`api/oauth` → `api/callback`, hosted on Vercel) does the code‑for‑token
+   exchange; the token lives only in the editor's browser session. **Its `repo`
+   scope covers both private repos, so one login edits both.**
+2. **Two surfaces, two repos** — Sveltia binds one config to one repo, so the
+   portal has two entry points sharing that login:
+   - `admin.devmohan.in/` → **Profile** admin (backend `portfolio-data`).
+   - `admin.devmohan.in/blog` → **Blog** admin (backend `portfolio-blog`).
+3. **Edit = commit** — saving an entry commits straight to the private repo over
+   the GitHub API (`data/*.json` for profile, `posts/*.mdx` for blog). No server,
+   no draft DB.
+4. **Publish** —
+   - *Profile:* the commit triggers a Vercel redeploy of `portfolio-data`, whose
+     site (`admin.devmohan.in`) serves `/data` and `/images` **publicly** — which
+     is exactly why the content repo can stay private.
+   - *Blog:* the commit triggers the `build-index` CI (see the pipeline section),
+     which regenerates `generated/*.json`.
+5. **App consumes** — the Next.js build pulls profile content/media from
+   `admin.devmohan.in` (`RAW_BASE`) and blog JSON from `portfolio-blog` (token),
+   then renders `devmohan.in` + `blog.devmohan.in`.
+
+### `enhance.js` — the custom layer
+
+Sveltia is customized entirely client‑side by a single script both admin pages
+load, configured per page via `window.__ADMIN__`:
+
+- **Rebrand + chrome:** replaces “Sveltia CMS” with “Dev Mohan”, sets the tab
+  title, adds a same‑tab cross‑link between the two admins, and serves clean URLs
+  (`/`, `/blog`) via Vercel rewrites.
+- **Profile:** each content type is its own sidebar collection with a real
+  sub‑item count; clicking one shows a **read‑only preview** (fetched from the
+  public `/data/*.json`, List/Grid toggle) with an **Edit** button into the form.
+- **Blog:** a custom **category view** — *All Posts* + categories (with counts)
+  in the nav, a **filter search + sort** toolbar, a **tri‑state Select All**, and
+  click‑to‑edit — driven by `blog.devmohan.in/blogs.json` (CORS‑enabled).
 
 ## Blog flow (autonomous) — step by step
 
