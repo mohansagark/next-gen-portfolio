@@ -36,8 +36,12 @@ const COPIES = [
 const IMAGES_FROM = "images";
 const IMAGES_TO = "public/blog-images";
 
+// Redact the token unconditionally, inside log() itself, so no call site can
+// ever leak it — e.g. via execSync's "Command failed: git clone ...<token>..."
+// error message ending up in a Vercel build log.
 function log(msg) {
-  console.log(`[fetch-blog-content] ${msg}`);
+  const safe = TOKEN ? String(msg).split(TOKEN).join("***") : msg;
+  console.log(`[fetch-blog-content] ${safe}`);
 }
 
 // blogs.json can reference a cover whose file never arrived — the clone failed
@@ -70,6 +74,11 @@ function applyPrune() {
   if (pruned > 0) {
     fs.writeFileSync(jsonPath, JSON.stringify(blogs, null, 2));
     log(`Pruned ${pruned} cover reference(s) with no image file.`);
+    log(
+      `WARNING: rewrote tracked file public/blogs.json in place — do NOT commit ` +
+        `this working tree in this state, or the committed offline-backup cover ` +
+        `data will be blanked permanently.`
+    );
   }
 }
 
@@ -141,4 +150,9 @@ function run() {
 // Only run the fetch when invoked directly (not when imported by tests).
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   run();
+} else {
+  log(
+    "Module loaded without matching direct-invocation guard (e.g. via a " +
+      "symlinked path) — run() was NOT called, no fetch was performed."
+  );
 }
