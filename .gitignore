@@ -6,3 +6,6 @@ out
 # macOS system files
 .DS_Store
 **/.DS_Store
+
+# Superpowers brainstorm mockups
+.superpowers/
