@@ -36,6 +36,15 @@ const COPIES = [
 const IMAGES_FROM = "images";
 const IMAGES_TO = "public/blog-images";
 
+// public/blogs.json is a BUILD ARTIFACT: applyPrune() rewrites it, blanking
+// covers whose image file did not arrive. It used to be the committed offline
+// backup too, which made that a one-way ratchet -- a local tokenless build
+// blanked the tracked file, and committing it destroyed the backup's cover data
+// permanently. The pristine upstream copy now lives here instead and is NEVER
+// pruned; only the artifact is.
+const FALLBACK = "public/blog-data/blogs.fallback.json";
+const ARTIFACT = "public/blogs.json";
+
 // Redact the token unconditionally, inside log() itself, so no call site can
 // ever leak it — e.g. via execSync's "Command failed: git clone ...<token>..."
 // error message ending up in a Vercel build log.
@@ -74,11 +83,6 @@ function applyPrune() {
   if (pruned > 0) {
     fs.writeFileSync(jsonPath, JSON.stringify(blogs, null, 2));
     log(`Pruned ${pruned} cover reference(s) with no image file.`);
-    log(
-      `WARNING: rewrote tracked file public/blogs.json in place — do NOT commit ` +
-        `this working tree in this state, or the committed offline-backup cover ` +
-        `data will be blanked permanently.`
-    );
   }
 }
 
@@ -102,11 +106,19 @@ function copyImages(tmp) {
 
 function keepBackup(reason) {
   log(`WARN: ${reason}`);
+  // Rebuild the (gitignored) artifact from the pristine committed fallback.
+  const fallback = path.join(ROOT, FALLBACK);
+  if (fs.existsSync(fallback)) {
+    fs.mkdirSync(path.dirname(path.join(ROOT, ARTIFACT)), { recursive: true });
+    fs.copyFileSync(fallback, path.join(ROOT, ARTIFACT));
+    log(`Restored ${ARTIFACT} from ${FALLBACK}.`);
+  }
   const ok = COPIES.every(({ to }) => fs.existsSync(path.join(ROOT, to)));
   if (ok) {
     log("Using committed backup copies — build continues.");
-    // The backup JSON may name covers that were never committed (the image dir
-    // is gitignored), so prune before the frontend can render a broken <img>.
+    // The fallback may name covers that were never committed (the image dir is
+    // gitignored), so prune the ARTIFACT before the frontend renders a broken
+    // <img>. The fallback itself is left untouched.
     applyPrune();
     process.exit(0);
   }
@@ -134,6 +146,12 @@ function run() {
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.copyFileSync(src, dest);
   }
+
+  // Refresh the pristine fallback from upstream BEFORE pruning, so the committed
+  // backup always holds complete cover data.
+  const fbDest = path.join(ROOT, FALLBACK);
+  fs.mkdirSync(path.dirname(fbDest), { recursive: true });
+  fs.copyFileSync(path.join(ROOT, ARTIFACT), fbDest);
 
   copyImages(tmp);
   applyPrune();
