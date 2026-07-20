@@ -1,67 +1,40 @@
 import makePath from "@/libs/makePath";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import countCommentLength from "@/libs/countCommentLength";
 import AuthorDisplay from "@/components/shared/AuthorDisplay";
 
 const BlogSingle = ({ blog }) => {
-  const { id, title, desc, blogTopList, category, author, comments } = blog
-    ? blog
-    : {};
+  const {
+    id,
+    title,
+    desc,
+    blogTopList,
+    category,
+    author,
+    comments,
+    coverImage,
+    coverImageAlt,
+  } = blog ? blog : {};
 
   return (
     <article className="group relative  wow fadeInUp" data-wow-delay=".3s">
       <div className="rounded-lg relative overflow-hidden bg-cream-light-color dark:bg-primary-color-light">
-        {/* TODO: BLOG IMAGE LOGIC IS HERE */}
-        {/* <div className="relative z-0">
-          {slider?.length > 0 ? (
-            <div>
-              <Swiper
-                spaceBetween={30}
-                slidesPerView={1}
-                loop={true}
-                speed={1000}
-                navigation={true}
-                autoplay={{
-                  delay: 7000,
-                  disableOnInteraction: false,
-                }}
-                modules={[Navigation, Autoplay]}
-                className="blog-gallery-slider"
-              >
-                {slider?.map((sliderImg, idx) => (
-                  <SwiperSlide key={idx}>
-                    <div>
-                      <Image src={sliderImg} alt="" width={1728} height={672} />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          ) : (
-            <>
-              <Link
-                href={`/blogs/${id}`}
-                className="rounded-t-lg overflow-hidden"
-              >
-                <Image
-                  src={detailsImg}
-                  alt=""
-                  width={2000}
-                  height={2000}
-                  className="group-hover:scale-110 transition-all duration-[.8s]"
-                />
-              </Link>
-              {popupVideo ? (
-                <div className="absolute top-0 left-0 w-full !h-full flex items-center justify-center z-1">
-                  <BlogPopupVideo url={popupVideo} />
-                </div>
-              ) : (
-                ""
-              )}
-            </>
-          )}
-        </div> */}
+        {coverImage ? (
+          <Link
+            href={`/blogs/${id}`}
+            className="block relative aspect-[16/9] overflow-hidden rounded-t-lg"
+          >
+            <Image
+              src={coverImage}
+              alt={coverImageAlt || ""}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover group-hover:scale-110 transition-all duration-[.8s]"
+            />
+          </Link>
+        ) : null}
         <Link
           href={`/blogs?category=${makePath(category)}`}
           className="text-size-13 uppercase px-15px py-10px rounded-50px leading-1 absolute top-[15px] right-[15px] text-white-color bg-gradient-secondary-2 bg-200 hover:bg-100"
