@@ -136,7 +136,92 @@ scripts, no framework):
 
 ## 10. Out of scope
 
-- **No backfill.** The 238 legacy posts stay image-less (parent spec §2).
+- **No backfill in C.** The 238 legacy posts stay image-less for now; §11.C
+  designs the backfill as separate future work.
 - **No card layout redesign** beyond adding the image block.
 - **No `verify-safety.mjs` change** in `portfolio-blog` — B established
   `sanitizeImagePath()` as the authoritative guard at the source.
+
+---
+
+# 11. Future workstreams — designed, NOT built
+
+Recorded here so C does not foreclose them. Each needs its own plan before any
+code is written. Nothing in this section is implemented.
+
+**Already true, not future work:** image failures never block post creation.
+`IMAGE_REQUIRED=false` plus best-effort wrapping means a failed render publishes
+the post text-only. Verified in production on run `29752659471`. D below is only
+the *retry*, not the fail-soft.
+
+## 11.A. Shared foundation — `attach_cover_to_existing_post()`
+
+D and E are the same operation applied to different input sets: **add a cover to
+an already-published post**. Today `daily-dev-digest` can only write covers at
+creation time (`build_mdx` composes front-matter for a *new* post). Build this
+once, in `daily-dev-digest` beside `build_mdx`, reusing `yaml_utils`.
+
+```
+attach_cover_to_existing_post(mdx_path, image_bytes, alt, prompt) -> bool
+```
+
+- Splices `image` / `image_alt` / `image_prompt` into existing front-matter,
+  leaving the body byte-identical.
+- **Idempotent:** a post that already has `image` is skipped, not overwritten.
+- Preserves `source_url` adjacency — Workstream A's own review flagged the
+  front-matter splice as the riskiest surface in the whole pipeline. Mutating
+  published posts amplifies that risk, so this function needs the same
+  YAML-parse-and-verify test treatment A's `build_mdx` got.
+- Writes `images/<slug>.jpg` alongside.
+
+**Non-negotiable:** dry-run mode that reports what *would* change without
+writing. Both D and E depend on it.
+
+## 11.B. Workstream D — retry pipeline
+
+**Derive the work queue; do not maintain a ledger.** A separate list of
+"posts awaiting an image" is duplicated state that drifts from reality. The truth
+already lives in the repo: any `.mdx` whose `image` front-matter is absent. A
+derived scan is idempotent, self-healing, and needs no migration or repair when
+it disagrees with the filesystem.
+
+The one piece of real state worth keeping is a **give-up list** — slugs that have
+failed N times — so a post that can never render (safety-filtered content, a
+permanently broken source) is not retried daily forever. It only grows on
+repeated failure, and it is advisory: deleting it just retries everything.
+
+- **Trigger:** second GitHub Actions workflow, cron in the IST afternoon
+  (~`30 8 * * *` UTC = 14:00 IST), well clear of the 08:00 IST digest run.
+- **Bounded per run:** cap at a handful of posts (e.g. 5) so a systematic
+  failure — expired `CF_API_TOKEN`, model deprecation — cannot burn budget or
+  spam commits before anyone notices.
+- **Flow:** scan for cover-less posts → subtract give-up list → take up to N →
+  regenerate brief + image → `attach_cover_to_existing_post()` → commit →
+  index rebuild fires on `posts/**` as it already does.
+
+## 11.C. Workstream E — one-time legacy backfill
+
+Same operation across every cover-less post (238 today).
+
+- **Cost estimate first, and it must gate execution.** The script prints the
+  estimate and requires explicit confirmation before spending anything.
+  Per post = 1 Bedrock Nova Pro call (the brief) + 1 Cloudflare Workers AI FLUX
+  render.
+  **Do not hardcode rates from memory.** At implementation time, read current
+  Bedrock and Cloudflare Workers AI pricing and derive the estimate from
+  configured unit prices, so the number is auditable and updatable.
+- **Dry-run first:** assemble briefs and prompts for all posts, render none,
+  show a sample for quality review. A bad house style caught here costs nothing;
+  caught after 238 renders it costs the whole run.
+- **Batched + resumable:** 238 network round-trips will be interrupted. Track
+  completion by the presence of `image` front-matter (same derived-truth
+  principle as D), so a re-run naturally resumes.
+- **Git safety:** run on a dedicated branch and commit in batches, so the
+  238-file mutation is reviewable and revertible rather than one opaque commit.
+
+## 11.D. Why C stays compatible
+
+C renders whatever `blogs.json` contains, so covers attached later by D or E
+appear on the next build with **no frontend change**. The §5 prune step is
+explicitly retry-friendly: it blanks references to missing files rather than
+discarding posts, so a later backfill simply repopulates them.
