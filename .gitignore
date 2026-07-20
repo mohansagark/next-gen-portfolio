@@ -9,3 +9,6 @@ out
 
 # Superpowers brainstorm mockups
 .superpowers/
+
+# Cover images are copied from portfolio-blog at build time
+public/blog-images/
