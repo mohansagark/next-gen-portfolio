@@ -3,6 +3,7 @@ import countCommentLength from "@/libs/countCommentLength";
 import makePath from "@/libs/makePath";
 import sliceText from "@/libs/sliceText";
 import Link from "next/link";
+import Image from "next/image";
 
 const BlogDetailsPrimary = ({
   prevId,
@@ -22,6 +23,8 @@ const BlogDetailsPrimary = ({
     comments,
     tags,
     keyTakeaways,
+    coverImage,
+    coverImageAlt,
   } = blog ? blog : {};
   const { title: prevBlogTitle } = pervblog || {};
   const { title: nextBlogTitle } = nextblog || {};
@@ -91,6 +94,20 @@ const BlogDetailsPrimary = ({
                   <p className="text-primary-color-light dark:text-white-color text-lg leading-relaxed mb-6">
                     {desc}
                   </p>
+                ) : null}
+
+                {/* cover image (absent on legacy posts) */}
+                {coverImage ? (
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-lg mb-8">
+                    <Image
+                      src={coverImage}
+                      alt={coverImageAlt || ""}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 800px"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
                 ) : null}
 
                 {/* post body: precompiled, sanitized HTML from portfolio-blog */}
