@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import BlogCategoriesWidget from "./widgets/BlogCategoriesWidget";
-import BlogTagsWidget from "./widgets/BlogTagsWidget";
 import RecentBlogWidget from "./widgets/RecentBlogWidget";
 import makePath from "@/libs/makePath";
 import makeText from "@/libs/makeText";
@@ -77,8 +76,6 @@ const BlogSidebar = () => {
         <BlogCategoriesWidget />
         {/* <!-- recent blogs--> */}
         <RecentBlogWidget />
-        {/* <!-- tags --> */}
-        <BlogTagsWidget />
       </div>
     </div>
   );
