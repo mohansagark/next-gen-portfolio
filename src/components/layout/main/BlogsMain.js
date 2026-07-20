@@ -1,6 +1,5 @@
 "use client";
 import BlogsPrimary from "@/components/sections/blogs/BlogsPrimary";
-import PopularTagsNebula from "@/components/sections/blogs/PopularTagsNebula";
 import HeroBreadcarumb from "@/components/sections/heros/HeroBreadcarumb";
 import CommonContext from "@/context_api/CommonContext";
 import useSearch from "@/hooks/useSearch";
@@ -79,7 +78,6 @@ const BlogsMain = () => {
         path={category || tag || author_role || search ? "/blogs" : false}
         isBlog={true}
       />
-      <PopularTagsNebula />
       <CommonContext value={{ filteredBlogs }}>
         <BlogsPrimary />
       </CommonContext>
