@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import ToptalBadge from "./ToptalBadge";
 import "./styles/Landing.css";
 
 const Landing = ({ children }: PropsWithChildren) => {
@@ -24,6 +25,9 @@ const Landing = ({ children }: PropsWithChildren) => {
               <div className="landing-h2-info">Engineer</div>
               <div className="landing-h2-info-1">Software</div>
             </h2>
+          </div>
+          <div className="landing-badge">
+            <ToptalBadge />
           </div>
         </div>
         {children}
