@@ -205,6 +205,13 @@
   z-index: 9;
 }
 
+.landing-badge {
+  position: absolute;
+  top: calc(12% + 125px);
+  left: 0;
+  z-index: 12;
+}
+
 .landing-info h3 {
   font-size: 22px;
   letter-spacing: 2px;
@@ -320,6 +327,10 @@ h2.landing-info-h2 {
   h2.landing-info-h2 {
     font-size: 55px;
   }
+
+  .landing-badge {
+    top: calc(12% + 155px);
+  }
 }
 
 @media screen and (min-width: 1025px) {
@@ -351,6 +362,11 @@ h2.landing-info-h2 {
     right: auto;
     left: 66%;
   }
+
+  .landing-badge {
+    left: 66%;
+    top: calc(51% + 86px);
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -368,6 +384,10 @@ h2.landing-info-h2 {
     text-align: left;
     transform: translate(0%, -50%);
     right: auto;
+    left: 70%;
+  }
+
+  .landing-badge {
     left: 70%;
   }
 }
@@ -393,5 +413,9 @@ h2.landing-info-h2 {
 
   h2.landing-info-h2 {
     font-size: 75px;
+  }
+
+  .landing-badge {
+    top: calc(51% + 125px);
   }
 }

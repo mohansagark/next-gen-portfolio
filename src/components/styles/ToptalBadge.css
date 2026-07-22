@@ -1,0 +1,98 @@
+.toptal-badge {
+  --badge-blue: #25a9ef;
+  --badge-deep-blue: #204ecf;
+  --badge-shape: polygon(50% 0, 100% 24%, 100% 76%, 50% 100%, 0 76%, 0 24%);
+  --toptal-badge-scale: 0.82;
+  color: var(--badge-deep-blue);
+  display: inline-block;
+  filter: drop-shadow(0 24px 38px rgba(6, 30, 96, 0.36));
+  position: relative;
+  text-align: center;
+  transform: scale(var(--toptal-badge-scale));
+  transform-origin: top left;
+  transition: color 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+  z-index: 12;
+}
+
+.toptal-badge:hover,
+.toptal-badge:focus-visible {
+  color: var(--badge-deep-blue);
+  filter: drop-shadow(0 28px 46px rgba(37, 169, 239, 0.36));
+  transform: scale(var(--toptal-badge-scale)) translateY(-4px);
+}
+
+.toptal-badge:focus-visible {
+  outline: 2px solid var(--accentColor);
+  outline-offset: 8px;
+}
+
+.toptal-badge-shell {
+  background: var(--badge-blue);
+  clip-path: var(--badge-shape);
+  display: inline-block;
+  padding: 6px;
+}
+
+.toptal-badge-card {
+  align-items: center;
+  background:
+    radial-gradient(circle at 20% -10%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at -20% 20%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 70% 100%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 120% 80%, #00c3ff -80%, #fff 30%);
+  background-blend-mode: multiply;
+  clip-path: var(--badge-shape);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 176px;
+  padding: 24px 0 40px;
+  width: 200px;
+}
+
+.toptal-badge-stars {
+  color: #00c3ff;
+}
+
+.toptal-badge-title {
+  display: block;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.toptal-badge-rule {
+  background: var(--badge-blue);
+  display: block;
+  height: 1px;
+  width: 120px;
+}
+
+.toptal-badge-vetted {
+  display: block;
+  font-size: 16px;
+  margin-bottom: -6px;
+}
+
+.toptal-badge-logo {
+  color: var(--badge-deep-blue);
+  display: block;
+  width: 100px;
+}
+
+.toptal-badge-cta {
+  background: #296bff;
+  border-radius: 6px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 4px 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .toptal-badge {
+    --toptal-badge-scale: 0.72;
+  }
+}
