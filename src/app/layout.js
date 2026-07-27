@@ -1,4 +1,5 @@
 import ThmeModeSwither from "@/components/shared/others/ThmeModeSwither";
+import LeoLoader from "@/components/shared/others/LeoLoader";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import ContentProvider from "@/components/providers/ContentProvider";
@@ -35,6 +36,7 @@ export default async function RootLayout({ children }) {
           <Suspense fallback={<></>}>{children}</Suspense>
         </ContentProvider>
         <ThmeModeSwither />
+        <LeoLoader workerUrl={process.env.NEXT_PUBLIC_LEO_WORKER_URL} />
         <Analytics />
       </body>
     </html>

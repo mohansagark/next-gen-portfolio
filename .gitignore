@@ -1,6 +1,7 @@
 node_modules
 yarn.lock
 .next
+.env*.local
 .DS_Storeout/
 out
 # macOS system files
