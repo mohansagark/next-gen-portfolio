@@ -32,6 +32,13 @@ function section(title, body) {
   return `=== ${title} ===\n${body}`.trim();
 }
 
+function truncate(text, maxLen) {
+  if (!text || text.length <= maxLen) return text;
+  const cut = text.slice(0, maxLen);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : maxLen)}...`;
+}
+
 const parts = [];
 
 const profile = readJson("profile.json");
@@ -71,9 +78,26 @@ if (education) {
   const degrees = (education.degrees ?? []).map((d) =>
     `- ${d.institution} — ${d.degree}${d.field ? `, ${d.field}` : ""} (${monthYear(d.startDate)}–${monthYear(d.endDate)})${d.grade ? `, grade ${d.grade}` : ""}`,
   );
-  const certs = (education.certifications ?? []).map((c) =>
-    `${c.title}${c.provider ? ` (${c.provider}` : ""}${c.issueDate ? `, ${monthYear(c.issueDate)}` : ""}${c.provider ? ")" : ""}`,
-  );
+  const byProvider = new Map();
+  for (const c of education.certifications ?? []) {
+    const key = c.provider || "";
+    if (!byProvider.has(key)) byProvider.set(key, []);
+    byProvider.get(key).push(c);
+  }
+  const certs = [];
+  for (const [provider, items] of byProvider) {
+    if (items.length <= 2) {
+      for (const c of items) {
+        certs.push(`${c.title}${provider ? ` (${provider}${c.issueDate ? `, ${monthYear(c.issueDate)}` : ""})` : ""}`);
+      }
+    } else {
+      const dates = items.map((c) => c.issueDate).filter(Boolean).sort();
+      const range = dates.length
+        ? dates[0] === dates[dates.length - 1] ? monthYear(dates[0]) : `${monthYear(dates[0])}–${monthYear(dates[dates.length - 1])}`
+        : "";
+      certs.push(`${items.length} courses from ${provider}${range ? ` (${range})` : ""}`);
+    }
+  }
   const body = [degrees.join("\n"), certs.length ? `Certifications: ${certs.join("; ")}` : ""].filter(Boolean).join("\n");
   parts.push(section("EDUCATION", body));
 }
@@ -92,7 +116,7 @@ if (services?.items?.length) {
 
 const testimonials = readJson("testimonials.json");
 if (testimonials?.items?.length) {
-  const lines = testimonials.items.map((t) => `- ${t.author} (${t.role}): "${t.quote}"`);
+  const lines = testimonials.items.map((t) => `- ${t.author} (${t.role}): "${truncate(t.quote, 140)}"`);
   parts.push(section("TESTIMONIALS", lines.join("\n")));
 }
 
