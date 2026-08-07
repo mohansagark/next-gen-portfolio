@@ -1,5 +1,4 @@
 "use client";
-import sliceText from "@/libs/sliceText";
 import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 
@@ -49,8 +48,8 @@ const HeroBreadcarumb = ({ title, text, actualItem, path }) => {
                 </p>
               </li>
               <li className="nav_item group relative">
-                <p className="font-medium text-white-color capitalize relative flex items-center gap-10px ">
-                  {sliceText(text, 23, true)}
+                <p className="font-medium text-white-color capitalize relative flex items-center gap-10px text-center max-w-4xl">
+                  {text}
                 </p>
               </li>
             </ul>
