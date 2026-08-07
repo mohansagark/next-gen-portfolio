@@ -20,6 +20,8 @@ Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked Gi
 | 8 | FLUX cover quality inconsistent run-to-run | `daily-dev-digest` |
 | 9 | Copyright year → **2026** | `next-gen-portfolio` |
 | 10 | Voice bot defaults to chat; voice only if visitor turns it on | `next-gen-portfolio` |
+| 11 | Move “Read more” button to the right side | `next-gen-portfolio` |
+| 12 | Author-name hover → small modal with LinkedIn profile card | `next-gen-portfolio` |
 
 ---
 
@@ -105,6 +107,24 @@ Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked Gi
 
 ---
 
+## 11. “Read more” button on the right
+
+**Home:** `next-gen-portfolio` blog card / list components (e.g. `BlogSingle.js` and related).
+
+**Problem:** “Read more” control is not right-aligned.
+
+**Desired:** Place the **Read more** button on the **right** side of the card/row.
+
+## 12. Author hover → LinkedIn profile card modal
+
+**Home:** `next-gen-portfolio` blog list + detail author UI.
+
+**Problem:** Author name is plain text / link with no profile preview.
+
+**Desired:** On hover (and accessible focus), open a **small modal/popover** showing a **LinkedIn profile card** for the author (Mohan’s LinkedIn). Dismiss on mouse leave / Esc / outside click; keyboard-accessible.
+
+---
+
 ## Out of scope for this note
 
 - Implementing fixes (separate PRs per home repo).
@@ -112,8 +132,9 @@ Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked Gi
 
 ## Suggested execution order
 
-1. Quick UI wins: #3, #4, #5, #7, #9  
-2. Voice default: #10  
-3. Search depth: #6 (may need index fields)  
-4. Content hygiene: #2, then #1  
-5. FLUX consistency: #8 (research + prompt/steps experiments)
+1. Quick UI wins: #3, #4, #5, #7, #9, #11  
+2. Author LinkedIn hover card: #12  
+3. Voice default: #10  
+4. Search depth: #6 (may need index fields)  
+5. Content hygiene: #2, then #1  
+6. FLUX consistency: #8 (research + prompt/steps experiments)
