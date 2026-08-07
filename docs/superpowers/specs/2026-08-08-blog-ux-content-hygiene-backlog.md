@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-08  
 **Status:** Open — recorded for resolution (not yet implemented)  
-**Source:** Product review after cover self-heal rollout  
+**Source:** Product review after cover self-heal rollout; SEO structure/typography research 2026-08-08  
 
 Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked GitHub issues track execution.
 
@@ -22,6 +22,12 @@ Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked Gi
 | 10 | Voice bot defaults to chat; voice only if visitor turns it on | `next-gen-portfolio` |
 | 11 | Move “Read more” button to the right side | `next-gen-portfolio` |
 | 12 | Author-name hover → small modal with LinkedIn profile card | `next-gen-portfolio` |
+| 13 | SEO: single H1 per post (no duplicate hero/article H1) | `next-gen-portfolio` |
+| 14 | SEO: answer-first opener + Key Takeaways high on page | `daily-dev-digest` (+ page template) |
+| 15 | SEO: question-style H2s + FAQ section in generate/repair | `daily-dev-digest` |
+| 16 | SEO: article typography — ~18px body, 1.5 line-height, ~65ch measure | `next-gen-portfolio` |
+| 17 | SEO: Article + BreadcrumbList (+ FAQPage) JSON-LD | `next-gen-portfolio` |
+| 18 | SEO: TOC for long posts | `next-gen-portfolio` |
 
 ---
 
@@ -123,18 +129,69 @@ Cross-cutting backlog. Own each item in the repo noted under **Home**. Linked Gi
 
 **Desired:** On hover (and accessible focus), open a **small modal/popover** showing a **LinkedIn profile card** for the author (Mohan’s LinkedIn). Dismiss on mouse leave / Esc / outside click; keyboard-accessible.
 
+
+## 13. SEO — single H1 per post
+
+**Home:** `next-gen-portfolio` (breadcrumb hero + `BlogDetailsPrimary`).
+
+**Problem:** Post pages can expose more than one `<h1>` (hero title + article title), which weakens heading semantics for crawlers.
+
+**Desired:** Exactly **one H1** (the post title). Breadcrumb/hero label can be a styled `<p>`/`<div>` or demote duplicate to non-heading.
+
+## 14. SEO — answer-first + Key Takeaways placement
+
+**Home:** `daily-dev-digest` generate/repair prompts; confirm template order on `next-gen-portfolio`.
+
+**Problem:** Posts may bury the main answer under long preamble.
+
+**Desired:** Open with a **40–60 word direct answer**, then a single **Key Takeaways** block near the top (ties to #2).
+
+## 15. SEO — question H2s + FAQ
+
+**Home:** `daily-dev-digest` generate + repair prompts; optional legacy hygiene.
+
+**Problem:** Flat/label-style H2s and missing FAQ reduce passage ranking and AI-overview citation odds.
+
+**Desired:** Prefer **question-style H2s** (PAA-shaped); add a short **FAQ** section when natural; keep strict H2→H3 hierarchy (no skipped levels, no body H1).
+
+## 16. SEO — article typography & measure
+
+**Home:** `next-gen-portfolio` article `prose` styles (`BlogDetailsPrimary`).
+
+**Problem:** Wide `max-w-none` prose can exceed ~75ch/line; body may be below long-form comfort size.
+
+**Desired:** Body **~18px** (min 16px), **line-height ~1.5–1.6**, content column **~50–75ch** (`max-width: ~65ch`); WCAG contrast ≥ 4.5:1; font-display swap / no CLS.
+
+## 17. SEO — structured data
+
+**Home:** `next-gen-portfolio` blog detail page.
+
+**Problem:** Missing or incomplete JSON-LD for articles/breadcrumbs/FAQ.
+
+**Desired:** Emit **Article** (with author) + **BreadcrumbList**; add **FAQPage** when an FAQ section exists. Valid in Rich Results test.
+
+## 18. SEO — table of contents (long posts)
+
+**Home:** `next-gen-portfolio` blog detail (optional generate of anchor IDs in digest).
+
+**Problem:** Long posts lack in-page navigation for users and crawlers.
+
+**Desired:** Auto TOC from H2/H3 with anchor links when post length exceeds a threshold (e.g. ≥ ~1,500 words or ≥ 4 H2s).
+
 ---
 
 ## Out of scope for this note
 
 - Implementing fixes (separate PRs per home repo).
 - Changing heal daily limit / cron (already shipped).
+- Breadcrumb full-title display (shipped — no ellipsis).
 
 ## Suggested execution order
 
 1. Quick UI wins: #3, #4, #5, #7, #9, #11  
-2. Author LinkedIn hover card: #12  
+2. Author LinkedIn hover card: #12 (+ E-E-A-T with #17 author schema)  
 3. Voice default: #10  
-4. Search depth: #6 (may need index fields)  
-5. Content hygiene: #2, then #1  
-6. FLUX consistency: #8 (research + prompt/steps experiments)
+4. SEO template: #13, #16, #17, #18  
+5. Search depth: #6 (may need index fields)  
+6. Content SEO hygiene: #14, #15, #2, then #1  
+7. FLUX consistency: #8 (research + prompt/steps experiments)
