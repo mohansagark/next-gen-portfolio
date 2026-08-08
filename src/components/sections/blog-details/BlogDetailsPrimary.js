@@ -122,17 +122,9 @@ const BlogDetailsPrimary = ({
                   </div>
                 ) : null}
 
-                {showToc ? <BlogTableOfContents headings={headings} /> : null}
-
-                {/* post body: ~18px / 1.5 lh / ~65ch measure */}
-                <div
-                  className="prose prose-lg dark:prose-invert max-w-[65ch] text-lg leading-normal break-words prose-p:leading-[1.5] prose-li:leading-[1.5] prose-headings:text-primary-color-light dark:prose-headings:text-white-color prose-p:text-primary-color-light dark:prose-p:text-white-color prose-strong:text-primary-color-light dark:prose-strong:text-white-color prose-a:text-primary-color prose-li:text-primary-color-light dark:prose-li:text-white-color prose-pre:overflow-x-auto prose-img:rounded-lg"
-                  dangerouslySetInnerHTML={{ __html: htmlWithIds }}
-                />
-
-                {/* key takeaways (only when present) */}
+                {/* key takeaways high on page (body HTML no longer includes this section) */}
                 {keyTakeaways?.length ? (
-                  <div className="mt-30px max-w-[65ch]">
+                  <div className="mb-8 max-w-[65ch]">
                     <h2 className="text-primary-color-light dark:text-white-color text-2xl font-bold mb-4">
                       Key Takeaways
                     </h2>
@@ -151,6 +143,14 @@ const BlogDetailsPrimary = ({
                     </ul>
                   </div>
                 ) : null}
+
+                {showToc ? <BlogTableOfContents headings={headings} /> : null}
+
+                {/* post body: ~18px / 1.5 lh / ~65ch measure */}
+                <div
+                  className="prose prose-lg dark:prose-invert max-w-[65ch] text-lg leading-normal break-words prose-p:leading-[1.5] prose-li:leading-[1.5] prose-headings:text-primary-color-light dark:prose-headings:text-white-color prose-p:text-primary-color-light dark:prose-p:text-white-color prose-strong:text-primary-color-light dark:prose-strong:text-white-color prose-a:text-primary-color prose-li:text-primary-color-light dark:prose-li:text-white-color prose-pre:overflow-x-auto prose-img:rounded-lg"
+                  dangerouslySetInnerHTML={{ __html: htmlWithIds }}
+                />
               </article>
 
               {/* <!-- tags and social --> */}
