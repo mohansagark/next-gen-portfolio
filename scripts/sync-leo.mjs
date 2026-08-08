@@ -40,7 +40,7 @@ const WRANGLER = `wrangler@${process.env.WRANGLER_VERSION || "4.42.0"}`;
 
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { stdio: "inherit", env: process.env, ...opts });
-  if (r.status !== 0) process.exit(r.status || 1);
+  return r.status === 0;
 }
 
 /**
@@ -76,7 +76,18 @@ if (!existsSync(buildScript)) {
   process.exit(1);
 }
 
-run(process.execPath, [buildScript]);
+// Non-fatal, for the same reason a KV failure is: the portfolio does not need Leo config to
+// ship. An unreachable content SoT (admin down, not yet published) or a validation failure
+// must not block deploying the site. Nothing reaches KV in that case, so Leo keeps its last
+// synced config and LeoLoader falls back to its inline widget defaults.
+// `npm run build:leo` stays strict for running this deliberately.
+if (!run(process.execPath, [buildScript])) {
+  console.error(
+    "[sync-leo] Leo config build FAILED (see the error above) — skipping KV sync. The site " +
+      "will still deploy; Leo keeps its previously synced config. Fix the content source and redeploy.",
+  );
+  process.exit(0);
+}
 
 // Vercel builds a preview for every branch and every PR. They all share one production KV
 // namespace, so an ungated sync means any preview silently repoints live Leo.
