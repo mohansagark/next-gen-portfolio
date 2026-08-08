@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "fetch:blogs": "node scripts/fetch-blog-content.mjs",
-    "prebuild": "npm run fetch:blogs",
-    "predev": "npm run fetch:blogs",
+    "build:leo": "node scripts/build-leo-config.mjs",
+    "sync:leo": "node scripts/sync-leo.mjs",
+    "prebuild": "npm run fetch:blogs && npm run sync:leo",
+    "predev": "npm run fetch:blogs && node scripts/build-leo-config.mjs --optional",
     "dev": "next dev --turbopack",
     "build": "next build",
     "export": "next build",
