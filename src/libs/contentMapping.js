@@ -14,7 +14,17 @@ export const FILES_BASE = "https://admin.devmohan.in";
 export const resolveFileUrl = (p) =>
   p && p.startsWith("/") ? `${FILES_BASE}${p}` : p || "";
 
-const img = (p) => (p ? `${RAW_BASE}${p}` : "");
+// Same contract as resolveFileUrl: repo-relative paths from the admin's image
+// widget resolve against the admin host, while a value the editor pasted as an
+// absolute (or protocol-relative) URL is already complete and passes through.
+// Prefixing those produced "https://admin.devmohan.inhttps://..." — a broken
+// image everywhere icons, logos, avatars and covers are rendered.
+const isAbsoluteUrl = (p) => /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(p);
+
+const img = (p) => {
+  if (!p) return "";
+  return isAbsoluteUrl(p) ? p : `${RAW_BASE}${p}`;
+};
 
 const MONTH_NAMES = {
   "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun",

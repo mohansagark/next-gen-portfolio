@@ -11,7 +11,8 @@
     "export": "next build",
     "deploy:build": "npm run build && npm run export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test \"src/libs/__tests__/*.test.mjs\""
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
