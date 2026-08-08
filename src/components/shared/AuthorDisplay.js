@@ -335,7 +335,7 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
             </div>
           ) : null}
 
-          {/* Mounted under the loader so LinkedIn can paint; fallback text is sr-only. */}
+          {/* Mounted under the loader so LinkedIn can paint; fallback text is visually hidden. */}
           <div
             key={theme}
             className={badgeReady ? "block" : "opacity-0"}
