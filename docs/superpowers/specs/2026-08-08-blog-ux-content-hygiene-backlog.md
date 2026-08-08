@@ -1,10 +1,10 @@
 # next-gen-portfolio — Blog UX & SEO Backlog
 
 **Date:** 2026-08-08  
-**Status:** Mostly shipped (#32); open follow-ups **#19** (LinkedIn badge), **#20** (scroll-to-top)  
+**Status:** Mostly shipped (#32); open follow-ups **#19**–**#21**  
 **Repo:** `next-gen-portfolio` only  
 **GitHub (original):** https://github.com/mohansagark/next-gen-portfolio/issues/26  
-**GitHub (open follow-ups):** https://github.com/mohansagark/next-gen-portfolio/issues/33 · https://github.com/mohansagark/next-gen-portfolio/issues/35  
+**GitHub (open follow-ups):** #33 · #35 · #36  
 
 **Sister backlog (digest):** https://github.com/mohansagark/daily-dev-digest/issues/12  
 `daily-dev-digest` → `docs/superpowers/specs/2026-08-08-content-slug-flux-hygiene-backlog.md`
@@ -30,6 +30,7 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 | 18 | SEO: TOC for long posts | Shipped (#32) |
 | **19** | **Author hover uses LinkedIn official profile badge (not custom card)** | **Open (#33)** |
 | **20** | **Move scroll-to-top control to bottom-left (chatbot overlap)** | **Open (#35)** |
+| **21** | **Contact section: map view container (not address text only)** | **Open (#36)** |
 
 ---
 
@@ -162,6 +163,22 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 - No overlap with Leo / chatbot orb
 - Adequate clearance from screen edges
 
+## 21. Contact section — map view container
+
+**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/36  
+**Surface:** Main contact (`Contact1`) — Address currently shows `profile.location` as text only
+
+**Problem:** Location is plain text (e.g. Hyderabad). No map / place visual, so address feels weaker than phone/email.
+
+**Desired:** Add a **map view container** in the contact section. Prefer an embedded interactive map (Google Maps / OpenStreetMap iframe) for the configured location; keep the address text as a label or caption (not an empty iframe with no readable address).
+
+**Acceptance:**
+- Visible map container on desktop and mobile
+- Reflects profile location
+- Address text remains readable
+- Contact form column layout intact
+- Looks intentional in light and dark mode
+
 ---
 
 ## Out of scope (this repo)
@@ -179,3 +196,4 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 5. ~~Search depth: #6~~ (shipped #32)  
 6. **Next:** #19 LinkedIn official badge  
 7. **Next:** #20 Scroll-to-top → bottom-left  
+8. **Next:** #21 Contact map view container  
