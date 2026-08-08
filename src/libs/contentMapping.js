@@ -163,6 +163,7 @@ const SOCIAL_ICONS = {
   instagram: "fa-brands fa-instagram",
   linkedin: "fa-brands fa-linkedin-in",
   github: "fa-brands fa-github",
+  medium: "fa-brands fa-medium",
 };
 
 export function mapSocials(socials) {

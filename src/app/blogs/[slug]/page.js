@@ -1,5 +1,6 @@
 import BlogDetailsMain from "@/components/layout/main/BlogDetailsMain";
 import PageWrapper from "@/components/shared/wrappers/PageWrapper";
+import { buildBlogJsonLd } from "@/libs/blogJsonLd";
 import getBlogs from "@/libs/getBlogs";
 import { notFound } from "next/navigation";
 
@@ -45,8 +46,19 @@ export default async function BlogDetails(context) {
     notFound();
   }
 
+  const jsonLd = buildBlogJsonLd(isExistBlog, {
+    blogBase: BLOG_BASE,
+    slug,
+  });
+
   return (
     <PageWrapper isInnerPage={true}>
+      {jsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      ) : null}
       <BlogDetailsMain blog={isExistBlog} />
     </PageWrapper>
   );

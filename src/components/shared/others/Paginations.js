@@ -39,10 +39,10 @@ const Paginations = ({ paginationDetails }) => {
   return (
     <nav
       aria-label="Blog pagination"
-      className="wow fadeInUp"
+      className="wow fadeInUp w-full"
       data-wow-delay=".3s"
     >
-      <ul className="paginations flex flex-nowrap justify-center items-center gap-2 sm:gap-3">
+      <ul className="paginations flex flex-nowrap justify-between sm:justify-between items-center gap-2 sm:gap-3 w-full">
         {/* previous */}
         <li>
           <Link

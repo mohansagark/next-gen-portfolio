@@ -151,16 +151,18 @@ const Footer3 = () => {
                 </li>
                 <li className="nav_item group relative ">
                   <Link
-                    href="#"
+                    href="https://mohansagark.medium.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-size-15 font-normal text-seondary-color dark:text-white-color hover:text-primary-color dark:hover:text-primary-color capitalize flex gap-2 items-center "
                   >
                     <span
                       className="text-primary-color group-hover:text-body-color dark:text-white-color
                   text-size-13 border border-primary-color dark:border-border-color-3 dark:group-hover:border-primary-color w-30px h-30px rounded-full flex items-center justify-center overflow-hidden relative z-0 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-full after:h-full after:scale-0 after:bg-primary-color group-hover:after:scale-105 after:transition-all after:duration-300 after:z-[-1] after:rounded-full"
                     >
-                      <i className="fa-brands fa-twitter"></i>
+                      <i className="fa-brands fa-medium"></i>
                     </span>{" "}
-                    Twitter
+                    Medium
                   </Link>
                 </li>
               </ul>
@@ -215,7 +217,7 @@ const Footer3 = () => {
           </div>
           <div className="flex flex-col items-center py-25px md:py-35px  px-15px">
             <div className="copyright text-gray-color dark:text-body-color whitespace-nowrap text-sm md:text-base ">
-              © 2025 All rights reserved by
+              © {new Date().getFullYear()} All rights reserved by
               <Link
                 href="/"
                 className="text-primary-color-light dark:text-white-color hover:text-primary-color  dark:hover:text-primary-color "

@@ -50,7 +50,9 @@ const Footer2 = () => {
             <ul className="flex justify-center xl:-mx-10px 2xl:mx-0 items-center flex-wrap gap-10px md:gap-0  ">
               <li className=" group md:border-r md:border-border-color dark:md:border-white-color-3 last:border-0">
                 <Link
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/mohansagarkillamsetty"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className=" flex justify-center items-center w-160px sm:w-170px h-auto  md:h-160px lg:w-230px lg:h-210px xl:w-278px xl:h-238px p-10px relative text-base sm:text-lg xl:text-xl font-medium text-seondary-color dark:text-white-color tracking-normal xl:tracking-[0.02em] leading-1"
                 >
                   <span className=" transition-all duration-700 ease-in-out opacity-100 visible group-hover:invisible group-hover:opacity-0  group-hover:-translate-y-full inline-block">
@@ -63,7 +65,9 @@ const Footer2 = () => {
               </li>
               <li className=" group md:border-r md:border-border-color dark:md:border-white-color-3 last:border-0">
                 <Link
-                  href="https://www.instagram.com"
+                  href="https://www.instagram.com/mohansagark"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className=" flex justify-center items-center w-160px sm:w-170px h-auto  md:h-160px lg:w-230px lg:h-210px xl:w-278px xl:h-238px p-10px relative text-base sm:text-lg xl:text-xl font-medium text-seondary-color dark:text-white-color tracking-normal xl:tracking-[0.02em] leading-1"
                 >
                   <span className=" transition-all duration-700 ease-in-out opacity-100 visible group-hover:invisible group-hover:opacity-0  group-hover:-translate-y-full inline-block">
@@ -76,20 +80,24 @@ const Footer2 = () => {
               </li>
               <li className=" group md:border-r md:border-border-color dark:md:border-white-color-3 last:border-0">
                 <Link
-                  href="https://x.com"
+                  href="https://mohansagark.medium.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className=" flex justify-center items-center w-160px sm:w-170px h-auto  md:h-160px lg:w-230px lg:h-210px xl:w-278px xl:h-238px p-10px relative text-base sm:text-lg xl:text-xl font-medium text-seondary-color dark:text-white-color tracking-normal xl:tracking-[0.02em] leading-1"
                 >
                   <span className=" transition-all duration-700 ease-in-out opacity-100 visible group-hover:invisible group-hover:opacity-0  group-hover:-translate-y-full inline-block">
-                    My Twitter
+                    My Medium
                   </span>
                   <span className="text-seondary-color  border border-seondary-color  dark:text-white-color dark:border-white-color w-35px h-35px rounded-full flex items-center justify-center overflow-hidden z-0 absolute transition-all duration-700  ease-in-out invisible opacity-0 group-hover:opacity-100 group-hover:visible left-1/2  -translate-x-1/2 translate-y-full group-hover:translate-y-0 text-base leading-1 font-normal ">
-                    <i className="fab fa-twitter"></i>
+                    <i className="fa-brands fa-medium"></i>
                   </span>
                 </Link>
               </li>
               <li className=" group md:border-r md:border-border-color dark:md:border-white-color-3 last:border-0">
                 <Link
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/in/mohansagark/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className=" flex justify-center items-center w-160px sm:w-170px h-auto  md:h-160px lg:w-230px lg:h-210px xl:w-278px xl:h-238px p-10px relative text-base sm:text-lg xl:text-xl font-medium text-seondary-color dark:text-white-color tracking-normal xl:tracking-[0.02em] leading-1"
                 >
                   <span className=" transition-all duration-700 ease-in-out opacity-100 visible group-hover:invisible group-hover:opacity-0  group-hover:-translate-y-full inline-block">
@@ -106,7 +114,7 @@ const Footer2 = () => {
 
         <div className="flex flex-col items-center py-25px md:py-35px border-t border-border-color dark:border-white-color-3 px-15px">
           <div className="copyright text-gray-color dark:text-body-color whitespace-nowrap text-sm md:text-base ">
-            © 2025 All rights reserved by
+            © {new Date().getFullYear()} All rights reserved by
             <Link
               href="/"
               className="text-primary-color-light dark:text-white-color hover:text-primary-color  dark:hover:text-primary-color "

@@ -53,18 +53,18 @@ const BlogSingle = ({ blog }) => {
                           key={1000 + idx}
                           className="text-primary-color dark:text-white-color "
                         >
-                          <i
-                            className={`${iconName} mr-1 text-primary-color transition-all duration-500`}
-                          ></i>{" "}
                           {path ? (
-                            <Link
-                              href={`/blogs?author=${makePath(author)}`}
-                              className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500 capitalize"
-                            >
-                              By {name}
-                            </Link>
+                            <AuthorDisplay
+                              author={author || name}
+                              className="text-primary-color dark:text-white-color"
+                            />
                           ) : (
-                            name
+                            <>
+                              <i
+                                className={`${iconName} mr-1 text-primary-color transition-all duration-500`}
+                              ></i>{" "}
+                              {name}
+                            </>
                           )}
                         </li>
                       ))
@@ -93,7 +93,7 @@ const BlogSingle = ({ blog }) => {
                 <p className="text-primary-color-light dark:text-white-color mb-5 md:mb-30px">
                   {desc}
                 </p>
-                <div>
+                <div className="flex justify-end">
                   <Link
                     href={`/blogs/${id}`}
                     className="text-size-15 font-bold text-white-color capitalize py-17px px-35px bg-200 bg-gradient-secondary hover:bg-[-100%] rounded-full leading-1 transition-all duration-300"

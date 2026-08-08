@@ -2,16 +2,24 @@
 import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 
-const HeroBreadcarumb = ({ title, text, actualItem, path }) => {
+const HeroBreadcarumb = ({
+  title,
+  text,
+  actualItem,
+  path,
+  /** Use a non-heading element on blog detail pages so the article keeps the sole H1. */
+  titleAs = "h1",
+}) => {
   const homeLink = useHomeLink();
+  const TitleTag = titleAs === "h1" ? "h1" : "p";
   return (
     <section>
       <div className="hero-breadcurmb pt-150px md:pt-40 lg:pt-200px pb-50px md:pb-60px lg:b-100px bg-[url('/img/breadcrumb/breadcrumb-bg.jpg')] bg-cover bg-center bg-no-repeat relative z-1 after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primary-color-light after:-z-1 after:opacity-70">
         <div className="container">
           <div className="flex flex-col items-center">
-            <h1 className="text-size-35 md:text-size-40 lg:text-size-50 font-bold text-white-color mb-15px capitalize text-center">
+            <TitleTag className="text-size-35 md:text-size-40 lg:text-size-50 font-bold text-white-color mb-15px capitalize text-center">
               {title}
-            </h1>
+            </TitleTag>
             {/* <!-- breadcrumbs --> */}
             <ul className="nav flex flex-wrap justify-center items-center gap-x-3">
               <li className="nav_item group relative">

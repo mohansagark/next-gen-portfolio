@@ -17,6 +17,7 @@ export default function LeoLoader({ workerUrl }) {
         consentText: "I agree to share my info so I can be followed up with.",
         privacyPolicyUrl: null,
       },
+      // Chat-first: TTS stays off until the visitor unmutes the sound control.
       voice: { enabled: true, speakByDefault: false },
     };
     const existing = document.querySelector("script[data-ai-voice-bot]");
