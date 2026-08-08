@@ -40,9 +40,10 @@ function endCountForWidth(width) {
   return 3;
 }
 
-/** Width every cell in a full bar occupies: n cells sit between n+1 gaps. */
+/** Packed flex row width: n cells with (n-1) gaps between them. */
 function widthForCells(cellCount, item, gap) {
-  return cellCount * item + (cellCount + 1) * gap;
+  if (cellCount <= 0) return 0;
+  return cellCount * item + Math.max(0, cellCount - 1) * gap;
 }
 
 /** Page-number cells that fit (prev/next + up to ~25% reserved for dots). */
@@ -59,9 +60,15 @@ function pageSlotsForWidth(width, item, gap) {
   return Math.max(MIN_SLOTS, slots);
 }
 
-/** True when even the minimum full bar would overflow and clip the arrows. */
-function needsCompactBar(width, item, gap) {
-  if (!width) return false;
+/**
+ * True when the page buttons would overflow and clip the arrows.
+ * Few-page lists skip the dots reserve so they stay as real buttons.
+ */
+function needsCompactBar(width, item, gap, totalPages) {
+  if (!width || !totalPages) return false;
+  if (totalPages <= MIN_SLOTS) {
+    return widthForCells(totalPages + SIDE_CONTROLS, item, gap) > width;
+  }
   const cells = MIN_SLOTS + SIDE_CONTROLS;
   return widthForCells(cells, item, gap) + MIN_DOTS_PX * 2 > width;
 }
@@ -194,7 +201,7 @@ const Paginations = ({ paginationDetails }) => {
 
   const itemPx = isSmUp ? ITEM_PX_SM : ITEM_PX_XS;
   const gapPx = isSmUp ? GAP_PX_SM : GAP_PX_XS;
-  const compact = needsCompactBar(barWidth, itemPx, gapPx);
+  const compact = needsCompactBar(barWidth, itemPx, gapPx, totalPages);
 
   const pages = useMemo(() => {
     if (compact) return [];

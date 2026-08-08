@@ -22,6 +22,9 @@ const BlogSearchWidget = () => {
   useEffect(() => {
     const q = searchParams?.get("search") || "";
     if (q === lastPushedRef.current) return;
+    // Cancel an in-flight debounce so a stale applySearch can't overwrite
+    // a just-applied ?category= / cleared search from another control.
+    clearTimeout(debounceRef.current);
     lastPushedRef.current = q;
     setSearchTerm(q ? makeText(q) : "");
   }, [searchParams]);
@@ -35,7 +38,7 @@ const BlogSearchWidget = () => {
     else params.delete("search");
     params.delete("page");
     const qs = params.toString();
-    router.replace(qs ? `/blogs?${qs}` : "/blogs");
+    router.replace(qs ? `/blogs?${qs}` : "/blogs", { scroll: false });
   };
 
   const handleChange = (e) => {

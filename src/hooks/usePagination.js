@@ -83,10 +83,17 @@ const usePagination = (
     // otherwise the viewport stays parked on the pagination bar.
     e?.preventDefault?.();
     setPageInUrl(id);
-    if (typeof document === "undefined") return;
-    document
-      .getElementById(scrollTargetId)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return;
+    }
+    const target = document.getElementById(scrollTargetId);
+    if (!target) return;
+    // Offset for the sticky header so the section title isn't covered.
+    const header = document.querySelector(".header-area.header-sticky");
+    const headerOffset = header?.getBoundingClientRect().height ?? 0;
+    const top =
+      target.getBoundingClientRect().top + window.scrollY - headerOffset - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   };
 
   let showMore = false;

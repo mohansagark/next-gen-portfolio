@@ -25,7 +25,7 @@ const BlogsPrimary = () => {
   const totalBlogs = filteredBlogs?.length;
   const totalBlogsToShow = currentItems?.length;
   return (
-    <section id="blogs">
+    <section id="blogs" className="scroll-mt-24 lg:scroll-mt-28">
       <div className="py-60px md:py-20 lg:py-100px xl:py-30 dark:bg-black-color">
         <div className="container">
           <div className="flex flex-col gap-10 lg:grid lg:gap-6 lg:grid-cols-12">
