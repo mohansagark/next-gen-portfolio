@@ -18,6 +18,10 @@ const LINKEDIN_SCRIPT_SRC = "https://platform.linkedin.com/badges/js/profile.js"
 const PANEL_GAP = 8;
 const VIEWPORT_MARGIN = 16;
 const CLOSE_DELAY = 200;
+const BADGE_FAIL_MS = 8000;
+// Medium HORIZONTAL badge footprint used as the loading placeholder.
+const PLACEHOLDER_WIDTH = 300;
+const PLACEHOLDER_HEIGHT = 120;
 
 // One shared <script> for the whole page, loaded on first hover only.
 // Rendering it per instance is wrong: the loader dedupes on src, so every
@@ -25,14 +29,14 @@ const CLOSE_DELAY = 200;
 let scriptPromise = null;
 
 function loadLinkedInScript() {
-  if (typeof window === "undefined") return Promise.resolve();
+  if (typeof window === "undefined") return Promise.resolve(false);
   if (scriptPromise) return scriptPromise;
   scriptPromise = new Promise((resolve) => {
     const el = document.createElement("script");
     el.src = LINKEDIN_SCRIPT_SRC;
     el.async = true;
-    el.onload = () => resolve();
-    el.onerror = () => resolve(); // fallback link stays usable
+    el.onload = () => resolve(true);
+    el.onerror = () => resolve(false);
     document.body.appendChild(el);
   });
   return scriptPromise;
@@ -77,12 +81,43 @@ function renderLinkedInBadges() {
   }
 }
 
+function isBadgePainted(node) {
+  if (!node) return false;
+  return Boolean(
+    node.querySelector("iframe") ||
+      node.querySelector(".profile-badge") ||
+      node.querySelector("[class*='LI-profile-badge'] iframe")
+  );
+}
+
+function BadgeLoader() {
+  return (
+    <div
+      className="load-text"
+      style={{ fontSize: 12, letterSpacing: "0.35em" }}
+      aria-live="polite"
+      aria-label="Loading LinkedIn badge"
+    >
+      <span>L</span>
+      <span>o</span>
+      <span>a</span>
+      <span>d</span>
+      <span>i</span>
+      <span>n</span>
+      <span>g</span>
+    </div>
+  );
+}
+
 const AuthorDisplay = ({ author, className = "", showBy = true }) => {
   const isBot = author === "Agent Bot";
   const [open, setOpen] = useState(false);
   const [scriptReady, setScriptReady] = useState(false);
+  const [badgeReady, setBadgeReady] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
   const rootRef = useRef(null);
   const panelRef = useRef(null);
+  const badgeRef = useRef(null);
   const closeTimer = useRef(null);
   const panelId = useId();
   const theme = useTheme();
@@ -102,10 +137,29 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
   const openPanel = useCallback(() => {
     cancelClose();
     setOpen(true);
-    loadLinkedInScript().then(() => setScriptReady(true));
+    loadLinkedInScript().then((ok) => {
+      if (!ok) {
+        setLoadFailed(true);
+        return;
+      }
+      setScriptReady(true);
+    });
   }, [cancelClose]);
 
   useEffect(() => cancelClose, [cancelClose]);
+
+  // Reset paint state whenever the panel closes or the theme remounts the badge.
+  useEffect(() => {
+    if (!open) {
+      setBadgeReady(false);
+      setLoadFailed(false);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    setBadgeReady(false);
+    setLoadFailed(false);
+  }, [theme]);
 
   // The panel is portalled to the end of <body>, so Tab from the trigger would
   // skip past it — hand focus over explicitly for keyboard users.
@@ -179,7 +233,6 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
     place();
     window.addEventListener("scroll", place, true);
     window.addEventListener("resize", place);
-    // Badge iframe resizes once LinkedIn paints it — reposition when it does.
     const observer = new ResizeObserver(place);
     if (panelRef.current) observer.observe(panelRef.current);
     return () => {
@@ -187,14 +240,43 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
       window.removeEventListener("resize", place);
       observer.disconnect();
     };
-  }, [open, theme, scriptReady]);
+  }, [open, theme, scriptReady, badgeReady, loadFailed]);
 
-  // LinkedIn only paints badges present at script load; re-scan after hover mount.
+  // LinkedIn only paints badges present at script load; re-scan after hover mount
+  // and watch until the iframe replaces the fallback text link.
   useEffect(() => {
-    if (!open || !scriptReady) return;
+    if (!open || !scriptReady || loadFailed) return;
+    const el = badgeRef.current;
+    if (!el) return;
+
+    let done = false;
+    const markReady = () => {
+      if (done || !isBadgePainted(el)) return false;
+      done = true;
+      setBadgeReady(true);
+      return true;
+    };
+
     const id = window.requestAnimationFrame(() => renderLinkedInBadges());
-    return () => window.cancelAnimationFrame(id);
-  }, [open, scriptReady, theme]);
+    if (markReady()) {
+      return () => window.cancelAnimationFrame(id);
+    }
+
+    const mo = new MutationObserver(() => {
+      if (markReady()) mo.disconnect();
+    });
+    mo.observe(el, { childList: true, subtree: true });
+
+    const failTimer = window.setTimeout(() => {
+      if (!markReady()) setLoadFailed(true);
+    }, BADGE_FAIL_MS);
+
+    return () => {
+      window.cancelAnimationFrame(id);
+      mo.disconnect();
+      window.clearTimeout(failTimer);
+    };
+  }, [open, scriptReady, theme, loadFailed]);
 
   if (isBot) {
     return (
@@ -206,39 +288,92 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
     );
   }
 
+  const showLoader = open && !badgeReady && !loadFailed;
+
   const panel = (
     <div
       ref={panelRef}
       id={panelId}
       role="dialog"
       aria-label={`${author} LinkedIn profile`}
-      className="fixed z-[1000] text-left normal-case"
+      aria-busy={showLoader}
+      className="fixed z-[1000] text-left normal-case leading-none"
       style={{ top: -9999, left: -9999, maxWidth: `calc(100vw - ${VIEWPORT_MARGIN * 2}px)` }}
       onMouseEnter={cancelClose}
       onMouseLeave={scheduleClose}
       onBlur={onPanelBlur}
     >
-      <div className="rounded-lg border border-border-color dark:border-gray-color-3 bg-white dark:bg-primary-color-light p-2 shadow-lg overflow-auto">
-        <div
-          key={theme}
-          className="badge-base LI-profile-badge"
-          data-locale="en_US"
-          data-size="medium"
-          data-theme={theme}
-          data-type="HORIZONTAL"
-          data-vanity={LINKEDIN_VANITY}
-          data-version="v1"
+      {loadFailed ? (
+        <a
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border-color dark:border-gray-color-3 bg-white dark:bg-primary-color-light px-3 py-2 text-xs font-semibold text-[#0A66C2] shadow-lg hover:underline"
         >
-          <a
-            className="badge-base__link LI-simple-link"
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          View LinkedIn profile
+          <i
+            className="fa-solid fa-arrow-up-right-from-square text-[10px]"
+            aria-hidden="true"
+          />
+        </a>
+      ) : (
+        <div
+          className="relative overflow-hidden"
+          style={
+            badgeReady
+              ? undefined
+              : {
+                  width: PLACEHOLDER_WIDTH,
+                  height: PLACEHOLDER_HEIGHT,
+                  maxWidth: "100%",
+                }
+          }
+        >
+          {showLoader ? (
+            <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg border border-border-color dark:border-gray-color-3 bg-white dark:bg-primary-color-light shadow-lg">
+              <BadgeLoader />
+            </div>
+          ) : null}
+
+          {/* Mounted under the loader so LinkedIn can paint; fallback text is visually hidden. */}
+          <div
+            key={theme}
+            className={badgeReady ? "block" : "opacity-0"}
+            aria-hidden={!badgeReady}
           >
-            {LINKEDIN_LABEL}
-          </a>
+            <div
+              ref={badgeRef}
+              className="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="medium"
+              data-theme={theme}
+              data-type="HORIZONTAL"
+              data-vanity={LINKEDIN_VANITY}
+              data-version="v1"
+            >
+              <a
+                className="badge-base__link LI-simple-link"
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  position: "absolute",
+                  width: 1,
+                  height: 1,
+                  padding: 0,
+                  margin: -1,
+                  overflow: "hidden",
+                  clip: "rect(0, 0, 0, 0)",
+                  whiteSpace: "nowrap",
+                  border: 0,
+                }}
+              >
+                {LINKEDIN_LABEL}
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 
