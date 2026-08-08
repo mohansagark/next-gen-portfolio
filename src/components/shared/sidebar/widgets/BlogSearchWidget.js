@@ -12,17 +12,26 @@ const BlogSearchWidget = () => {
     return initialSearch ? makeText(initialSearch) : "";
   });
   const debounceRef = useRef(null);
+  // Last value this instance pushed to the URL. makePath is lossy (lowercases,
+  // maps "/" and "&" to spaces), so echoing our own write back into the input
+  // would rewrite what the user typed and jump the caret to the end.
+  const lastPushedRef = useRef(searchParams?.get("search") || "");
 
-  // Keep both mobile/desktop instances in sync with the URL.
+  // Sync with genuinely external URL changes only: the other instance, history
+  // navigation, or a category link.
   useEffect(() => {
-    const q = searchParams?.get("search");
+    const q = searchParams?.get("search") || "";
+    if (q === lastPushedRef.current) return;
+    lastPushedRef.current = q;
     setSearchTerm(q ? makeText(q) : "");
   }, [searchParams]);
 
   // Live search keeps ?search= in sync; new search resets ?page= to 1.
   const applySearch = (value) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (value.trim()) params.set("search", makePath(value));
+    const next = value.trim() ? makePath(value) : "";
+    lastPushedRef.current = next;
+    if (next) params.set("search", next);
     else params.delete("search");
     params.delete("page");
     const qs = params.toString();

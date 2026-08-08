@@ -7,7 +7,12 @@ import { useCallback, useEffect, useMemo } from "react";
  * Blog list pagination synced to the URL via `?page=` (1-based).
  * Reload / share keeps the same page. Page 1 omits the param.
  */
-const usePagination = (filteredItems, currentLimit, pagiItemsLengthPerView) => {
+const usePagination = (
+  filteredItems,
+  currentLimit,
+  pagiItemsLengthPerView,
+  scrollTargetId = "blogs"
+) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -25,6 +30,14 @@ const usePagination = (filteredItems, currentLimit, pagiItemsLengthPerView) => {
     return index;
   }, [searchParams, totalPages]);
 
+  const dropPageFromUrl = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (!params.has("page")) return;
+    params.delete("page");
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  }, [router, pathname, searchParams]);
+
   const setPageInUrl = useCallback(
     (pageIndex) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -37,15 +50,24 @@ const usePagination = (filteredItems, currentLimit, pagiItemsLengthPerView) => {
     [router, pathname, searchParams]
   );
 
-  // If filters shrink the result set, clamp an out-of-range ?page= in the URL.
+  // Keep ?page= honest: drop it when there are no results, and clamp or discard
+  // values that filters made out of range or that were never a number at all.
   useEffect(() => {
-    if (totalPages <= 0) return;
-    const raw = parseInt(searchParams.get("page") || "1", 10);
-    if (!Number.isFinite(raw)) return;
+    const param = searchParams.get("page");
+    if (param === null) return;
+    if (totalPages <= 0) {
+      dropPageFromUrl();
+      return;
+    }
+    const raw = parseInt(param, 10);
+    if (!Number.isFinite(raw)) {
+      dropPageFromUrl();
+      return;
+    }
     if (raw < 1 || raw > totalPages) {
       setPageInUrl(Math.min(Math.max(raw - 1, 0), totalPages - 1));
     }
-  }, [totalPages, searchParams, setPageInUrl]);
+  }, [totalPages, searchParams, setPageInUrl, dropPageFromUrl]);
 
   const skip = limit * currentpage;
   const currentItems = filteredItems?.slice(skip, skip + limit);
@@ -56,8 +78,15 @@ const usePagination = (filteredItems, currentLimit, pagiItemsLengthPerView) => {
   );
 
   const handleCurrentPage = (e, id) => {
+    // The links carry href="#blogs" only as a no-JS fallback; we suppress the
+    // hash navigation (it would stack history entries) and scroll explicitly,
+    // otherwise the viewport stays parked on the pagination bar.
     e?.preventDefault?.();
     setPageInUrl(id);
+    if (typeof document === "undefined") return;
+    document
+      .getElementById(scrollTargetId)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   let showMore = false;

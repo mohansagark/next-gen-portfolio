@@ -103,26 +103,24 @@ const BlogSingle = ({ blog }) => {
             <div className="relative z-0">
               <div className="relative z-10">
                 {!coverImage ? (
-                  <>
-                    {/* Mobile: date + author stacked left, tag right */}
-                    <div className="flex md:hidden items-start justify-between gap-3 mb-5">
-                      <ul className="flex flex-col gap-2 min-w-0">
-                        {renderMetaItems("mobile")}
-                      </ul>
-                      {category ? (
-                        <Link
-                          href={`/blogs?category=${makePath(category)}`}
-                          className={`${categoryPillClass} shrink-0`}
-                        >
-                          {category}
-                        </Link>
-                      ) : null}
-                    </div>
-                    {/* Desktop: previous horizontal meta row */}
-                    <ul className="hidden md:flex flex-wrap gap-x-15px gap-y-10px md:gap-25px items-center mb-5">
-                      {renderMetaItems("desktop")}
+                  // One meta list for both breakpoints: stacked with the tag
+                  // beside it on mobile, horizontal row on desktop (where the
+                  // tag is the absolutely positioned one above). Rendering it
+                  // twice would double-mount AuthorDisplay and duplicate the
+                  // comments link for crawlers and assistive tech.
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <ul className="flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-25px md:gap-y-10px md:items-center min-w-0">
+                      {renderMetaItems("meta")}
                     </ul>
-                  </>
+                    {category ? (
+                      <Link
+                        href={`/blogs?category=${makePath(category)}`}
+                        className={`${categoryPillClass} shrink-0 md:hidden`}
+                      >
+                        {category}
+                      </Link>
+                    ) : null}
+                  </div>
                 ) : (
                   <ul className="flex flex-wrap gap-x-15px gap-y-10px md:gap-25px items-center mb-5">
                     {renderMetaItems("cover")}

@@ -67,7 +67,7 @@ const BlogsPrimary = () => {
             </div>
 
             {/* Categories / recent / tags: after posts on mobile, right column on desktop */}
-            <BlogSidebar />
+            <BlogSidebar mobileSearchElsewhere />
           </div>
         </div>
       </div>

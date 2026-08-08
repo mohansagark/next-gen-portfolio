@@ -1,6 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+
+// Paginations is prerendered on the server, where useLayoutEffect warns.
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 // Circular page / arrow cells.
 const CELL =
@@ -11,12 +15,23 @@ const ACTIVE =
   "bg-primary-color text-white-color border-primary-color shadow-sm";
 const DISABLED = "opacity-40 pointer-events-none";
 
-const ITEM_PX = 36;
-const GAP_PX = 6;
+// Cell/gap sizes must mirror what CELL and the <ul> actually render, or the
+// slot budget overshoots the bar and the trailing arrow gets clipped.
+// Tailwind's `sm` breakpoint is 576px in this theme.
+const SM_BREAKPOINT_PX = 576;
+const ITEM_PX_XS = 32; // size-8
+const ITEM_PX_SM = 36; // sm:size-9
+const GAP_PX_XS = 6; // gap-1.5
+const GAP_PX_SM = 8; // sm:gap-2
 const SIDE_CONTROLS = 2;
-const BAR_PAD_PX = 16;
 // Total width for all ellipsis blocks combined (~20–30% of the bar).
 const DOTS_TOTAL_RATIO = 0.25;
+// An ellipsis block narrower than this reads as a smudge, not a gap.
+const MIN_DOTS_PX = 20;
+const MAX_DOTS_PX = 64;
+// buildPages needs 5 slots to lay out start + middle + end; below the width
+// where 5 cells plus both arrows fit, fall back to a compact "n / N" bar.
+const MIN_SLOTS = 5;
 
 /** Trailing pages stay compact; extra width grows the start cluster. */
 function endCountForWidth(width) {
@@ -25,17 +40,30 @@ function endCountForWidth(width) {
   return 3;
 }
 
-/** Page-number cells that fit (prev/next + ~25% reserved for dots). */
-function pageSlotsForWidth(width) {
-  if (!width) return 9;
-  const arrowSpace = SIDE_CONTROLS * (ITEM_PX + GAP_PX);
-  const dotsReserve = width * DOTS_TOTAL_RATIO;
-  const usable = Math.max(
-    0,
-    width - arrowSpace - BAR_PAD_PX - dotsReserve
+/** Width every cell in a full bar occupies: n cells sit between n+1 gaps. */
+function widthForCells(cellCount, item, gap) {
+  return cellCount * item + (cellCount + 1) * gap;
+}
+
+/** Page-number cells that fit (prev/next + up to ~25% reserved for dots). */
+function pageSlotsForWidth(width, item, gap) {
+  // Server render has no measurement yet; the smallest bar is the safe guess.
+  if (!width) return MIN_SLOTS;
+  const arrowSpace = SIDE_CONTROLS * item;
+  const dotsReserve = Math.min(
+    Math.max(width * DOTS_TOTAL_RATIO, MIN_DOTS_PX * 2),
+    MAX_DOTS_PX * 2
   );
-  const slots = Math.floor((usable + GAP_PX) / (ITEM_PX + GAP_PX));
-  return Math.max(5, slots);
+  const usable = Math.max(0, width - arrowSpace - dotsReserve);
+  const slots = Math.floor((usable - gap) / (item + gap));
+  return Math.max(MIN_SLOTS, slots);
+}
+
+/** True when even the minimum full bar would overflow and clip the arrows. */
+function needsCompactBar(width, item, gap) {
+  if (!width) return false;
+  const cells = MIN_SLOTS + SIDE_CONTROLS;
+  return widthForCells(cells, item, gap) + MIN_DOTS_PX * 2 > width;
 }
 
 function pageNodes(from, to) {
@@ -141,8 +169,11 @@ const Paginations = ({ paginationDetails }) => {
   // Measure the constrained parent, not the list content (avoids overflow feedback loop).
   const measureRef = useRef(null);
   const [barWidth, setBarWidth] = useState(0);
+  // Cell and gap sizes come from the viewport breakpoint, not the bar width:
+  // a narrow bar on a wide screen still renders the larger `sm` cells.
+  const [isSmUp, setIsSmUp] = useState(false);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const el = measureRef.current;
     if (!el || typeof ResizeObserver === "undefined") return undefined;
     const measure = () => setBarWidth(el.getBoundingClientRect().width);
@@ -152,11 +183,25 @@ const Paginations = ({ paginationDetails }) => {
     return () => ro.disconnect();
   }, []);
 
+  useIsomorphicLayoutEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return undefined;
+    const mq = window.matchMedia(`(min-width: ${SM_BREAKPOINT_PX}px)`);
+    const sync = () => setIsSmUp(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const itemPx = isSmUp ? ITEM_PX_SM : ITEM_PX_XS;
+  const gapPx = isSmUp ? GAP_PX_SM : GAP_PX_XS;
+  const compact = needsCompactBar(barWidth, itemPx, gapPx);
+
   const pages = useMemo(() => {
-    const slots = pageSlotsForWidth(barWidth);
+    if (compact) return [];
+    const slots = pageSlotsForWidth(barWidth, itemPx, gapPx);
     const endCount = endCountForWidth(barWidth);
     return buildPages(currentpage, totalPages, slots, endCount);
-  }, [barWidth, currentpage, totalPages]);
+  }, [compact, barWidth, itemPx, gapPx, currentpage, totalPages]);
 
   if (!totalPages || totalPages <= 1) return null;
 
@@ -164,11 +209,52 @@ const Paginations = ({ paginationDetails }) => {
   const isLast = currentpage >= totalPages - 1;
   const gapCount = pages.filter((item) => item.type === "gap").length;
   const hasDots = gapCount > 0;
-  // Split the 25% dots budget across however many ellipsis blocks are shown.
-  const gapWidthPct =
-    gapCount > 0 ? (DOTS_TOTAL_RATIO * 100) / gapCount : 0;
+  // Dots absorb whatever the fixed-width cells leave over, within sane bounds,
+  // so the bar can never total more than its container.
+  const cellsWidth = widthForCells(
+    pages.length - gapCount + SIDE_CONTROLS,
+    itemPx,
+    gapPx
+  );
   const gapWidthPx =
-    gapCount > 0 && barWidth > 0 ? (barWidth * gapWidthPct) / 100 : 0;
+    gapCount > 0 && barWidth > 0
+      ? Math.min(
+          MAX_DOTS_PX,
+          Math.max(MIN_DOTS_PX, (barWidth - cellsWidth) / gapCount)
+        )
+      : 0;
+
+  const pageItems = pages.map((item) =>
+    item.type === "gap" ? (
+      <li
+        key={item.key}
+        className="inline-flex items-center justify-center min-w-0"
+        style={{
+          flex: `1 1 ${MIN_DOTS_PX}px`,
+          minWidth: MIN_DOTS_PX,
+          maxWidth: MAX_DOTS_PX,
+        }}
+        aria-hidden="true"
+      >
+        <DotsGap widthPx={gapWidthPx} />
+      </li>
+    ) : (
+      <li
+        key={item.value}
+        className={`shrink-0 ${item.value === currentpage ? "active" : ""}`}
+      >
+        <Link
+          href="#blogs"
+          aria-label={`Page ${item.value + 1}`}
+          aria-current={item.value === currentpage ? "page" : undefined}
+          onClick={(e) => handleCurrentPage(e, item.value)}
+          className={`${CELL} ${item.value === currentpage ? ACTIVE : IDLE}`}
+        >
+          {item.value + 1}
+        </Link>
+      </li>
+    )
+  );
 
   return (
     <nav
@@ -200,39 +286,15 @@ const Paginations = ({ paginationDetails }) => {
           </Link>
         </li>
 
-        {pages.map((item) =>
-          item.type === "gap" ? (
-            <li
-              key={item.key}
-              className="shrink-0 inline-flex items-center justify-center min-w-0"
-              style={{
-                width: `${gapWidthPct}%`,
-                flex: `0 0 ${gapWidthPct}%`,
-              }}
-              aria-hidden="true"
-            >
-              <DotsGap widthPx={gapWidthPx} />
-            </li>
-          ) : (
-            <li
-              key={item.value}
-              className={`shrink-0 ${
-                item.value === currentpage ? "active" : ""
-              }`}
-            >
-              <Link
-                href="#blogs"
-                aria-label={`Page ${item.value + 1}`}
-                aria-current={item.value === currentpage ? "page" : undefined}
-                onClick={(e) => handleCurrentPage(e, item.value)}
-                className={`${CELL} ${
-                  item.value === currentpage ? ACTIVE : IDLE
-                }`}
-              >
-                {item.value + 1}
-              </Link>
-            </li>
-          )
+        {compact ? (
+          <li
+            className="shrink min-w-0 px-2 text-sm font-medium text-primary-color-light dark:text-white-color whitespace-nowrap"
+            aria-current="page"
+          >
+            {currentpage + 1} / {totalPages}
+          </li>
+        ) : (
+          pageItems
         )}
 
         <li className="shrink-0">
