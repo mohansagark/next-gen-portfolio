@@ -1,10 +1,10 @@
 # next-gen-portfolio — Blog UX & SEO Backlog
 
 **Date:** 2026-08-08  
-**Status:** Mostly shipped (#32); open follow-up **#19** (LinkedIn official badge)  
+**Status:** Mostly shipped (#32); open follow-ups **#19** (LinkedIn badge), **#20** (scroll-to-top)  
 **Repo:** `next-gen-portfolio` only  
 **GitHub (original):** https://github.com/mohansagark/next-gen-portfolio/issues/26  
-**GitHub (open follow-up):** https://github.com/mohansagark/next-gen-portfolio/issues/33  
+**GitHub (open follow-ups):** https://github.com/mohansagark/next-gen-portfolio/issues/33 · https://github.com/mohansagark/next-gen-portfolio/issues/35  
 
 **Sister backlog (digest):** https://github.com/mohansagark/daily-dev-digest/issues/12  
 `daily-dev-digest` → `docs/superpowers/specs/2026-08-08-content-slug-flux-hygiene-backlog.md`
@@ -29,6 +29,7 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 | 17 | SEO: Article + BreadcrumbList (+ FAQPage) JSON-LD | Shipped (#32) |
 | 18 | SEO: TOC for long posts | Shipped (#32) |
 | **19** | **Author hover uses LinkedIn official profile badge (not custom card)** | **Open (#33)** |
+| **20** | **Move scroll-to-top control to bottom-left (chatbot overlap)** | **Open (#35)** |
 
 ---
 
@@ -148,6 +149,19 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 - Use `next/script` (or equivalent) so the badge script loads once; re-run badge init if the widget mounts after hover.
 - `data-theme` should follow site light/dark mode.
 
+## 20. Scroll-to-top → bottom-left (avoid chatbot overlap)
+
+**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/35  
+
+**Problem:** The scroll-to-top control (`BackToTop` / `#scrollUp` / `.progress-wrap`) is anchored **bottom-right**. Leo’s chatbot orb also sits bottom-right and **completely overlaps** the scroll-to-top icon, so it cannot be used.
+
+**Desired:** Move scroll-to-top to the **bottom-left** (with sensible edge / safe-area margin) so it no longer collides with the chatbot.
+
+**Acceptance:**
+- Visible and clickable on desktop and mobile
+- No overlap with Leo / chatbot orb
+- Adequate clearance from screen edges
+
 ---
 
 ## Out of scope (this repo)
@@ -164,3 +178,4 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 4. ~~SEO template: #13, #16, #17, #18~~ (shipped #32)  
 5. ~~Search depth: #6~~ (shipped #32)  
 6. **Next:** #19 LinkedIn official badge  
+7. **Next:** #20 Scroll-to-top → bottom-left  
