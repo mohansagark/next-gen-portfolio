@@ -47,7 +47,20 @@ async function loadJson(name) {
     console.warn(`[build-leo] ${file}: HTTP ${res.status} from ${url}`);
     return null;
   }
-  cache[key] = await res.json();
+  // A host serving an SPA/404 fallback answers 200 with HTML; report that plainly
+  // instead of letting res.json() throw an unexplained syntax error.
+  const type = res.headers.get("content-type") || "";
+  if (!type.includes("json")) {
+    cache[key] = null;
+    console.warn(`[build-leo] ${file}: expected JSON, got "${type}" from ${url}`);
+    return null;
+  }
+  try {
+    cache[key] = await res.json();
+  } catch (e) {
+    cache[key] = null;
+    console.warn(`[build-leo] ${file}: invalid JSON from ${url} — ${e.message}`);
+  }
   return cache[key];
 }
 
@@ -157,7 +170,7 @@ async function buildContext() {
   return parts.join("\n\n");
 }
 
-function buildFacts(profile, experience, achievements, education) {
+function buildFacts(profile, experience, achievements, education, extraFacts = []) {
   const facts = [];
   const name = firstName(profile?.firstName);
   if (experience?.jobs?.length) {
@@ -180,10 +193,40 @@ function buildFacts(profile, experience, achievements, education) {
       );
     }
   }
-  if (profile?.bio) {
-    facts.push(`${name} is open to freelance projects and full-time roles involving AI/agentic systems or frontend performance.`);
+  // Anything not derivable from the structured content — availability, preferences —
+  // is authored in chatbot.json rather than hardcoded here.
+  for (const f of extraFacts) {
+    if (typeof f === "string" && f.trim()) facts.push(f.trim());
   }
   return facts.length ? facts : [`${name} is a software engineer.`];
+}
+
+/**
+ * Mirrors ai-voice-bot/config/schema.json. Nothing downstream re-validates before this blob
+ * is written to production KV, and the Worker fails closed on a bad allowlist — so a bad
+ * build must stop here rather than take the widget offline.
+ */
+function validateAppConfig(config) {
+  const { allowedOrigins, persona } = config;
+  if (!Array.isArray(allowedOrigins) || !allowedOrigins.length) {
+    throw new Error(
+      "chatbot.json must define allowedOrigins[] (publish via admin.devmohan.in or set PORTFOLIO_DATA_DIR)",
+    );
+  }
+  for (const o of allowedOrigins) {
+    if (typeof o !== "string" || !/^https:\/\/[^/]+$/.test(o)) {
+      throw new Error(
+        `chatbot.json allowedOrigins entry ${JSON.stringify(o)} must be https:// + host only — a browser Origin header never carries a path or trailing slash`,
+      );
+    }
+  }
+  if (!persona.owner.name || !persona.owner.role) {
+    throw new Error("profile.json must provide firstName and headline (persona.owner)");
+  }
+  if (!persona.facts.length) throw new Error("persona.facts came out empty — check experience/achievements data");
+  if (config.behavior && "mode" in config.behavior) {
+    throw new Error("behavior.mode is not syncable — mode is a Worker env var so content edits cannot disable enforcement");
+  }
 }
 
 async function buildAppConfig() {
@@ -203,18 +246,11 @@ async function buildAppConfig() {
     },
     bio: profile.bio || "",
     tone: chatbot.tone || "warm, a little playful, and genuinely curious — a friendly guide, never a corporate bio",
-    facts: buildFacts(profile, experience, achievements, education),
+    facts: buildFacts(profile, experience, achievements, education, chatbot.extraFacts ?? []),
     do_not: chatbot.do_not || ["quote prices", "commit to dates", "schedule meetings"],
   };
 
-  const allowedOrigins = chatbot.allowedOrigins;
-  if (!Array.isArray(allowedOrigins) || !allowedOrigins.length) {
-    throw new Error(
-      "chatbot.json must define allowedOrigins[] (publish via admin.devmohan.in or set PORTFOLIO_DATA_DIR)",
-    );
-  }
-
-  const widget = chatbot.widget || {
+  const widgetDefaults = {
     branding: {
       botName,
       greeting: `Hi, I'm ${botName} — ${displayName}'s assistant. Ask me about their work, projects, or how to get in touch.`,
@@ -227,16 +263,19 @@ async function buildAppConfig() {
     voice: { enabled: true, speakByDefault: false },
   };
 
-  // Sveltia may store "" instead of null for optional URL fields.
-  if (widget.privacy && widget.privacy.privacyPolicyUrl === "") {
-    widget.privacy.privacyPolicyUrl = null;
-  }
+  // Merge per section, so filling in one CMS subsection can't drop the other three.
+  const authored = chatbot.widget || {};
+  const widget = Object.fromEntries(
+    Object.entries(widgetDefaults).map(([k, v]) => [k, { ...v, ...(authored[k] ?? {}) }]),
+  );
 
-  return {
-    allowedOrigins,
+  // Sveltia may store "" instead of null for optional URL fields.
+  if (widget.privacy.privacyPolicyUrl === "") widget.privacy.privacyPolicyUrl = null;
+
+  const config = {
+    allowedOrigins: chatbot.allowedOrigins,
     persona,
     behavior: chatbot.behavior || {
-      mode: "prod",
       defaultProvider: "groq",
       maxMessageChars: 2000,
       maxTurnsPerSession: 30,
@@ -245,6 +284,8 @@ async function buildAppConfig() {
     },
     widget,
   };
+  validateAppConfig(config);
+  return config;
 }
 
 async function main() {
@@ -273,7 +314,18 @@ async function main() {
   console.log(`Wrote ${widgetPublicPath}`);
 }
 
+// `--optional` (used by predev): a fresh clone with no portfolio-data checkout and no network
+// shouldn't be unable to run `npm run dev`. LeoLoader falls back to its inline defaults when
+// /leo-widget-config.json is absent. Builds that actually ship config never pass this flag.
+const optional = process.argv.includes("--optional");
+
 main().catch((e) => {
-  console.error(e.message || e);
+  const msg = e.message || e;
+  if (optional) {
+    console.warn(`[build-leo] skipped: ${msg}`);
+    console.warn("[build-leo] dev server will use LeoLoader's built-in widget defaults.");
+    process.exit(0);
+  }
+  console.error(msg);
   process.exit(1);
 });
