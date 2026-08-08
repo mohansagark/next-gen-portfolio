@@ -5,6 +5,9 @@ import getProfile from "@/libs/getProfile";
 
 const Contact1 = () => {
   const profile = getProfile();
+  // CMS may return a profile object without a usable location — the fallback in
+  // getProfile only kicks in when the whole profile key is missing.
+  const location = profile.location?.trim();
   const form = useRef();
   const [formData, setFormData] = useState({
     first_name: "",
@@ -224,43 +227,45 @@ const Contact1 = () => {
                       </a>
                     </div>
                   </li>
-                  <li
-                    className="flex flex-col gap-4 position-relative wow fadeInRight"
-                    data-wow-delay=".6s"
-                  >
-                    <div className="flex items-center gap-25px">
-                      <div className="icon-box text-xl flex-shrink-0 w-50px h-50px text-white-color flex justify-center items-center flex-col bg-gradient-primary-2 rounded-full leading-1">
-                        <i className="flaticon-location leading-1 mt-1"></i>
+                  {location ? (
+                    <li
+                      className="flex flex-col gap-4 position-relative wow fadeInRight"
+                      data-wow-delay=".6s"
+                    >
+                      <div className="flex items-center gap-25px">
+                        <div className="icon-box text-xl flex-shrink-0 w-50px h-50px text-white-color flex justify-center items-center flex-col bg-gradient-primary-2 rounded-full leading-1">
+                          <i className="flaticon-location leading-1 mt-1"></i>
+                        </div>
+                        <div className="text-box">
+                          <p className="text-primary-color-light dark:text-white-color mb-1">
+                            Address
+                          </p>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                              location
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-color-light dark:text-white-color text-lg lg:text-xl font-medium hover:text-primary-color"
+                          >
+                            {location}
+                          </a>
+                        </div>
                       </div>
-                      <div className="text-box">
-                        <p className="text-primary-color-light dark:text-white-color mb-1">
-                          Address
-                        </p>
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            profile.location
-                          )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary-color-light dark:text-white-color text-lg lg:text-xl font-medium hover:text-primary-color"
-                        >
-                          {profile.location}
-                        </a>
+                      <div className="w-full rounded-15px overflow-hidden border-2 border-body-color dark:border-bg-color-2 bg-white-color dark:bg-primary-color-light">
+                        <iframe
+                          title={`Map of ${location}`}
+                          src={`https://www.google.com/maps?q=${encodeURIComponent(
+                            location
+                          )}&z=12&output=embed`}
+                          className="block w-full h-[220px] md:h-[260px] border-0"
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                          allowFullScreen
+                        />
                       </div>
-                    </div>
-                    <div className="w-full rounded-15px overflow-hidden border-2 border-body-color dark:border-bg-color-2 bg-white-color dark:bg-primary-color-light">
-                      <iframe
-                        title={`Map of ${profile.location}`}
-                        src={`https://www.google.com/maps?q=${encodeURIComponent(
-                          profile.location
-                        )}&z=12&output=embed`}
-                        className="block w-full h-[220px] md:h-[260px] border-0"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        allowFullScreen
-                      />
-                    </div>
-                  </li>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
             </div>
