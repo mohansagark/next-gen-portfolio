@@ -1,9 +1,10 @@
 # next-gen-portfolio — Blog UX & SEO Backlog
 
 **Date:** 2026-08-08  
-**Status:** Open — recorded for resolution (not yet implemented)  
+**Status:** Mostly shipped (#32); open follow-ups **#19**–**#21**  
 **Repo:** `next-gen-portfolio` only  
-**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/26  
+**GitHub (original):** https://github.com/mohansagark/next-gen-portfolio/issues/26  
+**GitHub (open follow-ups):** #33 · #35 · #36  
 
 **Sister backlog (digest):** https://github.com/mohansagark/daily-dev-digest/issues/12  
 `daily-dev-digest` → `docs/superpowers/specs/2026-08-08-content-slug-flux-hygiene-backlog.md`
@@ -12,21 +13,24 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 
 ## Summary (this repo)
 
-| # | Issue |
-|---|---|
-| 3 | Social links open in a new tab |
-| 4 | Replace Twitter with Medium (`https://mohansagark.medium.com/`) + icon |
-| 5 | Categories listed by post count descending |
-| 6 | Blog/category search covers title, header, body, tags, related content |
-| 7 | Stretch pagination to blog post content width |
-| 9 | Copyright year → **2026** |
-| 10 | Voice bot defaults to chat; voice only if visitor turns it on |
-| 11 | Move “Read more” button to the right side |
-| 12 | Author-name hover → small modal with LinkedIn profile card |
-| 13 | SEO: single H1 per post (no duplicate hero/article H1) |
-| 16 | SEO: article typography — ~18px body, 1.5 line-height, ~65ch measure |
-| 17 | SEO: Article + BreadcrumbList (+ FAQPage) JSON-LD |
-| 18 | SEO: TOC for long posts |
+| # | Issue | Status |
+|---|---|---|
+| 3 | Social links open in a new tab | Shipped (#32) |
+| 4 | Replace Twitter with Medium (`https://mohansagark.medium.com/`) + icon | Shipped (#32) |
+| 5 | Categories listed by post count descending | Shipped (#32) |
+| 6 | Blog/category search covers title, header, body, tags, related content | Shipped (#32) |
+| 7 | Stretch pagination to blog post content width | Shipped (#32) |
+| 9 | Copyright year → **2026** | Shipped (#32) |
+| 10 | Voice bot defaults to chat; voice only if visitor turns it on | Shipped (#32) |
+| 11 | Move “Read more” button to the right side | Shipped (#32) |
+| 12 | Author-name hover → LinkedIn profile card (custom card) | Shipped (#32) — see **#19** |
+| 13 | SEO: single H1 per post (no duplicate hero/article H1) | Shipped (#32) |
+| 16 | SEO: article typography — ~18px body, 1.5 line-height, ~65ch measure | Shipped (#32) |
+| 17 | SEO: Article + BreadcrumbList (+ FAQPage) JSON-LD | Shipped (#32) |
+| 18 | SEO: TOC for long posts | Shipped (#32) |
+| **19** | **Author hover uses LinkedIn official profile badge (not custom card)** | **Open (#33)** |
+| **20** | **Move scroll-to-top control to bottom-left (chatbot overlap)** | **Open (#35)** |
+| **21** | **Contact section: map view container (not address text only)** | **Open (#36)** |
 
 ---
 
@@ -84,6 +88,8 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 
 **Desired:** On hover (and accessible focus), open a **small modal/popover** showing a **LinkedIn profile card** for the author (Mohan’s LinkedIn). Dismiss on mouse leave / Esc / outside click; keyboard-accessible.
 
+**Shipped:** Custom hover card in #32. Superseded for presentation by **#19** (official LinkedIn badge).
+
 ## 13. SEO — single H1 per post
 
 **Problem:** Post pages can expose more than one `<h1>` (hero title + article title).
@@ -108,6 +114,71 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 
 **Desired:** Auto TOC from H2/H3 with anchor links when post length exceeds a threshold (e.g. ≥ ~1,500 words or ≥ 4 H2s).
 
+## 19. Author hover → LinkedIn official profile badge
+
+**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/33  
+**Follow-up to:** #12 (custom card shipped in #32)
+
+**Problem:** Author hover uses a **hand-built** LinkedIn-style card. Product intent is LinkedIn’s **official badge banner**, not a custom mock.
+
+**Desired:** On author-name hover / focus, show LinkedIn’s profile badge for vanity `mohansagark`. Load the official script once; pick light/dark theme to match the site; keep Esc / outside-click / mouse-leave dismiss and keyboard access.
+
+**Script:**
+
+```html
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+```
+
+**Light badge:**
+
+```html
+<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="mohansagark" data-version="v1">
+  <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/mohansagark?trk=profile-badge">Mohan Sagar Killamsetty</a>
+</div>
+```
+
+**Dark badge:**
+
+```html
+<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="mohansagark" data-version="v1">
+  <a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/mohansagark?trk=profile-badge">Mohan Sagar Killamsetty</a>
+</div>
+```
+
+**Implementation notes:**
+- Replace custom markup in `AuthorDisplay.js`.
+- Use `next/script` (or equivalent) so the badge script loads once; re-run badge init if the widget mounts after hover.
+- `data-theme` should follow site light/dark mode.
+
+## 20. Scroll-to-top → bottom-left (avoid chatbot overlap)
+
+**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/35  
+
+**Problem:** The scroll-to-top control (`BackToTop` / `#scrollUp` / `.progress-wrap`) is anchored **bottom-right**. Leo’s chatbot orb also sits bottom-right and **completely overlaps** the scroll-to-top icon, so it cannot be used.
+
+**Desired:** Move scroll-to-top to the **bottom-left** (with sensible edge / safe-area margin) so it no longer collides with the chatbot.
+
+**Acceptance:**
+- Visible and clickable on desktop and mobile
+- No overlap with Leo / chatbot orb
+- Adequate clearance from screen edges
+
+## 21. Contact section — map view container
+
+**GitHub:** https://github.com/mohansagark/next-gen-portfolio/issues/36  
+**Surface:** Main contact (`Contact1`) — Address currently shows `profile.location` as text only
+
+**Problem:** Location is plain text (e.g. Hyderabad). No map / place visual, so address feels weaker than phone/email.
+
+**Desired:** Add a **map view container** in the contact section. Prefer an embedded interactive map (Google Maps / OpenStreetMap iframe) for the configured location; keep the address text as a label or caption (not an empty iframe with no readable address).
+
+**Acceptance:**
+- Visible map container on desktop and mobile
+- Reflects profile location
+- Address text remains readable
+- Contact form column layout intact
+- Looks intentional in light and dark mode
+
 ---
 
 ## Out of scope (this repo)
@@ -118,8 +189,11 @@ IDs below are stable cross-repo numbers (gaps are intentional — those IDs live
 
 ## Suggested execution order (this repo)
 
-1. Quick UI: #3, #4, #5, #7, #9, #11  
-2. Author LinkedIn hover: #12  
-3. Voice default: #10  
-4. SEO template: #13, #16, #17, #18  
-5. Search depth: #6  
+1. ~~Quick UI: #3, #4, #5, #7, #9, #11~~ (shipped #32)  
+2. ~~Author LinkedIn hover: #12~~ (custom card shipped #32) → **#19 official badge**  
+3. ~~Voice default: #10~~ (shipped #32)  
+4. ~~SEO template: #13, #16, #17, #18~~ (shipped #32)  
+5. ~~Search depth: #6~~ (shipped #32)  
+6. **Next:** #19 LinkedIn official badge  
+7. **Next:** #20 Scroll-to-top → bottom-left  
+8. **Next:** #21 Contact map view container  

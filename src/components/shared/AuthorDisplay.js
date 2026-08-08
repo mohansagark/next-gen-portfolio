@@ -1,22 +1,46 @@
 "use client";
 
-import Link from "next/link";
+import Script from "next/script";
 import React, { useEffect, useId, useRef, useState } from "react";
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/mohansagark/";
+const LINKEDIN_VANITY = "mohansagark";
+const LINKEDIN_URL = `https://in.linkedin.com/in/${LINKEDIN_VANITY}?trk=profile-badge`;
 const LINKEDIN_LABEL = "Mohan Sagar Killamsetty";
-const LINKEDIN_HEADLINE = "Software Engineer · Dev Mohan";
+
+function useIsDarkTheme() {
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const sync = () => setIsDark(html.classList.contains("dark"));
+    sync();
+    const obs = new MutationObserver(sync);
+    obs.observe(html, { attributes: true, attributeFilter: ["class"] });
+    return () => obs.disconnect();
+  }, []);
+
+  return isDark;
+}
+
+function renderLinkedInBadges() {
+  if (typeof window === "undefined") return;
+  if (typeof window.LIRenderAll === "function") {
+    window.LIRenderAll();
+  }
+}
 
 const AuthorDisplay = ({
   author,
   className = "",
   showBy = true,
-  linkedInUrl = LINKEDIN_URL,
 }) => {
   const isBot = author === "Agent Bot";
   const [open, setOpen] = useState(false);
+  const [scriptReady, setScriptReady] = useState(false);
   const rootRef = useRef(null);
   const panelId = useId();
+  const isDark = useIsDarkTheme();
+  const theme = isDark ? "dark" : "light";
 
   useEffect(() => {
     if (!open) return;
@@ -36,6 +60,13 @@ const AuthorDisplay = ({
     };
   }, [open]);
 
+  // LinkedIn only paints badges present at script load; re-scan after hover mount.
+  useEffect(() => {
+    if (!open || !scriptReady) return;
+    const id = window.requestAnimationFrame(() => renderLinkedInBadges());
+    return () => window.cancelAnimationFrame(id);
+  }, [open, scriptReady, theme]);
+
   if (isBot) {
     return (
       <span className={`inline-flex items-center gap-1 ${className}`}>
@@ -53,6 +84,14 @@ const AuthorDisplay = ({
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
+      <Script
+        src="https://platform.linkedin.com/badges/js/profile.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          setScriptReady(true);
+          renderLinkedInBadges();
+        }}
+      />
       {showBy ? <span>By</span> : null}
       <i className="fa-solid fa-user" title="Human Author" aria-hidden="true"></i>
       <button
@@ -71,28 +110,27 @@ const AuthorDisplay = ({
           id={panelId}
           role="dialog"
           aria-label={`${author} LinkedIn profile`}
-          className="absolute left-0 top-full z-50 mt-2 w-72 rounded-lg border border-border-color dark:border-gray-color-3 bg-white dark:bg-primary-color-light p-4 shadow-lg text-left normal-case"
+          className="absolute left-0 top-full z-50 pt-2 w-[min(100vw-2rem,340px)] text-left normal-case"
         >
-          <div className="flex items-start gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0A66C2] text-white text-lg">
-              <i className="fa-brands fa-linkedin-in" aria-hidden="true"></i>
-            </span>
-            <div className="min-w-0">
-              <p className="text-sm font-bold text-primary-color-light dark:text-white-color leading-snug">
-                {LINKEDIN_LABEL}
-              </p>
-              <p className="text-xs text-body-color dark:text-gray-color mt-0.5 leading-snug">
-                {LINKEDIN_HEADLINE}
-              </p>
-              <Link
-                href={linkedInUrl}
+          <div className="rounded-lg border border-border-color dark:border-gray-color-3 bg-white dark:bg-primary-color-light p-2 shadow-lg overflow-hidden">
+            <div
+              key={theme}
+              className="badge-base LI-profile-badge"
+              data-locale="en_US"
+              data-size="large"
+              data-theme={theme}
+              data-type="HORIZONTAL"
+              data-vanity={LINKEDIN_VANITY}
+              data-version="v1"
+            >
+              <a
+                className="badge-base__link LI-simple-link"
+                href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A66C2] hover:underline"
               >
-                View LinkedIn profile
-                <i className="fa-solid fa-arrow-up-right-from-square text-[10px]" aria-hidden="true"></i>
-              </Link>
+                {LINKEDIN_LABEL}
+              </a>
             </div>
           </div>
         </div>
