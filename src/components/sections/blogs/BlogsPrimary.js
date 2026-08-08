@@ -2,6 +2,7 @@ import BlogQuote from "@/components/shared/blogs/BlogQuote";
 import BlogSingle from "@/components/shared/blogs/BlogSingle";
 import Paginations from "@/components/shared/others/Paginations";
 import BlogSidebar from "@/components/shared/sidebar/BlogSidebar";
+import BlogSearchWidget from "@/components/shared/sidebar/widgets/BlogSearchWidget";
 import { useCommonContext } from "@/context_api/CommonContext";
 import usePagination from "@/hooks/usePagination";
 import React from "react";
@@ -27,9 +28,14 @@ const BlogsPrimary = () => {
     <section id="blogs">
       <div className="py-60px md:py-20 lg:py-100px xl:py-30 dark:bg-black-color">
         <div className="container">
-          <div className="lg:grid lg:gap-6 lg:grid-cols-12">
+          <div className="flex flex-col gap-10 lg:grid lg:gap-6 lg:grid-cols-12">
+            {/* Mobile only: search above the blog list */}
+            <div className="order-1 lg:hidden">
+              <BlogSearchWidget />
+            </div>
+
             {/* <!-- blogs --> */}
-            <div className="flex flex-col gap-10 lg:col-start-1 lg:col-span-8">
+            <div className="order-2 lg:order-1 flex flex-col gap-10 lg:col-start-1 lg:col-span-8">
               {currentItems?.length
                 ? currentItems?.map((blog, idx) =>
                     blog?.isBlogQuote ? (
@@ -59,7 +65,8 @@ const BlogsPrimary = () => {
                 ""
               )}
             </div>
-            {/* <!-- sidebar --> */}
+
+            {/* Categories / recent / tags: after posts on mobile, right column on desktop */}
             <BlogSidebar />
           </div>
         </div>
