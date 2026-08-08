@@ -75,7 +75,7 @@ const Footer = () => {
                   : "text-gray-color"
               } whitespace-nowrap text-sm md:text-base mt-5`}
             >
-              © 2025 All rights reserved by{" "}
+              © {new Date().getFullYear()} All rights reserved by{" "}
               <Link
                 href={homeLink("/")}
                 className={`${

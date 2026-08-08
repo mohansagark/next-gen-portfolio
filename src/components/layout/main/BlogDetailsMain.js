@@ -37,6 +37,7 @@ const BlogDetailsMain = ({ blog: passedBlog }) => {
         text={title ? title : "Blog Details"}
         actualItem={"Blogs"}
         path={"/blogs"}
+        titleAs="p"
       />
       <BlogDetailsPrimary
         prevId={prevBlog?.id}

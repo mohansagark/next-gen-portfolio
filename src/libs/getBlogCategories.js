@@ -1,18 +1,23 @@
 import getBlogs from "./getBlogs";
 
+/**
+ * Categories sorted by post count descending (name ascending on ties).
+ * @returns {{ category: string, count: number }[]}
+ */
 const getBlogCategories = () => {
   const blogs = getBlogs();
+  const counts = {};
 
-  // Extract unique categories from actual blog data
-  const categories = blogs?.reduce((acc, blog) => {
-    if (blog.category && !acc.includes(blog.category)) {
-      acc.push(blog.category);
-    }
-    return acc;
-  }, []);
+  for (const blog of blogs || []) {
+    if (!blog?.category) continue;
+    counts[blog.category] = (counts[blog.category] || 0) + 1;
+  }
 
-  // Sort categories alphabetically
-  return categories?.sort();
+  return Object.entries(counts)
+    .sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], undefined, { sensitivity: "base" })
+    )
+    .map(([category, count]) => ({ category, count }));
 };
 
 export default getBlogCategories;

@@ -42,10 +42,32 @@ const filterItems = (items, collection, filterItem, isProducts) => {
       // lone "(" or "+") straight in, and an unescaped one would throw.
       const escaped = makeText(filterItem).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const searchText = new RegExp(escaped, "i");
-      return items?.filter(
-        ({ title, category }) =>
-          searchText.test(title) || searchText.test(category)
-      );
+      const stripHtml = (html) =>
+        (html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+      return items?.filter((item) => {
+        const {
+          title,
+          category,
+          desc,
+          summary,
+          subtitle,
+          tags,
+          html,
+          content,
+        } = item || {};
+        const tagText = Array.isArray(tags) ? tags.join(" ") : tags || "";
+        const haystack = [
+          title,
+          category,
+          desc,
+          summary,
+          subtitle,
+          tagText,
+          stripHtml(html),
+          typeof content === "string" ? content : "",
+        ].join(" ");
+        return searchText.test(haystack);
+      });
 
     case "popularity":
       return [...items]?.sort((a, b) => b.views - a.views);

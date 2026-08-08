@@ -1,5 +1,11 @@
+import BlogTableOfContents from "@/components/shared/blogs/BlogTableOfContents";
+import AuthorDisplay from "@/components/shared/AuthorDisplay";
 import BlogSidebar from "@/components/shared/sidebar/BlogSidebar";
 import countCommentLength from "@/libs/countCommentLength";
+import {
+  extractHeadings,
+  wordCountFromHtml,
+} from "@/libs/extractHeadings";
 import makePath from "@/libs/makePath";
 import sliceText from "@/libs/sliceText";
 import Link from "next/link";
@@ -29,6 +35,12 @@ const BlogDetailsPrimary = ({
   const { title: prevBlogTitle } = pervblog || {};
   const { title: nextBlogTitle } = nextblog || {};
 
+  const rawHtml = blog?.html || "";
+  const { headings, htmlWithIds } = extractHeadings(rawHtml);
+  const h2Count = headings.filter((h) => h.level === 2).length;
+  const words = wordCountFromHtml(rawHtml);
+  const showToc = h2Count >= 4 || words >= 1500;
+
   return (
     <section id="blogs">
       <div className="py-60px md:py-20 lg:py-100px xl:py-30 dark:bg-black-color">
@@ -55,18 +67,18 @@ const BlogDetailsPrimary = ({
                           key={1000 + idx}
                           className="text-primary-color dark:text-white-color"
                         >
-                          <i
-                            className={`${iconName} mr-1 text-primary-color transition-all duration-500`}
-                          ></i>{" "}
                           {path ? (
-                            <Link
-                              href={`/blogs?author=${makePath(author)}`}
-                              className="text-primary-color dark:text-white-color hover:text-primary-color transition-all duration-500 capitalize"
-                            >
-                              By {name}
-                            </Link>
+                            <AuthorDisplay
+                              author={author || name}
+                              className="text-primary-color dark:text-white-color"
+                            />
                           ) : (
-                            name
+                            <>
+                              <i
+                                className={`${iconName} mr-1 text-primary-color transition-all duration-500`}
+                              ></i>{" "}
+                              {name}
+                            </>
                           )}
                         </li>
                       ))
@@ -84,14 +96,14 @@ const BlogDetailsPrimary = ({
                   )}
                 </ul>
 
-                {/* title */}
+                {/* sole H1 for the post page */}
                 <h1 className="text-primary-color dark:text-white-color capitalize text-size-28 md:text-4xl font-bold leading-tight mb-4">
                   {title}
                 </h1>
 
                 {/* lead / summary */}
                 {desc ? (
-                  <p className="text-primary-color-light dark:text-white-color text-lg leading-relaxed mb-6">
+                  <p className="text-primary-color-light dark:text-white-color text-lg leading-relaxed mb-6 max-w-[65ch]">
                     {desc}
                   </p>
                 ) : null}
@@ -110,15 +122,17 @@ const BlogDetailsPrimary = ({
                   </div>
                 ) : null}
 
-                {/* post body: precompiled, sanitized HTML from portfolio-blog */}
+                {showToc ? <BlogTableOfContents headings={headings} /> : null}
+
+                {/* post body: ~18px / 1.5 lh / ~65ch measure */}
                 <div
-                  className="prose prose-lg dark:prose-invert max-w-none break-words prose-headings:text-primary-color-light dark:prose-headings:text-white-color prose-p:text-primary-color-light dark:prose-p:text-white-color prose-strong:text-primary-color-light dark:prose-strong:text-white-color prose-a:text-primary-color prose-li:text-primary-color-light dark:prose-li:text-white-color prose-pre:overflow-x-auto prose-img:rounded-lg"
-                  dangerouslySetInnerHTML={{ __html: blog?.html || "" }}
+                  className="prose prose-lg dark:prose-invert max-w-[65ch] text-lg leading-normal break-words prose-p:leading-[1.5] prose-li:leading-[1.5] prose-headings:text-primary-color-light dark:prose-headings:text-white-color prose-p:text-primary-color-light dark:prose-p:text-white-color prose-strong:text-primary-color-light dark:prose-strong:text-white-color prose-a:text-primary-color prose-li:text-primary-color-light dark:prose-li:text-white-color prose-pre:overflow-x-auto prose-img:rounded-lg"
+                  dangerouslySetInnerHTML={{ __html: htmlWithIds }}
                 />
 
                 {/* key takeaways (only when present) */}
                 {keyTakeaways?.length ? (
-                  <div className="mt-30px">
+                  <div className="mt-30px max-w-[65ch]">
                     <h2 className="text-primary-color-light dark:text-white-color text-2xl font-bold mb-4">
                       Key Takeaways
                     </h2>
@@ -129,7 +143,7 @@ const BlogDetailsPrimary = ({
                           className="pl-25px mb-10px relative before:content-['\f058'] before:font-fontawesome before:absolute before:left-0 before:top-0 before:text-primary-color before:font-bold"
                         >
                           <span
-                            className="text-primary-color-light dark:text-white-color"
+                            className="text-primary-color-light dark:text-white-color text-lg leading-[1.5]"
                             dangerouslySetInnerHTML={{ __html: takeaway }}
                           />
                         </li>
@@ -173,6 +187,9 @@ const BlogDetailsPrimary = ({
                     <li>
                       <Link
                         href="https://www.linkedin.com/in/mohansagark/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
                         className="text-primary-color dark:text-white-color border border-primary-color hover:bg-primary-color w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                       >
                         <i className="fa-brands fa-linkedin-in"></i>
@@ -181,6 +198,9 @@ const BlogDetailsPrimary = ({
                     <li>
                       <Link
                         href="https://github.com/mohansagark"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
                         className="text-primary-color dark:text-white-color border border-primary-color hover:bg-primary-color w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                       >
                         <i className="fa-brands fa-github"></i>
@@ -188,10 +208,13 @@ const BlogDetailsPrimary = ({
                     </li>
                     <li>
                       <Link
-                        href="https://x.com"
+                        href="https://mohansagark.medium.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Medium"
                         className="text-primary-color dark:text-white-color border border-primary-color hover:bg-primary-color w-10 h-10 rounded-full flex items-center justify-center overflow-hidden"
                       >
-                        <i className="fa-brands fa-x-twitter"></i>
+                        <i className="fa-brands fa-medium"></i>
                       </Link>
                     </li>
                   </ul>

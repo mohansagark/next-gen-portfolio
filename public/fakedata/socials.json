@@ -18,5 +18,10 @@
     "id": "github",
     "iconName": "fa-brands fa-github",
     "path": "https://github.com/mohansagark"
+  },
+  {
+    "id": "medium",
+    "iconName": "fa-brands fa-medium",
+    "path": "https://mohansagark.medium.com/"
   }
 ]

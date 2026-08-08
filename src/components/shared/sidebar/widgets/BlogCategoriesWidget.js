@@ -1,13 +1,9 @@
-import countDataLength from "@/libs/countDataLength";
-import filterItems from "@/libs/filterItems";
 import getBlogCategories from "@/libs/getBlogCategories";
-import getBlogs from "@/libs/getBlogs";
 import makePath from "@/libs/makePath";
 import Link from "next/link";
 
 const BlogCategoriesWidget = () => {
   const categories = getBlogCategories();
-  const blogs = getBlogs();
   return (
     <div
       className="px-15px md:px-25px py-30px bg-cream-light-color dark:bg-primary-color-light rounded-lg wow fadeInUp"
@@ -16,14 +12,13 @@ const BlogCategoriesWidget = () => {
       <h3 className="mb-25px text-primary-color dark:text-white-color uppercase relative z-0 text-size-lg md:text-xl font-bold">
         Categories
       </h3>
-      {/* <!-- list --> */}
 
       <div className="max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-color scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
         <ul>
           {categories?.length
-            ? categories?.map((category, idx) => (
+            ? categories.map(({ category, count }, idx) => (
                 <li
-                  key={idx}
+                  key={category}
                   className="flex items-center justify-between gap-x-5 font-medium"
                 >
                   <Link
@@ -38,13 +33,7 @@ const BlogCategoriesWidget = () => {
                   >
                     {category}
                   </Link>
-                  <span className="text-primary-color">
-                    (
-                    {countDataLength(
-                      filterItems(blogs, "category", makePath(category))
-                    )}
-                    )
-                  </span>
+                  <span className="text-primary-color">({count})</span>
                 </li>
               ))
             : ""}
