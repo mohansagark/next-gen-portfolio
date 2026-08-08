@@ -101,14 +101,13 @@ if (!isProductionDeploy) {
 
 const hasToken = Boolean(process.env.CLOUDFLARE_API_TOKEN?.trim());
 if (!hasToken) {
-  if (process.env.VERCEL) {
-    console.error(
-      "CLOUDFLARE_API_TOKEN is required on Vercel so prebuild can sync Leo config to KV.",
-    );
-    process.exit(1);
-  }
-  console.warn(
-    "[sync-leo] CLOUDFLARE_API_TOKEN not set — built local artifacts only; skipped Cloudflare KV sync.",
+  // Soft-fail: same rationale as a KV write failure — the site must still deploy.
+  // Leo keeps last synced KV; set CLOUDFLARE_API_TOKEN on the Vercel *Production*
+  // env for project `next-gen-portfolio` (Build + Production) to enable sync.
+  console.error(
+    "[sync-leo] CLOUDFLARE_API_TOKEN not set — skipping KV sync. " +
+      "Site will still deploy; Leo keeps previously synced config. " +
+      "Add the token to Vercel project next-gen-portfolio (Production).",
   );
   process.exit(0);
 }
