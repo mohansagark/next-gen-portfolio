@@ -247,7 +247,11 @@ async function buildAppConfig() {
     bio: profile.bio || "",
     tone: chatbot.tone || "warm, a little playful, and genuinely curious — a friendly guide, never a corporate bio",
     facts: buildFacts(profile, experience, achievements, education, chatbot.extraFacts ?? []),
-    do_not: chatbot.do_not || ["quote prices", "commit to dates", "schedule meetings"],
+    do_not: chatbot.do_not || [
+      "quote prices",
+      "commit to delivery timelines",
+      "confirm calendar availability or treat a preferred time as a booked meeting",
+    ],
   };
 
   const widgetDefaults = {
