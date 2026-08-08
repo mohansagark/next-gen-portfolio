@@ -61,7 +61,7 @@ const AuthorDisplay = ({
         aria-expanded={open}
         aria-controls={panelId}
         onFocus={() => setOpen(true)}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(true)}
       >
         {author}
       </button>
