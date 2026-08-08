@@ -258,13 +258,21 @@ async function buildAppConfig() {
     branding: {
       botName,
       greeting: `Hi, I'm ${botName} — ${displayName}'s assistant. Ask me about their work, projects, or how to get in touch.`,
+      themeColor: "#6C5CE7",
+      themeColorSecondary: "#6C5CE7",
+      position: "bottom-right",
     },
-    behavior: { autoGreet: true, rememberReturning: true, language: "en-US" },
+    behavior: {
+      autoGreet: true,
+      rememberReturning: true,
+      language: "en-US",
+      proactiveGreet: true,
+    },
     privacy: {
       consentText: "I agree to share my info so I can be followed up with.",
       privacyPolicyUrl: null,
     },
-    voice: { enabled: true, speakByDefault: false },
+    voice: { enabled: true, speakByDefault: false, ttsVoice: "hannah" },
   };
 
   // Merge per section, so filling in one CMS subsection can't drop the other three.
@@ -276,9 +284,15 @@ async function buildAppConfig() {
   // Sveltia may store "" instead of null for optional URL fields.
   if (widget.privacy.privacyPolicyUrl === "") widget.privacy.privacyPolicyUrl = null;
 
+  const instructions =
+    typeof chatbot.instructions === "string" && chatbot.instructions.trim()
+      ? chatbot.instructions.trim()
+      : undefined;
+
   const config = {
     allowedOrigins: chatbot.allowedOrigins,
     persona,
+    ...(instructions ? { instructions } : {}),
     behavior: chatbot.behavior || {
       defaultProvider: "groq",
       maxMessageChars: 2000,
