@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Noto+Sans+Telugu:wght@500;700&display=swap");
+
+:root {
+  --op-cream: #faf8f5;
+  --op-cream-2: #f3efe8;
+  --op-ink: #0a0a0a;
+  --op-ink-2: #18181b;
+  --op-muted: #737373;
+  --op-muted-2: #525252;
+  --op-purple: #7a50dc;
+  --op-purple-deep: #673fc4;
+  --op-purple-soft: #ac4bff;
+  --op-indigo: #818cf8;
+  --op-gold: #e2b85a;
+  --op-gold-dim: #c99b3c;
+  --op-green: #149e6a;
+  --op-mint: #00e699;
+  --op-white: #ffffff;
+  --op-deep: #050505;
+  --op-navy: #0a0a0a;
+  --op-glass: rgba(255, 255, 255, 0.72);
+  --op-glass-dark: rgba(15, 15, 15, 0.66);
+  --op-border: rgba(0, 0, 0, 0.08);
+  --op-border-dark: rgba(255, 255, 255, 0.1);
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-telugu: "Noto Sans Telugu", sans-serif;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+  --shadow-card: 0 8px 32px rgba(79, 70, 229, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 12px 40px rgba(122, 80, 220, 0.28);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --fig-bg: #1e1e1e;
+  --fig-panel: #2c2c2c;
+  --fig-panel-2: #383838;
+  --fig-line: #444444;
+  --fig-text: #ffffff;
+  --fig-muted: #b3b3b3;
+  --fig-blue: #0d99ff;
+  --fig-proto: #a259ff;
+  --fig-canvas: #1e1e1e;
+}

@@ -7,6 +7,19 @@ const nextConfig = {
   },
 
   trailingSlash: true,
+
+  async rewrites() {
+    return [
+      {
+        source: "/ux/outpero",
+        destination: "/ux/outpero/index.html",
+      },
+      {
+        source: "/ux/outpero/",
+        destination: "/ux/outpero/index.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

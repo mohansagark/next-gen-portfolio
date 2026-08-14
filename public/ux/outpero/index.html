@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="./favicon.svg" />
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/studio.css" />
+  <link rel="stylesheet" href="./css/screens.css" />
+</head>
+<body class="studio design-mode">
+  <header class="topbar">
+    <div class="topbar-left">
+      <strong class="file-name">OUTPERO UX</strong>
+      <span class="chip">Draft</span>
+    </div>
+    <div class="topbar-center">
+      <div class="mode-switch">
+        <button class="active" data-mode="design">Design</button>
+        <button data-mode="prototype">Prototype</button>
+        <button data-mode="inspect">Inspect</button>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="chip" id="zoomOut">−</button>
+      <span class="zoom-readout" id="zoomReadout">35%</span>
+      <button class="chip" id="zoomIn">+</button>
+      <button class="chip" id="zoomFit">Fit</button>
+    </div>
+  </header>
+  <div class="layout">
+    <aside class="panel panel-left">
+      <h3>Pages</h3>
+      <div class="pages"><button class="page-item" data-page="cover">Cover<span>1</span></button><button class="page-item" data-page="ds">Design system<span>1</span></button><button class="page-item" data-page="home">Home<span>2</span></button><button class="page-item" data-page="solutions">Solutions<span>2</span></button><button class="page-item" data-page="contact">Contact<span>2</span></button><button class="page-item" data-page="about">About<span>2</span></button><button class="page-item" data-page="systems">Revenue systems<span>2</span></button><button class="page-item" data-page="employee">Hire AI Employee<span>2</span></button><button class="page-item" data-page="pricing">Pricing<span>2</span></button><button class="page-item" data-page="voice">Voice agents<span>2</span></button><button class="page-item" data-page="compare">Compare + Blog<span>3</span></button><button class="page-item" data-page="menu">Mobile menu<span>1</span></button><button class="page-item" data-page="flows">User flows<span>1</span></button></div>
+      <h3>Layers</h3>
+      <div class="layers" id="layers"></div>
+    </aside>
+    <main class="canvas-wrap" id="canvasWrap">
+      <div class="canvas" id="canvas"><div class="canvas-page" data-page="cover" hidden>
+    <div class="frame-wrap" data-frame="cover-desktop" data-page-owner="cover" style="left:80px;top:80px">
+      <div class="frame-label">Cover</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="cover">
+      <div>
+        <div class="kicker">UX file · Desktop + Mobile</div>
+        <h1>OUTPERO<br>experience design</h1>
+        <p>High-fidelity artboards reverse-engineered from outpero.com. Agency light for conversion. Product dark for the AI employee. Switch to Prototype and click CTAs to walk the paths.</p>
+        <div class="thumbs"><div class="thumb light"><b>Home</b><span>Agency · 1440 / 390</span></div><div class="thumb light"><b>Solutions</b><span>19 SKUs · filters</span></div><div class="thumb light"><b>Contact</b><span>Audit form</span></div><div class="thumb dark"><b>AI Employee</b><span>Product dark</span></div><div class="thumb dark"><b>Pricing</b><span>₹1899 + usage</span></div><div class="thumb dark"><b>Voice</b><span>Telugu samples</span></div></div>
+      </div>
+      <div class="cover-meta">
+        <div><b>Artboards</b>13 pages · 23 frames</div>
+        <div><b>Breakpoints</b>1440 desktop · 390 mobile</div>
+        <div><b>Themes</b>Agency cream · Product cinematic</div>
+        <div><b>Primary CTA</b>Book Free Audit → Contact</div>
+      </div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="ds" hidden>
+    <div class="frame-wrap" data-frame="ds-desktop" data-page-owner="ds" style="left:80px;top:80px">
+      <div class="frame-label">Design system / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ds-wrap">
+      <div class="kicker">Foundation</div>
+      <h1 class="display" style="font-size:48px">OUTPERO design system</h1>
+      <p class="lede">Two themes, one brand. Agency light for trust and audits. Product dark for hiring the AI employee.</p>
+      <h2 style="margin-top:36px">Color</h2>
+      <div class="ds-grid"><div class="ds-color" style="background:#FAF8F5;color:#111">Cream / Agency bg<br>#FAF8F5</div><div class="ds-color" style="background:#050505;color:#fff">Deep / Product bg<br>#050505</div><div class="ds-color" style="background:#7A50DC;color:#fff">Purple / Primary<br>#7A50DC</div><div class="ds-color" style="background:#673FC4;color:#fff">Purple deep<br>#673FC4</div><div class="ds-color" style="background:#E2B85A;color:#1a1304">Gold / Accent<br>#E2B85A</div><div class="ds-color" style="background:#818CF8;color:#111">Indigo glow<br>#818CF8</div><div class="ds-color" style="background:#0A0A0A;color:#fff">Ink<br>#0A0A0A</div><div class="ds-color" style="background:#737373;color:#fff">Muted<br>#737373</div></div>
+      <h2 style="margin-top:36px">Type</h2>
+      <div class="ds-type" style="font-family:Poppins,sans-serif;font-size:40px;font-weight:700">Poppins / Display</div>
+      <div class="ds-type" style="font-size:18px">Inter / Body — 16px / 1.5 — minimum 16px on mobile inputs</div>
+      <div class="ds-type telugu" style="font-size:28px">Noto Sans Telugu / Native voice UI</div>
+      <h2 style="margin-top:36px">Components</h2>
+      <div class="cta-row">
+        <a class="btn btn-primary">Primary CTA</a>
+        <a class="btn btn-gold">Product CTA</a>
+        <a class="btn btn-ghost">Secondary</a>
+      </div>
+      <div class="grid-3" style="margin-top:20px">
+        <div class="card"><div class="cat">Card</div><h3>Glass surface</h3><p>20px radius, 1px border, blur.</p></div>
+        <div class="card"><span class="flagship">FLAGSHIP</span><h3>Highlight</h3><p>Gold ring for recommended plan.</p></div>
+        <div class="card"><label style="font-size:12px;font-weight:600">Input</label><input style="width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid #0002" placeholder="16px text, 44px tall"></div>
+      </div>
+      <h2 style="margin-top:36px">Breakpoints</h2>
+      <p>390 mobile · 768 tablet · 1024 laptop · 1440 desktop · 1920 wall</p>
+      <p>Touch targets ≥ 44px. Nav collapses under 768. Grids 3→1. Process 4→stack. Footer 4→1.</p>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="home" hidden>
+    <div class="frame-wrap" data-frame="home-desktop" data-page-owner="home" style="left:80px;top:80px">
+      <div class="frame-label">Home / Desktop 1440</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class="active hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Systems that outperform</div>
+            <h1 class="display">Your business is <span class="grad">leaking</span> revenue. We seal it.</h1>
+            <p class="lede">AI automations, voice agents, and web solutions — engineered around your outcomes, not our deliverables.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary hotspot" data-go="contact">Book a Free Audit</a>
+              <a class="btn btn-ghost hotspot" data-go="systems">See Our Systems</a>
+            </div>
+          </div>
+          <div class="diagram"><svg width="100%" height="100%" style="position:absolute;inset:0"><g stroke="#7a50dc55" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><line x1="50%" y1="50%" x2="22%" y2="28%"/><line x1="50%" y1="50%" x2="78%" y2="24%"/><line x1="50%" y1="50%" x2="18%" y2="68%"/><line x1="50%" y1="50%" x2="82%" y2="62%"/><line x1="50%" y1="50%" x2="50%" y2="86%"/><line x1="50%" y1="50%" x2="72%" y2="80%"/></g></svg><div class="node core" style="left:50%;top:50%">YOUR<br>BUSINESS</div><div class="node " style="left:22%;top:28%">Leads</div><div class="node " style="left:78%;top:24%">Follow-up</div><div class="node " style="left:18%;top:68%">Bookings</div><div class="node " style="left:82%;top:62%">24/7 Calls</div><div class="node " style="left:50%;top:86%">WhatsApp</div><div class="node leak" style="left:72%;top:80%">Leaking Revenue</div></div>
+        </div>
+      </section>
+      <div class="marquee"><span>Real Estate</span><span>Clinics & Healthcare</span><span>Coaches & Consultants</span><span>D2C Brands</span><span>Legal Firms</span><span>E-commerce</span><span>SaaS Startups</span></div>
+      <section class="section">
+        <h2 class="display">You're doing everything right. But still losing.</h2>
+        <div class="grid-3" style="margin-top:28px">
+          <div class="card"><div class="num">01</div><h3>Leads Going Cold</h3><p>78% of customers buy from whoever responds first. By the time you call back, the deal is gone.</p></div>
+          <div class="card"><div class="num">02</div><h3>Too Much Manual Work</h3><p>Teams burn 20–40 hours a week on data entry, scheduling, and reports instead of revenue.</p></div>
+          <div class="card"><div class="num">03</div><h3>Websites That Don't Convert</h3><p>Traffic lands, looks around, and leaves. No system to capture and qualify visitors.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Revenue systems</div>
+        <h2 class="display">Three systems. Each solves one expensive problem.</h2>
+        <div class="grid-3" style="margin-top:28px">
+          <div class="card hotspot" data-go="systems"><div class="num">System 1</div><h3>Revenue Capture</h3><p>Contact, qualify, and book leads in seconds.</p><ul class="checks"><li>AI Voice Agent (24/7)</li><li>WhatsApp & SMS Bot</li><li>Instant CRM Sync</li></ul><div class="price">From ₹60,000</div></div>
+          <div class="card hotspot" data-go="systems" style="box-shadow:0 0 0 1px #e2b85a, var(--shadow-card)"><span class="flagship">FLAGSHIP</span><div class="num">System 2</div><h3>Ops Efficiency</h3><p>Eliminate 20–40 hours of manual tasks weekly.</p><ul class="checks"><li>Workflow Process Mapping</li><li>3–5 Core Automations</li><li>Custom n8n/Make Logic</li></ul><div class="price">From ₹1,00,000</div></div>
+          <div class="card hotspot" data-go="systems"><div class="num">System 3</div><h3>Web Capture</h3><p>Turn passive visitors into qualified leads.</p><ul class="checks"><li>High-Converting Landing Pages</li><li>Frictionless Lead Capture</li><li>Automated WhatsApp Triggers</li></ul><div class="price">From ₹50,000</div></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Our process</div>
+        <h2 class="display">From first call to live system. In 2 weeks.</h2>
+        <div class="steps" style="margin-top:28px">
+          <div class="card"><div class="step-index">01</div><h3>We understand</h3><p>30-minute call. Find where money is leaking.</p></div>
+          <div class="card"><div class="step-index">02</div><h3>Scope & price</h3><p>Exact deliverables, timeline, and cost in writing.</p></div>
+          <div class="card"><div class="step-index">03</div><h3>We build it</h3><p>Full build and setup. You stay on the business.</p></div>
+          <div class="card"><div class="step-index">04</div><h3>Goes live</h3><p>Hours saved and revenue retained within 30 days.</p></div>
+        </div>
+        <div class="grid-4" style="margin-top:28px">
+          <div class="stat"><b>0 sec</b><span>Lead response</span></div>
+          <div class="stat"><b>0 hrs</b><span>Manual work gone</span></div>
+          <div class="stat"><b>0x</b><span>Conversion lift</span></div>
+          <div class="stat"><b>Zero</b><span>Tech headache</span></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Individual solutions</div>
+        <h2 class="display">Not ready for a full system? Start with one.</h2>
+        <p class="lede">19 pre-built solutions. Starting from ₹14,999.</p>
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card hotspot" data-go="solutions"><div class="cat">AI & Automation</div><h3>Instant Lead Follow-Up</h3><p>WhatsApp + email the second a form is submitted.</p></div>
+          <div class="card hotspot" data-go="voice"><div class="cat">AI Voice</div><h3>Inbound AI Receptionist</h3><p>Answers every call, routes, and books 24/7.</p></div>
+          <div class="card hotspot" data-go="solutions"><div class="cat">Web</div><h3>High-Converting Landing Pages</h3><p>Single-page funnels built to capture and book.</p></div>
+          <div class="card hotspot" data-go="solutions"><div class="cat">AI & Automation</div><h3>Appointment Booking Bot</h3><p>Prospects book themselves. Zero calendar ping-pong.</p></div>
+        </div>
+        <div class="cta-row"><a class="btn btn-ghost hotspot" data-go="solutions">Explore all 19 solutions</a></div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Why work with us?</h2>
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card"><h3>Business first, tech second</h3><p>If it will not save time or make money, we will not recommend it.</p></div>
+          <div class="card"><h3>Clear, measurable ROI</h3><p>Every system is measured by hours saved and revenue generated.</p></div>
+          <div class="card"><h3>Fast deployment</h3><p>Biggest bottleneck first. Live in weeks, not months.</p></div>
+          <div class="card"><h3>Zero technical headaches</h3><p>We build, integrate, and maintain. You get a working system.</p></div>
+        </div>
+      </section>
+      <section class="section faq" style="padding-top:0">
+        <h2 class="display">Clear answers. No jargon.</h2>
+        <details open><summary>What exactly do you build?</summary><p>Voice agents, WhatsApp/CRM automations, and conversion websites — scoped to one revenue leak at a time.</p></details>
+        <details><summary>Will I need to replace my existing software?</summary><p>No. We wire into the tools you already use.</p></details>
+        <details><summary>How long does implementation take?</summary><p>Most systems go live in two weeks after scope is signed.</p></details>
+        <details><summary>How do you charge?</summary><p>Fixed-scope agency builds from ₹14,999, or hire an AI employee at ₹1,899 / 30 days plus usage.</p></details>
+      </section>
+      <div class="cta-band">
+        <h2>Your revenue leak has a fix. Let's find it.</h2>
+        <p>Book a free 30-minute strategy call. No obligation. No pitch. Just clarity.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold hotspot" data-go="contact">Book Free Audit →</a>
+          <a class="btn btn-ghost hotspot" data-go="solutions" style="color:#fff;box-shadow:inset 0 0 0 1px #fff6">Explore the Solutions →</a>
+        </div>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="home-mobile" data-page-owner="home" style="left:1600px;top:80px">
+      <div class="frame-label">Home / Mobile 390</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Systems that outperform</div>
+            <h1 class="display">Your business is <span class="grad">leaking</span> revenue. We seal it.</h1>
+            <p class="lede">AI automations, voice agents, and web solutions — engineered around your outcomes, not our deliverables.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary hotspot" data-go="contact">Book a Free Audit</a>
+              <a class="btn btn-ghost hotspot" data-go="systems">See Our Systems</a>
+            </div>
+          </div>
+          <div class="diagram"><svg width="100%" height="100%" style="position:absolute;inset:0"><g stroke="#7a50dc55" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><line x1="50%" y1="50%" x2="22%" y2="28%"/><line x1="50%" y1="50%" x2="78%" y2="24%"/><line x1="50%" y1="50%" x2="18%" y2="68%"/><line x1="50%" y1="50%" x2="82%" y2="62%"/><line x1="50%" y1="50%" x2="50%" y2="86%"/><line x1="50%" y1="50%" x2="72%" y2="80%"/></g></svg><div class="node core" style="left:50%;top:50%">YOUR<br>BUSINESS</div><div class="node " style="left:22%;top:28%">Leads</div><div class="node " style="left:78%;top:24%">Follow-up</div><div class="node " style="left:18%;top:68%">Bookings</div><div class="node " style="left:82%;top:62%">24/7 Calls</div><div class="node " style="left:50%;top:86%">WhatsApp</div><div class="node leak" style="left:72%;top:80%">Leaking Revenue</div></div>
+        </div>
+      </section>
+      <div class="marquee"><span>Real Estate</span><span>Clinics & Healthcare</span><span>Coaches & Consultants</span><span>D2C Brands</span><span>Legal Firms</span><span>E-commerce</span><span>SaaS Startups</span></div>
+      <section class="section">
+        <h2 class="display">You're doing everything right. But still losing.</h2>
+        <div class="grid-3" style="margin-top:28px">
+          <div class="card"><div class="num">01</div><h3>Leads Going Cold</h3><p>78% of customers buy from whoever responds first. By the time you call back, the deal is gone.</p></div>
+          <div class="card"><div class="num">02</div><h3>Too Much Manual Work</h3><p>Teams burn 20–40 hours a week on data entry, scheduling, and reports instead of revenue.</p></div>
+          <div class="card"><div class="num">03</div><h3>Websites That Don't Convert</h3><p>Traffic lands, looks around, and leaves. No system to capture and qualify visitors.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Revenue systems</div>
+        <h2 class="display">Three systems. Each solves one expensive problem.</h2>
+        <div class="grid-3" style="margin-top:28px">
+          <div class="card hotspot" data-go="systems"><div class="num">System 1</div><h3>Revenue Capture</h3><p>Contact, qualify, and book leads in seconds.</p><ul class="checks"><li>AI Voice Agent (24/7)</li><li>WhatsApp & SMS Bot</li><li>Instant CRM Sync</li></ul><div class="price">From ₹60,000</div></div>
+          <div class="card hotspot" data-go="systems" style="box-shadow:0 0 0 1px #e2b85a, var(--shadow-card)"><span class="flagship">FLAGSHIP</span><div class="num">System 2</div><h3>Ops Efficiency</h3><p>Eliminate 20–40 hours of manual tasks weekly.</p><ul class="checks"><li>Workflow Process Mapping</li><li>3–5 Core Automations</li><li>Custom n8n/Make Logic</li></ul><div class="price">From ₹1,00,000</div></div>
+          <div class="card hotspot" data-go="systems"><div class="num">System 3</div><h3>Web Capture</h3><p>Turn passive visitors into qualified leads.</p><ul class="checks"><li>High-Converting Landing Pages</li><li>Frictionless Lead Capture</li><li>Automated WhatsApp Triggers</li></ul><div class="price">From ₹50,000</div></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Our process</div>
+        <h2 class="display">From first call to live system. In 2 weeks.</h2>
+        <div class="steps" style="margin-top:28px">
+          <div class="card"><div class="step-index">01</div><h3>We understand</h3><p>30-minute call. Find where money is leaking.</p></div>
+          <div class="card"><div class="step-index">02</div><h3>Scope & price</h3><p>Exact deliverables, timeline, and cost in writing.</p></div>
+          <div class="card"><div class="step-index">03</div><h3>We build it</h3><p>Full build and setup. You stay on the business.</p></div>
+          <div class="card"><div class="step-index">04</div><h3>Goes live</h3><p>Hours saved and revenue retained within 30 days.</p></div>
+        </div>
+        <div class="grid-4" style="margin-top:28px">
+          <div class="stat"><b>0 sec</b><span>Lead response</span></div>
+          <div class="stat"><b>0 hrs</b><span>Manual work gone</span></div>
+          <div class="stat"><b>0x</b><span>Conversion lift</span></div>
+          <div class="stat"><b>Zero</b><span>Tech headache</span></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Individual solutions</div>
+        <h2 class="display">Not ready for a full system? Start with one.</h2>
+        <p class="lede">19 pre-built solutions. Starting from ₹14,999.</p>
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card hotspot" data-go="solutions"><div class="cat">AI & Automation</div><h3>Instant Lead Follow-Up</h3><p>WhatsApp + email the second a form is submitted.</p></div>
+          <div class="card hotspot" data-go="voice"><div class="cat">AI Voice</div><h3>Inbound AI Receptionist</h3><p>Answers every call, routes, and books 24/7.</p></div>
+          <div class="card hotspot" data-go="solutions"><div class="cat">Web</div><h3>High-Converting Landing Pages</h3><p>Single-page funnels built to capture and book.</p></div>
+          <div class="card hotspot" data-go="solutions"><div class="cat">AI & Automation</div><h3>Appointment Booking Bot</h3><p>Prospects book themselves. Zero calendar ping-pong.</p></div>
+        </div>
+        <div class="cta-row"><a class="btn btn-ghost hotspot" data-go="solutions">Explore all 19 solutions</a></div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Why work with us?</h2>
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card"><h3>Business first, tech second</h3><p>If it will not save time or make money, we will not recommend it.</p></div>
+          <div class="card"><h3>Clear, measurable ROI</h3><p>Every system is measured by hours saved and revenue generated.</p></div>
+          <div class="card"><h3>Fast deployment</h3><p>Biggest bottleneck first. Live in weeks, not months.</p></div>
+          <div class="card"><h3>Zero technical headaches</h3><p>We build, integrate, and maintain. You get a working system.</p></div>
+        </div>
+      </section>
+      <section class="section faq" style="padding-top:0">
+        <h2 class="display">Clear answers. No jargon.</h2>
+        <details open><summary>What exactly do you build?</summary><p>Voice agents, WhatsApp/CRM automations, and conversion websites — scoped to one revenue leak at a time.</p></details>
+        <details><summary>Will I need to replace my existing software?</summary><p>No. We wire into the tools you already use.</p></details>
+        <details><summary>How long does implementation take?</summary><p>Most systems go live in two weeks after scope is signed.</p></details>
+        <details><summary>How do you charge?</summary><p>Fixed-scope agency builds from ₹14,999, or hire an AI employee at ₹1,899 / 30 days plus usage.</p></details>
+      </section>
+      <div class="cta-band">
+        <h2>Your revenue leak has a fix. Let's find it.</h2>
+        <p>Book a free 30-minute strategy call. No obligation. No pitch. Just clarity.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold hotspot" data-go="contact">Book Free Audit →</a>
+          <a class="btn btn-ghost hotspot" data-go="solutions" style="color:#fff;box-shadow:inset 0 0 0 1px #fff6">Explore the Solutions →</a>
+        </div>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="solutions" hidden>
+    <div class="frame-wrap" data-frame="sol-desktop" data-page-owner="solutions" style="left:80px;top:80px">
+      <div class="frame-label">Solutions / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class="active hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Solutions</div>
+        <h1 class="display" style="max-width:900px;margin-left:auto;margin-right:auto">Drop-in solutions for immediate ROI.</h1>
+        <p class="lede" style="margin-left:auto;margin-right:auto">19 standalone solutions. Each one targets one specific problem. Starting from ₹14,999.</p>
+        <div class="cta-row" style="justify-content:center"><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></div>
+        <div class="chips" style="justify-content:center">
+          <span class="chip-filter active">All</span>
+          <span class="chip-filter">AI & Automation</span>
+          <span class="chip-filter">AI Voice</span>
+          <span class="chip-filter">Web</span>
+          <span class="chip-filter">Audit & Strategy</span>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0"><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">WhatsApp Business Automation</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">End-to-end automated WhatsApp interactions.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">AI Lead Qualification</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Automatic scoring and filtering for every lead.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">Appointment Booking Automation</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Zero-touch scheduling and reminders.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI Voice</div><h3 style="margin:4px 0 4px;font-size:16px">Inbound AI Voice Agent</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">24/7 intelligent answering and lead routing.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI Voice</div><h3 style="margin:4px 0 4px;font-size:16px">Outbound AI Voice Agent</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Scalable proactive calling and engagement.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Web</div><h3 style="margin:4px 0 4px;font-size:16px">Landing Page</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">High-velocity standalone pages for campaigns.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Web</div><h3 style="margin:4px 0 4px;font-size:16px">Website + Lead Pipeline</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Site fully wired into automated CRM follow-ups.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Audit & Strategy</div><h3 style="margin:4px 0 4px;font-size:16px">Business Automation Audit</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Map operational leaks and ROI fixes.</p></div><span>⌄</span></div>
+        <p class="lede" style="margin-top:18px;font-size:13px">All fees cover build and management. Platforms billed separately at cost.</p>
+      </section>
+      <div class="cta-band">
+        <h2>Need a complete transformation?</h2>
+        <p>Stop stitching tools together. Explore the three revenue systems.</p>
+        <a class="btn btn-gold hotspot" data-go="systems">Explore Revenue Systems</a>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="sol-mobile" data-page-owner="solutions" style="left:1600px;top:80px">
+      <div class="frame-label">Solutions / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Solutions</div>
+        <h1 class="display" style="max-width:900px;margin-left:auto;margin-right:auto">Drop-in solutions for immediate ROI.</h1>
+        <p class="lede" style="margin-left:auto;margin-right:auto">19 standalone solutions. Each one targets one specific problem. Starting from ₹14,999.</p>
+        <div class="cta-row" style="justify-content:center"><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></div>
+        <div class="chips" style="justify-content:center">
+          <span class="chip-filter active">All</span>
+          <span class="chip-filter">AI & Automation</span>
+          <span class="chip-filter">AI Voice</span>
+          <span class="chip-filter">Web</span>
+          <span class="chip-filter">Audit & Strategy</span>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0"><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">WhatsApp Business Automation</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">End-to-end automated WhatsApp interactions.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">AI Lead Qualification</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Automatic scoring and filtering for every lead.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI & Automation</div><h3 style="margin:4px 0 4px;font-size:16px">Appointment Booking Automation</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Zero-touch scheduling and reminders.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI Voice</div><h3 style="margin:4px 0 4px;font-size:16px">Inbound AI Voice Agent</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">24/7 intelligent answering and lead routing.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">AI Voice</div><h3 style="margin:4px 0 4px;font-size:16px">Outbound AI Voice Agent</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Scalable proactive calling and engagement.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Web</div><h3 style="margin:4px 0 4px;font-size:16px">Landing Page</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">High-velocity standalone pages for campaigns.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Web</div><h3 style="margin:4px 0 4px;font-size:16px">Website + Lead Pipeline</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Site fully wired into automated CRM follow-ups.</p></div><span>⌄</span></div><div class="sol-item"><div><div class="cat">Audit & Strategy</div><h3 style="margin:4px 0 4px;font-size:16px">Business Automation Audit</h3><p style="margin:0;color:var(--op-muted-2);font-size:13px">Map operational leaks and ROI fixes.</p></div><span>⌄</span></div>
+        <p class="lede" style="margin-top:18px;font-size:13px">All fees cover build and management. Platforms billed separately at cost.</p>
+      </section>
+      <div class="cta-band">
+        <h2>Need a complete transformation?</h2>
+        <p>Stop stitching tools together. Explore the three revenue systems.</p>
+        <a class="btn btn-gold hotspot" data-go="systems">Explore Revenue Systems</a>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="contact" hidden>
+    <div class="frame-wrap" data-frame="con-desktop" data-page-owner="contact" style="left:80px;top:80px">
+      <div class="frame-label">Contact / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class="active hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Contact</div>
+            <h1 class="display">Book your free business audit.</h1>
+            <p class="lede">30 minutes. We'll show you exactly where you're losing money and what to build first.</p>
+            <div class="card" style="margin-top:24px">
+              <b>What to expect</b>
+              <ul class="checks">
+                <li>Review current workflows or website</li>
+                <li>Identify 2–3 immediate quick wins</li>
+                <li>Map the highest-ROI system</li>
+                <li>Give a written estimate</li>
+              </ul>
+              <p style="margin-top:16px;font-size:13px">We respond within 24 hours · hello@outpero.com</p>
+            </div>
+            <a class="btn btn-ghost hotspot" data-go="voice" style="margin-top:16px">Looking for a voice agent? Explore →</a>
+          </div>
+          
+      <form class="form card">
+        <div><label>Name *</label><input placeholder="Your full name"></div>
+        <div><label>Business Name *</label><input placeholder="Your company name"></div>
+        <div><label>Email *</label><input type="email" placeholder="you@company.com"></div>
+        <div><label>Phone (WhatsApp preferred) *</label><input type="tel" placeholder="+91 98765 43210"></div>
+        <div><label>Business Type *</label><select><option>Real Estate</option><option>Clinic</option><option>Coaching</option><option>D2C</option><option>Other</option></select></div>
+        <div><label>Business Size *</label><select><option>Solo (1 person)</option><option>2-10 employees</option><option>11-50 employees</option></select></div>
+        <div><label>Biggest Challenge *</label><textarea placeholder="What is the biggest operational or growth challenge right now?"></textarea></div>
+        <button class="btn btn-primary btn-block" type="button">Book My Free Audit</button>
+      </form>
+    
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="con-mobile" data-page-owner="contact" style="left:1600px;top:80px">
+      <div class="frame-label">Contact / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Contact</div>
+            <h1 class="display">Book your free business audit.</h1>
+            <p class="lede">30 minutes. We'll show you exactly where you're losing money and what to build first.</p>
+            <div class="card" style="margin-top:24px">
+              <b>What to expect</b>
+              <ul class="checks">
+                <li>Review current workflows or website</li>
+                <li>Identify 2–3 immediate quick wins</li>
+                <li>Map the highest-ROI system</li>
+                <li>Give a written estimate</li>
+              </ul>
+              <p style="margin-top:16px;font-size:13px">We respond within 24 hours · hello@outpero.com</p>
+            </div>
+            <a class="btn btn-ghost hotspot" data-go="voice" style="margin-top:16px">Looking for a voice agent? Explore →</a>
+          </div>
+          
+      <form class="form card">
+        <div><label>Name *</label><input placeholder="Your full name"></div>
+        <div><label>Business Name *</label><input placeholder="Your company name"></div>
+        <div><label>Email *</label><input type="email" placeholder="you@company.com"></div>
+        <div><label>Phone (WhatsApp preferred) *</label><input type="tel" placeholder="+91 98765 43210"></div>
+        <div><label>Business Type *</label><select><option>Real Estate</option><option>Clinic</option><option>Coaching</option><option>D2C</option><option>Other</option></select></div>
+        <div><label>Business Size *</label><select><option>Solo (1 person)</option><option>2-10 employees</option><option>11-50 employees</option></select></div>
+        <div><label>Biggest Challenge *</label><textarea placeholder="What is the biggest operational or growth challenge right now?"></textarea></div>
+        <button class="btn btn-primary btn-block" type="button">Book My Free Audit</button>
+      </form>
+    
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="about" hidden>
+    <div class="frame-wrap" data-frame="about-desktop" data-page-owner="about" style="left:80px;top:80px">
+      <div class="frame-label">About / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class="active hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero">
+        <h1 class="display">We understand business first.<br>Technology second.</h1>
+        <p class="lede">Most agencies sell tools, not outcomes. OUTPERO starts with the leak, then engineers the system that seals it.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Philosophy</div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3>Outcome-first</h3><p>Measured by the result it creates for your business.</p></div>
+          <div class="card"><h3>Business audit always</h3><p>We map workflows before writing a line of code.</p></div>
+          <div class="card"><h3>ROI tracked</h3><p>Time saved. Revenue captured. Costs cut.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">What we build</div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card hotspot" data-go="systems"><h3>Revenue Capture</h3><p>Instant lead response, qualification, and booking — 24/7.</p></div>
+          <div class="card hotspot" data-go="systems"><h3>Ops Efficiency</h3><p>Eliminate 20–40 hours of manual work every week.</p></div>
+          <div class="card hotspot" data-go="systems"><h3>Digital Salesman</h3><p>Websites that convert, wired to automated pipelines.</p></div>
+        </div>
+      </section>
+      <div class="cta-band"><h2>Have a specific problem?</h2><p>Reach the founder at vatsal@outpero.com or book an audit.</p><a class="btn btn-gold hotspot" data-go="contact">Book Free Audit</a></div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="about-mobile" data-page-owner="about" style="left:1600px;top:80px">
+      <div class="frame-label">About / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <h1 class="display">We understand business first.<br>Technology second.</h1>
+        <p class="lede">Most agencies sell tools, not outcomes. OUTPERO starts with the leak, then engineers the system that seals it.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Philosophy</div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3>Outcome-first</h3><p>Measured by the result it creates for your business.</p></div>
+          <div class="card"><h3>Business audit always</h3><p>We map workflows before writing a line of code.</p></div>
+          <div class="card"><h3>ROI tracked</h3><p>Time saved. Revenue captured. Costs cut.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">What we build</div>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card hotspot" data-go="systems"><h3>Revenue Capture</h3><p>Instant lead response, qualification, and booking — 24/7.</p></div>
+          <div class="card hotspot" data-go="systems"><h3>Ops Efficiency</h3><p>Eliminate 20–40 hours of manual work every week.</p></div>
+          <div class="card hotspot" data-go="systems"><h3>Digital Salesman</h3><p>Websites that convert, wired to automated pipelines.</p></div>
+        </div>
+      </section>
+      <div class="cta-band"><h2>Have a specific problem?</h2><p>Reach the founder at vatsal@outpero.com or book an audit.</p><a class="btn btn-gold hotspot" data-go="contact">Book Free Audit</a></div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="systems" hidden>
+    <div class="frame-wrap" data-frame="sys-desktop" data-page-owner="systems" style="left:80px;top:80px">
+      <div class="frame-label">Revenue systems / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class="active hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Revenue systems</div>
+        <h1 class="display">The Big Three</h1>
+        <p class="lede" style="margin:0 auto">End-to-end systems for lead capture, operations, and web. Fixed scope. Fixed price.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="grid-3">
+          <div class="card"><div class="num">System 1</div><h3>Revenue Capture</h3><p>From ₹60,000</p><ul class="checks"><li>AI Voice Agent</li><li>WhatsApp & SMS</li><li>CRM sync</li><li>Missed-call textback</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+          <div class="card" style="box-shadow:0 0 0 1px #e2b85a, var(--shadow-card)"><span class="flagship">FLAGSHIP</span><div class="num">System 2</div><h3>Ops Efficiency</h3><p>From ₹1,00,000</p><ul class="checks"><li>Process mapping</li><li>3–5 automations</li><li>n8n / Make logic</li><li>Handover docs</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+          <div class="card"><div class="num">System 3</div><h3>Web Capture</h3><p>From ₹50,000</p><ul class="checks"><li>Landing pages</li><li>Lead capture</li><li>WhatsApp triggers</li><li>Analytics</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="sys-mobile" data-page-owner="systems" style="left:1600px;top:80px">
+      <div class="frame-label">Revenue systems / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Revenue systems</div>
+        <h1 class="display">The Big Three</h1>
+        <p class="lede" style="margin:0 auto">End-to-end systems for lead capture, operations, and web. Fixed scope. Fixed price.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="grid-3">
+          <div class="card"><div class="num">System 1</div><h3>Revenue Capture</h3><p>From ₹60,000</p><ul class="checks"><li>AI Voice Agent</li><li>WhatsApp & SMS</li><li>CRM sync</li><li>Missed-call textback</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+          <div class="card" style="box-shadow:0 0 0 1px #e2b85a, var(--shadow-card)"><span class="flagship">FLAGSHIP</span><div class="num">System 2</div><h3>Ops Efficiency</h3><p>From ₹1,00,000</p><ul class="checks"><li>Process mapping</li><li>3–5 automations</li><li>n8n / Make logic</li><li>Handover docs</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+          <div class="card"><div class="num">System 3</div><h3>Web Capture</h3><p>From ₹50,000</p><ul class="checks"><li>Landing pages</li><li>Lead capture</li><li>WhatsApp triggers</li><li>Analytics</li></ul><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:16px">Get this system</a></div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="employee" hidden>
+    <div class="frame-wrap" data-frame="emp-desktop" data-page-owner="employee" style="left:80px;top:80px">
+      <div class="frame-label">AI Employee / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-product desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class="active hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-gold hotspot" data-go="employee">Hire now</a></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Andhra & Telangana</div>
+            <h1 class="display">Hire the fastest <span class="telugu" style="color:var(--op-gold)">తెలుగు</span> employee.</h1>
+            <p class="lede">Skip the ₹30k agency setup fee. Hire it yourself in 5 minutes. Native Telugu, English mid-call, dedicated +91 number.</p>
+            <div class="cta-row">
+              <a class="btn btn-gold hotspot" data-go="pricing">See pricing ₹1,899/mo</a>
+              <a class="btn btn-ghost hotspot" data-go="voice">Hear a sample call</a>
+            </div>
+          </div>
+          <div class="diagram">
+            <div class="node core" style="left:50%;top:50%">AI<br>Employee</div>
+            <div class="node" style="left:22%;top:28%">+91 number</div>
+            <div class="node" style="left:80%;top:30%">CRM sync</div>
+            <div class="node" style="left:24%;top:74%">WhatsApp</div>
+            <div class="node" style="left:78%;top:72%">Calendar</div>
+          </div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">One employee, two ways to work.</h2>
+        <div class="grid-2" style="margin-top:24px">
+          <div class="card"><div class="num">01</div><h3>Instant lead calling</h3><p>New Facebook / website lead? The agent calls in seconds, qualifies, and books.</p></div>
+          <div class="card"><div class="num">02</div><h3>Bulk campaigns</h3><p>Launch to thousands at once. Reminders, follow-ups, promo blasts — 24/7.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Who is this best for?</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3>Real Estate & Builders</h3><p>Call site-visit leads before they bounce to the next listing.</p></div>
+          <div class="card"><h3>Coaching & Admissions</h3><p>Counsel every enquiry the same hour it comes in.</p></div>
+          <div class="card"><h3>Hospitals & Diagnostics</h3><p>Book appointments and never miss a ringing reception line.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Compliance</div>
+        <div class="grid-3" style="margin-top:16px">
+          <div class="card"><h3>DLT numbers</h3><p>Dedicated +91 line, TRAI-aware outbound.</p></div>
+          <div class="card"><h3>DNC screening</h3><p>Indian calling compliance built into the job, not bolted on.</p></div>
+          <div class="card"><h3>Recordings</h3><p>Every call transcribed and stored in Voice Hub.</p></div>
+        </div>
+      </section>
+      <div class="cta-band" style="background:linear-gradient(135deg,#14110a,#3a2a10 50%,#e2b85a)">
+        <h2>Ready in 5 minutes.</h2>
+        <p>No developer. No contract. Pause anytime.</p>
+        <a class="btn btn-gold hotspot" data-go="pricing">Hire an AI employee</a>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="emp-mobile" data-page-owner="employee" style="left:1600px;top:80px">
+      <div class="frame-label">AI Employee / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-product mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <div class="split">
+          <div>
+            <div class="kicker">Andhra & Telangana</div>
+            <h1 class="display">Hire the fastest <span class="telugu" style="color:var(--op-gold)">తెలుగు</span> employee.</h1>
+            <p class="lede">Skip the ₹30k agency setup fee. Hire it yourself in 5 minutes. Native Telugu, English mid-call, dedicated +91 number.</p>
+            <div class="cta-row">
+              <a class="btn btn-gold hotspot" data-go="pricing">See pricing ₹1,899/mo</a>
+              <a class="btn btn-ghost hotspot" data-go="voice">Hear a sample call</a>
+            </div>
+          </div>
+          <div class="diagram">
+            <div class="node core" style="left:50%;top:50%">AI<br>Employee</div>
+            <div class="node" style="left:22%;top:28%">+91 number</div>
+            <div class="node" style="left:80%;top:30%">CRM sync</div>
+            <div class="node" style="left:24%;top:74%">WhatsApp</div>
+            <div class="node" style="left:78%;top:72%">Calendar</div>
+          </div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">One employee, two ways to work.</h2>
+        <div class="grid-2" style="margin-top:24px">
+          <div class="card"><div class="num">01</div><h3>Instant lead calling</h3><p>New Facebook / website lead? The agent calls in seconds, qualifies, and books.</p></div>
+          <div class="card"><div class="num">02</div><h3>Bulk campaigns</h3><p>Launch to thousands at once. Reminders, follow-ups, promo blasts — 24/7.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Who is this best for?</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card"><h3>Real Estate & Builders</h3><p>Call site-visit leads before they bounce to the next listing.</p></div>
+          <div class="card"><h3>Coaching & Admissions</h3><p>Counsel every enquiry the same hour it comes in.</p></div>
+          <div class="card"><h3>Hospitals & Diagnostics</h3><p>Book appointments and never miss a ringing reception line.</p></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="kicker">Compliance</div>
+        <div class="grid-3" style="margin-top:16px">
+          <div class="card"><h3>DLT numbers</h3><p>Dedicated +91 line, TRAI-aware outbound.</p></div>
+          <div class="card"><h3>DNC screening</h3><p>Indian calling compliance built into the job, not bolted on.</p></div>
+          <div class="card"><h3>Recordings</h3><p>Every call transcribed and stored in Voice Hub.</p></div>
+        </div>
+      </section>
+      <div class="cta-band" style="background:linear-gradient(135deg,#14110a,#3a2a10 50%,#e2b85a)">
+        <h2>Ready in 5 minutes.</h2>
+        <p>No developer. No contract. Pause anytime.</p>
+        <a class="btn btn-gold hotspot" data-go="pricing">Hire an AI employee</a>
+      </div>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="pricing" hidden>
+    <div class="frame-wrap" data-frame="price-desktop" data-page-owner="pricing" style="left:80px;top:80px">
+      <div class="frame-label">Pricing / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-product desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class="active hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-gold hotspot" data-go="employee">Hire now</a></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Pricing</div>
+        <h1 class="display">One price, published.</h1>
+        <p class="lede" style="margin:0 auto">₹1,899 to hire an AI employee for 30 days, plus calls from ₹3 a minute. No setup fee. No sales call to hear the number.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="grid-2">
+          <div class="card" style="text-align:left">
+            <div class="kicker">Hiring fee</div>
+            <h2 class="display">₹1,899 <span style="font-size:18px;opacity:.7">/ 30 days</span></h2>
+            <ul class="checks">
+              <li>1 dedicated AI employee</li>
+              <li>Dedicated +91 DLT number</li>
+              <li>500 credits on every hire</li>
+              <li>+300 bonus on first hire</li>
+              <li>Dashboard, webhooks, CRM</li>
+              <li>99.9% uptime SLA</li>
+            </ul>
+            <a class="btn btn-gold btn-block hotspot" data-go="employee" style="margin-top:18px">Hire now</a>
+          </div>
+          <div>
+            <h3 style="margin-top:0">Voice tiers — pick per employee</h3>
+            <div class="card" style="margin-bottom:10px"><b>Value ₹3/min</b><p>Budget-friendly, covers most day-to-day calling.</p></div>
+            <div class="card" style="margin-bottom:10px"><b>Standard ₹5/min</b><p>A step up in naturalness for everyday quality.</p></div>
+            <div class="card"><b>Premium ₹7/min</b><p>Most lifelike — for the first voice a prospect hears.</p></div>
+          </div>
+        </div>
+        <h2 class="display" style="margin-top:48px">Compared with a telecaller</h2>
+        <table class="table">
+          <tr><th></th><th>Outpero</th><th>Human telecaller</th></tr>
+          <tr><td>Hiring cost</td><td>₹1,899 / 30 days</td><td>₹18,000</td></tr>
+          <tr><td>Hours</td><td>24/7</td><td>One shift</td></tr>
+          <tr><td>Concurrency</td><td>Up to 20</td><td>One</td></tr>
+          <tr><td>Training</td><td>Same day</td><td>2–6 weeks</td></tr>
+        </table>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="price-mobile" data-page-owner="pricing" style="left:1600px;top:80px">
+      <div class="frame-label">Pricing / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-product mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero" style="text-align:center">
+        <div class="kicker">Pricing</div>
+        <h1 class="display">One price, published.</h1>
+        <p class="lede" style="margin:0 auto">₹1,899 to hire an AI employee for 30 days, plus calls from ₹3 a minute. No setup fee. No sales call to hear the number.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="grid-2">
+          <div class="card" style="text-align:left">
+            <div class="kicker">Hiring fee</div>
+            <h2 class="display">₹1,899 <span style="font-size:18px;opacity:.7">/ 30 days</span></h2>
+            <ul class="checks">
+              <li>1 dedicated AI employee</li>
+              <li>Dedicated +91 DLT number</li>
+              <li>500 credits on every hire</li>
+              <li>+300 bonus on first hire</li>
+              <li>Dashboard, webhooks, CRM</li>
+              <li>99.9% uptime SLA</li>
+            </ul>
+            <a class="btn btn-gold btn-block hotspot" data-go="employee" style="margin-top:18px">Hire now</a>
+          </div>
+          <div>
+            <h3 style="margin-top:0">Voice tiers — pick per employee</h3>
+            <div class="card" style="margin-bottom:10px"><b>Value ₹3/min</b><p>Budget-friendly, covers most day-to-day calling.</p></div>
+            <div class="card" style="margin-bottom:10px"><b>Standard ₹5/min</b><p>A step up in naturalness for everyday quality.</p></div>
+            <div class="card"><b>Premium ₹7/min</b><p>Most lifelike — for the first voice a prospect hears.</p></div>
+          </div>
+        </div>
+        <h2 class="display" style="margin-top:48px">Compared with a telecaller</h2>
+        <table class="table">
+          <tr><th></th><th>Outpero</th><th>Human telecaller</th></tr>
+          <tr><td>Hiring cost</td><td>₹1,899 / 30 days</td><td>₹18,000</td></tr>
+          <tr><td>Hours</td><td>24/7</td><td>One shift</td></tr>
+          <tr><td>Concurrency</td><td>Up to 20</td><td>One</td></tr>
+          <tr><td>Training</td><td>Same day</td><td>2–6 weeks</td></tr>
+        </table>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="voice" hidden>
+    <div class="frame-wrap" data-frame="voice-desktop" data-page-owner="voice" style="left:80px;top:80px">
+      <div class="frame-label">Voice / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-product desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class=" hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class="active hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-gold hotspot" data-go="employee">Hire now</a></header>
+      <section class="hero">
+        <div class="kicker">Telugu-first voice AI</div>
+        <h1 class="display">AI voice agents for Indian businesses.</h1>
+        <p class="lede">Instant lead response. Native Telugu, Hindi, and English. Inbound, outbound, and bulk — one employee.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold hotspot" data-go="employee">Deploy AI Voice Agent</a>
+          <a class="btn btn-ghost">How it works</a>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Hear the AI in action</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">శాంతి</b><p>Warm & conversational</p></div><div class="play">▶</div></div>
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">Bhaskar</b><p>Energetic & upbeat</p></div><div class="play">▶</div></div>
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">Sahana</b><p>Deep & professional</p></div><div class="play">▶</div></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">How it actually works</h2>
+        <div class="steps" style="margin-top:20px">
+          <div class="card"><div class="step-index">1</div><h3>Lead captured</h3><p>Facebook ad or website form fires.</p></div>
+          <div class="card"><div class="step-index">2</div><h3>3-second call</h3><p>Agent calls before they close the tab.</p></div>
+          <div class="card"><div class="step-index">3</div><h3>Qualifies</h3><p>Handles objections, books the visit.</p></div>
+          <div class="card"><div class="step-index">4</div><h3>Voice Hub</h3><p>Recording, transcript, intent score.</p></div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="voice-mobile" data-page-owner="voice" style="left:1600px;top:80px">
+      <div class="frame-label">Voice / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-product mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <div class="kicker">Telugu-first voice AI</div>
+        <h1 class="display">AI voice agents for Indian businesses.</h1>
+        <p class="lede">Instant lead response. Native Telugu, Hindi, and English. Inbound, outbound, and bulk — one employee.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold hotspot" data-go="employee">Deploy AI Voice Agent</a>
+          <a class="btn btn-ghost">How it works</a>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Hear the AI in action</h2>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">శాంతి</b><p>Warm & conversational</p></div><div class="play">▶</div></div>
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">Bhaskar</b><p>Energetic & upbeat</p></div><div class="play">▶</div></div>
+          <div class="card voice-card"><div class="avatar"></div><div><div class="cat">Native Telugu</div><b class="telugu">Sahana</b><p>Deep & professional</p></div><div class="play">▶</div></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">How it actually works</h2>
+        <div class="steps" style="margin-top:20px">
+          <div class="card"><div class="step-index">1</div><h3>Lead captured</h3><p>Facebook ad or website form fires.</p></div>
+          <div class="card"><div class="step-index">2</div><h3>3-second call</h3><p>Agent calls before they close the tab.</p></div>
+          <div class="card"><div class="step-index">3</div><h3>Qualifies</h3><p>Handles objections, books the visit.</p></div>
+          <div class="card"><div class="step-index">4</div><h3>Voice Hub</h3><p>Recording, transcript, intent score.</p></div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="compare" hidden>
+    <div class="frame-wrap" data-frame="cmp-desktop" data-page-owner="compare" style="left:80px;top:80px">
+      <div class="frame-label">Compare / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class="active hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero">
+        <div class="kicker">Compare</div>
+        <h1 class="display">Sourced, line-by-line comparisons.</h1>
+        <p class="lede">Including a plain statement of where the competitor is genuinely ahead. If a comparison never admits a weakness, it is marketing.</p>
+      </section>
+      <section class="section" style="padding-top:0">
+        <h2 class="display">Regional Telugu & India voice AI</h2>
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card hotspot" data-go="pricing"><h3>Outpero vs Edesy</h3><p>One flat price. No ₹14,999/month tier to unlock an uptime SLA.</p></div>
+          <div class="card"><h3>Outpero vs Zudu AI</h3><p>We publish the number. Their page only offers a demo.</p></div>
+          <div class="card"><h3>Outpero vs Bolna / Vapi</h3><p>Those are developer platforms. This is a finished employee.</p></div>
+          <div class="card"><h3>Outpero vs human telecaller</h3><p>Speed, cost, and concurrency — with a human still on novel cases.</p></div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="blog-desktop" data-page-owner="compare" style="left:1600px;top:80px">
+      <div class="frame-label">Blog / Desktop</div>
+      <div class="artboard desktop" style="width:1440px">
+    <article class="ui theme-agency desktop">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><nav class="nav-links"><a class="active hotspot" data-go="home">Home</a><a class=" hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a><a class=" hotspot" data-go="voice">AI Voice Agents</a><a class=" hotspot" data-go="solutions">Solutions</a><a class=" hotspot" data-go="about">About</a><a class=" hotspot" data-go="contact">Contact</a></nav><a class="btn btn-primary hotspot" data-go="contact">Book Free Audit</a></header>
+      <section class="hero">
+        <div class="kicker">Resources</div>
+        <h1 class="display">Blog</h1>
+        <p class="lede">Voice AI, Telugu calling, pricing, and compliance — written for operators, not developers.</p>
+      </section>
+      <section class="section" style="padding-top:0"><div class="grid-2"><div class="card"><div class="cat">Guide</div><h3>Cheapest AI Voice Agent in India (2026): ₹3/Min</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Are AI Calling Agents Legal in India? TRAI, DLT & DNC</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Best AI Receptionist for Clinics in AP & Telangana</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Telugu AI Voice Agent vs Human Telecaller</h3><p>Practical, India-specific. No jargon.</p></div></div></section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div>
+    <div class="frame-wrap" data-frame="blog-mobile" data-page-owner="compare" style="left:3120px;top:80px">
+      <div class="frame-label">Blog / Mobile</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <section class="hero">
+        <div class="kicker">Resources</div>
+        <h1 class="display">Blog</h1>
+        <p class="lede">Voice AI, Telugu calling, pricing, and compliance — written for operators, not developers.</p>
+      </section>
+      <section class="section" style="padding-top:0"><div class="grid-2"><div class="card"><div class="cat">Guide</div><h3>Cheapest AI Voice Agent in India (2026): ₹3/Min</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Are AI Calling Agents Legal in India? TRAI, DLT & DNC</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Best AI Receptionist for Clinics in AP & Telangana</h3><p>Practical, India-specific. No jargon.</p></div><div class="card"><div class="cat">Guide</div><h3>Telugu AI Voice Agent vs Human Telecaller</h3><p>Practical, India-specific. No jargon.</p></div></div></section>
+      <footer class="footer">
+    <div><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><p class="lede" style="font-size:13px;margin-top:10px">AI automations, voice agents, and web systems — engineered around your outcomes, not our deliverables.</p><p style="font-size:12px;opacity:.6">A product by OpenDG</p></div>
+    <div><b>Navigation</b><a class="hotspot" data-go="home">Home</a><a class="hotspot" data-go="employee">Hire AI Employee</a><a class="hotspot" data-go="voice">AI Voice Agents</a><a class="hotspot" data-go="solutions">Solutions</a><a class="hotspot" data-go="about">About</a></div>
+    <div><b>Resources</b><a class="hotspot" data-go="blog">Blog</a><a class="hotspot" data-go="compare">Compare</a><a class="hotspot" data-go="pricing">Pricing</a></div>
+    <div><b>Get Started</b><p class="lede" style="font-size:13px">Start with a free 30-minute business audit.</p><a class="btn btn-primary hotspot" data-go="contact" style="margin-top:12px">Book Free Audit</a></div>
+    </footer><div class="legal">© 2026 OUTPERO · Privacy · Terms · Refund Policy</div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="menu" hidden>
+    <div class="frame-wrap" data-frame="menu-mobile" data-page-owner="menu" style="left:80px;top:80px">
+      <div class="frame-label">Mobile menu / 390</div>
+      <div class="artboard mobile" style="width:390px">
+    <article class="ui theme-agency mobile" style="position:relative;min-height:844px">
+      <header class="nav"><div class="logo"><span class="logo-mark"><span></span></span>OUTPERO</div><div style="display:flex;gap:8px;align-items:center"><button class="icon-round">☀</button><div class="hamburger hotspot" data-go="menu"><i></i><i></i><i></i></div></div></header>
+      <div class="menu-sheet">
+        <div class="menu-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b>Menu</b><span class="hotspot" data-go="home">✕</span></div>
+          <a class="hotspot" data-go="home">Home</a>
+          <a class="hotspot" data-go="employee">Hire AI Employee <span class="badge-new">NEW</span></a>
+          <a class="hotspot" data-go="voice">AI Voice Agents</a>
+          <a class="hotspot" data-go="solutions">Solutions</a>
+          <a class="hotspot" data-go="about">About</a>
+          <a class="hotspot" data-go="contact">Contact</a>
+          <a class="hotspot" data-go="pricing">Pricing</a>
+          <a class="btn btn-primary btn-block hotspot" data-go="contact" style="margin-top:20px">Book Free Audit</a>
+        </div>
+      </div>
+    </article>
+    </div>
+    </div></div><div class="canvas-page" data-page="flows" hidden>
+    <div class="frame-wrap" data-frame="flows-desktop" data-page-owner="flows" style="left:80px;top:80px">
+      <div class="frame-label">Primary conversion map</div>
+      <div class="artboard desktop" style="width:1440px"><div class="flow"><svg width="1600" height="900" style="position:absolute;inset:0"><g stroke="#a259ff" stroke-width="2" fill="none"><path d="M300 120 H380"/><path d="M300 140 C340 140,340 260,380 260"/><path d="M300 160 C340 160,340 420,380 420"/><path d="M600 100 H700"/><path d="M600 260 H700"/><path d="M600 420 H700"/><path d="M920 420 H1020"/><path d="M920 260 H1020"/></g></svg><div class="flow-node start" style="left:80px;top:80px"><b>Visitor lands</b>Home · 1440 / 390</div><div class="flow-node cta" style="left:380px;top:60px"><b>Book audit</b>Contact form</div><div class="flow-node cta" style="left:380px;top:220px"><b>See systems</b>Revenue systems</div><div class="flow-node cta" style="left:380px;top:380px"><b>Hire employee</b>AI Employee dark</div><div class="flow-node " style="left:700px;top:60px"><b>Audit booked</b>Email + WhatsApp</div><div class="flow-node cta" style="left:700px;top:220px"><b>Pick a system</b>₹50k–1L scope</div><div class="flow-node cta" style="left:700px;top:380px"><b>Pricing</b>₹1899 + ₹3/min</div><div class="flow-node " style="left:1020px;top:380px"><b>Self-serve hire</b>5 min deploy</div><div class="flow-node " style="left:1020px;top:220px"><b>Build in 2 weeks</b>Agency delivery</div><div class="flow-node " style="left:80px;top:560px"><b>Mobile menu</b>Hamburger overlay</div><div class="flow-node " style="left:380px;top:560px"><b>Solutions catalogue</b>19 drop-in SKUs</div><div class="flow-node " style="left:700px;top:560px"><b>Compare / Blog</b>Trust & SEO</div></div></div>
+    </div></div></div>
+      <div class="hint">Space + drag to pan · Scroll to zoom · Prototype mode: click CTAs</div>
+    </main>
+    <aside class="panel panel-right inspect" id="inspect">
+      <h3>Inspect</h3>
+      <p style="color:#aaa;padding:8px 0">Select a frame to see tokens, type, and spacing.</p>
+    </aside>
+  </div>
+  <script src="./js/studio.js"></script>
+</body>
+</html>
