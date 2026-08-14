@@ -31,7 +31,13 @@ export function middleware(request) {
   // On the apex/www domain, send blog traffic to the subdomain (SEO consolidation):
   //   devmohan.in/blogs          -> https://blog.devmohan.in/
   //   devmohan.in/blogs/<slug>   -> https://blog.devmohan.in/<slug>
-  if (pathname === "/blogs" || pathname.startsWith("/blogs/")) {
+  // Keep /blogs local on localhost so the in-theme templates can be verified.
+  const isLocal =
+    host === "localhost" || host === "127.0.0.1" || host.endsWith(".local");
+  if (
+    !isLocal &&
+    (pathname === "/blogs" || pathname.startsWith("/blogs/"))
+  ) {
     const url = request.nextUrl.clone();
     url.protocol = "https:";
     url.host = BLOG_HOST;

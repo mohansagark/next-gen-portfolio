@@ -6,14 +6,14 @@ const BlogCategoriesWidget = () => {
   const categories = getBlogCategories();
   return (
     <div
-      className="px-15px md:px-25px py-30px bg-cream-light-color dark:bg-primary-color-light rounded-lg wow fadeInUp"
+      className="px-15px md:px-25px py-30px bg-white dark:bg-[#12151a] border border-[#e5e7eb] dark:border-[#262b33] rounded-lg wow fadeInUp"
       data-wow-delay=".3s"
     >
-      <h3 className="mb-25px text-primary-color dark:text-white-color uppercase relative z-0 text-size-lg md:text-xl font-bold">
+      <h3 className="mb-25px text-[#0b0d10] dark:text-[#f3f4f6] uppercase relative z-0 text-size-lg md:text-xl font-bold">
         Categories
       </h3>
 
-      <div className="max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-color scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
+      <div className="max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-teal-700 dark:scrollbar-thumb-[#5eead4] scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
         <ul>
           {categories?.length
             ? categories.map(({ category, count }, idx) => (
@@ -29,11 +29,13 @@ const BlogCategoriesWidget = () => {
                         : idx + 1 === categories.length
                         ? "pt-2 md:pt-10px"
                         : "py-2 md:py-10px"
-                    }  text-primary-color-light dark:text-white-color hover:text-primary-color dark:hover:text-primary-color  transition-all duration-500`}
+                    } text-[#374151] dark:text-[#e5e7eb] hover:text-teal-700 dark:hover:text-[#5eead4] transition-all duration-500`}
                   >
                     {category}
                   </Link>
-                  <span className="text-primary-color">({count})</span>
+                  <span className="text-teal-700 dark:text-[#5eead4]">
+                    ({count})
+                  </span>
                 </li>
               ))
             : ""}

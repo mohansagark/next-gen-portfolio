@@ -1,23 +1,27 @@
 "use client";
-import Contact1 from "@/components/sections/contact/Contact1";
-import Hero from "@/components/sections/heros/Hero";
-import Portfolio1 from "@/components/sections/portfolio/Portfolio1";
-import Resume5 from "@/components/sections/resume/Resume5";
-import Services1 from "@/components/sections/services/Services1";
-import Skills1 from "@/components/sections/skills/Skills1";
-import Testimonials1 from "@/components/sections/testimonials/Testimonials1";
+
+import HomeHero from "@/components/sections/home/HomeHero";
+import HomeCredibility from "@/components/sections/home/HomeCredibility";
+import HomeCapabilities from "@/components/sections/home/HomeCapabilities";
+import HomeWork from "@/components/sections/home/HomeWork";
+import HomeExperience from "@/components/sections/home/HomeExperience";
+import HomeTestimonials from "@/components/sections/home/HomeTestimonials";
+import HomeWriting from "@/components/sections/home/HomeWriting";
+import HomeAbout from "@/components/sections/home/HomeAbout";
+import HomeContact from "@/components/sections/home/HomeContact";
 
 const IndexMain = () => {
   return (
-    <main>
-      <Hero />
-      <Services1 />
-      <Portfolio1 />
-      <Resume5 />
-      <Skills1 />
-      <Testimonials1 />
-      {/* <Blogs1 /> */}
-      <Contact1 />
+    <main id="main">
+      <HomeHero />
+      <HomeCredibility />
+      <HomeCapabilities />
+      <HomeWork />
+      <HomeExperience />
+      <HomeTestimonials />
+      <HomeWriting />
+      <HomeAbout />
+      <HomeContact />
     </main>
   );
 };

@@ -1,0 +1,224 @@
+"use client";
+
+import getProfile from "@/libs/getProfile";
+import { RAW_BASE } from "@/libs/contentMapping";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import { btnMetallicClass } from "@/components/shared/buttons/ButtonPrimary";
+
+const HeroGlobeCanvas = dynamic(() => import("./HeroGlobeCanvas"), {
+  ssr: false,
+  loading: () => (
+    <div className="mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.12),transparent_65%)]" />
+  ),
+});
+
+const EASE = [0.32, 0.72, 0, 1];
+
+const listVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.09, delayChildren: 0.06 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 22 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: EASE },
+  },
+};
+
+const globeVariants = {
+  hidden: { opacity: 0, scale: 0.92, y: 24 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: EASE, delay: 0.1 },
+  },
+};
+
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setIsDesktop(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  return isDesktop;
+}
+
+export default function HomeHero() {
+  const reduceMotion = useReducedMotion();
+  const isDesktop = useIsDesktop();
+  const profile = getProfile() || {};
+  const avatarSrc = profile.avatar
+    ? profile.avatar.startsWith("http")
+      ? profile.avatar
+      : `${RAW_BASE}${profile.avatar}`
+    : "/img/hero/me.png";
+
+  const tagline = profile.tagline || "I ship AI applications that hold up in production.";
+  const headline =
+    profile.headline || "AI Engineer · Frontend Architect";
+  const subhead =
+    profile.subhead ||
+    "A decade building production software — now focused on LLM applications, agentic workflows, and the interfaces that make them dependable for real teams.";
+  const primary = profile.primaryCta || {
+    label: "Get in touch",
+    href: "#contact",
+  };
+  const secondary = profile.secondaryCta || {
+    label: "View selected work",
+    href: "#work",
+  };
+  const displayName = profile.firstName || "Mohan Sagar";
+  const location = profile.location || "Remote · Available worldwide";
+
+  const motionProps = reduceMotion
+    ? {}
+    : { initial: "hidden", animate: "show", variants: listVariants };
+
+  const itemProps = reduceMotion ? {} : { variants: itemVariants };
+
+  const globe = (
+    <motion.div
+      className={
+        isDesktop
+          ? "relative w-full min-h-[520px] lg:min-h-[560px] xl:min-h-[620px] min-[1920px]:min-h-[720px] overflow-visible"
+          : "relative mx-auto flex w-full max-w-[min(100%,520px)] sm:max-w-[560px] min-h-[min(92vw,520px)] sm:min-h-[560px] my-5 sm:my-6 items-center justify-center overflow-visible"
+      }
+      variants={reduceMotion ? undefined : globeVariants}
+    >
+      <HeroGlobeCanvas reducedMotion={!!reduceMotion} />
+    </motion.div>
+  );
+
+  return (
+    <section
+      id="home"
+      className="home-hero relative overflow-x-clip overflow-y-visible min-h-[100dvh] flex items-start lg:items-center pt-[max(1rem,env(safe-area-inset-top))] lg:pt-28 pb-10 sm:pb-14 md:pb-16 lg:pb-20 scroll-mt-24 lg:scroll-mt-28"
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+        <div className="absolute -top-24 right-[-18%] w-[78vw] max-w-[520px] h-[78vw] max-h-[520px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.22),transparent_68%)] blur-2xl dark:opacity-100 opacity-70 lg:right-[-8%] lg:w-[62vw] lg:max-w-[820px]" />
+        <div className="absolute top-[42%] right-[4%] w-[40vw] max-w-[220px] h-[40vw] max-h-[220px] rounded-full bg-[radial-gradient(circle,rgba(15,118,110,0.1),transparent_70%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(45,212,191,0.12),transparent_70%)] dark:opacity-90 opacity-50 lg:top-[28%] lg:right-[8%] lg:w-[28vw] lg:max-w-[360px]" />
+        <div className="absolute bottom-[-12%] left-[-28%] w-[70vw] max-w-[420px] h-[70vw] max-h-[420px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.14),transparent_62%)] blur-2xl dark:opacity-100 opacity-55 lg:bottom-[-22%] lg:left-[-18%] lg:w-[52vw] lg:max-w-[600px]" />
+      </div>
+
+      <div className="container max-w-[1240px] min-[1920px]:!max-w-[1680px] w-full px-5 sm:px-6">
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] xl:grid-cols-[0.95fr_1.05fr] gap-8 lg:gap-6 xl:gap-8 min-[1920px]:gap-10 items-center"
+          {...motionProps}
+        >
+          <div className="max-w-3xl min-[1920px]:max-w-4xl">
+            <motion.div
+              className="flex items-center gap-3 mb-5 sm:mb-7 sm:gap-3.5 pt-1.5 max-lg:pt-2 max-lg:pr-14 lg:pt-0 lg:pr-0"
+              {...itemProps}
+            >
+              <img
+                src={avatarSrc}
+                alt=""
+                width={48}
+                height={48}
+                className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full object-cover object-top ring-1 ring-black/10 dark:ring-white/15"
+              />
+              <div className="min-w-0 flex-1 flex flex-col">
+                <p className="text-[0.75rem] sm:text-[0.95rem] text-primary-color-light dark:text-[#e5e7eb] leading-snug max-lg:whitespace-nowrap max-lg:overflow-hidden max-lg:text-ellipsis">
+                  <span className="font-medium">{displayName}</span>
+                  <span className="mx-1.5 opacity-35" aria-hidden>
+                    ·
+                  </span>
+                  <span className="text-[#374151] dark:text-[#8b939e]">
+                    {location}
+                  </span>
+                </p>
+                <p className="mt-1 inline-flex items-center gap-1.5 text-[0.6rem] sm:text-xs tracking-[0.08em] sm:tracking-[0.12em] uppercase text-teal-700 dark:text-teal-300/90 font-medium leading-snug min-w-0 whitespace-nowrap">
+                  <i
+                    className="fa-solid fa-rocket text-[10px] sm:text-[11px] shrink-0"
+                    aria-hidden
+                  />
+                  <span className="whitespace-nowrap">{headline}</span>
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Desktop: headline before globe column. Mobile: globe first, then headline */}
+            {isDesktop ? (
+              <motion.h1
+                className="font-display text-[2rem] sm:text-5xl lg:text-[3.55rem] xl:text-[3.9rem] leading-[1.08] text-primary-color-light dark:text-white max-w-[16ch] sm:max-w-[18ch] lg:max-w-none mb-4 sm:mb-5"
+                {...itemProps}
+              >
+                {tagline}
+              </motion.h1>
+            ) : null}
+
+            {!isDesktop ? globe : null}
+
+            {!isDesktop ? (
+              <motion.h1
+                className="font-display text-[2rem] sm:text-5xl leading-[1.08] text-primary-color-light dark:text-white max-w-[16ch] sm:max-w-[18ch] mb-4 sm:mb-5"
+                {...itemProps}
+              >
+                {tagline}
+              </motion.h1>
+            ) : null}
+
+            <motion.p
+              className="text-[0.9375rem] sm:text-base md:text-lg text-[#374151] dark:text-[#9aa3af] max-w-2xl leading-relaxed mb-6 sm:mb-8"
+              {...itemProps}
+            >
+              {subhead}
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap items-stretch sm:items-center gap-2.5"
+              {...itemProps}
+            >
+              <a
+                href={primary.href}
+                className={`group inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-2 rounded-full ${btnMetallicClass} !text-white dark:!text-white pl-4 pr-2 py-2.5 sm:py-2 text-sm font-semibold duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98]`}
+              >
+                <i className="fa-solid fa-comments text-[13px] text-white" aria-hidden />
+                {primary.label}
+                <span className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center transition-transform duration-500 group-hover:translate-x-0.5 text-white">
+                  <i className="fa-solid fa-arrow-right text-[12px] text-current" aria-hidden />
+                </span>
+              </a>
+              <div className="flex w-full sm:w-auto gap-2.5">
+                <a
+                  href={secondary.href}
+                  className="inline-flex flex-1 sm:flex-initial shrink-0 items-center justify-center gap-2 rounded-full border border-[#d1d5db] dark:border-white/15 text-primary-color-light dark:text-white px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm font-medium hover:border-teal-600/50 dark:hover:border-teal-300/50 transition-colors duration-500 active:scale-[0.98]"
+                >
+                  <i className="fa-solid fa-briefcase text-[13px]" aria-hidden />
+                  <span className="truncate">{secondary.label}</span>
+                </a>
+                {profile.resumeUrl ? (
+                  <Link
+                    href={profile.resumeUrl}
+                    className="inline-flex flex-1 sm:flex-initial shrink-0 items-center justify-center gap-2 rounded-full border border-[#d1d5db] dark:border-white/15 text-primary-color-light dark:text-white px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm font-medium hover:border-teal-600/50 dark:hover:border-teal-300/50 transition-colors duration-500 active:scale-[0.98]"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <i className="fa-solid fa-file-lines text-[13px]" aria-hidden />
+                    Resume
+                  </Link>
+                ) : null}
+              </div>
+            </motion.div>
+          </div>
+
+          {isDesktop ? globe : null}
+        </motion.div>
+      </div>
+    </section>
+  );
+}

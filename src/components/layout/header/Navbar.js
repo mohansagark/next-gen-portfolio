@@ -8,15 +8,13 @@ import indexingAndActiveLink from "@/libs/indexingAndActiveLink";
 import useHomeLink from "@/hooks/useHomeLink";
 import Link from "next/link";
 import { useEffect } from "react";
-import MobileMenuController from "./MobileMenuController";
 
-const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
-	const { isIndexPage, isInnerPage, isResumeBtn, headerType } =
+const Navbar = () => {
+	const { isIndexPage, isResumeBtn, headerType } =
 		useHeaderContext();
 	const navItems = getNavItems();
 	const homeLink = useHomeLink();
 	useEffect(() => {
-		// mobileMenuController();
 		indexingAndActiveLink();
 	}, []);
 
@@ -32,7 +30,7 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 									? "lg:bg-cream-light-color lg:dark:bg-black-color"
 									: "lg:border lg:border-primary-color "
 						  } `
-						: ` gap-x-5 2xl:gap-x-45px`
+						: ` gap-x-4 xl:gap-x-6 2xl:gap-x-10`
 				}`}
 			>
 				{navItems?.length
@@ -40,20 +38,11 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 							<li key={idx} className="nav_item group relative hidden lg:block">
 								<Link
 									href={isIndexPage ? path : homeLink(path2)}
-									className={`text-size-15 font-medium  ${
-										isInnerPage && !isSticky
-											? "text-white-color"
-											: headerType === 5 ||
-											  headerType === 6 ||
-											  headerType === 9 ||
-											  headerType === 10
-											? ""
-											: "text-seondary-color dark:text-white-color"
-									} capitalize relative z-0  ${
+									className={`text-size-15 font-medium capitalize relative z-0 text-primary-color-light hover:text-teal-700 dark:text-white-color dark:hover:text-teal-200 transition-colors ${
 										headerType === 5 || headerType === 10 ? "" : "py-10px "
 									}  ${
 										headerType === 5 || headerType === 6 || headerType === 9
-											? ` text-seondary-color hover:text-primary-color dark:text-gray-color-4 dark:hover:text-white-color ${
+											? `${
 													headerType === 6 || headerType === 9
 														? "py-10px md:py-14px lg:py-14px 2xl:py-14px"
 														: "px-14px py-3px border border-transparent hover:border-primary-color rounded-full"
@@ -62,7 +51,7 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 											? `  md:py-14px lg:py-14px 2xl:py-14px `
 											: `${
 													headerType === 10
-														? "text-seondary-color hover:text-primary-color dark:text-gray-color-4 dark:hover:text-white-color  py-10 after:w-0 after:h-0.5 after:bg-primary-color after:absolute after:right-0 hover:after:left-0 after:-bottom-0 after:transition-all after:duration-500 group-hover:after:w-full"
+														? "py-10 after:w-0 after:h-0.5 after:bg-primary-color after:absolute after:right-0 hover:after:left-0 after:-bottom-0 after:transition-all after:duration-500 group-hover:after:w-full"
 														: "md:py-15px lg:py-25px 2xl:py-30px  after:w-0 after:h-0.5 after:bg-gradient-primary after:absolute after:right-0 hover:after:left-0 after:bottom-[25px] after:transition-all after:duration-500 group-hover:after:w-full"
 											  }`
 									} `}
@@ -73,40 +62,27 @@ const Navbar = ({ isActiveMobileMenu, setIsActiveMobileMenu, isSticky }) => {
 					  ))
 					: ""}
 
-				{/* <!-- action button --> */}
+				{/* Contact CTA — only once here (not also in nav-items) */}
 				{headerType === 9 || headerType === 10 ? (
 					""
 				) : headerType === 5 ? (
 					<li className="menu-bar lg:hidden">
 						<ButtonHeader />
 					</li>
-				) : headerType === 3 || headerType === 4 ? (
+				) : headerType === 3 || headerType === 4 || headerType === 6 ? (
 					""
 				) : (
-					<li
-						className={`${headerType === 6 ? "hidden sm:block lg:hidden" : ""}`}
-					>
+					<li className="hidden lg:block">
 						{isResumeBtn ? (
 							<ButtonPrimary2 url={"#"}>Resume</ButtonPrimary2>
 						) : (
 							<ButtonPrimary
-								isIcon={headerType === 6 ? true : false}
 								url={isIndexPage ? "#contact" : homeLink("/#contact")}
+								className="!text-white dark:!text-white"
 							>
-								{headerType === 6 ? "Lets Talk" : "Hire Me!"}
+								Contact
 							</ButtonPrimary>
 						)}
-					</li>
-				)}
-				{/* <!-- open mobile menu button --> */}
-				{headerType === 9 || headerType === 10 ? (
-					""
-				) : (
-					<li className="menu-bar lg:hidden">
-						<MobileMenuController
-							setIsActiveMobileMenu={setIsActiveMobileMenu}
-							isActiveMobileMenu={isActiveMobileMenu}
-						/>
 					</li>
 				)}
 			</ul>

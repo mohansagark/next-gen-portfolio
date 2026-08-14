@@ -1,13 +1,14 @@
 import getBlogs from "@/libs/getBlogs";
+import { fetchAllContent } from "@/libs/portfolioData";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
-// The blog lives on its own subdomain; posts are canonical there.
 const BLOG_BASE = process.env.NEXT_PUBLIC_BLOG_URL || "https://blog.devmohan.in";
 
-// App Router sitemap: emitted as /sitemap.xml at build. Lists every blog post
-// (on the blog subdomain) so each is crawlable independent of list-page rendering.
-export default function sitemap() {
+export default async function sitemap() {
   const blogs = getBlogs() || [];
+  const content = await fetchAllContent();
+  const caseStudies = content.caseStudies || [];
+  const capabilities = content.capabilities?.items || [];
 
   const posts = blogs.map((b) => ({
     url: `${BLOG_BASE}/${b.id}`,
@@ -16,9 +17,29 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
+  const work = caseStudies
+    .filter((c) => c.slug)
+    .map((c) => ({
+      url: `${BASE}/work/${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
+
+  const capabilityRoutes = capabilities
+    .filter((c) => c.slug)
+    .map((c) => ({
+      url: `${BASE}/capabilities/${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    }));
+
   return [
     { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     { url: `${BLOG_BASE}/`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
+    ...work,
+    ...capabilityRoutes,
     ...posts,
   ];
 }

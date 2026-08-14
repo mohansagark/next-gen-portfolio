@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 const MAX_ORBS = 12;
 
-// Sidebar "Popular Topics" widget: tags as weighted violet orbs floating in a
+// Sidebar "Popular Topics" widget: tags as weighted teal orbs floating in a
 // nebula, diameter scaling with post count. Orb size is derived from the
 // measured column width so it fits the narrow sidebar. On fine-pointer devices
 // the orbs ease away from the cursor; on touch / small screens the cursor
@@ -144,10 +144,10 @@ const PopularTagsNebula = () => {
 
   return (
     <div
-      className="px-15px md:px-25px py-30px bg-cream-light-color dark:bg-primary-color-light rounded-lg wow fadeInUp"
+      className="px-15px md:px-25px py-30px bg-white dark:bg-[#12151a] border border-[#e5e7eb] dark:border-[#262b33] rounded-lg wow fadeInUp"
       data-wow-delay=".3s"
     >
-      <h3 className="mb-25px text-primary-color dark:text-white-color uppercase relative z-0 text-size-lg md:text-xl font-bold">
+      <h3 className="mb-25px text-[#0b0d10] dark:text-[#f3f4f6] uppercase relative z-0 text-size-lg md:text-xl font-bold">
         Popular Topics
       </h3>
 
@@ -156,7 +156,7 @@ const PopularTagsNebula = () => {
         className="relative rounded-lg overflow-hidden h-[320px]"
         style={{
           background:
-            "radial-gradient(120% 90% at 25% 15%, rgba(135,80,247,.12), transparent 60%), radial-gradient(120% 90% at 85% 95%, rgba(155,141,255,.12), transparent 60%)",
+            "radial-gradient(120% 90% at 25% 15%, rgba(94,234,212,.12), transparent 60%), radial-gradient(120% 90% at 85% 95%, rgba(45,212,191,.12), transparent 60%)",
         }}
       >
         {tags.map((t, i) => {
@@ -184,9 +184,9 @@ const PopularTagsNebula = () => {
                 cursor: "pointer",
                 willChange: "transform",
                 background:
-                  "radial-gradient(circle at 35% 30%, #b98cff, #8750f7 55%, #2a1454)",
+                  "radial-gradient(circle at 35% 30%, #99f6e4, #14b8a6 55%, #0b0d10)",
                 boxShadow:
-                  "0 0 0 1px rgba(155,141,255,.35), 0 6px 18px rgba(135,80,247,.35), inset 0 5px 12px rgba(255,255,255,.18)",
+                  "0 0 0 1px rgba(45,212,191,.35), 0 6px 18px rgba(94,234,212,.35), inset 0 5px 12px rgba(255,255,255,.18)",
               }}
             >
               <span

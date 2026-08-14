@@ -9,9 +9,9 @@ const BlogTableOfContents = ({ headings = [] }) => {
   return (
     <nav
       aria-label="Table of contents"
-      className="mb-8 rounded-lg border border-border-color dark:border-gray-color-3 bg-cream-light-color/60 dark:bg-primary-color-light/60 px-5 py-5"
+      className="mb-8 rounded-lg border border-[#e5e7eb] dark:border-[#262b33] bg-white dark:bg-[#12151a] px-5 py-5"
     >
-      <h2 className="text-primary-color-light dark:text-white-color text-lg font-bold mb-3">
+      <h2 className="text-[#0b0d10] dark:text-[#f3f4f6] text-lg font-bold mb-3">
         On this page
       </h2>
       <ol className="space-y-2 list-none m-0 p-0">
@@ -22,7 +22,7 @@ const BlogTableOfContents = ({ headings = [] }) => {
           >
             <a
               href={`#${id}`}
-              className="text-primary-color-light dark:text-white-color hover:text-primary-color dark:hover:text-primary-color text-[0.95rem] leading-snug transition-colors duration-300"
+              className="text-[#374151] dark:text-[#9aa3af] hover:text-teal-700 dark:hover:text-[#5eead4] text-[0.95rem] leading-snug transition-colors duration-300"
             >
               {text}
             </a>

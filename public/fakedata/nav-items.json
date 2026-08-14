@@ -1,23 +1,18 @@
 [
   {
-    "name": "Services",
-    "path": "#services",
-    "path2": "/#services"
+    "name": "Expertise",
+    "path": "#capabilities",
+    "path2": "/#capabilities"
   },
   {
-    "name": "Works",
-    "path": "#portfolio",
-    "path2": "/#portfolio"
+    "name": "Work",
+    "path": "#work",
+    "path2": "/#work"
   },
   {
-    "name": "Credentials",
-    "path": "#credentials",
-    "path2": "/#credentials"
-  },
-  {
-    "name": "Skills",
-    "path": "#skills",
-    "path2": "/#skills"
+    "name": "Experience",
+    "path": "#experience",
+    "path2": "/#experience"
   },
   {
     "name": "Testimonials",
@@ -25,13 +20,13 @@
     "path2": "/#testimonials"
   },
   {
-    "name": "Blog",
-    "path": "https://blog.devmohan.in",
-    "path2": "https://blog.devmohan.in"
+    "name": "Writing",
+    "path": "#writing",
+    "path2": "/#writing"
   },
   {
-    "name": "Contact",
-    "path": "#contact",
-    "path2": "/#contact"
+    "name": "About",
+    "path": "#about",
+    "path2": "/#about"
   }
 ]

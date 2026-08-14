@@ -258,8 +258,8 @@ async function buildAppConfig() {
     branding: {
       botName,
       greeting: `Hi, I'm ${botName} — ${displayName}'s assistant. Ask me about their work, projects, or how to get in touch.`,
-      themeColor: "#6C5CE7",
-      themeColorSecondary: "#6C5CE7",
+      themeColor: "#5eead4",
+      themeColorSecondary: "#2dd4bf",
       position: "bottom-right",
     },
     behavior: {

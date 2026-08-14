@@ -46,8 +46,32 @@ export const slugify = (s) =>
 
 export function mapSkills(skills) {
   return skills.categories.flatMap((c) =>
-    c.skills.map((s) => ({ name: s.name, img: img(s.icon), perchant: `${s.proficiency}%` }))
+    c.skills.map((s) => ({
+      name: s.name,
+      img: img(s.icon),
+      // Keep key for older Skills UI; prefer no fake % when proficiency omitted.
+      perchant: s.proficiency != null ? `${s.proficiency}%` : "",
+      group: c.name,
+    }))
   );
+}
+
+export function mapCapabilities(capabilities) {
+  return {
+    sectionTitle: capabilities.sectionTitle || "",
+    sectionSubcopy: capabilities.sectionSubcopy || "",
+    explorationNote: capabilities.explorationNote || "",
+    items: (capabilities.items || []).map((item) => ({
+      id: item.id,
+      slug: item.slug || item.id,
+      title: item.title,
+      body: item.body,
+      image: item.image || "",
+      imageLight: item.imageLight || "",
+      evidence: item.evidence || [],
+      page: item.page || null,
+    })),
+  };
 }
 
 export function mapResume(experience, education, achievements, bundledResume) {
@@ -109,6 +133,7 @@ export function mapPortfolio(projects, profile) {
 
   return projects.items.map((p, i) => {
     const image = img(p.image);
+    const sections = p.sections || [];
     return {
       id: i + 1,
       slug: p.slug,
@@ -120,9 +145,9 @@ export function mapPortfolio(projects, profile) {
       detailsImg: image,
       desc: p.description,
       shortDesc: p.shortDescription,
-      desc1: p.sections[0]?.body || "",
-      desc2: p.sections[1]?.body || "",
-      descItems: p.sections.slice(2).map((s) => ({ title: s.title, desc: s.body })),
+      desc1: sections[0]?.body || p.problem || "",
+      desc2: sections[1]?.body || p.solution || "",
+      descItems: sections.slice(2).map((s) => ({ title: s.title, desc: s.body })),
       category: p.category,
       dataFilter: slugify(p.category),
       tags: p.technologies,
@@ -131,11 +156,35 @@ export function mapPortfolio(projects, profile) {
       featured: p.featured,
       featuredDesc: p.shortDescription,
       featuredImg: image,
+      kind: p.kind,
+      company: p.company,
+      companyDomain: p.companyDomain || "",
+      role: p.role,
+      problem: p.problem,
+      context: p.context,
+      solution: p.solution,
+      architecture: p.architecture,
+      decisions: p.decisions || [],
+      ai: p.ai,
+      aiLabel: p.aiLabel || "",
+      challenges: p.challenges || [],
+      result: p.result,
+      priority: p.priority,
+      showOnHomepage: p.showOnHomepage !== false,
+      homeTitle: p.homeTitle || "",
+      homeMetric: p.homeMetric || "",
+      homeName: p.homeName || "",
+      homeTagline: p.homeTagline || "",
+      homeMetrics: p.homeMetrics || [],
+      coverImage: p.coverImage || p.image || "",
+      architectureImage: p.architectureImage || "",
+      architectureImageLight: p.architectureImageLight || "",
+      architectureCaption: p.architectureCaption || "",
       ...(employee ? { employee } : {}),
       statusItem: [
         { title: "Category", desc: p.category || "—" },
         { title: "Technology", desc: (p.technologies || []).slice(0, 3).join(", ") || "—" },
-        { title: "Status", desc: "Completed" },
+        { title: "Status", desc: p.kind === "employer" ? "Production" : "Personal" },
       ],
     };
   });
@@ -177,11 +226,14 @@ const SOCIAL_ICONS = {
 };
 
 export function mapSocials(socials) {
-  return socials.links.map((l) => ({
-    id: l.platform,
-    iconName: SOCIAL_ICONS[l.platform] || `fa-brands fa-${l.platform}`,
-    path: l.url,
-  }));
+  return socials.links
+    .filter((l) => !l.hiddenOnSite)
+    .map((l) => ({
+      id: l.platform,
+      iconName: SOCIAL_ICONS[l.platform] || `fa-brands fa-${l.platform}`,
+      path: l.url,
+      primary: l.primary !== false,
+    }));
 }
 
 export function mapTestimonials(testimonials) {
@@ -191,5 +243,6 @@ export function mapTestimonials(testimonials) {
     authorDesig: t.role,
     img: img(t.avatar),
     desc: t.quote,
+    featured: !!t.featured,
   }));
 }

@@ -1,296 +1,114 @@
-# 🚀 Next-Gen Portfolio
+# Mohan Sagar — Portfolio
 
-A modern, responsive portfolio website built with Next.js 15, featuring dynamic blog management, multiple homepage layouts, and a comprehensive design system.
+Personal portfolio for **Mohan Sagar** (AI Engineer · Frontend Architect): [devmohan.in](https://devmohan.in).
 
-> 📐 **System design, data/AI flows, and the full tool list:** see **[ARCHITECTURE.md](./ARCHITECTURE.md)** — how the portfolio, the AI‑written blog, and the git‑based CMS fit together across four repos (with diagrams).
+Next.js app that ships a single homepage IA, case-study and capability detail routes, a contact API (Cloudflare Turnstile + Resend), and a blog surface that mirrors to [blog.devmohan.in](https://blog.devmohan.in).
+
+> System design, data/AI flows, and the multi-repo map: **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.1.2-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?style=for-the-badge&logo=javascript)
 
-## ✨ Features
+## What this site is
 
-### 🎨 **Multiple Homepage Layouts**
+- **Homepage** (`/`) — one composition via `IndexMain` (hero → credibility → capabilities → work → experience → testimonials → writing → about → contact)
+- **Work** (`/work/[slug]`) — case studies from portfolio-data
+- **Capabilities** (`/capabilities/[slug]`) — capability detail pages
+- **Blogs** (`/blogs`, `/blogs/[slug]`) — listing + posts; canonical blog host is the subdomain
+- **Contact** (`/api/contact`) — Turnstile-verified form → Resend email
+- **Content SoT** — profile, experience, projects, and related JSON from [portfolio-data](https://github.com/mohansagark/portfolio-data) (local dir or `admin.devmohan.in`), with `public/fakedata/` fallbacks
 
-- 10 unique homepage variants (home-2 through home-10)
-- Customizable hero sections and layouts
-- Responsive design across all devices
-
-### 📝 **Dynamic Blog System**
-
-- **MDX-Powered**: Write blogs in MDX format with frontmatter support
-- **Auto-Generation**: Automatic conversion from MDX to JSON
-- **Rich Content**: Support for code blocks, images, and interactive components
-- **SEO Optimized**: Meta tags, structured data, and social sharing
-- **Tag & Category System**: Organized content with filtering capabilities
-
-### 🛠 **Advanced Components**
-
-- **Portfolio Gallery**: Filterable project showcase
-- **Services Section**: Highlight your offerings
-- **Testimonials**: Client feedback carousel
-- **Skills & Resume**: Professional experience display
-- **Contact Forms**: Integrated contact functionality
-
-### 🌙 **Modern UX/UI**
-
-- **Dark/Light Mode**: Seamless theme switching
-- **Smooth Animations**: GSAP and CSS animations
-- **Interactive Elements**: Vanilla Tilt, Intersection Observer
-- **Mobile-First**: Responsive design principles
-
-### ⚡ **Performance Optimized**
-
-- **Next.js 15**: Latest features and optimizations
-- **Image Optimization**: Next.js Image component
-- **Code Splitting**: Automatic bundle optimization
-- **Analytics Ready**: Vercel Analytics integration
-
-## 🚀 Quick Start
+## Quick start
 
 ### Prerequisites
 
 - Node.js 18+
-- npm package manager
+- npm
 
 ### Installation
 
-1. **Clone the repository**
+```bash
+git clone https://github.com/mohansagark/next-gen-portfolio.git
+cd next-gen-portfolio
+npm install
+cp .env.example .env.local   # fill in keys as needed
+npm run generate:blogs
+npm run dev
+```
 
-   ```bash
-   git clone https://github.com/mohansagark/next-gen-portfolio.git
-   cd next-gen-portfolio
-   ```
+Open [http://localhost:3000](http://localhost:3000).
 
-2. **Install dependencies**
+## Environment / keys checklist
 
-   ```bash
-   npm install
-   ```
+Copy `.env.example` → `.env.local` for local dev. **Do not commit secrets.** Where each key lives:
 
-3. **Generate blog data**
+| Key | Where to add | Notes |
+| --- | ------------ | ----- |
+| `NEXT_PUBLIC_SITE_URL` | Vercel project env + `.env.local` | Canonical URL (default `https://devmohan.in`) |
+| `NEXT_PUBLIC_LEO_WORKER_URL` | Vercel project env + `.env.local` | Browser Leo widget Worker URL |
+| `PORTFOLIO_BLOG_TOKEN` | Vercel project env (+ local if fetching blogs) | GitHub read token for private `portfolio-blog` at prebuild |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Vercel project env + `.env.local` | Cloudflare Turnstile **dashboard** → create Invisible widget; domains: `localhost`, `127.0.0.1`, `devmohan.in` |
+| `TURNSTILE_SECRET` | Vercel project env + `.env.local` | Same Turnstile widget secret (server-only) |
+| `RESEND_API_KEY` | Vercel project env + `.env.local` | [Resend dashboard](https://resend.com/api-keys) API key |
+| `RESEND_FROM_EMAIL` | Vercel project env + `.env.local` | Verified sender, e.g. `Portfolio <contact@devmohan.in>` (Resend domain) |
+| `CONTACT_TO_EMAIL` | Vercel project env + `.env.local` | Inbox that receives enquiries |
+| `CLOUDFLARE_API_TOKEN` | Vercel project env | Workers KV edit for Leo sync (`npm run sync:leo` / prebuild) |
+| `CLOUDFLARE_ACCOUNT_ID` | Vercel (optional) | Only if Wrangler cannot infer account |
+| `PORTFOLIO_KV_NAMESPACE_ID` | Vercel (optional) | Override Leo PORTFOLIO_KV id |
+| `PORTFOLIO_DATA_DIR` | `.env.local` only | Local path to `portfolio-data` checkout |
+| `PORTFOLIO_DATA_BASE_URL` | Vercel / local (optional) | Default `https://admin.devmohan.in` |
 
-   ```bash
-   npm run generate:blogs
-   ```
+Leo Worker secrets (`GROQ_API_KEY`, `DEEPGRAM_API_KEY`, etc.) belong on the **Cloudflare Worker**, not this Vercel project.
 
-4. **Start development server**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Open in browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📁 Project Structure
+## Project structure (high level)
 
 ```
 next-gen-portfolio/
-├── 📂 public/
-│   ├── 📄 blogs.json              # Generated blog data
-│   ├── 📂 img/                    # Static images
-│   └── 📂 fakedata/               # Demo data files
-├── 📂 src/
-│   ├── 📂 app/                    # Next.js app directory
-│   │   ├── 📄 page.js             # Homepage
-│   │   ├── 📂 blogs/              # Blog routes
-│   │   │   ├── 📄 page.js         # Blog listing
-│   │   │   └── 📂 [slug]/         # Dynamic blog pages
-│   │   ├── 📂 portfolio/          # Portfolio pages
-│   │   ├── 📂 services/           # Services pages
-│   │   └── 📂 home-{2-10}/        # Alternative homepages
-│   ├── 📂 blog/posts/             # MDX blog files
-│   ├── 📂 components/             # React components
-│   │   ├── 📂 layout/             # Layout components
-│   │   ├── 📂 sections/           # Page sections
-│   │   └── 📂 shared/             # Reusable components
-│   ├── 📂 context_api/            # React contexts
-│   ├── 📂 hooks/                  # Custom React hooks
-│   └── 📂 libs/                   # Utility functions
-├── 📂 scripts/
-│   └── 📄 convert-mdx-to-json.mjs # Blog generation script
-└── 📄 package.json
+├── public/
+│   ├── blogs.json           # Generated blog index
+│   ├── fakedata/            # Bundled content fallbacks
+│   └── img/ / images/       # Static assets
+├── src/
+│   ├── app/                 # App Router (/, /work, /capabilities, /blogs, /api/contact)
+│   ├── blog/posts/          # Local MDX (when present)
+│   ├── components/
+│   │   ├── layout/          # Header, footer, IndexMain, …
+│   │   ├── sections/home/   # Live homepage sections
+│   │   └── shared/
+│   ├── libs/                # portfolioData, contact, SEO helpers
+│   └── …
+├── scripts/                 # Blog generate, Leo sync, etc.
+└── package.json
 ```
 
-## ✍️ Blog Management
+## Blog
 
-### Writing Blog Posts
+Posts are generated into `public/blogs.json` (`npm run generate:blogs`). Production also pulls from the private portfolio-blog repo when `PORTFOLIO_BLOG_TOKEN` is set. Public reading lives primarily on **blog.devmohan.in**; this app still serves `/blogs` routes for listing/detail and sitemap entries.
 
-1. **Create MDX file** in `src/blog/posts/`
+## Scripts
 
-   ```markdown
-   ---
-   title: "Your Blog Title"
-   subtitle: "Brief description"
-   summary: "Detailed summary for SEO and previews"
-   slug: "your-blog-slug"
-   date: "2025-01-17"
-   content_strategy: "Technical tutorials and coding tips"
-   writing_style: "energetic and practical"
-   tags: '["javascript", "react", "nextjs"]'
-   image_url: "https://example.com/image.jpg"
-   source_url: "https://original-source.com"
-   ---
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Dev server (Turbopack) |
+| `npm run build` | Production build (runs prebuild hooks) |
+| `npm start` | Start production server |
+| `npm run lint` | ESLint |
+| `npm run generate:blogs` | Convert MDX / refresh blog JSON |
 
-   # Your Blog Content
+## Deployment
 
-   Write your blog content here using Markdown and JSX!
-   ```
+Deploy on Vercel. Set the Vercel project env vars from `.env.example` (site URL, Turnstile, Resend, blog token, Cloudflare token for Leo sync). Build uses `npm run build`.
 
-2. **Generate blog data**
-
-   ```bash
-   npm run generate:blogs
-   ```
-
-3. **Blog Features**
-   - ✅ Automatic slug generation
-   - ✅ Tag and category extraction
-   - ✅ Key takeaways extraction
-   - ✅ SEO metadata generation
-   - ✅ Image optimization
-   - ✅ Social sharing
-
-### Blog Structure
-
-Each blog post includes:
-
-- **Frontmatter**: Metadata and configuration
-- **Content**: Main blog content in MDX
-- **Auto-generated**: Tags, categories, key points
-- **Navigation**: Previous/next blog links
-- **Social**: Sharing buttons and metadata
-
-## 🎨 Customization
-
-### Homepage Layouts
-
-Switch between different homepage styles:
-
-- `/` - Default homepage
-- `/home-2` through `/home-10` - Alternative layouts
-
-### Styling
-
-- **Tailwind CSS**: Utility-first CSS framework
-- **Custom Components**: Modular design system
-- **Theme Configuration**: Easy color and typography changes
-
-### Content Management
-
-- **Static Data**: JSON files in `public/fakedata/`
-- **Dynamic Content**: MDX blog posts
-- **Images**: Optimized with Next.js Image component
-
-## 🔧 Available Scripts
-
-| Command                  | Description                             |
-| ------------------------ | --------------------------------------- |
-| `npm run dev`            | Start development server with Turbopack |
-| `npm run build`          | Build production application            |
-| `npm start`              | Start production server                 |
-| `npm run lint`           | Run ESLint code analysis                |
-| `npm run generate:blogs` | Convert MDX files to JSON               |
-
-## 📦 Dependencies
-
-### Core
-
-- **Next.js 15.1.2**: React framework
-- **React 19.0.0**: UI library
-- **TailwindCSS 3.4.1**: Styling framework
-
-### Animation & Interaction
-
-- **GSAP 3.12.7**: Advanced animations
-- **WOW.js**: Scroll animations
-- **Vanilla Tilt**: 3D tilt effects
-- **Swiper**: Touch sliders
-
-### Utilities
-
-- **Gray Matter**: MDX frontmatter parsing
-- **Isotope Layout**: Filterable layouts
-- **React Intersection Observer**: Scroll detection
-- **Nice Select**: Custom select components
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Connect repository to Vercel
-2. Configure build settings:
-   - Build Command: `npm run build`
-   - Output Directory: `.next`
-3. Deploy automatically on push
-
-### Manual Deployment
-
-```bash
-npm run build
-npm start
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create `.env.local` for environment-specific settings:
-
-```env
-NEXT_PUBLIC_SITE_URL=https://devmohan.in
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
-```
-
-### Next.js Configuration
-
-Customize `next.config.mjs` for:
-
-- Image domains
-- Redirects
-- Headers
-- Performance optimizations
-
-## 📱 Browser Support
-
-- ✅ Chrome (latest)
-- ✅ Firefox (latest)
-- ✅ Safari (latest)
-- ✅ Edge (latest)
-- ✅ Mobile browsers
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
+## Author
 
 **Mohan Sagar**
 
+- Site: [devmohan.in](https://devmohan.in)
+- Blog: [blog.devmohan.in](https://blog.devmohan.in)
 - GitHub: [@mohansagark](https://github.com/mohansagark)
-- Website: [devmohan.in](https://devmohan.in)
+- LinkedIn: [mohansagark](https://www.linkedin.com/in/mohansagark/)
 
-## 🙏 Acknowledgments
+## License
 
-- [Next.js](https://nextjs.org/) for the amazing framework
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS
-- [Vercel](https://vercel.com/) for hosting and deployment
-- All open-source contributors
-
----
-
-⭐ **Star this repository if you found it helpful!**
-
-🐛 **Found a bug?** [Open an issue](https://github.com/mohansagark/next-gen-portfolio/issues)
-
-💡 **Have a suggestion?** [Start a discussion](https://github.com/mohansagark/next-gen-portfolio/discussions)
+MIT — see [LICENSE](LICENSE).

@@ -1,12 +1,7 @@
 "use client";
 import Footer from "@/components/layout/footer/Footer";
-import Footer2 from "@/components/layout/footer/Footer2";
-import Footer3 from "@/components/layout/footer/Footer3";
-import Footer4 from "@/components/layout/footer/Footer4";
-import Footer5 from "@/components/layout/footer/Footer5";
-import Footer6 from "@/components/layout/footer/Footer6";
-import Footer7 from "@/components/layout/footer/Footer7";
 import Header from "@/components/layout/header/Header";
+import MobileFloatingNav from "@/components/layout/header/MobileFloatingNav";
 import FooterContextProvider from "@/context_api/FooterContext";
 import HeaderContextProvider from "@/context_api/HeaderContext";
 import PortfolioRenderContextProvider from "@/context_api/PortfolioRenderContext";
@@ -48,7 +43,7 @@ const PageWrapper = ({
 	}, []);
 	return (
 		<div>
-			<Preloader />
+			<Preloader isHome={!!isIndexPage} />
 
 			<BackToTop />
 			{headerType === 4 ? <MagicCusror1 /> : ""}
@@ -57,26 +52,13 @@ const PageWrapper = ({
 			>
 				<Header />
 				<Header isSticky={true} />
+				<MobileFloatingNav />
 			</HeaderContextProvider>
 			<PortfolioRenderContextProvider>
 				{children ? children : ""}
 			</PortfolioRenderContextProvider>
 			<FooterContextProvider value={{ footerType }}>
-				{footerType === 10 ? (
-					<Footer7 />
-				) : footerType === 9 ? (
-					<Footer6 />
-				) : footerType === 8 || footerType === 7 ? (
-					<Footer5 />
-				) : footerType === 6 ? (
-					<Footer4 />
-				) : footerType === 5 ? (
-					<Footer3 />
-				) : footerType === 4 ? (
-					<Footer2 />
-				) : (
-					<Footer />
-				)}
+				<Footer />
 			</FooterContextProvider>
 		</div>
 	);
