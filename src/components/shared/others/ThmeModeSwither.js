@@ -14,7 +14,7 @@ const ThmeModeSwither = () => {
       <button
         type="button"
         aria-label="Toggle color theme"
-        className="theme-controller w-90px h-10 bg-200 bg-gradient-secondary hover:bg-[-100%] rounded-l-full text-whiteColor px-10px flex items-center transition-all duration-300 font-sora"
+        className="theme-controller w-90px h-10 bg-200 bg-gradient-btn-light hover:bg-[-100%] rounded-l-full !text-white dark:!text-white dark:bg-gradient-btn-dark px-10px flex items-center transition-all duration-300 font-sora shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_1px_2px_rgba(0,0,0,0.18)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1px_2px_rgba(0,0,0,0.35)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
