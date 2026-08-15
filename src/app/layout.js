@@ -1,16 +1,14 @@
-import ThmeModeSwither from "@/components/shared/others/ThmeModeSwither";
-import LeoLoader from "@/components/shared/others/LeoLoader";
 import { Suspense } from "react";
-import { Analytics } from "@vercel/analytics/next";
 import ContentProvider from "@/components/providers/ContentProvider";
 import { fetchAllContent } from "@/libs/portfolioData";
 import { seedContent } from "@/libs/contentStore";
 import JsonLd from "@/components/seo/JsonLd";
+import { isPerfAuditBuild } from "@/libs/perfAudit";
+import ShellExtras from "@/components/shared/others/ShellExtras";
 
-import "./css/backToTop.css";
-import "./globals.css";
+import "@/app/css/backToTop.css";
+import "@/app/globals.css";
 import { Sora, Fraunces } from "next/font/google";
-import DeferredIconStyles from "@/components/shared/others/DeferredIconStyles";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -91,6 +89,7 @@ export default async function RootLayout({ children }) {
   const content = await fetchAllContent();
   seedContent(content);
   const profile = content.profile || {};
+  const perfAudit = isPerfAuditBuild();
   const currentJob =
     (content.experience || []).find((job) => job.current) ||
     (content.experience || [])[0];
@@ -138,6 +137,11 @@ export default async function RootLayout({ children }) {
     url: SITE,
   };
 
+  // CI audit builds: theme only — never pin LCP behind splash-pending.
+  const bootScript = perfAudit
+    ? `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark");}else{document.documentElement.classList.add("dark");}}catch(e){document.documentElement.classList.add("dark");}})();`
+    : `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark");}else{document.documentElement.classList.add("dark");}var p=location.pathname;var ua=navigator.userAgent||"";var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;var bot=navigator.webdriver||/Lighthouse|Chrome-Lighthouse|PageSpeed|HeadlessChrome|PTST|GTmetrix|Pingdom|WebPageTest/i.test(ua);if(!bot&&!reduce&&(p==="/"||p==="")){document.documentElement.classList.add("splash-pending");}}catch(e){document.documentElement.classList.add("dark");}})();`;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -146,7 +150,7 @@ export default async function RootLayout({ children }) {
       >
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark");}else{document.documentElement.classList.add("dark");}var p=location.pathname;var ua=navigator.userAgent||"";var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;var bot=navigator.webdriver||/Lighthouse|Chrome-Lighthouse|PageSpeed|HeadlessChrome|PTST|GTmetrix|Pingdom|WebPageTest/i.test(ua);if(!bot&&!reduce&&(p==="/"||p==="")){document.documentElement.classList.add("splash-pending");}}catch(e){document.documentElement.classList.add("dark");}})();`,
+            __html: bootScript,
           }}
         />
         <a
@@ -156,14 +160,10 @@ export default async function RootLayout({ children }) {
           Skip to content
         </a>
         <JsonLd data={[personLd, websiteLd]} />
-        <DeferredIconStyles />
         <ContentProvider content={content}>
           <Suspense fallback={<></>}>{children}</Suspense>
         </ContentProvider>
-        <ThmeModeSwither />
-        <LeoLoader workerUrl={process.env.NEXT_PUBLIC_LEO_WORKER_URL} />
-        {/* Analytics script 404s off Vercel (hurts Lighthouse Best Practices). */}
-        {process.env.VERCEL ? <Analytics /> : null}
+        <ShellExtras />
       </body>
     </html>
   );

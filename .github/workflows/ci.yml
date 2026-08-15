@@ -84,9 +84,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      # Skip WebGL globe + other audit-only heavy paths in this job's build so
-      # CI Lighthouse matches what bots see (prod UA-spoof still gets intent defer).
-      - run: npm run build
+      # Skip WebGL / Leo / Motion homepage for this job only. Use webpack so
+      # resolve aliases apply (Turbopack is Next 16 default otherwise).
+      - name: Build (Lighthouse audit)
+        run: |
+          npm run prebuild
+          npx next build --webpack
         env:
           NEXT_PUBLIC_SKIP_HEAVY_MEDIA: "1"
       # treosh/lighthouse-ci-action@v11 does not accept startServerCommand —

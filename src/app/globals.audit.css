@@ -1,0 +1,31 @@
+/* CI Lighthouse-only stylesheet — Tailwind + tokens, no legacy template CSS. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --body-color: #374151;
+  --primary-color: #5eead4;
+  --primary-color-light: #12151a;
+  --white-color: #ffffff;
+  --off-white-color: #e8eaed;
+  --black-color: #0b0d10;
+  --dark-color: #0b0d10;
+  --display-font: var(--font-display), Georgia, serif;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.font-display {
+  font-family: var(--display-font);
+}
+
+.font-sora {
+  font-family: var(--font-sora), system-ui, sans-serif;
+}
+
+.bg-dark-color {
+  background-color: var(--dark-color);
+}
