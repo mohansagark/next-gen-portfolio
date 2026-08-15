@@ -1,4 +1,5 @@
 import BlogDetailsMain from "@/components/layout/main/BlogDetailsMain";
+import JsonLd from "@/components/seo/JsonLd";
 import PageWrapper from "@/components/shared/wrappers/PageWrapper";
 import { buildBlogJsonLd } from "@/libs/blogJsonLd";
 import getBlogs from "@/libs/getBlogs";
@@ -53,17 +54,7 @@ export default async function BlogDetails(context) {
 
   return (
     <PageWrapper isInnerPage={true}>
-      {jsonLd ? (
-        <script
-          type="application/ld+json"
-          // Escape "<" so a value containing "</script>" can't break out of
-          // this tag; JSON.parse decodes the escape back correctly.
-          // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
-      ) : null}
+      {jsonLd ? <JsonLd data={jsonLd} /> : null}
       <BlogDetailsMain blog={isExistBlog} />
     </PageWrapper>
   );

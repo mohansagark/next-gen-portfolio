@@ -14,7 +14,7 @@
     "deploy:build": "npm run build && npm run export",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --test \"src/libs/__tests__/*.test.mjs\"",
+    "test": "node --test src/libs/__tests__/*.test.mjs",
     "test:smoke": "node scripts/smoke-site.mjs",
     "test:all": "npm test && npm run test:smoke"
   },
