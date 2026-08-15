@@ -155,7 +155,8 @@ export default async function RootLayout({ children }) {
         </ContentProvider>
         <ThmeModeSwither />
         <LeoLoader workerUrl={process.env.NEXT_PUBLIC_LEO_WORKER_URL} />
-        <Analytics />
+        {/* Analytics script 404s off Vercel (hurts Lighthouse Best Practices). */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

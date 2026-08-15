@@ -57,9 +57,41 @@ function useIsDesktop() {
   return isDesktop;
 }
 
+/** Defer WebGL globe until idle so Lighthouse / first paint aren't blocked. */
+function useDeferredMount(enabled) {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (!enabled) {
+      setReady(false);
+      return undefined;
+    }
+    let cancelled = false;
+    const arm = () => {
+      if (cancelled) return;
+      setReady(true);
+    };
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(arm, { timeout: 1800 });
+      return () => {
+        cancelled = true;
+        window.cancelIdleCallback?.(id);
+      };
+    }
+    const t = window.setTimeout(arm, 600);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(t);
+    };
+  }, [enabled]);
+
+  return ready;
+}
+
 export default function HomeHero() {
   const reduceMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
+  const mountGlobe = useDeferredMount(isDesktop);
   const profile = getProfile() || {};
   const avatarSrc = profile.avatar
     ? profile.avatar.startsWith("http")
@@ -99,7 +131,14 @@ export default function HomeHero() {
       }
       variants={reduceMotion ? undefined : globeVariants}
     >
-      <HeroGlobeCanvas reducedMotion={!!reduceMotion} />
+      {isDesktop && mountGlobe ? (
+        <HeroGlobeCanvas reducedMotion={!!reduceMotion} />
+      ) : (
+        <div
+          className="mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.2),transparent_62%)] dark:bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.14),transparent_62%)]"
+          aria-hidden
+        />
+      )}
     </motion.div>
   );
 

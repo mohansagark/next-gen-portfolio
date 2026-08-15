@@ -15,18 +15,17 @@ const FALLBACK_WRITING = {
 
 function resolveCover(post) {
   const cover = post.coverImage || post.img || post.image || "";
-  if (cover) {
-    if (
-      cover.startsWith("http") ||
-      cover.startsWith("//") ||
-      cover.startsWith("/blog-images/")
-    ) {
-      return cover;
-    }
-    const file = cover.split("/").pop();
-    if (file) return `/blog-images/${file}`;
+  if (!cover) return null;
+  if (
+    cover.startsWith("http") ||
+    cover.startsWith("//") ||
+    cover.startsWith("/blog-images/")
+  ) {
+    return cover;
   }
-  return `/blog-images/${post.id}.jpg`;
+  const file = cover.split("/").pop();
+  if (file) return `/blog-images/${file}`;
+  return null;
 }
 
 export default function HomeWriting() {
@@ -83,14 +82,18 @@ export default function HomeWriting() {
                   rel="noreferrer"
                 >
                   <div className="relative aspect-[16/10] bg-cream-light-color dark:bg-[#0f1217] overflow-hidden">
-                    <img
-                      src={cover}
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      onError={(e) => {
-                        e.currentTarget.style.opacity = "0";
-                      }}
-                    />
+                    {cover ? (
+                      <img
+                        src={cover}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        onError={(e) => {
+                          e.currentTarget.style.opacity = "0";
+                        }}
+                      />
+                    ) : null}
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(15,118,110,0.12),transparent_55%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(94,234,212,0.16),transparent_55%)] pointer-events-none" />
                   </div>
                   <div className="p-5 flex flex-col flex-1">

@@ -93,7 +93,28 @@ test("mapSkills keeps the first occurrence when a name appears in multiple categ
   assert.equal(mapped[0].group, "Frontend");
 });
 
-test("mapSkills includes proficiency and omits fake percent when missing", () => {
+test("mapSkills remaps heavy third-party icons to local assets", () => {
+  const mapped = mapSkills({
+    categories: [
+      {
+        name: "Frontend",
+        skills: [
+          {
+            name: "JavaScript",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1280px-Unofficial_JavaScript_logo_2.svg.png",
+          },
+          {
+            name: "Agentic AI",
+            icon: "https://www.prutech.com/in/wp-content/uploads/2025/03/agentic-AI-1.png",
+          },
+        ],
+      },
+    ],
+  });
+  assert.equal(mapped.find((s) => s.name === "JavaScript")?.img, "/img/icons/js.svg");
+  assert.equal(mapped.find((s) => s.name === "Agentic AI")?.img, "");
+});
+
   const mapped = mapSkills({
     categories: [
       {

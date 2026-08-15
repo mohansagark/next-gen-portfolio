@@ -21,9 +21,23 @@ export const resolveFileUrl = (p) =>
 // image everywhere icons, logos, avatars and covers are rendered.
 const isAbsoluteUrl = (p) => /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(p);
 
+/** Prefer same-origin icons over huge third-party logos (Lighthouse / cookies). */
+const LOCAL_SKILL_ICONS = {
+  JavaScript: "/img/icons/js.svg",
+  TypeScript: "/img/icons/typescript.svg",
+  "Agentic AI": "",
+};
+
 const img = (p) => {
   if (!p) return "";
   return isAbsoluteUrl(p) ? p : `${RAW_BASE}${p}`;
+};
+
+const skillIcon = (name, icon) => {
+  if (Object.prototype.hasOwnProperty.call(LOCAL_SKILL_ICONS, name)) {
+    return LOCAL_SKILL_ICONS[name];
+  }
+  return img(icon);
 };
 
 const MONTH_NAMES = {
@@ -56,7 +70,7 @@ export function mapSkills(skills) {
       seen.add(s.name);
       out.push({
         name: s.name,
-        img: img(s.icon),
+        img: skillIcon(s.name, s.icon),
         // Keep key for older Skills UI; prefer no fake % when proficiency omitted.
         perchant: s.proficiency != null ? `${s.proficiency}%` : "",
         group: c.name,

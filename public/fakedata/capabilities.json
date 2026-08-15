@@ -8,8 +8,8 @@
       "slug": "ai-product-experiences",
       "title": "AI product experiences",
       "body": "Copilots and assistants your customers trust — clear, fast, and safe enough for everyday use.",
-      "image": "/images/capabilities/cover-ai-experiences-chat.png",
-      "imageLight": "/images/capabilities/cover-ai-experiences-chat-light.png",
+      "image": "/images/capabilities/cover-ai-experiences-chat.jpg",
+      "imageLight": "/images/capabilities/cover-ai-experiences-chat-light.jpg",
       "evidence": ["ivygpt", "servicenow-agentic"],
       "page": {
         "eyebrow": "Service",
@@ -62,8 +62,8 @@
       "slug": "agentic-systems",
       "title": "Agentic systems",
       "body": "Automate multi-step work across your tools — with visibility and human control at every critical step.",
-      "image": "/images/capabilities/cover-agentic-bots-v3.png",
-      "imageLight": "/images/capabilities/cover-agentic-bots-light-v3.png",
+      "image": "/images/capabilities/cover-agentic-bots-v3.jpg",
+      "imageLight": "/images/capabilities/cover-agentic-bots-light-v3.jpg",
       "evidence": ["servicenow-agentic"],
       "page": {
         "eyebrow": "Service",
@@ -116,8 +116,8 @@
       "slug": "llm-application-infrastructure",
       "title": "LLM application infrastructure",
       "body": "Keep AI features reliable and affordable as usage grows — without rebuilding the foundation every release.",
-      "image": "/images/capabilities/cover-llm-infrastructure.png",
-      "imageLight": "/images/capabilities/cover-llm-infrastructure-light.png",
+      "image": "/images/capabilities/cover-llm-infrastructure.jpg",
+      "imageLight": "/images/capabilities/cover-llm-infrastructure-light.jpg",
       "evidence": ["ivygpt", "daily-dev-digest"],
       "page": {
         "eyebrow": "Service",
@@ -170,8 +170,8 @@
       "slug": "product-frontend-systems",
       "title": "Product frontend systems",
       "body": "Fast, accessible interfaces that raise conversion — and stay consistent as your product and team grow.",
-      "image": "/images/capabilities/cover-frontend-systems.png",
-      "imageLight": "/images/capabilities/cover-frontend-systems-light.png",
+      "image": "/images/capabilities/cover-frontend-systems.jpg",
+      "imageLight": "/images/capabilities/cover-frontend-systems-light.jpg",
       "evidence": ["jio-platforms", "servicenow-agentic"],
       "page": {
         "eyebrow": "Service",
