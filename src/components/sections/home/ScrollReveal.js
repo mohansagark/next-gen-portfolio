@@ -27,13 +27,13 @@ export default function ScrollReveal({
   return (
     <Tag
       className={className}
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18, margin: "0px 0px -6% 0px" }}
       transition={{
         type: "spring",
-        bounce: 0.22,
-        duration: 0.75,
+        bounce: 0.18,
+        duration: 0.65,
         delay: delay / 1000,
       }}
     >

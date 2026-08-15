@@ -456,7 +456,8 @@ module.exports = {
 
       // typography
       fontFamily: {
-        sora: "'Sora', sans-serif",
+        sora: "var(--font-sora), 'Sora', sans-serif",
+        display: "var(--font-display), Fraunces, Georgia, serif",
         fontawesome: `"Font Awesome 6 Pro"`,
         helvetica: `"Helvetica Neue", sans-serif`,
         flaticon: `flaticon_gerold`,

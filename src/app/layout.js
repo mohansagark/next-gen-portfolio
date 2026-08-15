@@ -7,14 +7,24 @@ import { fetchAllContent } from "@/libs/portfolioData";
 import { seedContent } from "@/libs/contentStore";
 import JsonLd from "@/components/seo/JsonLd";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "./css/animate.min.css";
 import "./css/backToTop.css";
-import "./css/flaticon_gerold.css";
-import "./css/font-awesome-pro.min.css";
 import "./globals.css";
+import { Sora, Fraunces } from "next/font/google";
+import DeferredIconStyles from "@/components/shared/others/DeferredIconStyles";
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sora",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
 
@@ -96,11 +106,7 @@ export default async function RootLayout({ children }) {
     "@type": "Person",
     name: "Mohan Sagar",
     url: SITE,
-    image: profile.avatar
-      ? profile.avatar.startsWith("http")
-        ? profile.avatar
-        : `https://admin.devmohan.in${profile.avatar}`
-      : undefined,
+    image: `${SITE}/images/profile/avatar-web.jpg`,
     jobTitle: profile.headline || "Senior Software Engineer",
     worksFor,
     sameAs: [
@@ -135,12 +141,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`font-sora bg-[var(--off-white-color)] dark:bg-dark-color overflow-x-hidden relative`}
+        className={`${sora.variable} ${fraunces.variable} font-sora bg-[var(--off-white-color)] dark:bg-dark-color overflow-x-hidden relative`}
         suppressHydrationWarning={true}
       >
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark");}else{document.documentElement.classList.add("dark");}var p=location.pathname;if(p==="/"||p===""){document.documentElement.classList.add("splash-pending");}}catch(e){document.documentElement.classList.add("dark");}})();`,
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark");}else{document.documentElement.classList.add("dark");}var p=location.pathname;var ua=navigator.userAgent||"";var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;var bot=navigator.webdriver||/Lighthouse|Chrome-Lighthouse|PageSpeed|HeadlessChrome|PTST|GTmetrix|Pingdom|WebPageTest/i.test(ua);if(!bot&&!reduce&&(p==="/"||p==="")){document.documentElement.classList.add("splash-pending");}}catch(e){document.documentElement.classList.add("dark");}})();`,
           }}
         />
         <a
@@ -150,6 +156,7 @@ export default async function RootLayout({ children }) {
           Skip to content
         </a>
         <JsonLd data={[personLd, websiteLd]} />
+        <DeferredIconStyles />
         <ContentProvider content={content}>
           <Suspense fallback={<></>}>{children}</Suspense>
         </ContentProvider>

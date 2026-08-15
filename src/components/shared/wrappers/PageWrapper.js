@@ -5,12 +5,7 @@ import MobileFloatingNav from "@/components/layout/header/MobileFloatingNav";
 import FooterContextProvider from "@/context_api/FooterContext";
 import HeaderContextProvider from "@/context_api/HeaderContext";
 import useSticky from "@/hooks/useSticky";
-import animateInvertText from "@/libs/animateInvertText";
-import animateSplitText from "@/libs/animateSplitText ";
-import controlVanillaTilt from "@/libs/controlVanillaTilt";
 import scrollToHash from "@/libs/scrollToHash";
-import smoothScroll from "@/libs/smoothScroll";
-import tjTitleAnim from "@/libs/tjTitleAnim";
 import { useEffect } from "react";
 import BackToTop from "../others/BackToTop";
 import Preloader from "../others/Preloader";
@@ -25,19 +20,34 @@ const PageWrapper = ({
 }) => {
 	useSticky();
 	useEffect(() => {
-		import("wow.js").then(({ default: WOW }) => {
-			new WOW().init();
-			controlVanillaTilt();
-		});
-		smoothScroll();
-		animateSplitText();
-		animateInvertText();
-		tjTitleAnim();
-		// Sections render client-side, so a #hash present on load (e.g. arriving
-		// at /#contact from the blog) has no target when the browser's native
-		// hash-scroll fires. Scroll to it ourselves once it mounts.
 		const cancelHashScroll = scrollToHash(window.location.hash);
-		return () => cancelHashScroll && cancelHashScroll();
+
+		let cancelled = false;
+		const runHeavy = () => {
+			if (cancelled) return;
+			void import("wow.js").then(({ default: WOW }) => {
+				if (cancelled) return;
+				new WOW().init();
+			});
+			void import("@/libs/controlVanillaTilt").then((m) => m.default?.());
+			void import("@/libs/smoothScroll").then((m) => m.default?.());
+			void import("@/libs/animateSplitText ").then((m) => m.default?.());
+			void import("@/libs/animateInvertText").then((m) => m.default?.());
+			void import("@/libs/tjTitleAnim").then((m) => m.default?.());
+		};
+
+		const idleId =
+			typeof window.requestIdleCallback === "function"
+				? window.requestIdleCallback(runHeavy, { timeout: 4000 })
+				: null;
+		const timer = idleId == null ? window.setTimeout(runHeavy, 2000) : null;
+
+		return () => {
+			cancelled = true;
+			if (idleId != null) window.cancelIdleCallback?.(idleId);
+			if (timer != null) window.clearTimeout(timer);
+			cancelHashScroll && cancelHashScroll();
+		};
 	}, []);
 	return (
 		<div>

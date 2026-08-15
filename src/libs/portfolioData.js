@@ -141,6 +141,8 @@ export async function fetchAllContent() {
   if (canon.profile) {
     bundle.profile = {
       ...canon.profile,
+      // Prefer same-origin optimized avatar (CDN still hosts a multi-MB PNG).
+      avatar: "/images/profile/avatar-web.jpg",
       resumeUrl: resolveFileUrl(canon.profile.resumeUrl),
     };
   }

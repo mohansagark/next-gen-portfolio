@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import getBlogs from "@/libs/getBlogs";
+import getHomeWriting from "@/libs/getHomeWriting";
 import { getContent } from "@/libs/contentStore";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
 
@@ -15,29 +15,29 @@ const FALLBACK_WRITING = {
 
 function resolveCover(post) {
   const cover = post.coverImage || post.img || post.image || "";
-  if (!cover) return null;
-  if (
-    cover.startsWith("http") ||
-    cover.startsWith("//") ||
-    cover.startsWith("/blog-images/")
-  ) {
-    return cover;
+  if (cover) {
+    if (
+      cover.startsWith("http") ||
+      cover.startsWith("//") ||
+      cover.startsWith("/blog-images/")
+    ) {
+      return cover;
+    }
+    const file = cover.split("/").pop();
+    if (file) return `/blog-images/${file}`;
   }
-  const file = cover.split("/").pop();
-  if (file) return `/blog-images/${file}`;
+  // blogs.json may have pruned coverImage while public/blog-images/{id}.jpg exists.
+  const id = post.id || post.slug;
+  if (id) return `/blog-images/${id}.jpg`;
   return null;
 }
 
 export default function HomeWriting() {
   const writing = getContent("writing") || FALLBACK_WRITING;
-  const preferredSlugs = writing.preferredSlugs || [];
   const limit = Math.max(1, Number(writing.homepageLimit) || 3);
 
-  const blogs = (getBlogs() || []).filter((b) => !b.isBlogQuote);
-  const preferred = preferredSlugs
-    .map((id) => blogs.find((b) => b.id === id || b.slug === id))
-    .filter(Boolean);
-  const items = (preferred.length ? preferred : blogs).slice(0, limit);
+  // Preferred ordering is baked into writing-home.json at build time.
+  const items = (getHomeWriting() || []).slice(0, limit);
   const blogBase =
     process.env.NEXT_PUBLIC_BLOG_URL || "https://blog.devmohan.in";
 

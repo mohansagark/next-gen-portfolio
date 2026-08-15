@@ -27,16 +27,21 @@ function resolveExperienceLogo(job) {
   const company = String(job.company || "");
   const hay = `${logo} ${company}`.toLowerCase();
 
-  if (/accenture/.test(hay)) return "/images/experience/accenture.png";
-  if (/servicenow/.test(hay)) return "/images/experience/servicenow.png";
-  if (/invesco/.test(hay)) return "/images/experience/invesco.png";
-  if (/reliance|jio/.test(hay)) return "/images/experience/reliance.png";
-  if (/zentree/.test(hay)) return "/images/experience/zentreelabs.png";
-  if (/shell/.test(hay)) return "/images/experience/shell.png";
+  if (/accenture/.test(hay)) return "/images/experience/accenture.jpg";
+  if (/servicenow/.test(hay)) return "/images/experience/servicenow.jpg";
+  if (/invesco/.test(hay)) return "/images/experience/invesco.jpg";
+  if (/reliance|jio/.test(hay)) return "/images/experience/reliance.jpg";
+  if (/zentree/.test(hay)) return "/images/experience/zentreelabs.jpg";
+  if (/shell/.test(hay)) return "/images/experience/shell.jpg";
 
   if (!logo) return "";
+  const file = logo.split("/").pop() || "";
+  const localJpg = file.replace(/\.png$/i, ".jpg");
+  if (localJpg && /\.(jpe?g|webp|svg)$/i.test(localJpg)) {
+    return `/images/experience/${localJpg}`;
+  }
   if (logo.startsWith("http") || logo.startsWith("/images/")) return logo;
-  return `/images/experience/${logo.split("/").pop()}`;
+  return `/images/experience/${file}`;
 }
 
 /** Same circular avatar treatment as experience — local education marks. */

@@ -1,7 +1,6 @@
 "use client";
 
 import getProfile from "@/libs/getProfile";
-import { RAW_BASE } from "@/libs/contentMapping";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
 
 /** Render plain text with simple **bold** markers as <strong>. */
@@ -28,11 +27,7 @@ export default function HomeAbout() {
   const chunks = [profile.bio, profile.about]
     .filter(Boolean)
     .flatMap((p) => String(p).split(/\n\n+/).map((c) => c.trim()).filter(Boolean));
-  const avatarSrc = profile.avatar
-    ? profile.avatar.startsWith("http")
-      ? profile.avatar
-      : `${RAW_BASE}${profile.avatar}`
-    : "/img/hero/me.png";
+  const avatarSrc = "/images/profile/avatar-web.jpg";
 
   return (
     <section

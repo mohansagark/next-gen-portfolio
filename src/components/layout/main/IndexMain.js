@@ -1,14 +1,25 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import HomeHero from "@/components/sections/home/HomeHero";
 import HomeCredibility from "@/components/sections/home/HomeCredibility";
-import HomeCapabilities from "@/components/sections/home/HomeCapabilities";
-import HomeWork from "@/components/sections/home/HomeWork";
-import HomeExperience from "@/components/sections/home/HomeExperience";
-import HomeTestimonials from "@/components/sections/home/HomeTestimonials";
-import HomeWriting from "@/components/sections/home/HomeWriting";
-import HomeAbout from "@/components/sections/home/HomeAbout";
-import HomeContact from "@/components/sections/home/HomeContact";
+
+/** Code-split below-fold sections but still SSR their HTML into the document. */
+const lazy = (loader) => dynamic(loader, { ssr: true });
+
+const HomeCapabilities = lazy(
+  () => import("@/components/sections/home/HomeCapabilities"),
+);
+const HomeWork = lazy(() => import("@/components/sections/home/HomeWork"));
+const HomeExperience = lazy(
+  () => import("@/components/sections/home/HomeExperience"),
+);
+const HomeTestimonials = lazy(
+  () => import("@/components/sections/home/HomeTestimonials"),
+);
+const HomeWriting = lazy(() => import("@/components/sections/home/HomeWriting"));
+const HomeAbout = lazy(() => import("@/components/sections/home/HomeAbout"));
+const HomeContact = lazy(() => import("@/components/sections/home/HomeContact"));
 
 const IndexMain = () => {
   return (

@@ -89,8 +89,12 @@ const progressVariants = {
 
 /**
  * Home splash with staggered Motion enter/exit.
- * Shows only on a hard load/reload of `/` (boot script sets `html.splash-pending`).
- * Soft navigations back to home (e.g. from a service page) skip it.
+ * Shows only on a hard load/reload of `/` when the boot script sets
+ * `html.splash-pending` (skipped for Lighthouse/bots/reduced-motion so LCP
+ * stays green). Soft navigations back to home skip it.
+ *
+ * Dismisses on a short brand hold — never waits for `window.load` (that used
+ * to pin LCP behind every image/font on the page).
  */
 export default function Preloader({ isHome = false }) {
   const reduceMotion = useReducedMotion();
@@ -127,43 +131,23 @@ export default function Preloader({ isHome = false }) {
   useEffect(() => {
     if (!isHome || !visible) return undefined;
 
-    const minHold = reduceMotion ? 200 : 1500;
-    const maxHold = reduceMotion ? 600 : 3000;
+    // Brand beat only — do not wait for window.load (images/fonts).
+    const minHold = reduceMotion ? 180 : 900;
+    const maxHold = reduceMotion ? 400 : 1400;
 
-    let minReady = false;
-    let loadReady = document.readyState === "complete";
     let dismissed = false;
-
     const dismiss = () => {
-      if (dismissed || !minReady || !loadReady) return;
+      if (dismissed) return;
       dismissed = true;
       setVisible(false);
     };
 
-    const minTimer = window.setTimeout(() => {
-      minReady = true;
-      dismiss();
-    }, minHold);
-
-    const maxTimer = window.setTimeout(() => {
-      loadReady = true;
-      minReady = true;
-      dismiss();
-    }, maxHold);
-
-    const onLoad = () => {
-      loadReady = true;
-      dismiss();
-    };
-
-    if (!loadReady) {
-      window.addEventListener("load", onLoad, { once: true });
-    }
+    const minTimer = window.setTimeout(dismiss, minHold);
+    const maxTimer = window.setTimeout(dismiss, maxHold);
 
     return () => {
       window.clearTimeout(minTimer);
       window.clearTimeout(maxTimer);
-      window.removeEventListener("load", onLoad);
     };
   }, [isHome, visible, reduceMotion]);
 

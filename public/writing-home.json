@@ -1,0 +1,23 @@
+[
+  {
+    "id": "build-a-rag-application-with-langchain-a",
+    "slug": "build-a-rag-application-with-langchain-a",
+    "title": "Build a RAG application with LangChain and Local LLMs powered by Ollama",
+    "date": "Aug 22, 2025",
+    "coverImage": "/blog-images/build-a-rag-application-with-langchain-a.jpg"
+  },
+  {
+    "id": "a-week-in-the-life-of-an-ai-augmented-de",
+    "slug": "a-week-in-the-life-of-an-ai-augmented-de",
+    "title": "A Week In The Life Of An AI-Augmented Designer",
+    "date": "Aug 29, 2025",
+    "coverImage": "/blog-images/a-week-in-the-life-of-an-ai-augmented-de.jpg"
+  },
+  {
+    "id": "beyond-the-hype-what-ai-can-really-do-fo",
+    "slug": "beyond-the-hype-what-ai-can-really-do-fo",
+    "title": "Beyond The Hype: What AI Can Really Do For Product Design",
+    "date": "Aug 29, 2025",
+    "coverImage": "/blog-images/beyond-the-hype-what-ai-can-really-do-fo.jpg"
+  }
+]

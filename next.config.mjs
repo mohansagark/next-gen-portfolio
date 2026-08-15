@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  // Images served unoptimized (includes remote raw.githubusercontent.com URLs)
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "admin.devmohan.in",
+        pathname: "/images/**",
+      },
+    ],
   },
 
   trailingSlash: true,

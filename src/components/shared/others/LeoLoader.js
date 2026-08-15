@@ -190,33 +190,27 @@ export default function LeoLoader({ workerUrl }) {
     let themeObserver = null;
     let safetyTimer = null;
     let lastMode = null;
+    let started = false;
 
-    const whenSplashDone = () =>
+    const waitForIntent = () =>
       new Promise((resolve) => {
-        if (!document.body.classList.contains("loaded")) {
+        const done = () => {
+          window.removeEventListener("pointerdown", done);
+          window.removeEventListener("keydown", done);
+          window.removeEventListener("scroll", done);
           resolve();
-          return;
-        }
-        observer = new MutationObserver(() => {
-          if (!document.body.classList.contains("loaded")) {
-            if (observer) observer.disconnect();
-            if (safetyTimer) window.clearTimeout(safetyTimer);
-            resolve();
-          }
-        });
-        observer.observe(document.body, {
-          attributes: true,
-          attributeFilter: ["class"],
-        });
-        safetyTimer = window.setTimeout(() => {
-          if (observer) observer.disconnect();
-          resolve();
-        }, 5000);
+        };
+        window.addEventListener("pointerdown", done, { once: true, passive: true });
+        window.addEventListener("keydown", done, { once: true, passive: true });
+        window.addEventListener("scroll", done, { once: true, passive: true });
+        // Fallback so the widget still appears for passive visitors.
+        safetyTimer = window.setTimeout(done, 12000);
       });
 
     (async () => {
-      await whenSplashDone();
-      if (cancelled) return;
+      await waitForIntent();
+      if (cancelled || started) return;
+      started = true;
 
       const widget = await loadWidgetConfig(workerUrl);
       if (cancelled) return;

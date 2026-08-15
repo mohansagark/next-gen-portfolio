@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 /* Custom theme for nice-select dropdown */
 .nice-select-dropdown {
   background: #fff;
@@ -100,9 +97,9 @@
   --radius: 0.5rem;
 
   /* font family */
-  --body-font: "Sora", sans-serif;
-  --display-font: "Fraunces", "Source Serif 4", Georgia, serif;
-  --russo: "Russo One", sans-serif;
+  --body-font: var(--font-sora), "Sora", sans-serif;
+  --display-font: var(--font-display), "Source Serif 4", Georgia, serif;
+  --russo: var(--font-sora), sans-serif;
   --font-family: "Font Awesome 6 Pro";
 
   /* font weight */
@@ -1525,6 +1522,47 @@ img {
 .form_group .nice-select {
   padding: 17px 20px;
 }
+
+/* Mobile CSS globe (no WebGL) — equirectangular scroll */
+.hero-globe-map {
+  width: 200%;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: 0 center;
+}
+.hero-globe-map--day {
+  background-image: url("/images/hero/earth-mobile-day.jpg");
+}
+.hero-globe-map--night {
+  background-image: url("/images/hero/earth-mobile-night.jpg");
+}
+.hero-globe-map--spin {
+  animation: hero-globe-spin 70s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-globe-map--spin {
+    animation: none;
+  }
+}
+@keyframes hero-globe-spin {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.hero-globe-arc {
+  stroke-dasharray: 8 14;
+  animation: hero-globe-arc-dash 3.2s linear infinite;
+}
+@keyframes hero-globe-arc-dash {
+  to { stroke-dashoffset: -44; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-globe-arc {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
 
 /* Instant cover before React hydrates the home splash (see boot script in layout) */
 html.splash-pending::before {

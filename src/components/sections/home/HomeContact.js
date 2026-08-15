@@ -59,6 +59,8 @@ export default function HomeContact() {
   /** @type {React.MutableRefObject<{ resolve: (t: string) => void, reject: (e: Error) => void } | null>} */
   const tokenWaiterRef = useRef(null);
 
+  const sectionRef = useRef(null);
+  const [loadTurnstile, setLoadTurnstile] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,6 +73,22 @@ export default function HomeContact() {
   const [status, setStatus] = useState(null); // success | error | null
   const [errorMessage, setErrorMessage] = useState("");
   const [challengePending, setChallengePending] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setLoadTurnstile(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const clearTokenWaiter = useCallback((error) => {
     const waiter = tokenWaiterRef.current;
@@ -272,14 +290,17 @@ export default function HomeContact() {
 
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="scroll-mt-24 lg:scroll-mt-28 py-16 sm:py-20 md:py-28"
     >
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-        strategy="afterInteractive"
-        onLoad={() => renderWidget()}
-      />
+      {loadTurnstile ? (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          strategy="lazyOnload"
+          onLoad={() => renderWidget()}
+        />
+      ) : null}
       <div className="container max-w-[1120px] min-[1920px]:!max-w-[1680px] px-5 sm:px-6">
         {/* Form stays outside ScrollReveal — motion transform breaks mobile <select> menus. */}
         <div className="rounded-2xl md:rounded-[2rem] border border-[#e5e7eb] dark:border-[#262b33] bg-[#f3f4f6] dark:bg-[#12151a] p-6 sm:p-8 md:p-12">
