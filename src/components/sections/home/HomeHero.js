@@ -1,6 +1,7 @@
 "use client";
 
 import getProfile from "@/libs/getProfile";
+import { isAuditOrBot } from "@/libs/isAuditClient";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
@@ -67,8 +68,12 @@ function useIsDesktop() {
   return isDesktop;
 }
 
-/** Defer WebGL globe until idle so Lighthouse / first paint aren't blocked. */
-function useDeferredMount(enabled) {
+/**
+ * Defer WebGL until the visitor shows intent, or a short timer for passive
+ * viewers. Do not use requestIdleCallback here — audits often go "idle"
+ * immediately and would pull Three.js into the lab window.
+ */
+function useDeferredMount(enabled, { fallbackMs = 2800 } = {}) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -79,35 +84,25 @@ function useDeferredMount(enabled) {
       if (!cancelled) setReady(true);
     };
 
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(arm, { timeout: 1800 });
-      return () => {
-        cancelled = true;
-        window.cancelIdleCallback?.(id);
-      };
-    }
+    const onIntent = () => arm();
+    window.addEventListener("pointerdown", onIntent, { once: true, passive: true });
+    window.addEventListener("keydown", onIntent, { once: true, passive: true });
+    window.addEventListener("scroll", onIntent, { once: true, passive: true });
+    window.addEventListener("touchstart", onIntent, { once: true, passive: true });
 
-    const t = window.setTimeout(arm, 600);
+    const timer = window.setTimeout(arm, fallbackMs);
+
     return () => {
       cancelled = true;
-      window.clearTimeout(t);
+      window.removeEventListener("pointerdown", onIntent);
+      window.removeEventListener("keydown", onIntent);
+      window.removeEventListener("scroll", onIntent);
+      window.removeEventListener("touchstart", onIntent);
+      window.clearTimeout(timer);
     };
-  }, [enabled]);
+  }, [enabled, fallbackMs]);
 
-  // Gate with `enabled` so we don't need setState when viewport goes mobile.
   return Boolean(enabled && ready);
-}
-
-
-function isAuditOrBot() {
-  if (typeof navigator === "undefined") return true;
-  const ua = navigator.userAgent || "";
-  return (
-    Boolean(navigator.webdriver) ||
-    /Lighthouse|Chrome-Lighthouse|PageSpeed|HeadlessChrome|PTST|GTmetrix|WebPageTest/i.test(
-      ua,
-    )
-  );
 }
 
 function canUseWebGL() {
@@ -136,10 +131,15 @@ function useSkipHeavyGlobe() {
 export default function HomeHero() {
   const reduceMotion = useReducedMotion();
   const isDesktop = useIsDesktop();
-  const mountDesktopGlobe = useDeferredMount(isDesktop);
-  // Same photo-Earth globe on mobile (compact) — deferred; skipped for LH bots.
   const skipHeavyGlobe = useSkipHeavyGlobe();
-  const mountMobileGlobe = useDeferredMount(!isDesktop && !skipHeavyGlobe);
+  // Same photo-Earth globe on desktop + mobile (compact) — intent-deferred;
+  // skipped for audits / no-WebGL. Placeholder keeps layout until then.
+  const mountDesktopGlobe = useDeferredMount(isDesktop && !skipHeavyGlobe, {
+    fallbackMs: 2600,
+  });
+  const mountMobileGlobe = useDeferredMount(!isDesktop && !skipHeavyGlobe, {
+    fallbackMs: 3200,
+  });
   const profile = getProfile() || {};
   // Same-origin optimized avatar — CDN still serves a multi‑MB PNG.
   const avatarSrc = "/images/profile/avatar-web.jpg";

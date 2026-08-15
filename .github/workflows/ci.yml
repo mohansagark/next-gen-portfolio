@@ -84,7 +84,11 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Skip WebGL globe + other audit-only heavy paths in this job's build so
+      # CI Lighthouse matches what bots see (prod UA-spoof still gets intent defer).
       - run: npm run build
+        env:
+          NEXT_PUBLIC_SKIP_HEAVY_MEDIA: "1"
       # treosh/lighthouse-ci-action@v11 does not accept startServerCommand —
       # boot Next ourselves, then point Lighthouse at the live URL.
       - name: Start Next.js

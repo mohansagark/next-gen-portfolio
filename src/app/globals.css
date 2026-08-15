@@ -1523,31 +1523,6 @@ img {
   padding: 17px 20px;
 }
 
-/* Mobile CSS globe (no WebGL) — equirectangular scroll */
-.hero-globe-map {
-  width: 200%;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 0 center;
-}
-.hero-globe-map--day {
-  background-image: url("/images/hero/earth-mobile-day.jpg");
-}
-.hero-globe-map--night {
-  background-image: url("/images/hero/earth-mobile-night.jpg");
-}
-.hero-globe-map--spin {
-  animation: hero-globe-spin 70s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-globe-map--spin {
-    animation: none;
-  }
-}
-@keyframes hero-globe-spin {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 
 .hero-globe-arc {
   stroke-dasharray: 8 14;

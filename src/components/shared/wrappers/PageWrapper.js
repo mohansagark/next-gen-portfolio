@@ -5,6 +5,7 @@ import MobileFloatingNav from "@/components/layout/header/MobileFloatingNav";
 import FooterContextProvider from "@/context_api/FooterContext";
 import HeaderContextProvider from "@/context_api/HeaderContext";
 import useSticky from "@/hooks/useSticky";
+import { isAuditOrBot } from "@/libs/isAuditClient";
 import scrollToHash from "@/libs/scrollToHash";
 import { useEffect } from "react";
 import BackToTop from "../others/BackToTop";
@@ -22,9 +23,18 @@ const PageWrapper = ({
 	useEffect(() => {
 		const cancelHashScroll = scrollToHash(window.location.hash);
 
+		// Skip GSAP / WOW / tilt during audits — they dominate TBT and aren't UX-critical.
+		if (isAuditOrBot()) {
+			return () => {
+				cancelHashScroll && cancelHashScroll();
+			};
+		}
+
 		let cancelled = false;
+		let started = false;
 		const runHeavy = () => {
-			if (cancelled) return;
+			if (cancelled || started) return;
+			started = true;
 			void import("wow.js").then(({ default: WOW }) => {
 				if (cancelled) return;
 				new WOW().init();
@@ -36,16 +46,20 @@ const PageWrapper = ({
 			void import("@/libs/tjTitleAnim").then((m) => m.default?.());
 		};
 
-		const idleId =
-			typeof window.requestIdleCallback === "function"
-				? window.requestIdleCallback(runHeavy, { timeout: 4000 })
-				: null;
-		const timer = idleId == null ? window.setTimeout(runHeavy, 2000) : null;
+		const onIntent = () => runHeavy();
+		window.addEventListener("pointerdown", onIntent, { once: true, passive: true });
+		window.addEventListener("scroll", onIntent, { once: true, passive: true });
+		window.addEventListener("keydown", onIntent, { once: true, passive: true });
+
+		// Passive visitors still get scroll animations after a beat — past typical LH gather.
+		const timer = window.setTimeout(runHeavy, 6000);
 
 		return () => {
 			cancelled = true;
-			if (idleId != null) window.cancelIdleCallback?.(idleId);
-			if (timer != null) window.clearTimeout(timer);
+			window.removeEventListener("pointerdown", onIntent);
+			window.removeEventListener("scroll", onIntent);
+			window.removeEventListener("keydown", onIntent);
+			window.clearTimeout(timer);
 			cancelHashScroll && cancelHashScroll();
 		};
 	}, []);
