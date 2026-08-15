@@ -123,12 +123,13 @@ function canUseWebGL() {
   }
 }
 
-/** Start skipped; only enable globe for real browsers with WebGL. */
+/** Skip heavy WebGL for SSR/bots/no-WebGL; enable for real browsers. */
 function useSkipHeavyGlobe() {
-  const [skip, setSkip] = useState(true);
-  useEffect(() => {
-    setSkip(isAuditOrBot() || !canUseWebGL());
-  }, []);
+  // Lazy init — avoid setState-in-effect (eslint react-hooks/set-state-in-effect).
+  const [skip] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return isAuditOrBot() || !canUseWebGL();
+  });
   return skip;
 }
 
