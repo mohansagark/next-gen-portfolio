@@ -80,7 +80,13 @@ function startServer() {
     {
       cwd: ROOT,
       stdio: ["ignore", "pipe", "pipe"],
-      env: { ...process.env, PORT, NODE_ENV: "production" },
+      env: {
+        ...process.env,
+        PORT,
+        NODE_ENV: "production",
+        // Match CI: don't prefer a developer PORTFOLIO_DATA_DIR checkout.
+        PORTFOLIO_DATA_DIR: "",
+      },
     }
   );
 
@@ -181,17 +187,19 @@ async function runChecks() {
       `  ✓ /services/999/ → ${legacySvc.status} (not-found${legacySvc.status === 404 ? "" : " soft"})`
     );
 
-    const legacyHit = await get("/portfolio/1/");
+    // Prefer slug-based legacy URL: numeric /portfolio/1 only works when that
+    // id exists in the content source (prod CDN currently has no ivygpt → id 1).
+    const legacyHit = await get(`/portfolio/${workSlug}/`);
     const redirected =
       [301, 302, 307, 308].includes(legacyHit.status) ||
       (/NEXT_REDIRECT/i.test(legacyHit.text) &&
-        /\/work\//.test(legacyHit.text));
+        new RegExp(`/work/${workSlug}`).test(legacyHit.text));
     assert(
       redirected,
-      `/portfolio/1/ → ${legacyHit.status} without redirect to /work/`
+      `/portfolio/${workSlug}/ → ${legacyHit.status} without redirect to /work/${workSlug}/`
     );
     console.log(
-      `  ✓ /portfolio/1/ → ${legacyHit.status} (redirect to work)`
+      `  ✓ /portfolio/${workSlug}/ → ${legacyHit.status} (redirect to work)`
     );
 
     const contact = await fetchTimed(`${BASE}/api/contact`, {
