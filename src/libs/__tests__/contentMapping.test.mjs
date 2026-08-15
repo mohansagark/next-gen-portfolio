@@ -115,6 +115,7 @@ test("mapSkills remaps heavy third-party icons to local assets", () => {
   assert.equal(mapped.find((s) => s.name === "Agentic AI")?.img, "");
 });
 
+test("mapSkills includes proficiency and omits fake percent when missing", () => {
   const mapped = mapSkills({
     categories: [
       {
