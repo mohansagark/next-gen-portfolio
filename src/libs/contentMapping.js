@@ -45,15 +45,25 @@ export const slugify = (s) =>
   (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export function mapSkills(skills) {
-  return skills.categories.flatMap((c) =>
-    c.skills.map((s) => ({
-      name: s.name,
-      img: img(s.icon),
-      // Keep key for older Skills UI; prefer no fake % when proficiency omitted.
-      perchant: s.proficiency != null ? `${s.proficiency}%` : "",
-      group: c.name,
-    }))
-  );
+  // Categories may list the same skill more than once (e.g. TypeScript under
+  // Frontend and Languages). The flat list is keyed by name in the UI, so keep
+  // the first occurrence only.
+  const seen = new Set();
+  const out = [];
+  for (const c of skills.categories || []) {
+    for (const s of c.skills || []) {
+      if (!s?.name || seen.has(s.name)) continue;
+      seen.add(s.name);
+      out.push({
+        name: s.name,
+        img: img(s.icon),
+        // Keep key for older Skills UI; prefer no fake % when proficiency omitted.
+        perchant: s.proficiency != null ? `${s.proficiency}%` : "",
+        group: c.name,
+      });
+    }
+  }
+  return out;
 }
 
 export function mapCapabilities(capabilities) {

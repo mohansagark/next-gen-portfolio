@@ -34,6 +34,29 @@ test("a missing skill icon stays empty rather than becoming the bare host", () =
   assert.equal(skill.img, "");
 });
 
+test("mapSkills keeps the first occurrence when a name appears in multiple categories", () => {
+  const mapped = mapSkills({
+    categories: [
+      {
+        name: "Frontend",
+        skills: [{ name: "TypeScript", icon: "/images/skills/typescript.svg" }],
+      },
+      {
+        name: "Languages",
+        skills: [
+          { name: "JavaScript", icon: "/images/skills/js.png" },
+          { name: "TypeScript", icon: "/images/skills/typescript.svg" },
+        ],
+      },
+    ],
+  });
+  assert.deepEqual(
+    mapped.map((s) => s.name),
+    ["TypeScript", "JavaScript"]
+  );
+  assert.equal(mapped[0].group, "Frontend");
+});
+
 test("absolute project cover URLs are left untouched", () => {
   const projects = mapPortfolio(
     {

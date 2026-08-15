@@ -10,16 +10,16 @@ function SkillsPackedTicker({ skills }) {
   const reduceMotion = useReducedMotion();
   const [paused, setPaused] = useState(false);
 
-  const items = useMemo(
-    () =>
-      (skills || [])
-        .filter((s) => s?.name)
-        .map((s) => ({
-          name: s.name,
-          img: s.img || "",
-        })),
-    [skills]
-  );
+  const items = useMemo(() => {
+    const seen = new Set();
+    const out = [];
+    for (const s of skills || []) {
+      if (!s?.name || seen.has(s.name)) continue;
+      seen.add(s.name);
+      out.push({ name: s.name, img: s.img || "" });
+    }
+    return out;
+  }, [skills]);
 
   if (!items.length) {
     return (
