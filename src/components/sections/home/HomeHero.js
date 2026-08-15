@@ -290,10 +290,12 @@ export default function HomeHero() {
       id="home"
       className="home-hero relative overflow-x-clip overflow-y-visible min-h-[100dvh] flex items-start lg:items-center pt-[max(1rem,env(safe-area-inset-top))] lg:pt-28 pb-10 sm:pb-14 md:pb-16 lg:pb-20 scroll-mt-24 lg:scroll-mt-28"
     >
+      {/* Decorative blur — lighter + GPU-composited on mobile (blur is an
+          expensive paint op at these sizes); full strength from lg: up. */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
-        <div className="absolute -top-24 right-[-18%] w-[78vw] max-w-[520px] h-[78vw] max-h-[520px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.22),transparent_68%)] blur-2xl dark:opacity-100 opacity-70 lg:right-[-8%] lg:w-[62vw] lg:max-w-[820px]" />
-        <div className="absolute top-[42%] right-[4%] w-[40vw] max-w-[220px] h-[40vw] max-h-[220px] rounded-full bg-[radial-gradient(circle,rgba(15,118,110,0.1),transparent_70%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(45,212,191,0.12),transparent_70%)] dark:opacity-90 opacity-50 lg:top-[28%] lg:right-[8%] lg:w-[28vw] lg:max-w-[360px]" />
-        <div className="absolute bottom-[-12%] left-[-28%] w-[70vw] max-w-[420px] h-[70vw] max-h-[420px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.14),transparent_62%)] blur-2xl dark:opacity-100 opacity-55 lg:bottom-[-22%] lg:left-[-18%] lg:w-[52vw] lg:max-w-[600px]" />
+        <div className="transform-gpu absolute -top-24 right-[-18%] w-[78vw] max-w-[520px] h-[78vw] max-h-[520px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.22),transparent_68%)] blur-lg lg:blur-2xl dark:opacity-100 opacity-70 lg:right-[-8%] lg:w-[62vw] lg:max-w-[820px]" />
+        <div className="transform-gpu absolute top-[42%] right-[4%] w-[40vw] max-w-[220px] h-[40vw] max-h-[220px] rounded-full bg-[radial-gradient(circle,rgba(15,118,110,0.1),transparent_70%)] blur-xl lg:blur-3xl dark:bg-[radial-gradient(circle,rgba(45,212,191,0.12),transparent_70%)] dark:opacity-90 opacity-50 lg:top-[28%] lg:right-[8%] lg:w-[28vw] lg:max-w-[360px]" />
+        <div className="transform-gpu absolute bottom-[-12%] left-[-28%] w-[70vw] max-w-[420px] h-[70vw] max-h-[420px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.14),transparent_62%)] blur-lg lg:blur-2xl dark:opacity-100 opacity-55 lg:bottom-[-22%] lg:left-[-18%] lg:w-[52vw] lg:max-w-[600px]" />
       </div>
 
       <div className="container max-w-[1240px] min-[1920px]:!max-w-[1680px] w-full px-5 sm:px-6">
