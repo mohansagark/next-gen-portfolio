@@ -106,7 +106,10 @@ jobs:
           urls: |
             http://127.0.0.1:3000/
           configPath: ./lighthouserc.json
-          runs: 1
+          # Single-run scores swing wildly on shared runner CPU contention
+          # (observed 0.55-0.77 on identical code) — median of 3 is what
+          # Google's own guidance recommends for CI performance gates.
+          runs: 3
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Stop Next.js
