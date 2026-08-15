@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run lint
@@ -53,16 +53,12 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run build
       # Total client JS across all routes, uncompressed. Dependency-free check
-      # (size-limit needs a plugin resolvable from this project's own
-      # node_modules plus a Node engine newer than what this job runs — not
-      # worth the friction here). ~6.0 MB measured at the time this was
-      # written; 8 MB leaves headroom without being a rubber stamp — tune
-      # after a couple of real runs.
+      # (~6.0 MB measured when added; 8 MB leaves headroom — tune after real runs).
       - name: Check total client JS size
         run: |
           limit_kb=8192
@@ -81,7 +77,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       # Skip WebGL globe + other audit-only heavy paths in this job's build so
