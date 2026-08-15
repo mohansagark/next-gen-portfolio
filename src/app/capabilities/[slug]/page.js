@@ -19,9 +19,11 @@ export async function generateMetadata({ params }) {
   const item = findCapability(await loadCapabilities(), slug);
   if (!item) notFound();
   const page = item.page || {};
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
   return {
     title: `${item.title} — Mohan Sagar`,
     description: page.intro || item.body,
+    alternates: { canonical: `${SITE}/capabilities/${slug}` },
   };
 }
 

@@ -1,4 +1,4 @@
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { fetchAllContent } from "@/libs/portfolioData";
 import getPortfolio from "@/libs/getPortfolio";
 
@@ -15,5 +15,5 @@ export default async function PortfolioDetails({ params }) {
   if (match?.slug) {
     permanentRedirect(`/work/${match.slug}`);
   }
-  permanentRedirect("/");
+  notFound();
 }

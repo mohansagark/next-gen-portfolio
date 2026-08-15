@@ -2,15 +2,6 @@ import { getContactEmailTemplate } from "./contactEmailTemplate.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function escapeHtml(value) {
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 export function sanitizeContactPayload(body = {}) {
   const name = String(body.name || "").trim().slice(0, 120);
   const email = String(body.email || body.user_email || "")
@@ -48,11 +39,22 @@ export function sanitizeContactPayload(body = {}) {
   };
 }
 
+const TURNSTILE_DEV_SECRET = "1x0000000000000000000000000000000AA";
+
 export async function verifyTurnstileToken(token, remoteip) {
-  const secret =
-    process.env.TURNSTILE_SECRET ||
-    process.env.TURNSTILE_SECRET_KEY ||
-    "1x0000000000000000000000000000000AA";
+  const configured =
+    process.env.TURNSTILE_SECRET || process.env.TURNSTILE_SECRET_KEY || "";
+  const isProd = process.env.NODE_ENV === "production";
+
+  if (!configured) {
+    if (isProd) {
+      const err = new Error("TURNSTILE_SECRET is not configured");
+      err.code = "MISSING_TURNSTILE";
+      throw err;
+    }
+  }
+
+  const secret = configured || TURNSTILE_DEV_SECRET;
 
   const body = new URLSearchParams({
     secret,
@@ -92,15 +94,6 @@ export async function sendContactViaResend(payload) {
   const from =
     process.env.RESEND_FROM_EMAIL || "Portfolio <onboarding@resend.dev>";
 
-  const safe = {
-    name: escapeHtml(payload.name),
-    user_email: escapeHtml(payload.email),
-    company: escapeHtml(payload.company || "N/A"),
-    phone: escapeHtml(payload.phone || "N/A"),
-    select: escapeHtml(payload.reason),
-    message: escapeHtml(payload.message),
-  };
-
   const subject = `[devmohan.in] ${payload.reason} — ${payload.name}`;
 
   const result = await resend.emails.send({
@@ -108,7 +101,15 @@ export async function sendContactViaResend(payload) {
     to: [to],
     replyTo: payload.email,
     subject,
-    html: getContactEmailTemplate(safe),
+    // Template escapes all fields; pass raw sanitized strings.
+    html: getContactEmailTemplate({
+      name: payload.name,
+      user_email: payload.email,
+      company: payload.company || "N/A",
+      phone: payload.phone || "N/A",
+      select: payload.reason,
+      message: payload.message,
+    }),
     text: [
       `New contact enquiry from ${payload.name}`,
       `Email: ${payload.email}`,

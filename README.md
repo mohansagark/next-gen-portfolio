@@ -6,7 +6,7 @@ Next.js app that ships a single homepage IA, case-study and capability detail ro
 
 > System design, data/AI flows, and the multi-repo map: **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.1.2-black?style=for-the-badge&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16.2.9-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0.0-blue?style=for-the-badge&logo=react)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css)
 

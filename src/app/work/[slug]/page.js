@@ -20,6 +20,7 @@ export async function generateMetadata({ params }) {
   const item = findCase(await loadCaseStudies(), slug);
   if (!item) notFound();
   const name = item.homeName || item.title;
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
   return {
     title: `${name} — Mohan Sagar`,
     description:
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }) {
       item.shortDesc ||
       item.description ||
       item.desc,
+    alternates: { canonical: `${SITE}/work/${slug}` },
   };
 }
 

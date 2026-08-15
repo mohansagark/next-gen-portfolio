@@ -1,3 +1,12 @@
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function getContactEmailTemplate(formData) {
   const primary = "#0f766e";
   const accent = "#14b8a6";
@@ -6,6 +15,13 @@ export function getContactEmailTemplate(formData) {
   const textGray = "#374151";
   const lightGray = "#e5e7eb";
   const currentYear = new Date().getFullYear();
+
+  const name = escapeHtml(formData.name);
+  const email = escapeHtml(formData.user_email);
+  const company = escapeHtml(formData.company || "N/A");
+  const phone = escapeHtml(formData.phone || "N/A");
+  const reason = escapeHtml(formData.select);
+  const message = escapeHtml(formData.message);
 
   return `
     <div style="font-family: 'Sora', Inter, Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 580px; margin: auto; border: 1px solid ${lightGray};">
@@ -17,33 +33,33 @@ export function getContactEmailTemplate(formData) {
       <table style="width: 100%; border-collapse: collapse; font-size: 1rem;">
         <tr>
           <td style="font-weight: 600; padding: 10px 0; width: 140px; color: ${primary};">Name</td>
-          <td style="padding: 10px 0;">${formData.name}</td>
+          <td style="padding: 10px 0;">${name}</td>
         </tr>
         <tr>
           <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Email</td>
-          <td style="padding: 10px 0;">${formData.user_email}</td>
+          <td style="padding: 10px 0;">${email}</td>
         </tr>
         <tr>
           <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Company</td>
-          <td style="padding: 10px 0;">${formData.company || "N/A"}</td>
+          <td style="padding: 10px 0;">${company}</td>
         </tr>
         <tr>
           <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Phone</td>
-          <td style="padding: 10px 0;">${formData.phone || "N/A"}</td>
+          <td style="padding: 10px 0;">${phone}</td>
         </tr>
         <tr>
           <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Reason</td>
-          <td style="padding: 10px 0;">${formData.select}</td>
+          <td style="padding: 10px 0;">${reason}</td>
         </tr>
         <tr>
           <td style="font-weight: 600; padding: 10px 0; vertical-align: top; color: ${primary};">Message</td>
-          <td style="padding: 10px 0; white-space: pre-line; color: ${textGray}; line-height: 1.5;">${formData.message}</td>
+          <td style="padding: 10px 0; white-space: pre-line; color: ${textGray}; line-height: 1.5;">${message}</td>
         </tr>
       </table>
 
       <div style="text-align: center; margin-top: 32px;">
-        <a href="mailto:${formData.user_email}" style="background: linear-gradient(90deg, ${primary}, ${accent}); padding: 12px 20px; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block;">
-          Reply to ${formData.name}
+        <a href="mailto:${email}" style="background: linear-gradient(90deg, ${primary}, ${accent}); padding: 12px 20px; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block;">
+          Reply to ${name}
         </a>
       </div>
 
