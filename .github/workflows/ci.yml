@@ -8,6 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -22,7 +23,9 @@ jobs:
       - run: npm run build
       # Post-build HTTP smoke (home, work/capabilities slugs, legacy 404, contact 400).
       # Does not click Turnstile or call live Resend — those need secrets + a browser.
-      - run: npm run test:smoke
+      - name: Smoke (next start)
+        timeout-minutes: 3
+        run: npm run test:smoke
 
   semgrep:
     runs-on: ubuntu-latest

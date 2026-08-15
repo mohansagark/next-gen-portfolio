@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Post-build HTTP smoke. Expects `npm run build` already completed.
- * Starts `next start`, checks key routes, then exits.
+ * Starts `next start`, checks key routes, then exits hard (no hang).
  *
  * Deferred (needs real secrets / browser widget): Turnstile widget click +
  * live Resend delivery end-to-end.
@@ -18,6 +18,9 @@ import { join } from "node:path";
 const PORT = process.env.SMOKE_PORT || "3010";
 const BASE = `http://127.0.0.1:${PORT}`;
 const ROOT = process.cwd();
+const BOOT_TIMEOUT_MS = Number(process.env.SMOKE_BOOT_TIMEOUT_MS || 45_000);
+const REQUEST_TIMEOUT_MS = Number(process.env.SMOKE_REQUEST_TIMEOUT_MS || 12_000);
+const OVERALL_TIMEOUT_MS = Number(process.env.SMOKE_OVERALL_TIMEOUT_MS || 90_000);
 
 function firstStaticSlug(segment) {
   const dir = join(ROOT, ".next/server/app", segment);
@@ -31,22 +34,31 @@ function firstStaticSlug(segment) {
   return null;
 }
 
-async function waitForServer(timeoutMs = 60_000) {
+async function fetchTimed(url, init = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
+  const signal = AbortSignal.timeout(timeoutMs);
+  return fetch(url, { ...init, signal });
+}
+
+async function waitForServer(timeoutMs = BOOT_TIMEOUT_MS) {
   const start = Date.now();
+  let lastErr = null;
   while (Date.now() - start < timeoutMs) {
     try {
-      const res = await fetch(`${BASE}/`);
+      const res = await fetchTimed(`${BASE}/`, {}, 2_500);
       if (res.status > 0) return;
-    } catch {
-      // not up yet
+    } catch (err) {
+      lastErr = err;
     }
-    await sleep(500);
+    await sleep(400);
   }
-  throw new Error(`Server did not become ready on ${BASE}`);
+  throw new Error(
+    `Server did not become ready on ${BASE} within ${timeoutMs}ms` +
+      (lastErr ? ` (${lastErr.name}: ${lastErr.message})` : "")
+  );
 }
 
 async function get(path) {
-  const res = await fetch(`${BASE}${path}`, { redirect: "manual" });
+  const res = await fetchTimed(`${BASE}${path}`, { redirect: "manual" });
   const text = await res.text();
   return { status: res.status, text, location: res.headers.get("location") };
 }
@@ -55,7 +67,60 @@ function assert(cond, msg) {
   if (!cond) throw new Error(msg);
 }
 
-async function main() {
+function startServer() {
+  const nextBin = join(ROOT, "node_modules/next/dist/bin/next");
+  if (!existsSync(nextBin)) {
+    throw new Error(`Missing Next binary at ${nextBin}`);
+  }
+
+  // Spawn Next directly (not via npx) so we can kill the real server process.
+  const child = spawn(
+    process.execPath,
+    [nextBin, "start", "-p", PORT, "-H", "127.0.0.1"],
+    {
+      cwd: ROOT,
+      stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env, PORT, NODE_ENV: "production" },
+    }
+  );
+
+  let logs = "";
+  const append = (d) => {
+    logs += d.toString();
+    if (logs.length > 20_000) logs = logs.slice(-16_000);
+  };
+  child.stdout.on("data", append);
+  child.stderr.on("data", append);
+
+  return { child, getLogs: () => logs };
+}
+
+function forceKill(child) {
+  if (!child || child.exitCode != null || child.signalCode) return;
+  try {
+    child.kill("SIGTERM");
+  } catch {
+    // ignore
+  }
+}
+
+async function ensureDead(child) {
+  if (!child || child.exitCode != null || child.signalCode) return;
+  forceKill(child);
+  const deadline = Date.now() + 2_500;
+  while (Date.now() < deadline) {
+    if (child.exitCode != null || child.signalCode) return;
+    await sleep(100);
+  }
+  try {
+    child.kill("SIGKILL");
+  } catch {
+    // ignore
+  }
+  await sleep(200);
+}
+
+async function runChecks() {
   if (!existsSync(join(ROOT, ".next"))) {
     throw new Error("Missing .next — run `npm run build` before smoke");
   }
@@ -65,31 +130,12 @@ async function main() {
     firstStaticSlug("capabilities") || "ai-product-experiences";
 
   console.log(`Starting next start on :${PORT} …`);
-  const child = spawn(
-    "npx",
-    ["next", "start", "-p", PORT, "-H", "127.0.0.1"],
-    {
-      cwd: ROOT,
-      stdio: ["ignore", "pipe", "pipe"],
-      env: { ...process.env, PORT },
+  const { child, getLogs } = startServer();
+
+  child.on("exit", (code, signal) => {
+    if (code && code !== 0) {
+      console.error(`next start exited early code=${code} signal=${signal}`);
     }
-  );
-
-  let logs = "";
-  child.stdout.on("data", (d) => {
-    logs += d.toString();
-  });
-  child.stderr.on("data", (d) => {
-    logs += d.toString();
-  });
-
-  const shutdown = () => {
-    if (!child.killed) child.kill("SIGTERM");
-  };
-  process.on("exit", shutdown);
-  process.on("SIGINT", () => {
-    shutdown();
-    process.exit(130);
   });
 
   try {
@@ -111,7 +157,6 @@ async function main() {
     );
     console.log(`  ✓ /capabilities/${capSlug}/ → ${caps.status}`);
 
-    // Unknown legacy id: hard 404 or soft not-found body
     const legacy = await get("/portfolio/308/");
     const legacyNotFound =
       legacy.status === 404 ||
@@ -136,11 +181,11 @@ async function main() {
       `  ✓ /services/999/ → ${legacySvc.status} (not-found${legacySvc.status === 404 ? "" : " soft"})`
     );
 
-    // Known legacy id should redirect (HTTP 308 or NEXT_REDIRECT + /work/)
     const legacyHit = await get("/portfolio/1/");
     const redirected =
       [301, 302, 307, 308].includes(legacyHit.status) ||
-      (/NEXT_REDIRECT/i.test(legacyHit.text) && /\/work\//.test(legacyHit.text));
+      (/NEXT_REDIRECT/i.test(legacyHit.text) &&
+        /\/work\//.test(legacyHit.text));
     assert(
       redirected,
       `/portfolio/1/ → ${legacyHit.status} without redirect to /work/`
@@ -149,7 +194,7 @@ async function main() {
       `  ✓ /portfolio/1/ → ${legacyHit.status} (redirect to work)`
     );
 
-    const contact = await fetch(`${BASE}/api/contact`, {
+    const contact = await fetchTimed(`${BASE}/api/contact`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -165,14 +210,41 @@ async function main() {
     );
     console.log(`  ✓ POST /api/contact (invalid) → ${contact.status}`);
     console.log("Smoke OK");
+    return 0;
   } catch (err) {
     console.error("Smoke FAILED:", err.message);
+    const logs = getLogs();
     if (logs) console.error("--- server logs ---\n", logs.slice(-4000));
-    process.exitCode = 1;
+    return 1;
   } finally {
-    shutdown();
-    await sleep(500);
+    await ensureDead(child);
   }
+}
+
+async function main() {
+  let exitCode = 1;
+  let timer;
+  try {
+    exitCode = await Promise.race([
+      runChecks(),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          reject(
+            new Error(
+              `Smoke overall timeout (${OVERALL_TIMEOUT_MS}ms) — aborting`
+            )
+          );
+        }, OVERALL_TIMEOUT_MS);
+      }),
+    ]);
+  } catch (err) {
+    console.error("Smoke FAILED:", err.message);
+    exitCode = 1;
+  } finally {
+    clearTimeout(timer);
+  }
+  // Hard exit so a lingering child/handle cannot keep the CI step alive.
+  process.exit(exitCode);
 }
 
 main();
