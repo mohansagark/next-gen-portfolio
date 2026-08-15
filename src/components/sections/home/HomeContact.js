@@ -31,10 +31,14 @@ const selectClass = `${inputClass.replace(
   "text-base"
 )} appearance-none cursor-pointer pr-10`;
 
-// Production sitekey should be created as Invisible in the Cloudflare Turnstile
-// dashboard. Test keys (1x000…AA) may still show a visible widget.
+// Production: Invisible widget sitekey from Cloudflare (required at build time).
+// Dev-only fallback is Cloudflare's always-pass test sitekey — never bake that
+// into production bundles or siteverify will reject tokens against a real secret.
+const TURNSTILE_TEST_SITE_KEY = "1x00000000000000000000AA";
 const TURNSTILE_SITE_KEY =
-  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+  (process.env.NODE_ENV !== "production" ? TURNSTILE_TEST_SITE_KEY : "");
+const TURNSTILE_EXECUTE_TIMEOUT_MS = 20_000;
 
 function isDarkMode() {
   return (
@@ -104,7 +108,8 @@ export default function HomeContact() {
       if (
         typeof window === "undefined" ||
         !window.turnstile ||
-        !widgetRef.current
+        !widgetRef.current ||
+        !TURNSTILE_SITE_KEY
       ) {
         return;
       }
@@ -167,6 +172,14 @@ export default function HomeContact() {
 
   const obtainTurnstileToken = useCallback(() => {
     return new Promise((resolve, reject) => {
+      if (!TURNSTILE_SITE_KEY) {
+        reject(
+          new Error(
+            "Contact form is misconfigured (missing Turnstile site key)."
+          )
+        );
+        return;
+      }
       if (
         typeof window === "undefined" ||
         !window.turnstile ||
@@ -177,12 +190,30 @@ export default function HomeContact() {
       }
 
       clearTokenWaiter(new Error("Superseded"));
-      tokenWaiterRef.current = { resolve, reject };
+
+      const timer = setTimeout(() => {
+        if (tokenWaiterRef.current?.reject !== reject) return;
+        tokenWaiterRef.current = null;
+        setChallengePending(false);
+        reject(new Error("Security check timed out. Please try again."));
+      }, TURNSTILE_EXECUTE_TIMEOUT_MS);
+
+      tokenWaiterRef.current = {
+        resolve: (token) => {
+          clearTimeout(timer);
+          resolve(token);
+        },
+        reject: (error) => {
+          clearTimeout(timer);
+          reject(error);
+        },
+      };
       setChallengePending(true);
 
       try {
         window.turnstile.execute(widgetIdRef.current);
       } catch (err) {
+        clearTimeout(timer);
         tokenWaiterRef.current = null;
         setChallengePending(false);
         reject(

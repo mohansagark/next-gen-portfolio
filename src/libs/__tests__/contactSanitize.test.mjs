@@ -95,3 +95,18 @@ test("sanitizeContactPayload rejects empty or non-object body", () => {
   assert.ok(empty.errors.includes("message"));
   assert.ok(empty.errors.includes("token"));
 });
+
+test("sanitizeContactPayload strips CR/LF from subject-bound fields", () => {
+  const result = sanitizeContactPayload({
+    name: "Ada\r\nBcc: evil@x.com",
+    email: "ada@example.com",
+    reason: "Project\nX-Injected: yes",
+    message: "We need help shipping a production copilot.",
+    token: "turnstile-token-abc",
+  });
+  assert.equal(result.ok, true);
+  assert.equal(result.data.name.includes("\n"), false);
+  assert.equal(result.data.name.includes("\r"), false);
+  assert.equal(result.data.reason.includes("\n"), false);
+  assert.match(result.data.name, /Ada Bcc: evil@x.com/);
+});

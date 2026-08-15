@@ -34,6 +34,8 @@ test("contact form stack is wired (UI + API + Turnstile + Resend)", () => {
   assert.match(home, /turnstile/);
   assert.match(home, /execution:\s*"execute"/);
   assert.match(home, /appearance:\s*"interaction-only"/);
+  assert.match(home, /NODE_ENV\s*!==\s*"production"/);
+  assert.match(home, /TURNSTILE_EXECUTE_TIMEOUT_MS|Security check timed out/);
   assert.match(home, /Building an AI product/);
   assert.match(home, /Send enquiry/);
 });

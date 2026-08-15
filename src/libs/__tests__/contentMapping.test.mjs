@@ -13,6 +13,7 @@ import {
   fmtMonth,
   fmtRange,
   slugify,
+  LEGACY_PORTFOLIO_NUMERIC_IDS,
 } from "../contentMapping.js";
 
 // Inline skeletons (public/fakedata no longer ships resume/services JSON).
@@ -165,7 +166,7 @@ test("mapPortfolio maps sections, slugify filter, and profile employee", () => {
     }
   );
   const p = portfolio[0];
-  assert.equal(p.id, 1);
+  assert.equal(p.id, "stock-bot");
   assert.equal(p.title2, "Sub");
   assert.equal(p.desc1, "o");
   assert.equal(p.desc2, "d");
@@ -175,6 +176,18 @@ test("mapPortfolio maps sections, slugify filter, and profile employee", () => {
   assert.equal(p.img, `${RAW_BASE}/images/projects/stock-bot.png`);
   assert.equal(p.employee.name, "Mohan Sagar Killamsetty");
   assert.equal(p.statusItem[0].desc, "AI/Automation");
+});
+
+test("mapPortfolio uses frozen legacy numeric ids, not array order", () => {
+  const items = [
+    { slug: "claude-graph", title: "C", category: "AI", technologies: [] },
+    { slug: "ivygpt", title: "I", category: "AI", technologies: [] },
+  ];
+  const mapped = mapPortfolio({ items }, null);
+  assert.equal(mapped[0].id, LEGACY_PORTFOLIO_NUMERIC_IDS["claude-graph"]);
+  assert.equal(mapped[1].id, LEGACY_PORTFOLIO_NUMERIC_IDS.ivygpt);
+  assert.equal(mapped[0].id, 5);
+  assert.equal(mapped[1].id, 1);
 });
 
 test("mapResume builds experience education achievements with logos", () => {

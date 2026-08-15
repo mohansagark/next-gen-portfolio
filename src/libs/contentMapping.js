@@ -132,6 +132,24 @@ export function mapResume(experience, education, achievements, bundledResume) {
   ];
 }
 
+/**
+ * Frozen numeric IDs for legacy `/portfolio/[id]` bookmarks.
+ * Must NOT be derived from array order — CMS reorder would remap redirects.
+ */
+export const LEGACY_PORTFOLIO_NUMERIC_IDS = Object.freeze({
+  ivygpt: 1,
+  "servicenow-agentic": 2,
+  "jio-platforms": 3,
+  "daily-dev-digest": 4,
+  "claude-graph": 5,
+  "ai-voice-bot": 6,
+  "ai-stock-analysis-bot": 7,
+  "smart-expense-tracker": 8,
+  "portfolio-backend-api": 9,
+  "modern-portfolio-website": 10,
+  "react-mini-games-collection": 11,
+});
+
 export function mapPortfolio(projects, profile) {
   const employee = profile
     ? {
@@ -141,12 +159,14 @@ export function mapPortfolio(projects, profile) {
       }
     : undefined;
 
-  return projects.items.map((p, i) => {
+  return projects.items.map((p) => {
     const image = img(p.image);
     const sections = p.sections || [];
+    const slug = p.slug;
     return {
-      id: i + 1,
-      slug: p.slug,
+      // Prefer frozen legacy numeric id; otherwise slug (never array index).
+      id: LEGACY_PORTFOLIO_NUMERIC_IDS[slug] ?? slug,
+      slug,
       title: p.title,
       title2: p.subtitle,
       img: image,

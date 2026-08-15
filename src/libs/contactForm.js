@@ -2,27 +2,34 @@ import { getContactEmailTemplate } from "./contactEmailTemplate.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Collapse CR/LF/NUL so values are safe in email subjects and headers. */
+function oneLine(value, max) {
+  return String(value || "")
+    .replace(/[\r\n\u0000]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, max);
+}
+
 export function sanitizeContactPayload(body = {}) {
-  const name = String(body.name || "").trim().slice(0, 120);
-  const email = String(body.email || body.user_email || "")
+  const name = oneLine(body.name, 120);
+  const email = oneLine(body.email || body.user_email, 254).toLowerCase();
+  const company = oneLine(body.company, 120);
+  const phone = oneLine(body.phone, 40);
+  const reason = oneLine(body.reason || body.select || "General Inquiry", 80);
+  const message = String(body.message || "")
+    .replace(/\u0000/g, "")
     .trim()
-    .toLowerCase()
-    .slice(0, 254);
-  const company = String(body.company || "").trim().slice(0, 120);
-  const phone = String(body.phone || "").trim().slice(0, 40);
-  const reason = String(body.reason || body.select || "General Inquiry")
-    .trim()
-    .slice(0, 80);
-  const message = String(body.message || "").trim().slice(0, 5000);
-  const token = String(
-    body.token || body["cf-turnstile-response"] || ""
-  ).trim();
+    .slice(0, 5000);
+  const rawToken = String(body.token || body["cf-turnstile-response"] || "")
+    .replace(/[\r\n\u0000]+/g, " ")
+    .trim();
 
   const errors = [];
   if (name.length < 2) errors.push("name");
   if (!EMAIL_RE.test(email)) errors.push("email");
   if (message.length < 10) errors.push("message");
-  if (!token || token.length > 2048) errors.push("token");
+  if (!rawToken || rawToken.length > 2048) errors.push("token");
 
   return {
     ok: errors.length === 0,
@@ -34,7 +41,7 @@ export function sanitizeContactPayload(body = {}) {
       phone,
       reason,
       message,
-      token,
+      token: rawToken.slice(0, 2048),
     },
   };
 }
