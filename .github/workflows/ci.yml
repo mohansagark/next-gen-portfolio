@@ -76,6 +76,7 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     needs: test
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -84,10 +85,32 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # treosh/lighthouse-ci-action@v11 does not accept startServerCommand —
+      # boot Next ourselves, then point Lighthouse at the live URL.
+      - name: Start Next.js
+        run: |
+          npx next start -H 127.0.0.1 -p 3000 > /tmp/next-start.log 2>&1 &
+          echo $! > /tmp/next-start.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:3000/" >/dev/null; then
+              echo "Next.js ready on :3000"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Next.js failed to become ready"
+          cat /tmp/next-start.log || true
+          exit 1
       - uses: treosh/lighthouse-ci-action@72f881228236981b625ed765b928efb1786a1f55 # v11
         with:
           urls: |
-            http://localhost:3000/
-          startServerCommand: npm run start
+            http://127.0.0.1:3000/
+          runs: 1
           uploadArtifacts: true
           temporaryPublicStorage: true
+      - name: Stop Next.js
+        if: always()
+        run: |
+          if [ -f /tmp/next-start.pid ]; then
+            kill "$(cat /tmp/next-start.pid)" 2>/dev/null || true
+          fi
