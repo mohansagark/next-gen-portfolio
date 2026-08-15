@@ -6,7 +6,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "admin.devmohan.in",
-        pathname: "/images/**",
+        // CMS uses /images/**; allow /img/** too for older/fakedata paths.
+        pathname: "/**",
       },
     ],
   },
