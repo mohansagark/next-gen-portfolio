@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import getTestimonials from "@/libs/getTestimonials";
 import { RAW_BASE } from "@/libs/contentMapping";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
@@ -74,7 +75,7 @@ export default function HomeTestimonials() {
               </blockquote>
               <figcaption className="mt-5 flex items-center gap-3">
                 {avatarSrc(current) ? (
-                  <img
+                  <Image
                     src={avatarSrc(current)}
                     alt=""
                     width={48}
@@ -115,7 +116,7 @@ export default function HomeTestimonials() {
                     }`}
                   >
                     {avatarSrc(t) ? (
-                      <img
+                      <Image
                         src={avatarSrc(t)}
                         alt=""
                         width={36}
