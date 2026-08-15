@@ -8,7 +8,23 @@ import ScrollReveal from "@/components/sections/home/ScrollReveal";
 
 function avatarSrc(t) {
   if (!t?.img) return "";
-  return t.img.startsWith("http") ? t.img : `${RAW_BASE}${t.img}`;
+  // mapTestimonials usually returns an absolute CDN URL already.
+  if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(t.img)) return t.img;
+  return `${RAW_BASE}${t.img.startsWith("/") ? t.img : `/${t.img}`}`;
+}
+
+function TestimonialAvatar({ src, size, className }) {
+  if (!src) return null;
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={size}
+      height={size}
+      sizes={`${size}px`}
+      className={className}
+    />
+  );
 }
 
 export default function HomeTestimonials() {
@@ -74,15 +90,11 @@ export default function HomeTestimonials() {
                 </p>
               </blockquote>
               <figcaption className="mt-5 flex items-center gap-3">
-                {avatarSrc(current) ? (
-                  <Image
-                    src={avatarSrc(current)}
-                    alt=""
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-teal-700/30 dark:border-teal-300/40"
-                  />
-                ) : null}
+                <TestimonialAvatar
+                  src={avatarSrc(current)}
+                  size={48}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-teal-700/30 dark:border-teal-300/40"
+                />
                 <div>
                   <cite className="not-italic text-[#0b0d10] dark:text-[#f3f4f6] font-semibold block text-sm sm:text-base">
                     {current.authorName}
@@ -115,19 +127,15 @@ export default function HomeTestimonials() {
                         : "border-[#e5e7eb] dark:border-[#262b33] hover:border-teal-700/30 dark:hover:border-teal-300/25 bg-transparent"
                     }`}
                   >
-                    {avatarSrc(t) ? (
-                      <Image
-                        src={avatarSrc(t)}
-                        alt=""
-                        width={36}
-                        height={36}
-                        className={`w-9 h-9 rounded-full object-cover shrink-0 ${
-                          selected
-                            ? "ring-2 ring-teal-700 dark:ring-teal-300"
-                            : "opacity-80"
-                        }`}
-                      />
-                    ) : null}
+                    <TestimonialAvatar
+                      src={avatarSrc(t)}
+                      size={36}
+                      className={`w-9 h-9 rounded-full object-cover shrink-0 ${
+                        selected
+                          ? "ring-2 ring-teal-700 dark:ring-teal-300"
+                          : "opacity-80"
+                      }`}
+                    />
                     <span className="min-w-0">
                       <span
                         className={`block text-sm font-medium truncate ${
