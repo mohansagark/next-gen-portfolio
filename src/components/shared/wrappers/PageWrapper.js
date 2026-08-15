@@ -14,7 +14,6 @@ import smoothScroll from "@/libs/smoothScroll";
 import tjTitleAnim from "@/libs/tjTitleAnim";
 import { useEffect } from "react";
 import BackToTop from "../others/BackToTop";
-import MagicCusror1 from "../others/MagicCusror1";
 import Preloader from "../others/Preloader";
 
 const PageWrapper = ({
@@ -46,7 +45,6 @@ const PageWrapper = ({
 			<Preloader isHome={!!isIndexPage} />
 
 			<BackToTop />
-			{headerType === 4 ? <MagicCusror1 /> : ""}
 			<HeaderContextProvider
 				value={{ isIndexPage, isInnerPage, headerType, isResumeBtn }}
 			>

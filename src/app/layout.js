@@ -14,9 +14,6 @@ import "./css/animate.min.css";
 import "./css/backToTop.css";
 import "./css/flaticon_gerold.css";
 import "./css/font-awesome-pro.min.css";
-import "./css/glightbox.min.css";
-import "./css/nice-select2.css";
-import "./css/odometer-theme-default.css";
 import "./globals.css";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";

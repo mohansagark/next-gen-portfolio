@@ -1,5 +1,4 @@
 "use client";
-import Socials4 from "@/components/shared/socials/Socials4";
 import { useFooterContext } from "@/context_api/FooterContext";
 import useHomeLink from "@/hooks/useHomeLink";
 import Image from "next/image";
@@ -17,8 +16,6 @@ const Footer = () => {
       >
         <div className="container">
           <div className="flex flex-col items-center pt-50px pb-5 md:pt-60px">
-            {/* <!-- socials --> */}
-            {footerType === 3 ? <Socials4 type={2} /> : ""}
             {/* logo */}
             <div className="footer-logo w-75px h-75px mb-6">
               <Link href={homeLink("/")} className="logo inline-flex">

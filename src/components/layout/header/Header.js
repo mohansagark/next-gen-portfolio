@@ -1,9 +1,4 @@
 "use client";
-import ButtonHeader from "@/components/shared/buttons/ButtonHeader";
-import ButtonPrimary from "@/components/shared/buttons/ButtonPrimary";
-import Socials4 from "@/components/shared/socials/Socials4";
-import Socials5 from "@/components/shared/socials/Socials5";
-import Socials6 from "@/components/shared/socials/Socials6";
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import stickyHeader from "@/libs/stickyHeader";
 import Link from "next/link";
@@ -104,53 +99,6 @@ const Header = ({ isSticky }) => {
               </ul>
             </div>
             <Navbar isSticky={isSticky} />
-            {headerType === 3 ||
-            headerType === 4 ||
-            headerType === 5 ||
-            headerType === 6 ||
-            headerType === 9 ||
-            headerType === 10 ? (
-              <div
-                className={`${
-                  headerType === 9 || headerType === 10 ? "flex" : "hidden"
-                } ${
-                  headerType === 9 || headerType === 10 || headerType === 5
-                    ? "lg:flex items-center gap-25px"
-                    : "lg:block "
-                } ${
-                  headerType === 10
-                    ? "lg:pl-30px lg:border-l border-border-coloer dark:border-bg-color-2"
-                    : ""
-                }`}
-              >
-                {headerType === 9 || headerType === 10 ? (
-                  <>
-                    {headerType === 10 ? "" : <Socials6 />}
-                    <div className="hidden sm:block">
-                      <ButtonPrimary type={2} isIcon={true} url={"/#contact"}>
-                        Lets Talk
-                      </ButtonPrimary>
-                    </div>
-                  </>
-                ) : headerType === 6 ? (
-                  <ButtonPrimary
-                    isIcon={headerType === 6 ? true : false}
-                    url={isIndexPage ? "#contact" : "/#contact"}
-                  >
-                    {headerType === 6 ? "Let's talk" : "Contact"}
-                  </ButtonPrimary>
-                ) : headerType === 5 ? (
-                  <>
-                    <Socials5 />
-                    <ButtonHeader />
-                  </>
-                ) : (
-                  <Socials4 />
-                )}
-              </div>
-            ) : (
-              ""
-            )}
           </div>
         </div>
       </div>

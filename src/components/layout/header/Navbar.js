@@ -1,7 +1,5 @@
 "use client";
-import ButtonHeader from "@/components/shared/buttons/ButtonHeader";
 import ButtonPrimary from "@/components/shared/buttons/ButtonPrimary";
-import ButtonPrimary2 from "@/components/shared/buttons/ButtonPrimary2";
 import { useHeaderContext } from "@/context_api/HeaderContext";
 import getNavItems from "@/libs/getNavItems";
 import indexingAndActiveLink from "@/libs/indexingAndActiveLink";
@@ -10,8 +8,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 const Navbar = () => {
-	const { isIndexPage, isResumeBtn, headerType } =
-		useHeaderContext();
+	const { isIndexPage, headerType } = useHeaderContext();
 	const navItems = getNavItems();
 	const homeLink = useHomeLink();
 	useEffect(() => {
@@ -63,26 +60,16 @@ const Navbar = () => {
 					: ""}
 
 				{/* Contact CTA — only once here (not also in nav-items) */}
-				{headerType === 9 || headerType === 10 ? (
-					""
-				) : headerType === 5 ? (
-					<li className="menu-bar lg:hidden">
-						<ButtonHeader />
-					</li>
-				) : headerType === 3 || headerType === 4 || headerType === 6 ? (
+				{headerType === 9 || headerType === 10 || headerType === 5 || headerType === 3 || headerType === 4 || headerType === 6 ? (
 					""
 				) : (
 					<li className="hidden lg:block">
-						{isResumeBtn ? (
-							<ButtonPrimary2 url={"#"}>Resume</ButtonPrimary2>
-						) : (
-							<ButtonPrimary
-								url={isIndexPage ? "#contact" : homeLink("/#contact")}
-								className="!text-white dark:!text-white"
-							>
-								Contact
-							</ButtonPrimary>
-						)}
+						<ButtonPrimary
+							url={isIndexPage ? "#contact" : homeLink("/#contact")}
+							className="!text-white dark:!text-white"
+						>
+							Contact
+						</ButtonPrimary>
 					</li>
 				)}
 			</ul>
