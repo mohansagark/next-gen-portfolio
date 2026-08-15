@@ -62,15 +62,13 @@ function useDeferredMount(enabled) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!enabled) {
-      setReady(false);
-      return undefined;
-    }
+    if (!enabled) return undefined;
+
     let cancelled = false;
     const arm = () => {
-      if (cancelled) return;
-      setReady(true);
+      if (!cancelled) setReady(true);
     };
+
     if (typeof window.requestIdleCallback === "function") {
       const id = window.requestIdleCallback(arm, { timeout: 1800 });
       return () => {
@@ -78,6 +76,7 @@ function useDeferredMount(enabled) {
         window.cancelIdleCallback?.(id);
       };
     }
+
     const t = window.setTimeout(arm, 600);
     return () => {
       cancelled = true;
@@ -85,7 +84,8 @@ function useDeferredMount(enabled) {
     };
   }, [enabled]);
 
-  return ready;
+  // Gate with `enabled` so we don't need setState when viewport goes mobile.
+  return Boolean(enabled && ready);
 }
 
 export default function HomeHero() {
