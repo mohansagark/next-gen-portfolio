@@ -85,7 +85,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_SKIP_HEAVY_MEDIA: "1"
-      # treosh/lighthouse-ci-action@v11 does not accept startServerCommand —
+      # treosh/lighthouse-ci-action still has no startServerCommand —
       # boot Next ourselves, then point Lighthouse at the live URL.
       - name: Start Next.js
         run: |
@@ -101,7 +101,7 @@ jobs:
           echo "::error::Next.js failed to become ready"
           cat /tmp/next-start.log || true
           exit 1
-      - uses: treosh/lighthouse-ci-action@72f881228236981b625ed765b928efb1786a1f55 # v11
+      - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12.6.2
         with:
           urls: |
             http://127.0.0.1:3000/
