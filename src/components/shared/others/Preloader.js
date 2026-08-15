@@ -101,6 +101,9 @@ export default function Preloader({ isHome = false }) {
       document.documentElement.classList.remove("splash-pending");
       document.documentElement.style.removeProperty("background-color");
       document.body.classList.remove("loaded");
+      // Syncing with the boot script's pre-hydration DOM class, not derivable
+      // from props/state during render.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(false);
       return;
     }

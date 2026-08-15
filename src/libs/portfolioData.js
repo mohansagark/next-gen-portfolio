@@ -35,11 +35,12 @@ function bundled(name) {
   return JSON.parse(readFileSync(p, "utf8"));
 }
 
-function localDataDir() {
+/** Exported for tests: local checkout vs CDN URL selection. */
+export function localDataDir() {
   return process.env.PORTFOLIO_DATA_DIR || "";
 }
 
-function readLocal(name) {
+export function readLocal(name) {
   const dir = localDataDir();
   if (!dir) return null;
   const p = join(dir, "data", `${name}.json`);
@@ -47,11 +48,16 @@ function readLocal(name) {
   return JSON.parse(readFileSync(p, "utf8"));
 }
 
+/** CDN URL used when PORTFOLIO_DATA_DIR is unset or the file is missing. */
+export function remoteContentUrl(name) {
+  return `${RAW_BASE}/data/${name}.json`;
+}
+
 async function fetchJson(name) {
   const local = readLocal(name);
   if (local) return local;
 
-  const res = await fetch(`${RAW_BASE}/data/${name}.json`, {
+  const res = await fetch(remoteContentUrl(name), {
     next: { revalidate: 300 },
   });
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);

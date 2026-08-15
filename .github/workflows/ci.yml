@@ -9,8 +9,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
           cache: npm
@@ -20,23 +20,26 @@ jobs:
       # fetch:blogs / sync:leo (prebuild) are fail-soft without secrets — build
       # falls back to committed data and skips the KV push. Safe to run here.
       - run: npm run build
+      # Post-build HTTP smoke (home, work/capabilities slugs, legacy 404, contact 400).
+      # Does not click Turnstile or call live Resend — those need secrets + a browser.
+      - run: npm run test:smoke
 
   semgrep:
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - run: semgrep scan --config=p/security-audit --config=p/owasp-top-ten --error
 
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
       # Free for personal/public repos; GITLEAKS_LICENSE only required for orgs.
-      - uses: gitleaks/gitleaks-action@v2
+      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -44,29 +47,41 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
       - run: npm run build
-      # Thresholds in .size-limit.json are a starting guess — tune after
-      # a couple of real runs so this doesn't turn noisy and get ignored.
-      - run: npx --yes size-limit
+      # Total client JS across all routes, uncompressed. Dependency-free check
+      # (size-limit needs a plugin resolvable from this project's own
+      # node_modules plus a Node engine newer than what this job runs — not
+      # worth the friction here). ~6.0 MB measured at the time this was
+      # written; 8 MB leaves headroom without being a rubber stamp — tune
+      # after a couple of real runs.
+      - name: Check total client JS size
+        run: |
+          limit_kb=8192
+          size_kb=$(find .next/static/chunks -maxdepth 1 -name '*.js' ! -name '*.map' -exec cat {} + | wc -c | awk '{print int($1/1024)}')
+          echo "Total chunk size: ${size_kb}KB (limit ${limit_kb}KB)"
+          if [ "$size_kb" -gt "$limit_kb" ]; then
+            echo "::error::Client JS grew to ${size_kb}KB, over the ${limit_kb}KB budget"
+            exit 1
+          fi
 
   lighthouse:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
       - run: npm run build
-      - uses: treosh/lighthouse-ci-action@v11
+      - uses: treosh/lighthouse-ci-action@72f881228236981b625ed765b928efb1786a1f55 # v11
         with:
           urls: |
             http://localhost:3000/

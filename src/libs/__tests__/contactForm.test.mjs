@@ -8,22 +8,26 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "../../..");
 
 test("contact form stack is wired (UI + API + Turnstile + Resend)", () => {
   const routePath = join(root, "src/app/api/contact/route.js");
+  const handlerPath = join(root, "src/libs/contactApiHandler.js");
   const homePath = join(root, "src/components/sections/home/HomeContact.js");
   const libPath = join(root, "src/libs/contactForm.js");
   const clientPath = join(root, "src/libs/sendContactEmail.js");
 
   assert.equal(existsSync(routePath), true);
+  assert.equal(existsSync(handlerPath), true);
   assert.equal(existsSync(homePath), true);
   assert.equal(existsSync(libPath), true);
   assert.equal(existsSync(clientPath), true);
 
   const route = readFileSync(routePath, "utf8");
+  const handler = readFileSync(handlerPath, "utf8");
   const home = readFileSync(homePath, "utf8");
   const lib = readFileSync(libPath, "utf8");
   const client = readFileSync(clientPath, "utf8");
 
-  assert.match(route, /verifyTurnstileToken/);
-  assert.match(route, /sendContactViaResend/);
+  assert.match(route, /handleContactPost/);
+  assert.match(handler, /verifyTurnstileToken/);
+  assert.match(handler, /sendContactViaResend/);
   assert.match(lib, /siteverify/);
   assert.match(lib, /RESEND_API_KEY/);
   assert.match(client, /\/api\/contact/);

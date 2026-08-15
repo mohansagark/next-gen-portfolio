@@ -137,6 +137,10 @@ const BlogDetailsPrimary = ({
                         >
                           <span
                             className="text-[#374151] dark:text-[#9aa3af] text-lg leading-[1.5]"
+                            // takeaway comes from portfolio-blog's takeawayToHtml():
+                            // HTML-escaped first, then only <strong>/<em>/<code> are
+                            // reintroduced via allowlist regex — never raw author HTML.
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml
                             dangerouslySetInnerHTML={{ __html: takeaway }}
                           />
                         </li>
@@ -150,6 +154,12 @@ const BlogDetailsPrimary = ({
                 {/* post body: ~18px / 1.5 lh / ~65ch measure */}
                 <div
                   className="prose prose-lg dark:prose-invert max-w-[65ch] text-lg leading-normal break-words prose-p:leading-[1.5] prose-li:leading-[1.5] prose-headings:text-[#0b0d10] dark:prose-headings:text-[#f3f4f6] prose-p:text-[#374151] dark:prose-p:text-[#9aa3af] prose-strong:text-[#0b0d10] dark:prose-strong:text-[#f3f4f6] prose-a:text-teal-700 dark:prose-a:text-[#5eead4] prose-li:text-[#374151] dark:prose-li:text-[#9aa3af] prose-pre:overflow-x-auto prose-img:rounded-lg"
+                  // htmlWithIds derives from portfolio-blog's generated/blogs.json
+                  // "html" field: raw HTML disabled in remark-rehype, then
+                  // rehype-sanitize (defaultSchema), then independently re-verified
+                  // by scripts/verify-safety.mjs (parses output, asserts zero
+                  // executable nodes) gating that repo's CI before publish.
+                  // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml
                   dangerouslySetInnerHTML={{ __html: htmlWithIds }}
                 />
               </article>

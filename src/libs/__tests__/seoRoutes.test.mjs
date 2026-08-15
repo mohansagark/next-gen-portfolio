@@ -20,15 +20,14 @@ test("robots drops deleted demo routes including globe-samples", () => {
   assert.doesNotMatch(src, /\/home-2/);
 });
 
-test("middleware rewrites blog host and redirects apex /blogs", () => {
+test("middleware wires resolveBlogHostAction for blog host / apex blogs", () => {
   const src = readFileSync(join(root, "src/middleware.js"), "utf8");
-  assert.match(src, /blog\.devmohan\.in/);
+  assert.match(src, /resolveBlogHostAction/);
   assert.match(src, /NextResponse\.rewrite/);
-  assert.match(src, /pathname === "\/blogs"/);
-  assert.match(src, /308/);
+  assert.match(src, /NextResponse\.redirect/);
 });
 
-test("legacy portfolio/services routes permanently redirect matches only", () => {
+test("legacy portfolio/services routes use redirect helpers + notFound", () => {
   const portfolio = readFileSync(
     join(root, "src/app/portfolio/[id]/page.js"),
     "utf8"
@@ -37,12 +36,14 @@ test("legacy portfolio/services routes permanently redirect matches only", () =>
     join(root, "src/app/services/[id]/page.js"),
     "utf8"
   );
+  assert.match(portfolio, /findLegacyPortfolioMatch/);
+  assert.match(portfolio, /legacyPortfolioTarget/);
   assert.match(portfolio, /permanentRedirect/);
-  assert.match(portfolio, /\/work\//);
   assert.match(portfolio, /notFound\(/);
   assert.doesNotMatch(portfolio, /Personal Portfolio React/);
+  assert.match(services, /findLegacyCapabilityMatch/);
+  assert.match(services, /legacyCapabilityTarget/);
   assert.match(services, /permanentRedirect/);
-  assert.match(services, /\/capabilities\//);
   assert.match(services, /notFound\(/);
   assert.doesNotMatch(services, /Personal Portfolio React/);
   // Unmatched ids must not permanently redirect to homepage

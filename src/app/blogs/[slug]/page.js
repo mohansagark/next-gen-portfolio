@@ -56,7 +56,12 @@ export default async function BlogDetails(context) {
       {jsonLd ? (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          // Escape "<" so a value containing "</script>" can't break out of
+          // this tag; JSON.parse decodes the escape back correctly.
+          // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       ) : null}
       <BlogDetailsMain blog={isExistBlog} />

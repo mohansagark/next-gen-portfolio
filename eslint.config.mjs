@@ -1,0 +1,39 @@
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+
+const eslintConfig = [
+  {
+    ignores: [".next/**", "node_modules/**", "public/**", "generated/**"],
+  },
+  ...nextCoreWebVitals,
+  {
+    languageOptions: {
+      globals: {
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        requestAnimationFrame: "readonly",
+        localStorage: "readonly",
+        IntersectionObserver: "readonly",
+        Isotope: "readonly",
+        define: "readonly",
+        exports: "readonly",
+        self: "readonly",
+      },
+    },
+    rules: {
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-img-element": "off",
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "no-redeclare": "warn",
+      "no-case-declarations": "warn",
+      "no-misleading-character-class": "warn",
+      "no-useless-escape": "warn",
+      "no-cond-assign": "warn",
+      "no-dupe-else-if": "warn",
+    },
+  },
+];
+
+export default eslintConfig;

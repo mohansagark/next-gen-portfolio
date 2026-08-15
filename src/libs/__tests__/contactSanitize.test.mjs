@@ -46,3 +46,52 @@ test("sanitizeContactPayload trims and caps lengths", () => {
   assert.equal(result.data.email, "user@example.com");
   assert.equal(result.data.message.length, 5000);
 });
+
+test("sanitizeContactPayload accepts user_email and select aliases", () => {
+  const result = sanitizeContactPayload({
+    name: "Grace Hopper",
+    user_email: "grace@example.com",
+    select: "General Inquiry",
+    message: "Need a production-grade assistant for ops.",
+    "cf-turnstile-response": "cf-token",
+  });
+  assert.equal(result.ok, true);
+  assert.equal(result.data.email, "grace@example.com");
+  assert.equal(result.data.reason, "General Inquiry");
+  assert.equal(result.data.token, "cf-token");
+});
+
+test("sanitizeContactPayload rejects oversized tokens", () => {
+  const result = sanitizeContactPayload({
+    name: "Valid Name",
+    email: "ok@example.com",
+    message: "Long enough message body here.",
+    token: "t".repeat(2049),
+  });
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.includes("token"));
+});
+
+test("sanitizeContactPayload defaults reason and caps optional fields", () => {
+  const result = sanitizeContactPayload({
+    name: "Valid Name",
+    email: "ok@example.com",
+    company: "C".repeat(200),
+    phone: "P".repeat(80),
+    message: "Long enough message body here.",
+    token: "tok",
+  });
+  assert.equal(result.ok, true);
+  assert.equal(result.data.reason, "General Inquiry");
+  assert.equal(result.data.company.length, 120);
+  assert.equal(result.data.phone.length, 40);
+});
+
+test("sanitizeContactPayload rejects empty or non-object body", () => {
+  const empty = sanitizeContactPayload();
+  assert.equal(empty.ok, false);
+  assert.ok(empty.errors.includes("name"));
+  assert.ok(empty.errors.includes("email"));
+  assert.ok(empty.errors.includes("message"));
+  assert.ok(empty.errors.includes("token"));
+});
