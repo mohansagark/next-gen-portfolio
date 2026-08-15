@@ -129,9 +129,10 @@ const PopularTagsNebula = () => {
     };
     window.addEventListener("resize", onResize);
 
+    const simState = sim.current;
     return () => {
       cancelled = true;
-      cancelAnimationFrame(sim.current.raf);
+      cancelAnimationFrame(simState.raf);
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", onResize);
       field.removeEventListener("pointermove", onMove);

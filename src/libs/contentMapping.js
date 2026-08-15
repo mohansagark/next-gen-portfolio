@@ -127,7 +127,11 @@ export function mapResume(experience, education, achievements, bundledResume) {
       desc: d.location ? `${d.institution}, ${d.location}` : d.institution,
     }))
     .sort((a, b) => (a.sort < b.sort ? 1 : -1))
-    .map(({ sort, ...item }) => item);
+    .map((entry) => {
+      const item = { ...entry };
+      delete item.sort;
+      return item;
+    });
 
   // Prefer canonical achievements; fall back to the bundled section's items
   // so the section survives a failed achievements fetch.

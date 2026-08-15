@@ -2,7 +2,14 @@ import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
 const eslintConfig = [
   {
-    ignores: [".next/**", "node_modules/**", "public/**", "generated/**"],
+    ignores: [
+      ".next/**",
+      "node_modules/**",
+      "public/**",
+      "generated/**",
+      "**/*.min.js",
+      "src/libs/gsap-split-text.min.js",
+    ],
   },
   ...nextCoreWebVitals,
   {

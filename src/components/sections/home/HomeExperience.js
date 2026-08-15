@@ -203,7 +203,6 @@ function RoleTile({
         <div className="relative size-11 sm:size-12 shrink-0 overflow-hidden rounded-full border border-[#e5e7eb] dark:border-[#262b33] bg-transparent">
           {logoSrc ? (
             // Full-bleed cover so colored logo squares fill the circle — no white chip/padding corners.
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={logoSrc}
               alt=""

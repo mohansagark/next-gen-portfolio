@@ -93,7 +93,6 @@ function SkillChip({ skill, ariaHidden = false }) {
       aria-hidden={ariaHidden || undefined}
     >
       {skill.img ? (
-        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={skill.img}
           alt=""
