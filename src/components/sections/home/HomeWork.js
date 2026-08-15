@@ -84,12 +84,7 @@ export default function HomeWork() {
                   >
                     <CaseStudyVisual
                       slug={item.slug}
-                      src={
-                        item.coverImage ||
-                        (item.image?.startsWith("/images/work/")
-                          ? item.image
-                          : undefined)
-                      }
+                      src={item.coverImage || item.image || undefined}
                       alt=""
                       featured
                     />

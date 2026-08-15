@@ -124,9 +124,7 @@ export default async function WorkCaseStudyPage({ params }) {
   const companyDomain = item.companyDomain || "";
   const github = item.githubUrl;
   const live = item.liveUrl || item.url;
-  const coverSrc =
-    item.coverImage ||
-    (item.image?.startsWith?.("/images/work/") ? item.image : undefined);
+  const coverSrc = item.coverImage || item.image || undefined;
   const architectureSrc = item.architectureImage || "";
   const architectureSrcLight =
     item.architectureImageLight || item.architectureImage || "";

@@ -433,13 +433,13 @@ export default function HomeExperience() {
   const heading = isExperience ? "Experience" : "Credentials";
   const subcopy = isExperience
     ? "Ownership, architecture, and outcomes."
-    : "Education, certifications, and recognition that back the work.";
+    : "Education, certifications, and recognition";
 
   return (
     <section id="experience" className="scroll-mt-24 lg:scroll-mt-28 py-16 sm:py-20 md:py-28">
       <div className="container max-w-[1120px] min-[1920px]:!max-w-[1680px] px-5 sm:px-6">
         <ScrollReveal>
-          <div className="relative min-h-[5.5rem] mb-8">
+          <div className="relative min-h-[4.75rem] sm:min-h-[5.5rem] mb-8">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={`heading-${tab}`}
