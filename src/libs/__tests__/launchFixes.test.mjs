@@ -65,7 +65,9 @@ test("experience logos resolve to local responsive assets", () => {
     join(root, "src/components/sections/home/HomeExperience.js"),
     "utf8"
   );
-  assert.match(exp, /object-contain/);
+  // Full-bleed cover (not padded contain on a white chip) so colored logo BGs fill corners.
+  assert.match(exp, /object-cover/);
+  assert.doesNotMatch(exp, /object-contain p-/);
   assert.match(exp, /grid-cols-2/);
   assert.match(exp, /splitLocationMode/);
   for (const file of EXPERIENCE_LOGOS) {

@@ -195,15 +195,17 @@ function RoleTile({
   return (
     <li className="flex h-full flex-col rounded-2xl border border-[#e8eaed] dark:border-[#262b33] bg-white dark:bg-[#12151a] p-4 sm:p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
       <div className="flex items-start justify-between gap-3">
-        <div className="relative size-11 sm:size-12 shrink-0 overflow-hidden rounded-full border border-[#e5e7eb] dark:border-[#262b33] bg-white">
+        <div className="relative size-11 sm:size-12 shrink-0 overflow-hidden rounded-full border border-[#e5e7eb] dark:border-[#262b33] bg-transparent">
           {logoSrc ? (
+            // Full-bleed cover so colored logo squares fill the circle — no white chip/padding corners.
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={logoSrc}
               alt=""
-              className="absolute inset-0 h-full w-full object-contain p-1.5"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           ) : (
-            <span className="absolute inset-0 flex items-center justify-center text-[0.7rem] font-semibold tracking-wide text-[#6b7280] dark:text-[#9aa3af]">
+            <span className="absolute inset-0 flex items-center justify-center bg-[#f3f4f6] dark:bg-[#1a1e24] text-[0.7rem] font-semibold tracking-wide text-[#6b7280] dark:text-[#9aa3af]">
               {initials(org)}
             </span>
           )}

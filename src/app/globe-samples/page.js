@@ -2,7 +2,7 @@ import GlobeSamplesGrid from "@/components/globe-samples/GlobeSamplesGrid";
 
 export const metadata = {
   title: "Globe samples",
-  description: "Compare globe implementations for the portfolio hero.",
+  description: "react-globe.gl light/dark variants used by the portfolio hero.",
   robots: { index: false, follow: false },
 };
 
@@ -13,19 +13,20 @@ export default function GlobeSamplesPage() {
       <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <header className="mb-10 max-w-2xl space-y-3 md:mb-12">
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--primary-color)]">
-            Hero selection
+            Hero reference
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-[var(--white-color)] sm:text-4xl">
-            Pick a globe style for the hero
+            Hero globe (react-globe.gl)
           </h1>
           <p className="text-base leading-relaxed text-[var(--gray-color)]">
-            Live side-by-side demos. The home hero is unchanged — choose a look
-            here, then we can wire the winner into the page.{" "}
+            Internal reference for the shipped light/dark hero globes. Losing
+            candidates (cobe, R3F/Three, Magic UI) were removed from production
+            dependencies.{" "}
             <a
               href="/globe-samples/compare/"
               className="text-teal-300/90 underline-offset-4 hover:underline"
             >
-              Focused compare (current vs Magic UI / cobe) →
+              Light vs dark compare →
             </a>
           </p>
         </header>

@@ -18,16 +18,6 @@ const ReactGlobeNightSample = dynamic(
   { ssr: false, loading: () => loadingFallback }
 );
 
-const MagicUIGlobeFullLightSample = dynamic(
-  () => import("@/components/globe-samples/MagicUIGlobeFullLightSample"),
-  { ssr: false, loading: () => loadingFallback }
-);
-
-const CobeGlobeSample = dynamic(
-  () => import("@/components/globe-samples/CobeGlobeSample"),
-  { ssr: false, loading: () => loadingFallback }
-);
-
 const CURRENT = [
   {
     id: "current-light",
@@ -43,21 +33,6 @@ const CURRENT = [
   },
 ];
 
-const CANDIDATES = [
-  {
-    id: "candidate-magicui-full-light",
-    label: "Candidate · Magic UI light · full",
-    note: "cobe via Magic UI — full uncropped sphere, light map, drag-to-spin",
-    Component: MagicUIGlobeFullLightSample,
-  },
-  {
-    id: "candidate-cobe",
-    label: "Candidate · cobe",
-    note: "Lightweight dotted globe with teal markers — strong marketing look",
-    Component: CobeGlobeSample,
-  },
-];
-
 function Panel({ id, label, note, Component }) {
   return (
     <section
@@ -70,7 +45,7 @@ function Panel({ id, label, note, Component }) {
         </h3>
         <p className="text-sm leading-relaxed text-[var(--gray-color)]">{note}</p>
       </header>
-      <div className="flex min-h-[340px] items-center justify-center overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_center,rgba(18,28,36,0.9),#0b0d10_70%)]">
+      <div className="flex min-h-[340px] items-center justify-center overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_center,rgb(18,28,36,0.9),#0b0d10_70%)]">
         <Component />
       </div>
     </section>
@@ -91,22 +66,6 @@ export default function GlobeCompareView() {
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {CURRENT.map((item) => (
-            <Panel key={item.id} {...item} />
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-4">
-        <div className="space-y-1">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-teal-300/90">
-            Looking better
-          </p>
-          <h2 className="text-xl font-semibold text-[var(--white-color)] md:text-2xl">
-            Shortlisted candidates
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-          {CANDIDATES.map((item) => (
             <Panel key={item.id} {...item} />
           ))}
         </div>

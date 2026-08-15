@@ -13,88 +13,23 @@ const ReactGlobeDaySample = dynamic(() => import("./ReactGlobeDaySample"), {
   loading: () => loadingFallback,
 });
 
-const CobeGlobeSample = dynamic(() => import("./CobeGlobeSample"), {
-  ssr: false,
-  loading: () => loadingFallback,
-});
-
-const R3FEarthSample = dynamic(() => import("./R3FEarthSample"), {
-  ssr: false,
-  loading: () => loadingFallback,
-});
-
 const ReactGlobeNightSample = dynamic(() => import("./ReactGlobeNightSample"), {
   ssr: false,
   loading: () => loadingFallback,
 });
 
-const MagicUIGlobeSample = dynamic(() => import("./MagicUIGlobeSample"), {
-  ssr: false,
-  loading: () => loadingFallback,
-});
-
-const MagicUIGlobeDarkSample = dynamic(
-  () => import("./MagicUIGlobeDarkSample"),
-  { ssr: false, loading: () => loadingFallback }
-);
-
-const MagicUIGlobeFullSample = dynamic(
-  () => import("./MagicUIGlobeFullSample"),
-  { ssr: false, loading: () => loadingFallback }
-);
-
-const MagicUIGlobeFullLightSample = dynamic(
-  () => import("./MagicUIGlobeFullLightSample"),
-  { ssr: false, loading: () => loadingFallback }
-);
-
+/** Winning hero library only — losing candidates (cobe / R3F / Magic UI) removed from prod deps. */
 const VARIANTS = [
-  {
-    id: "magicui",
-    name: "Magic UI Globe (light · cropped)",
-    pros: "Official Magic UI demo look — light map, partial sphere, drag-to-spin.",
-    Component: MagicUIGlobeSample,
-  },
-  {
-    id: "magicui-dark",
-    name: "Magic UI Globe (dark · cropped)",
-    pros: "Same Magic UI crop layout with cobe dark: 1 + teal markers.",
-    Component: MagicUIGlobeDarkSample,
-  },
-  {
-    id: "magicui-full",
-    name: "Magic UI Globe (dark · full)",
-    pros: "Complete centered sphere — better for a hero column than the crop.",
-    Component: MagicUIGlobeFullSample,
-  },
-  {
-    id: "magicui-full-light",
-    name: "Magic UI Globe (light · full)",
-    pros: "Full sphere with the default light/white cobe map.",
-    Component: MagicUIGlobeFullLightSample,
-  },
   {
     id: "react-globe-day",
     name: "react-globe.gl (day + arcs)",
-    pros: "Feature-rich: arcs, atmosphere, bump map — closest to the current hero.",
+    pros: "Feature-rich: arcs, atmosphere, bump map — live on the home hero in light theme.",
     Component: ReactGlobeDaySample,
-  },
-  {
-    id: "cobe",
-    name: "cobe",
-    pros: "Tiny WebGL footprint; clean marketing-style markers; great for performance.",
-    Component: CobeGlobeSample,
-  },
-  {
-    id: "r3f-earth",
-    name: "R3F / Three.js sphere",
-    pros: "Full control via Fiber + Drei; simple textured Earth with auto-rotate.",
-    Component: R3FEarthSample,
   },
   {
     id: "react-globe-night",
     name: "react-globe.gl (night)",
-    pros: "Same API as day globe; city-lights texture suits dark portfolio themes.",
+    pros: "Same API as day globe; city-lights texture for dark portfolio themes.",
     Component: ReactGlobeNightSample,
   },
 ];
@@ -114,7 +49,7 @@ export default function GlobeSamplesGrid() {
             </h2>
             <p className="text-sm leading-relaxed text-[var(--gray-color)]">{pros}</p>
           </header>
-          <div className="flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_center,rgba(18,28,36,0.9),#0b0d10_70%)]">
+          <div className="flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl bg-[radial-gradient(ellipse_at_center,rgb(18,28,36,0.9),#0b0d10_70%)]">
             <Component />
           </div>
         </section>
