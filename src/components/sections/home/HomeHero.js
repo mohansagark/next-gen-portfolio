@@ -11,7 +11,7 @@ import { btnMetallicClass } from "@/components/shared/buttons/ButtonPrimary";
 const HeroGlobeCanvas = dynamic(() => import("./HeroGlobeCanvas"), {
   ssr: false,
   loading: () => (
-    <div className="mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.12),transparent_65%)]" />
+    <div className="animate-pulse mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle,rgba(94,234,212,0.12),transparent_65%)]" />
   ),
 });
 
@@ -170,7 +170,7 @@ export default function HomeHero() {
 
   const identity = (
     <motion.div
-      className="flex items-center gap-3 mb-5 sm:mb-7 sm:gap-3.5 pt-1.5 max-lg:pt-2 max-lg:pr-14 lg:pt-0 lg:pr-0"
+      className="[grid-area:identity] flex items-center gap-3 mb-5 sm:mb-7 sm:gap-3.5 pt-1.5 max-lg:pt-2 max-lg:pr-14 lg:pt-0 lg:pr-0"
       {...chromeProps}
     >
       <img
@@ -205,7 +205,7 @@ export default function HomeHero() {
 
   const heading = (
     <motion.h1
-      className="font-display text-[2rem] sm:text-5xl lg:text-[3.55rem] xl:text-[3.9rem] leading-[1.08] text-primary-color-light dark:text-white max-w-[16ch] sm:max-w-[18ch] lg:max-w-none mb-4 sm:mb-5"
+      className="[grid-area:heading] font-display text-[2rem] sm:text-5xl lg:text-[3.55rem] xl:text-[3.9rem] leading-[1.08] text-primary-color-light dark:text-white max-w-[16ch] sm:max-w-[18ch] lg:max-w-none mb-4 sm:mb-5"
       {...textProps}
     >
       {tagline}
@@ -214,7 +214,7 @@ export default function HomeHero() {
 
   const subheading = (
     <motion.p
-      className="text-[0.9375rem] sm:text-base md:text-lg text-[#374151] dark:text-[#9aa3af] max-w-2xl leading-relaxed mb-6 sm:mb-8"
+      className="[grid-area:subhead] text-[0.9375rem] sm:text-base md:text-lg text-[#374151] dark:text-[#9aa3af] max-w-2xl leading-relaxed mb-6 sm:mb-8"
       {...textProps}
     >
       {subhead}
@@ -223,7 +223,7 @@ export default function HomeHero() {
 
   const ctas = (
     <motion.div
-      className="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap items-stretch sm:items-center gap-2.5"
+      className="[grid-area:ctas] flex flex-col sm:flex-row flex-wrap lg:flex-nowrap items-stretch sm:items-center gap-2.5"
       {...chromeProps}
     >
       <a
@@ -267,7 +267,7 @@ export default function HomeHero() {
       />
     ) : (
       <div
-        className="mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.2),transparent_62%)] dark:bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.14),transparent_62%)]"
+        className="animate-pulse mx-auto aspect-square w-full max-w-[min(100%,520px)] sm:max-w-[560px] lg:max-w-[720px] min-[1920px]:max-w-[900px] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.2),transparent_62%)] dark:bg-[radial-gradient(circle_at_35%_30%,rgba(94,234,212,0.14),transparent_62%)]"
         aria-hidden
       />
     );
@@ -276,8 +276,8 @@ export default function HomeHero() {
     <motion.div
       className={
         isDesktop
-          ? "relative w-full min-h-[520px] lg:min-h-[560px] xl:min-h-[620px] min-[1920px]:min-h-[720px] overflow-visible"
-          : "relative mx-auto flex w-full max-w-[min(100%,420px)] sm:max-w-[480px] min-h-[min(78vw,420px)] sm:min-h-[480px] items-center justify-center overflow-visible"
+          ? "[grid-area:globe] relative w-full min-h-[520px] lg:min-h-[560px] xl:min-h-[620px] min-[1920px]:min-h-[720px] overflow-visible"
+          : "[grid-area:globe] relative mx-auto flex w-full max-w-[min(100%,420px)] sm:max-w-[480px] min-h-[min(78vw,420px)] sm:min-h-[480px] items-center justify-center overflow-visible mb-5 sm:mb-6 lg:mb-0"
       }
       variants={reduceMotion ? undefined : globeVariants}
     >
@@ -299,27 +299,18 @@ export default function HomeHero() {
       </div>
 
       <div className="container max-w-[1240px] min-[1920px]:!max-w-[1680px] w-full px-5 sm:px-6">
-        {/* Mobile: name/role → globe → H1 → subhead → CTAs */}
-        <motion.div className="flex flex-col lg:hidden" {...motionProps}>
+        {/* Single set of elements — CSS Grid remaps identity/globe/heading/
+            subhead/ctas per breakpoint instead of rendering two full trees
+            (was doubling every Motion instance + DOM node for the hero). */}
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] xl:grid-cols-[0.95fr_1.05fr] gap-x-6 xl:gap-x-8 min-[1920px]:gap-x-10 lg:items-center [grid-template-areas:'identity'_'globe'_'heading'_'subhead'_'ctas'] lg:[grid-template-areas:'identity_globe'_'heading_globe'_'subhead_globe'_'ctas_globe']"
+          {...motionProps}
+        >
           {identity}
-          <div className="w-full my-5 sm:my-6">{globe}</div>
+          {globe}
           {heading}
           {subheading}
           {ctas}
-        </motion.div>
-
-        {/* Desktop: copy | globe */}
-        <motion.div
-          className="hidden lg:grid lg:grid-cols-[1fr_1fr] xl:grid-cols-[0.95fr_1.05fr] gap-6 xl:gap-8 min-[1920px]:gap-10 items-center"
-          {...motionProps}
-        >
-          <div className="max-w-3xl min-[1920px]:max-w-4xl">
-            {identity}
-            {heading}
-            {subheading}
-            {ctas}
-          </div>
-          {globe}
         </motion.div>
       </div>
     </section>
