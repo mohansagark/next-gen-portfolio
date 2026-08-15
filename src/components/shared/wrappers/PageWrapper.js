@@ -4,7 +4,6 @@ import Header from "@/components/layout/header/Header";
 import MobileFloatingNav from "@/components/layout/header/MobileFloatingNav";
 import FooterContextProvider from "@/context_api/FooterContext";
 import HeaderContextProvider from "@/context_api/HeaderContext";
-import PortfolioRenderContextProvider from "@/context_api/PortfolioRenderContext";
 import useSticky from "@/hooks/useSticky";
 import animateInvertText from "@/libs/animateInvertText";
 import animateSplitText from "@/libs/animateSplitText ";
@@ -52,9 +51,7 @@ const PageWrapper = ({
 				<Header isSticky={true} />
 				<MobileFloatingNav />
 			</HeaderContextProvider>
-			<PortfolioRenderContextProvider>
-				{children ? children : ""}
-			</PortfolioRenderContextProvider>
+			{children ? children : ""}
 			<FooterContextProvider value={{ footerType }}>
 				<Footer />
 			</FooterContextProvider>
