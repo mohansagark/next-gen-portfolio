@@ -14,9 +14,9 @@ test("sitemap includes work and capabilities detail routes", () => {
   assert.match(src, /caseStudies/);
 });
 
-test("robots keeps globe-samples disallowed and drops deleted home demos", () => {
+test("robots drops deleted demo routes including globe-samples", () => {
   const src = readFileSync(join(root, "src/app/robots.js"), "utf8");
-  assert.match(src, /\/globe-samples/);
+  assert.doesNotMatch(src, /\/globe-samples/);
   assert.doesNotMatch(src, /\/home-2/);
 });
 
