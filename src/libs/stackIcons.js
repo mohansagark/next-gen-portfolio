@@ -13,6 +13,9 @@ const STACK = {
   "amazon bedrock": { type: "fa", className: "fa-brands fa-aws", color: "#FF9900" },
   bedrock: { type: "fa", className: "fa-brands fa-aws", color: "#FF9900" },
   docker: { type: "fa", className: "fa-brands fa-docker", color: "#2496ED" },
+  // No official FontAwesome brand glyph for MongoDB — the leaf is their own
+  // brand mark, commonly used as the icon-only stand-in.
+  mongodb: { type: "fa", className: "fa-solid fa-leaf", color: "#47A248" },
   github: { type: "fa", className: "fa-brands fa-github", color: "#8B949E" },
   "github actions": { type: "fa", className: "fa-brands fa-github", color: "#2088FF" },
   graphql: { type: "fa", className: "fa-solid fa-diagram-project", color: "#E10098" },

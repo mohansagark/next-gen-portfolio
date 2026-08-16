@@ -5,6 +5,7 @@ import getProfile from "@/libs/getProfile";
 import getSkills from "@/libs/getSkills";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
 import { isOptimizableImageSrc } from "@/libs/optimizableImage";
+import { getStackIcon } from "@/libs/stackIcons";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
@@ -88,40 +89,63 @@ function SkillsPackedTicker({ skills }) {
   );
 }
 
+function SkillMark({ name }) {
+  const icon = getStackIcon(name);
+  if (icon.type === "badge") {
+    return (
+      <span
+        className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded bg-teal-700/15 dark:bg-teal-300/15 text-[8px] font-semibold text-teal-800 dark:text-teal-200"
+        aria-hidden
+      >
+        {icon.label}
+      </span>
+    );
+  }
+  return (
+    <i
+      className={`${icon.className} text-[13px] w-4 text-center shrink-0`}
+      style={{ color: icon.color }}
+      aria-hidden
+    />
+  );
+}
+
 function SkillChip({ skill, ariaHidden = false }) {
+  // Broken/missing CMS icon (e.g. Node.js, MongoDB, ServiceNow, Agentic AI
+  // links that 404) falls back to a colored FontAwesome brand/concept icon
+  // — same icon-only system already used on work case-study pages — instead
+  // of silently showing a broken image.
+  const [imgFailed, setImgFailed] = useState(false);
+  const useIcon = !skill.img || imgFailed;
+
   return (
     <span
       className="inline-flex items-center gap-1.5 shrink-0 rounded-md bg-teal-700/[0.07] dark:bg-teal-300/[0.08] px-1.5 py-1 sm:px-2"
       aria-hidden={ariaHidden || undefined}
     >
-      {skill.img ? (
-        isOptimizableImageSrc(skill.img) ? (
-          <Image
-            src={skill.img}
-            alt=""
-            width={16}
-            height={16}
-            sizes="16px"
-            className="h-4 w-4 shrink-0 object-contain"
-          />
-        ) : (
-          <img
-            src={skill.img}
-            alt=""
-            width={16}
-            height={16}
-            className="h-4 w-4 shrink-0 object-contain"
-            loading="lazy"
-            decoding="async"
-          />
-        )
+      {useIcon ? (
+        <SkillMark name={skill.name} />
+      ) : isOptimizableImageSrc(skill.img) ? (
+        <Image
+          src={skill.img}
+          alt=""
+          width={16}
+          height={16}
+          sizes="16px"
+          className="h-4 w-4 shrink-0 object-contain"
+          onError={() => setImgFailed(true)}
+        />
       ) : (
-        <span
-          className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded bg-teal-700/15 dark:bg-teal-300/15 text-[8px] font-semibold text-teal-800 dark:text-teal-200"
-          aria-hidden
-        >
-          {skill.name.slice(0, 1)}
-        </span>
+        <img
+          src={skill.img}
+          alt=""
+          width={16}
+          height={16}
+          className="h-4 w-4 shrink-0 object-contain"
+          loading="lazy"
+          decoding="async"
+          onError={() => setImgFailed(true)}
+        />
       )}
       <span className="whitespace-nowrap text-[0.75rem] sm:text-[0.8125rem] font-medium text-[#12151a] dark:text-[#e8eaed] leading-none">
         {skill.name}
