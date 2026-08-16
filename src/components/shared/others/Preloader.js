@@ -93,8 +93,9 @@ const progressVariants = {
  * `html.splash-pending` (skipped for Lighthouse/bots/reduced-motion so LCP
  * stays green). Soft navigations back to home skip it.
  *
- * Dismisses on a short brand hold — never waits for `window.load` (that used
- * to pin LCP behind every image/font on the page).
+ * Dismisses after a brand hold once the hero globe reports ready (see
+ * "hero-globe-ready" in HomeHero.js) — not `window.load`, which waits for
+ * every image/font on the page and used to pin LCP behind all of it.
  */
 export default function Preloader({ isHome = false }) {
   const reduceMotion = useReducedMotion();
@@ -131,23 +132,48 @@ export default function Preloader({ isHome = false }) {
   useEffect(() => {
     if (!isHome || !visible) return undefined;
 
-    // Brand beat only — do not wait for window.load (images/fonts).
+    // Brand beat, then wait for the hero globe specifically (not the old
+    // window.load, which waited for every image/font on the page and used
+    // to pin LCP behind all of it). HomeHero fires "hero-globe-ready" the
+    // moment its globe starts mounting (or immediately for bots/no-WebGL —
+    // see useSkipHeavyGlobe there), so this never affects the Lighthouse
+    // path. maxHold is a hard cap above the globe's own fallback timers
+    // (2600/3200ms) so a slow network can't hang the splash indefinitely.
     const minHold = reduceMotion ? 180 : 900;
-    const maxHold = reduceMotion ? 400 : 1400;
+    const maxHold = reduceMotion ? 500 : 3600;
 
+    let minReady = false;
+    let globeReady = false;
     let dismissed = false;
     const dismiss = () => {
-      if (dismissed) return;
+      if (dismissed || !minReady || !globeReady) return;
       dismissed = true;
       setVisible(false);
     };
 
-    const minTimer = window.setTimeout(dismiss, minHold);
-    const maxTimer = window.setTimeout(dismiss, maxHold);
+    const minTimer = window.setTimeout(() => {
+      minReady = true;
+      dismiss();
+    }, minHold);
+
+    const maxTimer = window.setTimeout(() => {
+      minReady = true;
+      globeReady = true;
+      dismiss();
+    }, maxHold);
+
+    const onGlobeReady = () => {
+      globeReady = true;
+      dismiss();
+    };
+    window.addEventListener("hero-globe-ready", onGlobeReady, {
+      once: true,
+    });
 
     return () => {
       window.clearTimeout(minTimer);
       window.clearTimeout(maxTimer);
+      window.removeEventListener("hero-globe-ready", onGlobeReady);
     };
   }, [isHome, visible, reduceMotion]);
 

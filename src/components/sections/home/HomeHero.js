@@ -140,6 +140,15 @@ export default function HomeHero() {
   const mountMobileGlobe = useDeferredMount(!isDesktop && !skipHeavyGlobe, {
     fallbackMs: 3200,
   });
+  // Lets the splash (Preloader) hold until the globe has actually started
+  // mounting instead of dismissing on a fixed timer regardless of it — see
+  // Preloader.js. Bots/no-WebGL fire this immediately (skipHeavyGlobe),
+  // so it never affects the Lighthouse-measured path.
+  useEffect(() => {
+    if (skipHeavyGlobe || mountDesktopGlobe || mountMobileGlobe) {
+      window.dispatchEvent(new Event("hero-globe-ready"));
+    }
+  }, [skipHeavyGlobe, mountDesktopGlobe, mountMobileGlobe]);
   const profile = getProfile() || {};
   // Same-origin optimized avatar — CDN still serves a multi‑MB PNG.
   const avatarSrc = "/images/profile/avatar-web.jpg";
