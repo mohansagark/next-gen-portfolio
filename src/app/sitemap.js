@@ -37,6 +37,7 @@ export default async function sitemap() {
 
   return [
     { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BLOG_BASE}/`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     ...work,
     ...capabilityRoutes,

@@ -14,6 +14,7 @@ export async function sendContactEmail(formData) {
       reason: formData.reason || formData.select || "General Inquiry",
       message: formData.message,
       token: formData.token || formData["cf-turnstile-response"] || "",
+      consent: formData.consent === true || formData.consent === "true",
     }),
   });
 

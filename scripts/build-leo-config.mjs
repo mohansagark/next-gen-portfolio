@@ -270,7 +270,7 @@ async function buildAppConfig() {
     },
     privacy: {
       consentText: "I agree to share my info so I can be followed up with.",
-      privacyPolicyUrl: null,
+      privacyPolicyUrl: "https://www.devmohan.in/privacy",
     },
     voice: { enabled: true, speakByDefault: false, ttsVoice: "hannah" },
   };
@@ -282,7 +282,11 @@ async function buildAppConfig() {
   );
 
   // Sveltia may store "" instead of null for optional URL fields.
-  if (widget.privacy.privacyPolicyUrl === "") widget.privacy.privacyPolicyUrl = null;
+  // Empty/null still falls back to the live privacy notice so Leo's consent
+  // gate does not ship without a policy link.
+  if (!widget.privacy.privacyPolicyUrl) {
+    widget.privacy.privacyPolicyUrl = widgetDefaults.privacy.privacyPolicyUrl;
+  }
 
   const instructions =
     typeof chatbot.instructions === "string" && chatbot.instructions.trim()

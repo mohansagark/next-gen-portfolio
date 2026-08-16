@@ -24,12 +24,19 @@ export function sanitizeContactPayload(body = {}) {
   const rawToken = String(body.token || body["cf-turnstile-response"] || "")
     .replace(/[\r\n\u0000]+/g, " ")
     .trim();
+  const consent =
+    body.consent === true ||
+    body.consent === "true" ||
+    body.consent === "on" ||
+    body.consent === 1 ||
+    body.consent === "1";
 
   const errors = [];
   if (name.length < 2) errors.push("name");
   if (!EMAIL_RE.test(email)) errors.push("email");
   if (message.length < 10) errors.push("message");
   if (!rawToken || rawToken.length > 2048) errors.push("token");
+  if (!consent) errors.push("consent");
 
   return {
     ok: errors.length === 0,
@@ -41,6 +48,7 @@ export function sanitizeContactPayload(body = {}) {
       phone,
       reason,
       message,
+      consent,
       token: rawToken.slice(0, 2048),
     },
   };
@@ -116,6 +124,7 @@ export async function sendContactViaResend(payload) {
       phone: payload.phone || "N/A",
       select: payload.reason,
       message: payload.message,
+      consent: payload.consent === true,
     }),
     text: [
       `New contact enquiry from ${payload.name}`,
@@ -123,6 +132,7 @@ export async function sendContactViaResend(payload) {
       `Company: ${payload.company || "N/A"}`,
       `Phone: ${payload.phone || "N/A"}`,
       `Reason: ${payload.reason}`,
+      `Privacy notice: ${payload.consent === true ? "accepted" : "not recorded"}`,
       "",
       payload.message,
     ].join("\n"),
