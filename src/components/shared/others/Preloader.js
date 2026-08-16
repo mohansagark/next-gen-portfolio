@@ -57,20 +57,6 @@ const logoVariants = {
   },
 };
 
-const ruleVariants = {
-  initial: { opacity: 0, scaleX: 0 },
-  animate: {
-    opacity: 1,
-    scaleX: 1,
-    transition: { duration: 0.65, ease: EASE_OUT },
-  },
-  exit: {
-    opacity: 0,
-    scaleX: 0.4,
-    transition: { duration: 0.28, ease: EASE_IN_OUT },
-  },
-};
-
 const progressVariants = {
   initial: { scaleX: 0, opacity: 0 },
   animate: {
@@ -279,12 +265,7 @@ export default function Preloader({ isHome = false }) {
             </motion.p>
 
             <motion.div
-              className="mx-auto mt-8 h-px w-16 origin-center bg-teal-300/70"
-              variants={ruleVariants}
-            />
-
-            <motion.div
-              className="mt-10 h-px w-28 origin-left rounded-full bg-white/10"
+              className="mt-9 h-px w-28 origin-left rounded-full bg-white/10"
               variants={progressVariants}
             >
               <span className="sr-only">Loading</span>
