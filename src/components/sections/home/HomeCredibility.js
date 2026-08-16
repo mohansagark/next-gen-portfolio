@@ -101,6 +101,18 @@ function SkillMark({ name }) {
       </span>
     );
   }
+  if (icon.type === "img") {
+    return (
+      <Image
+        src={icon.src}
+        alt=""
+        width={16}
+        height={16}
+        sizes="16px"
+        className="h-4 w-4 shrink-0 object-contain"
+      />
+    );
+  }
   return (
     <i
       className={`${icon.className} text-[13px] w-4 text-center shrink-0`}

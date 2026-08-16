@@ -67,6 +67,18 @@ function StackMark({ tech }) {
       </span>
     );
   }
+  if (icon.type === "img") {
+    return (
+      <Image
+        src={icon.src}
+        alt=""
+        width={16}
+        height={16}
+        sizes="16px"
+        className="h-[0.95em] w-[0.95em] object-contain"
+      />
+    );
+  }
   return (
     <i
       className={`${icon.className} text-[0.95em]`}

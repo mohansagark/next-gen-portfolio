@@ -6,16 +6,14 @@ const STACK = {
   "next.js": { type: "fa", className: "fa-brands fa-react", color: "#94A3B8" },
   nextjs: { type: "fa", className: "fa-brands fa-react", color: "#94A3B8" },
   javascript: { type: "fa", className: "fa-brands fa-js", color: "#F7DF1E" },
-  "node.js": { type: "fa", className: "fa-brands fa-node-js", color: "#68A063" },
-  node: { type: "fa", className: "fa-brands fa-node-js", color: "#68A063" },
+  "node.js": { type: "img", src: "/images/skills/nodejs.png" },
+  node: { type: "img", src: "/images/skills/nodejs.png" },
   python: { type: "fa", className: "fa-brands fa-python", color: "#3776AB" },
   aws: { type: "fa", className: "fa-brands fa-aws", color: "#FF9900" },
   "amazon bedrock": { type: "fa", className: "fa-brands fa-aws", color: "#FF9900" },
   bedrock: { type: "fa", className: "fa-brands fa-aws", color: "#FF9900" },
   docker: { type: "fa", className: "fa-brands fa-docker", color: "#2496ED" },
-  // No official FontAwesome brand glyph for MongoDB — the leaf is their own
-  // brand mark, commonly used as the icon-only stand-in.
-  mongodb: { type: "fa", className: "fa-solid fa-leaf", color: "#47A248" },
+  mongodb: { type: "img", src: "/images/skills/mongodb.png" },
   github: { type: "fa", className: "fa-brands fa-github", color: "#8B949E" },
   "github actions": { type: "fa", className: "fa-brands fa-github", color: "#2088FF" },
   graphql: { type: "fa", className: "fa-solid fa-diagram-project", color: "#E10098" },
@@ -29,7 +27,7 @@ const STACK = {
   "gen ai": { type: "fa", className: "fa-solid fa-wand-magic-sparkles", color: "#14B8A6" },
   agents: { type: "fa", className: "fa-solid fa-robot", color: "#F59E0B" },
   agentic: { type: "fa", className: "fa-solid fa-robot", color: "#F59E0B" },
-  servicenow: { type: "fa", className: "fa-solid fa-cloud", color: "#62D84E" },
+  servicenow: { type: "img", src: "/images/skills/servicenow.png" },
   "workflow automation": {
     type: "fa",
     className: "fa-solid fa-gears",
