@@ -263,7 +263,7 @@ function TechStackStrip({ skills }) {
                   Minimize
                 </button>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-6">
                 {groups.map(([group, groupSkills]) => (
                   <div key={group}>
                     <p className="mb-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#6b7280] dark:text-[#8b939e]">
