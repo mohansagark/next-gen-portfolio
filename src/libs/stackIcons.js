@@ -1,10 +1,11 @@
 /** Stack marks: Font Awesome icons or monogram badges, each with a brand color. */
 
 const STACK = {
-  react: { type: "fa", className: "fa-brands fa-react", color: "#61DAFB" },
-  "react.js": { type: "fa", className: "fa-brands fa-react", color: "#61DAFB" },
-  "next.js": { type: "fa", className: "fa-brands fa-react", color: "#94A3B8" },
-  nextjs: { type: "fa", className: "fa-brands fa-react", color: "#94A3B8" },
+  react: { type: "img", src: "/images/skills/react.png" },
+  "react.js": { type: "img", src: "/images/skills/react.png" },
+  "react native": { type: "img", src: "/images/skills/reactnative.png" },
+  "next.js": { type: "img", src: "/images/skills/nextjs.png" },
+  nextjs: { type: "img", src: "/images/skills/nextjs.png" },
   javascript: { type: "fa", className: "fa-brands fa-js", color: "#F7DF1E" },
   "node.js": { type: "img", src: "/images/skills/nodejs.png" },
   node: { type: "img", src: "/images/skills/nodejs.png" },
