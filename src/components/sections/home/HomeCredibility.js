@@ -157,10 +157,22 @@ function TechStackStrip({ skills }) {
     for (const s of skills || []) {
       if (!s?.name || seen.has(s.name)) continue;
       seen.add(s.name);
-      out.push({ name: s.name, img: s.img || "" });
+      out.push({ name: s.name, img: s.img || "", group: s.group || "Other" });
     }
     return out;
   }, [skills]);
+
+  // Preserve first-seen category order (matches CMS ordering) rather than
+  // alphabetizing — groups appear in the modal in the same order they were
+  // defined in admin.devmohan.in.
+  const groups = useMemo(() => {
+    const byGroup = new Map();
+    for (const item of items) {
+      if (!byGroup.has(item.group)) byGroup.set(item.group, []);
+      byGroup.get(item.group).push(item);
+    }
+    return [...byGroup.entries()];
+  }, [items]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -194,11 +206,11 @@ function TechStackStrip({ skills }) {
             aria-haspopup="dialog"
             aria-expanded={open}
             aria-label="Expand tech stack"
-            className="inline-flex items-center gap-1.5 rounded-full border border-teal-700/30 dark:border-teal-300/30 bg-teal-700/[0.06] dark:bg-teal-300/[0.08] px-2.5 py-1 text-[0.65rem] sm:text-xs font-medium text-teal-700 dark:text-teal-300 hover:bg-teal-700/[0.1] dark:hover:bg-teal-300/[0.12] transition-colors shrink-0"
+            title="Expand"
+            className="inline-flex items-center justify-center rounded-full border border-teal-700/30 dark:border-teal-300/30 bg-teal-700/[0.06] dark:bg-teal-300/[0.08] h-6 w-6 sm:h-7 sm:w-7 text-teal-700 dark:text-teal-300 hover:bg-teal-700/[0.1] dark:hover:bg-teal-300/[0.12] transition-colors shrink-0"
           >
-            Expand
             <i
-              className="fa-solid fa-up-right-and-down-left-from-center text-[9px]"
+              className="fa-solid fa-up-right-and-down-left-from-center text-[10px]"
               aria-hidden
             />
           </motion.button>
@@ -251,9 +263,18 @@ function TechStackStrip({ skills }) {
                   Minimize
                 </button>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {items.map((skill) => (
-                  <SkillChip key={skill.name} skill={skill} />
+              <div className="flex flex-col gap-4">
+                {groups.map(([group, groupSkills]) => (
+                  <div key={group}>
+                    <p className="mb-2 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[#6b7280] dark:text-[#8b939e]">
+                      {group}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {groupSkills.map((skill) => (
+                        <SkillChip key={skill.name} skill={skill} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </motion.div>
