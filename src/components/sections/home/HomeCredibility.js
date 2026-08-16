@@ -123,12 +123,17 @@ function SkillMark({ name }) {
 }
 
 function SkillChip({ skill, ariaHidden = false }) {
-  // Broken/missing CMS icon (e.g. Node.js, MongoDB, ServiceNow, Agentic AI
-  // links that 404) falls back to a colored FontAwesome brand/concept icon
-  // — same icon-only system already used on work case-study pages — instead
-  // of silently showing a broken image.
+  // stackIcons.js "img" entries are deliberately-sourced official favicons
+  // (Node.js, MongoDB, ServiceNow, React, Next.js, React Native, ...) and
+  // always win over whatever the CMS has, even if the CMS image loads fine
+  // -- that's the whole point of curating them. "fa"/"badge" entries are
+  // just a fallback for when the CMS icon is broken/missing, not an
+  // override, since those are generic concept glyphs rather than real
+  // brand marks.
   const [imgFailed, setImgFailed] = useState(false);
-  const useIcon = !skill.img || imgFailed;
+  const stackIcon = getStackIcon(skill.name);
+  const forceStackIcon = stackIcon.type === "img";
+  const useIcon = forceStackIcon || !skill.img || imgFailed;
 
   return (
     <span
