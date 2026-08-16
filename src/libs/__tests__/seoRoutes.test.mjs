@@ -12,6 +12,7 @@ test("sitemap includes work and capabilities detail routes", () => {
   assert.match(src, /\/capabilities\/\$\{/);
   assert.match(src, /content\.capabilities/);
   assert.match(src, /content\.portfolio/);
+  assert.match(src, /\/privacy/);
 });
 
 test("robots drops deleted demo routes including globe-samples", () => {
@@ -64,6 +65,31 @@ test("work and capabilities pages set their own canonical URLs", () => {
   assert.match(work, /\/work\/\$\{/);
   assert.match(caps, /alternates:\s*\{\s*canonical:/);
   assert.match(caps, /\/capabilities\/\$\{/);
+});
+
+test("privacy page is canonical, linked from the footer, and names Leo storage", () => {
+  const page = readFileSync(join(root, "src/app/privacy/page.js"), "utf8");
+  const notice = readFileSync(
+    join(root, "src/components/layout/main/PrivacyNotice.js"),
+    "utf8"
+  );
+  const footer = readFileSync(
+    join(root, "src/components/layout/footer/Footer.js"),
+    "utf8"
+  );
+  const leo = readFileSync(
+    join(root, "src/components/shared/others/LeoLoader.js"),
+    "utf8"
+  );
+  assert.match(page, /\/privacy/);
+  assert.match(page, /alternates:\s*\{\s*canonical:/);
+  assert.match(notice, /voicebot\.devmohan\.in/);
+  assert.match(notice, /Durable Object/);
+  assert.match(notice, /D1/);
+  assert.match(notice, /come into force/);
+  assert.match(notice, /On this page/);
+  assert.match(footer, /homeLink\("\/privacy"\)/);
+  assert.match(leo, /https:\/\/www\.devmohan\.in\/privacy/);
 });
 
 test("Turnstile test secret is gated out of production", () => {

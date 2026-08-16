@@ -11,10 +11,12 @@ test("sanitizeContactPayload accepts a valid enquiry", () => {
     reason: "Building an AI product",
     message: "We need help shipping a production copilot.",
     token: "turnstile-token-abc",
+    consent: true,
   });
 
   assert.equal(result.ok, true);
   assert.deepEqual(result.errors, []);
+  assert.equal(result.data.consent, true);
   assert.equal(result.data.email, "ada@example.com");
   assert.equal(result.data.reason, "Building an AI product");
 });
@@ -40,6 +42,7 @@ test("sanitizeContactPayload trims and caps lengths", () => {
     email: "  USER@Example.COM ",
     message: "x".repeat(6000),
     token: "tok",
+    consent: true,
   });
 
   assert.equal(result.data.name.length, 120);
@@ -54,6 +57,7 @@ test("sanitizeContactPayload accepts user_email and select aliases", () => {
     select: "General Inquiry",
     message: "Need a production-grade assistant for ops.",
     "cf-turnstile-response": "cf-token",
+    consent: true,
   });
   assert.equal(result.ok, true);
   assert.equal(result.data.email, "grace@example.com");
@@ -80,6 +84,7 @@ test("sanitizeContactPayload defaults reason and caps optional fields", () => {
     phone: "P".repeat(80),
     message: "Long enough message body here.",
     token: "tok",
+    consent: true,
   });
   assert.equal(result.ok, true);
   assert.equal(result.data.reason, "General Inquiry");
@@ -94,6 +99,18 @@ test("sanitizeContactPayload rejects empty or non-object body", () => {
   assert.ok(empty.errors.includes("email"));
   assert.ok(empty.errors.includes("message"));
   assert.ok(empty.errors.includes("token"));
+  assert.ok(empty.errors.includes("consent"));
+});
+
+test("sanitizeContactPayload rejects missing consent", () => {
+  const result = sanitizeContactPayload({
+    name: "Ada Lovelace",
+    email: "ada@example.com",
+    message: "We need help shipping a production copilot.",
+    token: "turnstile-token-abc",
+  });
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.includes("consent"));
 });
 
 test("sanitizeContactPayload strips CR/LF from subject-bound fields", () => {
@@ -103,6 +120,7 @@ test("sanitizeContactPayload strips CR/LF from subject-bound fields", () => {
     reason: "Project\nX-Injected: yes",
     message: "We need help shipping a production copilot.",
     token: "turnstile-token-abc",
+    consent: true,
   });
   assert.equal(result.ok, true);
   assert.equal(result.data.name.includes("\n"), false);

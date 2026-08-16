@@ -44,7 +44,7 @@ const FALLBACK_WIDGET = {
   },
   privacy: {
     consentText: "I agree to share my info so I can be followed up with.",
-    privacyPolicyUrl: null,
+    privacyPolicyUrl: "https://www.devmohan.in/privacy",
   },
   // Chat-first: TTS stays off until the visitor unmutes the sound control.
   voice: { enabled: true, speakByDefault: false, ttsVoice: "hannah" },
@@ -221,6 +221,7 @@ export default function LeoLoader({ workerUrl }) {
 
       // Section-wise merge: a partial config fills gaps from FALLBACK_WIDGET rather than
       // handing the widget `undefined` and inheriting its generic strings.
+      const authoredPrivacy = widget.privacy ?? {};
       window.AiVoiceBotConfig = {
         workerUrl,
         branding: {
@@ -230,7 +231,13 @@ export default function LeoLoader({ workerUrl }) {
           themeColorSecondary: accents.secondary,
         },
         behavior: { ...FALLBACK_WIDGET.behavior, ...(widget.behavior ?? {}) },
-        privacy: { ...FALLBACK_WIDGET.privacy, ...(widget.privacy ?? {}) },
+        privacy: {
+          ...FALLBACK_WIDGET.privacy,
+          ...authoredPrivacy,
+          privacyPolicyUrl:
+            authoredPrivacy.privacyPolicyUrl ||
+            FALLBACK_WIDGET.privacy.privacyPolicyUrl,
+        },
         voice: { ...FALLBACK_WIDGET.voice, ...(widget.voice ?? {}) },
       };
 

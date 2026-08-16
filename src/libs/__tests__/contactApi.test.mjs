@@ -24,6 +24,7 @@ const validBody = {
   reason: "Building an AI product",
   message: "We need help shipping a production copilot.",
   token: "turnstile-token-abc",
+  consent: true,
 };
 
 test("createRateLimiter returns false after RATE_MAX requests from same IP", () => {

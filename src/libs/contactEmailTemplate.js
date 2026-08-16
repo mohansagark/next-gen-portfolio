@@ -52,6 +52,10 @@ export function getContactEmailTemplate(formData) {
           <td style="padding: 10px 0;">${reason}</td>
         </tr>
         <tr>
+          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Privacy</td>
+          <td style="padding: 10px 0;">${formData.consent === true ? "Notice accepted" : "Not recorded"}</td>
+        </tr>
+        <tr>
           <td style="font-weight: 600; padding: 10px 0; vertical-align: top; color: ${primary};">Message</td>
           <td style="padding: 10px 0; white-space: pre-line; color: ${textGray}; line-height: 1.5;">${message}</td>
         </tr>

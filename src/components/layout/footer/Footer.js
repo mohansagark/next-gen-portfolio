@@ -77,11 +77,18 @@ const Footer = () => {
                 footerType === 2 || footerType === 3
                   ? "text-primary-color"
                   : "text-gray-color"
-              } text-xs sm:text-sm md:text-base mt-5 text-center px-4 max-w-full whitespace-nowrap`}
+              } text-xs sm:text-sm md:text-base mt-5 text-center px-4 max-w-full`}
             >
               © {new Date().getFullYear()} Mohan Sagar
               <span className="mx-2 opacity-40">·</span>
               AI Engineer · Frontend Architect
+              <span className="mx-2 opacity-40">·</span>
+              <Link
+                href={homeLink("/privacy")}
+                className="underline-offset-4 hover:underline"
+              >
+                Privacy
+              </Link>
             </p>
           </div>
         </div>

@@ -38,4 +38,6 @@ test("contact form stack is wired (UI + API + Turnstile + Resend)", () => {
   assert.match(home, /TURNSTILE_EXECUTE_TIMEOUT_MS|Security check timed out/);
   assert.match(home, /Building an AI product/);
   assert.match(home, /Send enquiry/);
+  assert.match(home, /contact-consent/);
+  assert.match(home, /\/privacy/);
 });

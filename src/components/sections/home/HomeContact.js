@@ -73,6 +73,7 @@ export default function HomeContact() {
   const [status, setStatus] = useState(null); // success | error | null
   const [errorMessage, setErrorMessage] = useState("");
   const [challengePending, setChallengePending] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -252,15 +253,22 @@ export default function HomeContact() {
     e.preventDefault();
     if (sending) return;
 
+    if (!consent) {
+      setStatus("error");
+      setErrorMessage("Please accept the privacy notice before sending.");
+      return;
+    }
+
     setSending(true);
     setStatus(null);
     setErrorMessage("");
 
     try {
       const token = await obtainTurnstileToken();
-      const result = await sendContactEmail({ ...formData, token });
+      const result = await sendContactEmail({ ...formData, token, consent: true });
       if (result.ok) {
         setStatus("success");
+        setConsent(false);
         setFormData({
           name: "",
           email: "",
@@ -457,6 +465,40 @@ export default function HomeContact() {
                   className="cf-turnstile sm:col-span-2 empty:hidden [&_iframe]:!max-w-full"
                   aria-hidden={!challengePending}
                 />
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="contact-consent"
+                    className="flex items-start gap-3 text-sm text-[#374151] dark:text-[#9aa3af] leading-relaxed cursor-pointer"
+                  >
+                    <input
+                      id="contact-consent"
+                      name="consent"
+                      type="checkbox"
+                      required
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      className="peer sr-only"
+                    />
+                    <span
+                      aria-hidden
+                      className="mt-0.5 inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border border-[#9aa3af] dark:border-[#6b7280] transition-colors peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-teal-700 dark:peer-focus-visible:outline-[#5eead4] peer-checked:border-teal-700 dark:peer-checked:border-[#5eead4] peer-checked:[&>span]:bg-teal-700 dark:peer-checked:[&>span]:bg-[#5eead4]"
+                    >
+                      <span className="h-2 w-2 rounded-full bg-transparent" />
+                    </span>
+                    <span>
+                      I agree that Mohan may use this information to respond to
+                      my enquiry, as described in the{" "}
+                      <a
+                        href="/privacy"
+                        className="text-teal-700 dark:text-[#5eead4] underline-offset-4 hover:underline"
+                      >
+                        privacy notice
+                      </a>
+                      .
+                    </span>
+                  </label>
+                </div>
 
                 <div className="sm:col-span-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end sm:gap-4">
                   {challengePending ? (
