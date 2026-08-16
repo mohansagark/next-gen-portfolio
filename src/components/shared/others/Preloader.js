@@ -265,7 +265,7 @@ export default function Preloader({ isHome = false }) {
             </motion.p>
 
             <motion.div
-              className="mt-9 h-px w-28 origin-left rounded-full bg-white/10"
+              className="mt-9 h-1 w-28 origin-left rounded-full bg-teal-300/70"
               variants={progressVariants}
             >
               <span className="sr-only">Loading</span>
