@@ -7,8 +7,8 @@ const BLOG_BASE = process.env.NEXT_PUBLIC_BLOG_URL || "https://blog.devmohan.in"
 export default async function sitemap() {
   const blogs = getBlogs() || [];
   const content = await fetchAllContent();
-  const caseStudies = content.caseStudies || [];
-  const capabilities = content.capabilities?.items || [];
+  const workItems = content.portfolio || [];
+  const capabilities = (content.capabilities?.items || []).filter((c) => c.page);
 
   const posts = blogs.map((b) => ({
     url: `${BLOG_BASE}/${b.id}`,
@@ -17,7 +17,7 @@ export default async function sitemap() {
     priority: 0.7,
   }));
 
-  const work = caseStudies
+  const work = workItems
     .filter((c) => c.slug)
     .map((c) => ({
       url: `${BASE}/work/${c.slug}`,

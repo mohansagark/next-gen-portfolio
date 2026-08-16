@@ -109,7 +109,7 @@ export async function fetchAllContent() {
     bundle.portfolio = mapPortfolio(canon.projects, canon.profile);
     bundle.caseStudies = (canon.projects.items || [])
       .filter((p) => p.featured)
-      .sort((a, b) => (a.priority || 99) - (b.priority || 99));
+      .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
     bundle.homeCaseStudies = bundle.caseStudies.filter(
       (p) => p.showOnHomepage !== false
     );

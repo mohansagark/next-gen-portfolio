@@ -17,8 +17,8 @@ function findCapability(items, slug) {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const item = findCapability(await loadCapabilities(), slug);
-  if (!item) notFound();
-  const page = item.page || {};
+  if (!item?.page) notFound();
+  const page = item.page;
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
   return {
     title: `${item.title} — Mohan Sagar`,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 export async function generateStaticParams() {
   const items = await loadCapabilities();
   return (items || [])
-    .filter((i) => i.slug || i.id)
+    .filter((i) => i.page && (i.slug || i.id))
     .map((i) => ({ slug: i.slug || i.id }));
 }
 

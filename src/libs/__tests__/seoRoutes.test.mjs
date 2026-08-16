@@ -11,7 +11,7 @@ test("sitemap includes work and capabilities detail routes", () => {
   assert.match(src, /\/work\/\$\{/);
   assert.match(src, /\/capabilities\/\$\{/);
   assert.match(src, /content\.capabilities/);
-  assert.match(src, /caseStudies/);
+  assert.match(src, /content\.portfolio/);
 });
 
 test("robots drops deleted demo routes including globe-samples", () => {

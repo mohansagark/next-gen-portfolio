@@ -62,7 +62,7 @@ jobs:
       - name: Check total client JS size
         run: |
           limit_kb=8192
-          size_kb=$(find .next/static/chunks -maxdepth 1 -name '*.js' ! -name '*.map' -exec cat {} + | wc -c | awk '{print int($1/1024)}')
+          size_kb=$(find .next/static -name '*.js' ! -name '*.map' -exec cat {} + | wc -c | awk '{print int($1/1024)}')
           echo "Total chunk size: ${size_kb}KB (limit ${limit_kb}KB)"
           if [ "$size_kb" -gt "$limit_kb" ]; then
             echo "::error::Client JS grew to ${size_kb}KB, over the ${limit_kb}KB budget"

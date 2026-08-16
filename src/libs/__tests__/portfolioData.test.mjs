@@ -97,7 +97,8 @@ test("fetchAllContent maps canon and falls back when a remote fetch fails", asyn
 
   try {
     const bundle = await fetchAllContent();
-    // skills failed remotely; bundled public/fakedata/skills.json may still apply
+    // skills failed remotely; bundled public/fakedata/skills.json must apply
+    assert.ok(Array.isArray(bundle.skills) && bundle.skills.length > 0, "skills bundled fallback");
     assert.ok(Array.isArray(bundle.portfolio), "portfolio mapped");
     assert.ok(Array.isArray(bundle.resume) && bundle.resume.length === 3);
     assert.deepEqual(bundle.resume[2].resumeItems, [

@@ -59,6 +59,20 @@ export const slugify = (s) =>
   (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export function mapSkills(skills) {
+  // Bundled public/fakedata/skills.json is still a flat array.
+  if (Array.isArray(skills)) {
+    return skills
+      .filter((s) => s?.name)
+      .map((s) => ({
+        name: s.name,
+        img: s.img || skillIcon(s.name, s.icon),
+        perchant:
+          s.perchant ||
+          (s.proficiency != null ? `${s.proficiency}%` : ""),
+        group: s.group || "",
+      }));
+  }
+
   // Categories may list the same skill more than once (e.g. TypeScript under
   // Frontend and Languages). The flat list is keyed by name in the UI, so keep
   // the first occurrence only.
@@ -90,8 +104,8 @@ export function mapCapabilities(capabilities) {
       slug: item.slug || item.id,
       title: item.title,
       body: item.body,
-      image: item.image || "",
-      imageLight: item.imageLight || "",
+      image: img(item.image),
+      imageLight: img(item.imageLight),
       evidence: item.evidence || [],
       page: item.page || null,
     })),
@@ -224,9 +238,9 @@ export function mapPortfolio(projects, profile) {
       homeName: p.homeName || "",
       homeTagline: p.homeTagline || "",
       homeMetrics: p.homeMetrics || [],
-      coverImage: p.coverImage || p.image || "",
-      architectureImage: p.architectureImage || "",
-      architectureImageLight: p.architectureImageLight || "",
+      coverImage: img(p.coverImage || p.image),
+      architectureImage: img(p.architectureImage),
+      architectureImageLight: img(p.architectureImageLight),
       architectureCaption: p.architectureCaption || "",
       ...(employee ? { employee } : {}),
       statusItem: [

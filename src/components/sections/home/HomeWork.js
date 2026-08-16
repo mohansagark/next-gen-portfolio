@@ -7,18 +7,18 @@ import ScrollReveal from "@/components/sections/home/ScrollReveal";
 import CaseStudyVisual from "@/components/sections/home/CaseStudyVisual";
 
 function homeItems() {
+  const portfolio = getPortfolio() || [];
+  const mapped = portfolio
+    .filter((p) => p.featured && p.showOnHomepage !== false)
+    .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
+  if (mapped.length) return mapped.slice(0, 6);
+
+  // Fallback when mapped portfolio is empty (bundled/offline).
   const homeCaseStudies = getContent("homeCaseStudies");
   const caseStudies = getContent("caseStudies");
-  const portfolio = getPortfolio() || [];
-  const raw =
-    homeCaseStudies?.length
-      ? homeCaseStudies
-      : caseStudies?.length
-        ? caseStudies.filter((p) => p.showOnHomepage !== false)
-        : portfolio
-            .filter((p) => p.featured && p.showOnHomepage !== false)
-            .sort((a, b) => (a.priority || 99) - (b.priority || 99));
-
+  const raw = homeCaseStudies?.length
+    ? homeCaseStudies
+    : (caseStudies || []).filter((p) => p.showOnHomepage !== false);
   return raw.slice(0, 6);
 }
 
@@ -84,7 +84,7 @@ export default function HomeWork() {
                   >
                     <CaseStudyVisual
                       slug={item.slug}
-                      src={item.coverImage || item.image || undefined}
+                      src={item.coverImage || item.image || item.img || undefined}
                       alt=""
                       featured
                     />

@@ -21,9 +21,9 @@ const nextConfig = {
 
   trailingSlash: true,
 
-  // Lighthouse "Missing source maps for large first-party JavaScript" —
-  // safe to ship; only affects an opt-in debugging surface.
-  productionBrowserSourceMaps: true,
+  // Source maps on Vercel preview only — do not ship first-party source
+  // to every production visitor.
+  productionBrowserSourceMaps: process.env.VERCEL_ENV === "preview",
 
   // Framing/origin-isolation headers only — no script-src/style-src CSP here.
   // This app has an inline boot script (theme init, layout.js) plus

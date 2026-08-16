@@ -177,6 +177,7 @@ test("mapPortfolio maps sections, slugify filter, and profile employee", () => {
           liveUrl: "",
           featured: true,
           image: "/images/projects/stock-bot.png",
+          coverImage: "/images/work/ivygpt-cover.png",
         },
       ],
     },
@@ -196,6 +197,7 @@ test("mapPortfolio maps sections, slugify filter, and profile employee", () => {
   assert.equal(p.dataFilter, "ai-automation");
   assert.deepEqual(p.tags, ["Python", "OpenAI"]);
   assert.equal(p.img, `${RAW_BASE}/images/projects/stock-bot.png`);
+  assert.equal(p.coverImage, `${RAW_BASE}/images/work/ivygpt-cover.png`);
   assert.equal(p.employee.name, "Mohan Sagar Killamsetty");
   assert.equal(p.statusItem[0].desc, "AI/Automation");
 });

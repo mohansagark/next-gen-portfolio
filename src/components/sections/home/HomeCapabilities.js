@@ -27,14 +27,21 @@ export default function HomeCapabilities() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
           {capabilities.items.map((item, i) => {
-            const href = `/capabilities/${item.slug || item.id}`;
+            const href = item.page
+              ? `/capabilities/${item.slug || item.id}`
+              : null;
+            const cardClass =
+              "group block h-full rounded-[1.25rem] border border-black/5 dark:border-white/10 bg-cream-light-color/80 dark:bg-white/[0.025] p-1 transition-[transform,border-color,box-shadow,background-color] duration-300 ease-out will-change-transform" +
+              (href
+                ? " hover:-translate-y-1.5 hover:border-teal-700/35 dark:hover:border-teal-300/35 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)] dark:hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,0.75)] active:translate-y-0 active:scale-[0.985] active:duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/40 dark:focus-visible:ring-teal-300/40"
+                : "");
+            const Card = href ? Link : "div";
+            const cardProps = href
+              ? { href, "aria-label": `${item.title} — open capability`, className: cardClass }
+              : { className: cardClass };
             return (
               <ScrollReveal key={item.id} delay={i * 70}>
-                <Link
-                  href={href}
-                  aria-label={`${item.title} — open capability`}
-                  className="group block h-full rounded-[1.25rem] border border-black/5 dark:border-white/10 bg-cream-light-color/80 dark:bg-white/[0.025] p-1 transition-[transform,border-color,box-shadow,background-color] duration-300 ease-out will-change-transform hover:-translate-y-1.5 hover:border-teal-700/35 dark:hover:border-teal-300/35 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)] dark:hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,0.75)] active:translate-y-0 active:scale-[0.985] active:duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/40 dark:focus-visible:ring-teal-300/40"
-                >
+                <Card {...cardProps}>
                   <article className="h-full rounded-[calc(1.25rem-0.15rem)] bg-white dark:bg-[#0f1217] overflow-hidden flex flex-col text-center transition-colors duration-300 group-hover:bg-[#fafbfc] dark:group-hover:bg-[#12161c] group-active:bg-white dark:group-active:bg-[#0f1217]">
                     {item.image || item.imageLight ? (
                       <div className="relative aspect-[4/3] w-full overflow-hidden bg-transparent">
@@ -71,7 +78,7 @@ export default function HomeCapabilities() {
                       </p>
                     </div>
                   </article>
-                </Link>
+                </Card>
               </ScrollReveal>
             );
           })}

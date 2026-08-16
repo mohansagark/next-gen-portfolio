@@ -98,7 +98,7 @@ const Header = ({ isSticky }) => {
                 )}
               </ul>
             </div>
-            <Navbar isSticky={isSticky} />
+            <Navbar />
           </div>
         </div>
       </div>

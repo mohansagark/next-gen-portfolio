@@ -13,10 +13,15 @@ const COVER_BY_SLUG = {
 };
 
 function resolveCover(slug, src) {
-  if (slug && COVER_BY_SLUG[slug]) return COVER_BY_SLUG[slug];
-  if (!src) return "";
-  // Content may still point at multi‑MB PNGs — prefer compressed JPEG siblings.
-  return String(src).replace(/-cover\.png$/i, "-cover.jpg");
+  if (src) {
+    // Prefer CMS/mapped src. Rewrite same-origin PNG covers to the
+    // compressed JPEG sibling when that is what public/ ships.
+    if (src.startsWith("/") && !src.startsWith("//")) {
+      return String(src).replace(/-cover\.png$/i, "-cover.jpg");
+    }
+    return src;
+  }
+  return (slug && COVER_BY_SLUG[slug]) || "";
 }
 
 export default function CaseStudyVisual({ slug, src, alt = "", featured = false }) {

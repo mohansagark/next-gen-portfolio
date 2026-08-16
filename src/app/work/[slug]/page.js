@@ -8,9 +8,11 @@ import { getStackIcon } from "@/libs/stackIcons";
 import { btnMetallicClass } from "@/components/shared/buttons/ButtonPrimary";
 import { isOptimizableImageSrc } from "@/libs/optimizableImage";
 
-async function loadCaseStudies() {
+async function loadWorkItems() {
   const content = await fetchAllContent();
-  return content.caseStudies || content.portfolio || [];
+  // Full mapped portfolio — not featured-only caseStudies, or legacy
+  // /portfolio/<id> 308s into a /work/<slug> 404.
+  return content.portfolio || [];
 }
 
 function findCase(items, slug) {
@@ -19,7 +21,7 @@ function findCase(items, slug) {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const item = findCase(await loadCaseStudies(), slug);
+  const item = findCase(await loadWorkItems(), slug);
   if (!item) notFound();
   const name = item.homeName || item.title;
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://devmohan.in";
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  const items = await loadCaseStudies();
+  const items = await loadWorkItems();
   return (items || [])
     .filter((i) => i.slug)
     .map(({ slug }) => ({ slug }));
@@ -122,7 +124,7 @@ function StoryBeat({ index, label, body, emphasize = false }) {
 
 export default async function WorkCaseStudyPage({ params }) {
   const { slug } = await params;
-  const item = findCase(await loadCaseStudies(), slug);
+  const item = findCase(await loadWorkItems(), slug);
   if (!item) notFound();
 
   const name = item.homeName || item.title;
@@ -138,7 +140,7 @@ export default async function WorkCaseStudyPage({ params }) {
   const companyDomain = item.companyDomain || "";
   const github = item.githubUrl;
   const live = item.liveUrl || item.url;
-  const coverSrc = item.coverImage || item.image || undefined;
+  const coverSrc = item.coverImage || item.image || item.img || undefined;
   const architectureSrc = item.architectureImage || "";
   const architectureSrcLight =
     item.architectureImageLight || item.architectureImage || "";
