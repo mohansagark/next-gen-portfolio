@@ -7,7 +7,6 @@ import { fetchAllContent } from "@/libs/portfolioData";
 import { seedContent } from "@/libs/contentStore";
 import JsonLd from "@/components/seo/JsonLd";
 
-import "./css/backToTop.css";
 import "./globals.css";
 import { Sora, Fraunces } from "next/font/google";
 import DeferredIconStyles from "@/components/shared/others/DeferredIconStyles";
