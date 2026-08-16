@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import CaseStudyVisual from "@/components/sections/home/CaseStudyVisual";
-import TechStackModal from "@/components/shared/others/TechStackModal";
+import { getStackIcon } from "@/libs/stackIcons";
 import { btnMetallicClass } from "@/components/shared/buttons/ButtonPrimary";
 import { isOptimizableImageSrc } from "@/libs/optimizableImage";
 
@@ -51,6 +51,29 @@ function metricsFrom(item) {
       .filter(Boolean);
   }
   return [];
+}
+
+function StackMark({ tech }) {
+  const icon = getStackIcon(tech);
+  if (icon.type === "badge") {
+    return (
+      <span
+        className="inline-flex h-4 min-w-4 items-center justify-center rounded-[3px] px-0.5 text-[0.55rem] font-bold leading-none text-white"
+        style={{ backgroundColor: icon.color || "#3178C6" }}
+        title={icon.title}
+        aria-hidden
+      >
+        {icon.label}
+      </span>
+    );
+  }
+  return (
+    <i
+      className={`${icon.className} text-[0.95em]`}
+      style={{ color: icon.color || "#14B8A6" }}
+      aria-hidden
+    />
+  );
 }
 
 function StoryBeat({ index, label, body, emphasize = false }) {
@@ -171,7 +194,24 @@ export default async function WorkCaseStudyPage({ params }) {
               </div>
             ) : null}
 
-            <TechStackModal stack={stack} />
+            {stack.length ? (
+              <div className="mb-6">
+                <p className="text-[0.7rem] uppercase tracking-[0.14em] text-teal-700 dark:text-teal-300/80 mb-2.5 font-medium">
+                  Stack
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="inline-flex items-center gap-2 rounded-full border border-black/8 dark:border-white/10 bg-white dark:bg-[#0f1217] px-3 py-1.5 text-xs sm:text-sm text-primary-color-light/90 dark:text-white/85"
+                    >
+                      <StackMark tech={tech} />
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
 
             {(live || github) && (
               <div className="flex flex-wrap gap-3">

@@ -5,8 +5,8 @@ import getProfile from "@/libs/getProfile";
 import getSkills from "@/libs/getSkills";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
 import { isOptimizableImageSrc } from "@/libs/optimizableImage";
-import { useReducedMotion } from "motion/react";
-import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 function SkillsPackedTicker({ skills }) {
   const reduceMotion = useReducedMotion();
@@ -130,6 +130,140 @@ function SkillChip({ skill, ariaHidden = false }) {
   );
 }
 
+/**
+ * "Tech Stack" label + ticker, with an expand button that morphs the whole
+ * strip into a modal showing every skill in a static, readable grid (the
+ * ticker is nice to glance at but hard to actually scan). The button and
+ * modal panel share a Framer Motion layoutId — Motion's documented behavior
+ * for two elements claiming the same layoutId is "the newest mount wins,
+ * the rest fade out," which drives the morph (transform/opacity, GPU-
+ * composited) without any manual FLIP bookkeeping.
+ *
+ * The FLIP measurement only runs on click, never on mount/paint, so it
+ * can't touch LCP/TBT/CLS. The full skill list is already present in the
+ * DOM at all times (duplicated for the ticker's seamless loop), so search
+ * engines see every skill regardless of whether the modal's ever opened.
+ */
+function TechStackStrip({ skills }) {
+  const [open, setOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const panelId = useId();
+  const triggerRef = useRef(null);
+  const closeRef = useRef(null);
+
+  const items = useMemo(() => {
+    const seen = new Set();
+    const out = [];
+    for (const s of skills || []) {
+      if (!s?.name || seen.has(s.name)) continue;
+      seen.add(s.name);
+      out.push({ name: s.name, img: s.img || "" });
+    }
+    return out;
+  }, [skills]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    closeRef.current?.focus();
+    const trigger = triggerRef.current;
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      trigger?.focus();
+    };
+  }, [open]);
+
+  return (
+    <div className="flex flex-col justify-center gap-2 min-w-0 h-full px-5 py-4 sm:px-6 sm:py-5 sm:col-span-2 border-t sm:border-t-0 border-[#e5e7eb] dark:border-[#262b33] overflow-x-hidden">
+      <div className="flex items-center justify-between gap-2">
+        <p className="shrink-0 text-[0.65rem] sm:text-[0.7rem] font-semibold tracking-[0.14em] uppercase text-[#6b7280] dark:text-[#8b939e]">
+          Tech Stack
+        </p>
+        {items.length ? (
+          <motion.button
+            ref={triggerRef}
+            type="button"
+            layoutId={`tech-stack-panel-${panelId}`}
+            onClick={() => setOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            aria-label="Expand tech stack"
+            className="inline-flex items-center gap-1.5 rounded-full border border-teal-700/30 dark:border-teal-300/30 bg-teal-700/[0.06] dark:bg-teal-300/[0.08] px-2.5 py-1 text-[0.65rem] sm:text-xs font-medium text-teal-700 dark:text-teal-300 hover:bg-teal-700/[0.1] dark:hover:bg-teal-300/[0.12] transition-colors shrink-0"
+          >
+            Expand
+            <i
+              className="fa-solid fa-up-right-and-down-left-from-center text-[9px]"
+              aria-hidden
+            />
+          </motion.button>
+        ) : null}
+      </div>
+
+      <SkillsPackedTicker skills={skills} />
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+              aria-hidden
+            />
+            <motion.div
+              layoutId={`tech-stack-panel-${panelId}`}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Full tech stack"
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { type: "spring", bounce: 0.15, duration: 0.5 }
+              }
+              className="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl border border-black/8 dark:border-white/10 bg-white dark:bg-[#12151a] p-6 shadow-2xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700 dark:text-teal-300/80">
+                  Full stack ({items.length})
+                </p>
+                <button
+                  ref={closeRef}
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Minimize"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-black/8 dark:border-white/10 px-3 py-1.5 text-xs font-medium text-primary-color-light/90 dark:text-white/85 hover:bg-black/[0.03] dark:hover:bg-white/[0.05] transition-colors"
+                >
+                  <i
+                    className="fa-solid fa-down-left-and-up-right-to-center text-[10px]"
+                    aria-hidden
+                  />
+                  Minimize
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {items.map((skill) => (
+                  <SkillChip key={skill.name} skill={skill} />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function HomeCredibility() {
   const profile = getProfile() || {};
   const skills = getSkills() || [];
@@ -205,12 +339,7 @@ export default function HomeCredibility() {
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-center gap-2 min-w-0 h-full px-5 py-4 sm:px-6 sm:py-5 sm:col-span-2 border-t sm:border-t-0 border-[#e5e7eb] dark:border-[#262b33] overflow-x-hidden">
-                  <p className="shrink-0 text-[0.65rem] sm:text-[0.7rem] font-semibold tracking-[0.14em] uppercase text-[#6b7280] dark:text-[#8b939e]">
-                    Tech Stack
-                  </p>
-                  <SkillsPackedTicker skills={skills} />
-                </div>
+                <TechStackStrip skills={skills} />
               </div>
             </div>
           </div>
