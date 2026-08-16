@@ -1,5 +1,8 @@
 /** Realistic case-study covers — product photography / UI stills, not chart SVGs. */
 
+import Image from "next/image";
+import { isOptimizableImageSrc } from "@/libs/optimizableImage";
+
 const COVER_BY_SLUG = {
   ivygpt: "/images/work/ivygpt-cover.jpg",
   "servicenow-agentic": "/images/work/servicenow-agentic-cover.jpg",
@@ -36,15 +39,25 @@ export default function CaseStudyVisual({ slug, src, alt = "", featured = false 
         featured ? "min-h-[240px] md:min-h-full" : ""
       }`}
     >
-      <img
-        src={cover}
-        alt={alt}
-        width={640}
-        height={400}
-        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.03]"
-        loading="lazy"
-        decoding="async"
-      />
+      {isOptimizableImageSrc(cover) ? (
+        <Image
+          src={cover}
+          alt={alt}
+          fill
+          sizes="(min-width: 1024px) 33vw, 100vw"
+          className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.03]"
+        />
+      ) : (
+        <img
+          src={cover}
+          alt={alt}
+          width={640}
+          height={400}
+          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.03]"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
     </div>
   );
 }

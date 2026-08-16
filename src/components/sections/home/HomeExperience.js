@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { getContent } from "@/libs/contentStore";
 import { fmtMonth, fmtRange } from "@/libs/contentMapping";
 import { cn } from "@/lib/utils";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
+import { isOptimizableImageSrc } from "@/libs/optimizableImage";
 
 const EASE = [0.32, 0.72, 0, 1];
 const PANEL_TRANSITION = { duration: 0.45, ease: EASE };
@@ -203,11 +205,21 @@ function RoleTile({
         <div className="relative size-11 sm:size-12 shrink-0 overflow-hidden rounded-full border border-[#e5e7eb] dark:border-[#262b33] bg-transparent">
           {logoSrc ? (
             // Full-bleed cover so colored logo squares fill the circle — no white chip/padding corners.
-            <img
-              src={logoSrc}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            isOptimizableImageSrc(logoSrc) ? (
+              <Image
+                src={logoSrc}
+                alt=""
+                fill
+                sizes="48px"
+                className="object-cover"
+              />
+            ) : (
+              <img
+                src={logoSrc}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )
           ) : (
             <span className="absolute inset-0 flex items-center justify-center bg-[#f3f4f6] dark:bg-[#1a1e24] text-[0.7rem] font-semibold tracking-wide text-[#6b7280] dark:text-[#9aa3af]">
               {initials(org)}

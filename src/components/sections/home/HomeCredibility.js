@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import getProfile from "@/libs/getProfile";
 import getSkills from "@/libs/getSkills";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
+import { isOptimizableImageSrc } from "@/libs/optimizableImage";
 import { useReducedMotion } from "motion/react";
 import { useMemo, useState } from "react";
 
@@ -93,15 +95,26 @@ function SkillChip({ skill, ariaHidden = false }) {
       aria-hidden={ariaHidden || undefined}
     >
       {skill.img ? (
-        <img
-          src={skill.img}
-          alt=""
-          width={16}
-          height={16}
-          className="h-4 w-4 shrink-0 object-contain"
-          loading="lazy"
-          decoding="async"
-        />
+        isOptimizableImageSrc(skill.img) ? (
+          <Image
+            src={skill.img}
+            alt=""
+            width={16}
+            height={16}
+            sizes="16px"
+            className="h-4 w-4 shrink-0 object-contain"
+          />
+        ) : (
+          <img
+            src={skill.img}
+            alt=""
+            width={16}
+            height={16}
+            className="h-4 w-4 shrink-0 object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        )
       ) : (
         <span
           className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded bg-teal-700/15 dark:bg-teal-300/15 text-[8px] font-semibold text-teal-800 dark:text-teal-200"

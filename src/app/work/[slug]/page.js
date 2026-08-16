@@ -2,9 +2,11 @@ import PageWrapper from "@/components/shared/wrappers/PageWrapper";
 import { fetchAllContent } from "@/libs/portfolioData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import CaseStudyVisual from "@/components/sections/home/CaseStudyVisual";
 import { getStackIcon } from "@/libs/stackIcons";
 import { btnMetallicClass } from "@/components/shared/buttons/ButtonPrimary";
+import { isOptimizableImageSrc } from "@/libs/optimizableImage";
 
 async function loadCaseStudies() {
   const content = await fetchAllContent();
@@ -259,24 +261,48 @@ export default async function WorkCaseStudyPage({ params }) {
               {hasArchitecture ? (
                 <div className="relative rounded-2xl overflow-hidden border border-black/5 dark:border-white/10 aspect-[16/10] bg-transparent shadow-none">
                   {architectureSrcLight ? (
-                    <img
-                      src={architectureSrcLight}
-                      alt={`Architecture for ${name}`}
-                      className="absolute inset-0 h-full w-full object-contain object-center dark:hidden"
-                      loading="lazy"
-                    />
+                    isOptimizableImageSrc(architectureSrcLight) ? (
+                      <Image
+                        src={architectureSrcLight}
+                        alt={`Architecture for ${name}`}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-contain object-center dark:hidden"
+                      />
+                    ) : (
+                      <img
+                        src={architectureSrcLight}
+                        alt={`Architecture for ${name}`}
+                        className="absolute inset-0 h-full w-full object-contain object-center dark:hidden"
+                        loading="lazy"
+                      />
+                    )
                   ) : null}
                   {architectureSrc ? (
-                    <img
-                      src={architectureSrc}
-                      alt={`Architecture for ${name}`}
-                      className={
-                        architectureSrcLight
-                          ? "absolute inset-0 h-full w-full object-contain object-center hidden dark:block"
-                          : "absolute inset-0 h-full w-full object-contain object-center"
-                      }
-                      loading="lazy"
-                    />
+                    isOptimizableImageSrc(architectureSrc) ? (
+                      <Image
+                        src={architectureSrc}
+                        alt={`Architecture for ${name}`}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className={
+                          architectureSrcLight
+                            ? "object-contain object-center hidden dark:block"
+                            : "object-contain object-center"
+                        }
+                      />
+                    ) : (
+                      <img
+                        src={architectureSrc}
+                        alt={`Architecture for ${name}`}
+                        className={
+                          architectureSrcLight
+                            ? "absolute inset-0 h-full w-full object-contain object-center hidden dark:block"
+                            : "absolute inset-0 h-full w-full object-contain object-center"
+                        }
+                        loading="lazy"
+                      />
+                    )
                   ) : null}
                 </div>
               ) : null}

@@ -10,6 +10,13 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+    // Skill/logo icons from the CMS are a mix of raster and SVG. next/image
+    // rejects SVG sources by default (they can carry <script>); this is the
+    // documented safe way to allow them — served with an isolating CSP
+    // sandbox and forced download disposition, never executed inline.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   trailingSlash: true,
