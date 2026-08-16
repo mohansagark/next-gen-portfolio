@@ -1,4 +1,5 @@
 "use client";
+import { btnMetallicWhiteClass } from "@/components/shared/buttons/ButtonPrimary";
 import makePath from "@/libs/makePath";
 import makeText from "@/libs/makeText";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -56,7 +57,7 @@ const BlogSearchWidget = () => {
 
   return (
     <div
-      className="px-15px md:px-25px py-30px bg-cream-light-color dark:bg-primary-color-light rounded-lg wow fadeInUp"
+      className="px-15px md:px-25px py-30px bg-white dark:bg-[#12151a] border border-[#e5e7eb] dark:border-[#262b33] rounded-lg wow fadeInUp"
       data-wow-delay=".3s"
     >
       <form onSubmit={handleSearch}>
@@ -67,13 +68,13 @@ const BlogSearchWidget = () => {
               value={searchTerm}
               onChange={handleChange}
               placeholder="Search blogs & categories..."
-              className="text-white-color w-full pl-5 py-4 border border-gray-color-3 bg-cream-light-color dark:bg-black-color focus:border-primary-color rounded-l-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-gray-color leading-1"
+              className="text-[#0b0d10] dark:text-[#f3f4f6] w-full pl-5 py-4 border border-[#e5e7eb] dark:border-[#262b33] bg-[#f3f4f6] dark:bg-black-color focus:border-teal-700 dark:focus:border-[#5eead4] rounded-l-lg outline-none focus:outline-none transition-all duration-300 placeholder:text-[#6b7280] dark:placeholder:text-[#9aa3af] leading-1"
             />
           </div>
           <div className="min-h-full">
             <button
               type="submit"
-              className="w-60px h-full bg-primary-color hover:bg-seondary-color rounded-r-lg text-white-color text-xl inline-flex items-center justify-center transition-all duration-500"
+              className={`w-60px h-full rounded-r-lg text-xl inline-flex items-center justify-center ${btnMetallicWhiteClass}`}
             >
               <i className="fa-light fa-magnifying-glass"></i>
             </button>

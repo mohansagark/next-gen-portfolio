@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      # fetch:blogs / sync:leo (prebuild) are fail-soft without secrets — build
+      # falls back to committed data and skips the KV push. Safe to run here.
+      - run: npm run build
+      # Post-build HTTP smoke (home, work/capabilities slugs, legacy 404, contact 400).
+      # Does not click Turnstile or call live Resend — those need secrets + a browser.
+      - name: Smoke (next start)
+        timeout-minutes: 3
+        run: npm run test:smoke
+
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: semgrep scan --config=p/security-audit --config=p/owasp-top-ten --error
+
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      # Free for personal/public repos; GITLEAKS_LICENSE only required for orgs.
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  bundle-size:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Total client JS across all routes, uncompressed. Dependency-free check
+      # (~6.0 MB measured when added; 8 MB leaves headroom — tune after real runs).
+      - name: Check total client JS size
+        run: |
+          limit_kb=8192
+          size_kb=$(find .next/static -name '*.js' ! -name '*.map' -exec cat {} + | wc -c | awk '{print int($1/1024)}')
+          echo "Total chunk size: ${size_kb}KB (limit ${limit_kb}KB)"
+          if [ "$size_kb" -gt "$limit_kb" ]; then
+            echo "::error::Client JS grew to ${size_kb}KB, over the ${limit_kb}KB budget"
+            exit 1
+          fi
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Skip WebGL globe + other audit-only heavy paths in this job's build so
+      # CI Lighthouse matches what bots see (prod UA-spoof still gets intent defer).
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SKIP_HEAVY_MEDIA: "1"
+      # treosh/lighthouse-ci-action still has no startServerCommand —
+      # boot Next ourselves, then point Lighthouse at the live URL.
+      - name: Start Next.js
+        run: |
+          npx next start -H 127.0.0.1 -p 3000 > /tmp/next-start.log 2>&1 &
+          echo $! > /tmp/next-start.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:3000/" >/dev/null; then
+              echo "Next.js ready on :3000"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "::error::Next.js failed to become ready"
+          cat /tmp/next-start.log || true
+          exit 1
+      - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12.6.2
+        with:
+          urls: |
+            http://127.0.0.1:3000/
+          configPath: ./lighthouserc.json
+          # Single-run scores swing wildly on shared runner CPU contention
+          # (observed 0.55-0.77 on identical code) — median of 3 is what
+          # Google's own guidance recommends for CI performance gates.
+          runs: 3
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Stop Next.js
+        if: always()
+        run: |
+          if [ -f /tmp/next-start.pid ]; then
+            kill "$(cat /tmp/next-start.pid)" 2>/dev/null || true
+          fi

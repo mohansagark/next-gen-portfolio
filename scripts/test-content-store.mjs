@@ -1,12 +1,15 @@
-import assert from 'node:assert/strict';
-import { seedContent, getContent } from '../src/libs/contentStore.js';
+/**
+ * Orphan script retained as a thin CLI wrapper. Prefer:
+ *   npm test  (contentStore coverage in portfolioData.test.mjs)
+ */
+import { spawnSync } from "node:child_process";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-assert.equal(getContent('skills'), undefined, 'empty store returns undefined');
-seedContent({ skills: [1, 2] });
-assert.deepEqual(getContent('skills'), [1, 2], 'seeded value readable');
-seedContent({ portfolio: ['p'] });
-assert.deepEqual(getContent('skills'), [1, 2], 'merge preserves earlier keys');
-seedContent(null); // must not throw
-seedContent(undefined); // must not throw
-assert.deepEqual(getContent('portfolio'), ['p']);
-console.log('content store OK');
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const result = spawnSync(
+  process.execPath,
+  ["--test", "src/libs/__tests__/portfolioData.test.mjs"],
+  { cwd: root, stdio: "inherit" }
+);
+process.exit(result.status ?? 1);

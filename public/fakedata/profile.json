@@ -1,0 +1,53 @@
+{
+  "firstName": "Mohan Sagar",
+  "lastName": "Killamsetty",
+  "headline": "AI Engineer · Frontend Architect",
+  "tagline": "I ship AI applications that hold up in production.",
+  "subhead": "A decade building production software — now focused on LLM applications, agentic workflows, and the interfaces that make them dependable for real teams.",
+  "proofLine": "Led IVYGPT at Invesco — adopted by 8,000+ users; report analysis from ~30 days to ~30 minutes. Now building agentic AI platforms at ServiceNow.",
+  "bio": "**I turn complex ideas into software that works — and AI into products people can trust.**",
+  "about": "I'm a Senior Software Engineer with a decade of experience building scalable products across frontend, full-stack systems, and AI. My foundation is in frontend architecture and product engineering; today, I apply that same production mindset to **LLM applications, agentic systems, and AI-powered experiences**.\n\nI'm at my best when the problem isn't clearly defined, the solution doesn't exist yet, and someone needs to take ownership from **first idea to production**.\n\nI bridge the gap between **interfaces, application architecture, and AI workflows** — combining engineering rigor, product thinking, and a bias toward building.\n\nIf you're building something ambitious with AI, **I'd love to hear about it.**",
+  "location": "Remote · Available worldwide",
+  "email": "contact@devmohan.in",
+  "phone": "+91 9790427138",
+  "avatar": "/images/profile/avatar-web.jpg",
+  "resumeUrl": "/files/mohansagar_9years_aiengineer.pdf",
+  "primaryCta": {
+    "label": "Get in touch",
+    "href": "#contact"
+  },
+  "secondaryCta": {
+    "label": "View selected work",
+    "href": "#work"
+  },
+  "credibility": {
+    "companies": [
+      "ServiceNow",
+      "Invesco",
+      "Jio",
+      "Zentree Labs",
+      "Shell",
+      "Accenture"
+    ],
+    "stats": [
+      {
+        "label": "Years of industry experience",
+        "value": "10"
+      },
+      {
+        "label": "Users of shipped AI products",
+        "value": "8,000+"
+      },
+      {
+        "label": "Users across shipped platforms",
+        "value": "5M+"
+      }
+    ]
+  },
+  "seo": {
+    "title": "Mohan Sagar — AI Engineer · Frontend Architect",
+    "description": "Senior software engineer with a decade of production experience — LLM applications, agentic workflows, and high-performance frontend systems. IVYGPT at Invesco · Agentic platforms at ServiceNow.",
+    "ogTitle": "Mohan Sagar — AI Engineer · Frontend Architect",
+    "ogDescription": "I ship AI applications that hold up in production — LLM systems, agentic workflows, and the interfaces teams rely on."
+  }
+}

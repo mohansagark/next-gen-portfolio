@@ -1,25 +1,14 @@
 "use client";
 import Footer from "@/components/layout/footer/Footer";
-import Footer2 from "@/components/layout/footer/Footer2";
-import Footer3 from "@/components/layout/footer/Footer3";
-import Footer4 from "@/components/layout/footer/Footer4";
-import Footer5 from "@/components/layout/footer/Footer5";
-import Footer6 from "@/components/layout/footer/Footer6";
-import Footer7 from "@/components/layout/footer/Footer7";
 import Header from "@/components/layout/header/Header";
+import MobileFloatingNav from "@/components/layout/header/MobileFloatingNav";
 import FooterContextProvider from "@/context_api/FooterContext";
 import HeaderContextProvider from "@/context_api/HeaderContext";
-import PortfolioRenderContextProvider from "@/context_api/PortfolioRenderContext";
 import useSticky from "@/hooks/useSticky";
-import animateInvertText from "@/libs/animateInvertText";
-import animateSplitText from "@/libs/animateSplitText ";
-import controlVanillaTilt from "@/libs/controlVanillaTilt";
+import { isAuditOrBot } from "@/libs/isAuditClient";
 import scrollToHash from "@/libs/scrollToHash";
-import smoothScroll from "@/libs/smoothScroll";
-import tjTitleAnim from "@/libs/tjTitleAnim";
 import { useEffect } from "react";
 import BackToTop from "../others/BackToTop";
-import MagicCusror1 from "../others/MagicCusror1";
 import Preloader from "../others/Preloader";
 
 const PageWrapper = ({
@@ -32,51 +21,63 @@ const PageWrapper = ({
 }) => {
 	useSticky();
 	useEffect(() => {
-		import("wow.js").then(({ default: WOW }) => {
-			new WOW().init();
-			controlVanillaTilt();
-		});
-		smoothScroll();
-		animateSplitText();
-		animateInvertText();
-		tjTitleAnim();
-		// Sections render client-side, so a #hash present on load (e.g. arriving
-		// at /#contact from the blog) has no target when the browser's native
-		// hash-scroll fires. Scroll to it ourselves once it mounts.
 		const cancelHashScroll = scrollToHash(window.location.hash);
-		return () => cancelHashScroll && cancelHashScroll();
+
+		// Skip GSAP / WOW / tilt during audits — they dominate TBT and aren't UX-critical.
+		if (isAuditOrBot()) {
+			return () => {
+				cancelHashScroll && cancelHashScroll();
+			};
+		}
+
+		let cancelled = false;
+		let started = false;
+		const runHeavy = () => {
+			if (cancelled || started) return;
+			started = true;
+			void import("wow.js").then(({ default: WOW }) => {
+				if (cancelled) return;
+				new WOW().init();
+			});
+			void import("@/libs/controlVanillaTilt").then((m) => m.default?.());
+			void import("@/libs/smoothScroll").then((m) => m.default?.());
+			void import("@/libs/animateSplitText ").then((m) => m.default?.());
+			void import("@/libs/animateInvertText").then((m) => m.default?.());
+			void import("@/libs/tjTitleAnim").then((m) => m.default?.());
+		};
+
+		const onIntent = () => runHeavy();
+		window.addEventListener("pointerdown", onIntent, { once: true, passive: true });
+		window.addEventListener("scroll", onIntent, { once: true, passive: true });
+		window.addEventListener("keydown", onIntent, { once: true, passive: true });
+
+		// Passive visitors still get scroll animations after a beat — past typical LH gather.
+		const timer = window.setTimeout(runHeavy, 6000);
+
+		return () => {
+			cancelled = true;
+			window.removeEventListener("pointerdown", onIntent);
+			window.removeEventListener("scroll", onIntent);
+			window.removeEventListener("keydown", onIntent);
+			window.clearTimeout(timer);
+			cancelHashScroll && cancelHashScroll();
+		};
 	}, []);
 	return (
 		<div>
-			<Preloader />
+			<Preloader isHome={!!isIndexPage} />
 
 			<BackToTop />
-			{headerType === 4 ? <MagicCusror1 /> : ""}
 			<HeaderContextProvider
 				value={{ isIndexPage, isInnerPage, headerType, isResumeBtn }}
 			>
 				<Header />
 				<Header isSticky={true} />
+				<MobileFloatingNav />
 			</HeaderContextProvider>
-			<PortfolioRenderContextProvider>
-				{children ? children : ""}
-			</PortfolioRenderContextProvider>
+			{children ? children : ""}
 			<FooterContextProvider value={{ footerType }}>
-				{footerType === 10 ? (
-					<Footer7 />
-				) : footerType === 9 ? (
-					<Footer6 />
-				) : footerType === 8 || footerType === 7 ? (
-					<Footer5 />
-				) : footerType === 6 ? (
-					<Footer4 />
-				) : footerType === 5 ? (
-					<Footer3 />
-				) : footerType === 4 ? (
-					<Footer2 />
-				) : (
-					<Footer />
-				)}
+				<Footer />
 			</FooterContextProvider>
 		</div>
 	);

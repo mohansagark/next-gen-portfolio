@@ -20,6 +20,9 @@ export default function useHomeLink() {
       typeof window !== "undefined" &&
       window.location.hostname === BLOG_HOST
     ) {
+      // window.location isn't available at SSR time — this two-pass read is
+      // the deliberate fix for the hydration mismatch noted above.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBase(MAIN_SITE);
     }
   }, []);

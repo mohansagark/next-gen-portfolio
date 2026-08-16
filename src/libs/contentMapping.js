@@ -21,9 +21,23 @@ export const resolveFileUrl = (p) =>
 // image everywhere icons, logos, avatars and covers are rendered.
 const isAbsoluteUrl = (p) => /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(p);
 
+/** Prefer same-origin icons over huge third-party logos (Lighthouse / cookies). */
+const LOCAL_SKILL_ICONS = {
+  JavaScript: "/img/icons/js.svg",
+  TypeScript: "/img/icons/typescript.svg",
+  "Agentic AI": "",
+};
+
 const img = (p) => {
   if (!p) return "";
   return isAbsoluteUrl(p) ? p : `${RAW_BASE}${p}`;
+};
+
+const skillIcon = (name, icon) => {
+  if (Object.prototype.hasOwnProperty.call(LOCAL_SKILL_ICONS, name)) {
+    return LOCAL_SKILL_ICONS[name];
+  }
+  return img(icon);
 };
 
 const MONTH_NAMES = {
@@ -45,9 +59,57 @@ export const slugify = (s) =>
   (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 export function mapSkills(skills) {
-  return skills.categories.flatMap((c) =>
-    c.skills.map((s) => ({ name: s.name, img: img(s.icon), perchant: `${s.proficiency}%` }))
-  );
+  // Bundled public/fakedata/skills.json is still a flat array.
+  if (Array.isArray(skills)) {
+    return skills
+      .filter((s) => s?.name)
+      .map((s) => ({
+        name: s.name,
+        img: s.img || skillIcon(s.name, s.icon),
+        perchant:
+          s.perchant ||
+          (s.proficiency != null ? `${s.proficiency}%` : ""),
+        group: s.group || "",
+      }));
+  }
+
+  // Categories may list the same skill more than once (e.g. TypeScript under
+  // Frontend and Languages). The flat list is keyed by name in the UI, so keep
+  // the first occurrence only.
+  const seen = new Set();
+  const out = [];
+  for (const c of skills.categories || []) {
+    for (const s of c.skills || []) {
+      if (!s?.name || seen.has(s.name)) continue;
+      seen.add(s.name);
+      out.push({
+        name: s.name,
+        img: skillIcon(s.name, s.icon),
+        // Keep key for older Skills UI; prefer no fake % when proficiency omitted.
+        perchant: s.proficiency != null ? `${s.proficiency}%` : "",
+        group: c.name,
+      });
+    }
+  }
+  return out;
+}
+
+export function mapCapabilities(capabilities) {
+  return {
+    sectionTitle: capabilities.sectionTitle || "",
+    sectionSubcopy: capabilities.sectionSubcopy || "",
+    explorationNote: capabilities.explorationNote || "",
+    items: (capabilities.items || []).map((item) => ({
+      id: item.id,
+      slug: item.slug || item.id,
+      title: item.title,
+      body: item.body,
+      image: img(item.image),
+      imageLight: img(item.imageLight),
+      evidence: item.evidence || [],
+      page: item.page || null,
+    })),
+  };
 }
 
 export function mapResume(experience, education, achievements, bundledResume) {
@@ -79,7 +141,11 @@ export function mapResume(experience, education, achievements, bundledResume) {
       desc: d.location ? `${d.institution}, ${d.location}` : d.institution,
     }))
     .sort((a, b) => (a.sort < b.sort ? 1 : -1))
-    .map(({ sort, ...item }) => item);
+    .map((entry) => {
+      const item = { ...entry };
+      delete item.sort;
+      return item;
+    });
 
   // Prefer canonical achievements; fall back to the bundled section's items
   // so the section survives a failed achievements fetch.
@@ -98,6 +164,24 @@ export function mapResume(experience, education, achievements, bundledResume) {
   ];
 }
 
+/**
+ * Frozen numeric IDs for legacy `/portfolio/[id]` bookmarks.
+ * Must NOT be derived from array order — CMS reorder would remap redirects.
+ */
+export const LEGACY_PORTFOLIO_NUMERIC_IDS = Object.freeze({
+  ivygpt: 1,
+  "servicenow-agentic": 2,
+  "jio-platforms": 3,
+  "daily-dev-digest": 4,
+  "claude-graph": 5,
+  "ai-voice-bot": 6,
+  "ai-stock-analysis-bot": 7,
+  "smart-expense-tracker": 8,
+  "portfolio-backend-api": 9,
+  "modern-portfolio-website": 10,
+  "react-mini-games-collection": 11,
+});
+
 export function mapPortfolio(projects, profile) {
   const employee = profile
     ? {
@@ -107,11 +191,14 @@ export function mapPortfolio(projects, profile) {
       }
     : undefined;
 
-  return projects.items.map((p, i) => {
+  return projects.items.map((p) => {
     const image = img(p.image);
+    const sections = p.sections || [];
+    const slug = p.slug;
     return {
-      id: i + 1,
-      slug: p.slug,
+      // Prefer frozen legacy numeric id; otherwise slug (never array index).
+      id: LEGACY_PORTFOLIO_NUMERIC_IDS[slug] ?? slug,
+      slug,
       title: p.title,
       title2: p.subtitle,
       img: image,
@@ -120,9 +207,9 @@ export function mapPortfolio(projects, profile) {
       detailsImg: image,
       desc: p.description,
       shortDesc: p.shortDescription,
-      desc1: p.sections[0]?.body || "",
-      desc2: p.sections[1]?.body || "",
-      descItems: p.sections.slice(2).map((s) => ({ title: s.title, desc: s.body })),
+      desc1: sections[0]?.body || p.problem || "",
+      desc2: sections[1]?.body || p.solution || "",
+      descItems: sections.slice(2).map((s) => ({ title: s.title, desc: s.body })),
       category: p.category,
       dataFilter: slugify(p.category),
       tags: p.technologies,
@@ -131,11 +218,35 @@ export function mapPortfolio(projects, profile) {
       featured: p.featured,
       featuredDesc: p.shortDescription,
       featuredImg: image,
+      kind: p.kind,
+      company: p.company,
+      companyDomain: p.companyDomain || "",
+      role: p.role,
+      problem: p.problem,
+      context: p.context,
+      solution: p.solution,
+      architecture: p.architecture,
+      decisions: p.decisions || [],
+      ai: p.ai,
+      aiLabel: p.aiLabel || "",
+      challenges: p.challenges || [],
+      result: p.result,
+      priority: p.priority,
+      showOnHomepage: p.showOnHomepage !== false,
+      homeTitle: p.homeTitle || "",
+      homeMetric: p.homeMetric || "",
+      homeName: p.homeName || "",
+      homeTagline: p.homeTagline || "",
+      homeMetrics: p.homeMetrics || [],
+      coverImage: img(p.coverImage || p.image),
+      architectureImage: img(p.architectureImage),
+      architectureImageLight: img(p.architectureImageLight),
+      architectureCaption: p.architectureCaption || "",
       ...(employee ? { employee } : {}),
       statusItem: [
         { title: "Category", desc: p.category || "—" },
         { title: "Technology", desc: (p.technologies || []).slice(0, 3).join(", ") || "—" },
-        { title: "Status", desc: "Completed" },
+        { title: "Status", desc: p.kind === "employer" ? "Production" : "Personal" },
       ],
     };
   });
@@ -177,11 +288,14 @@ const SOCIAL_ICONS = {
 };
 
 export function mapSocials(socials) {
-  return socials.links.map((l) => ({
-    id: l.platform,
-    iconName: SOCIAL_ICONS[l.platform] || `fa-brands fa-${l.platform}`,
-    path: l.url,
-  }));
+  return socials.links
+    .filter((l) => !l.hiddenOnSite)
+    .map((l) => ({
+      id: l.platform,
+      iconName: SOCIAL_ICONS[l.platform] || `fa-brands fa-${l.platform}`,
+      path: l.url,
+      primary: l.primary !== false,
+    }));
 }
 
 export function mapTestimonials(testimonials) {
@@ -191,5 +305,6 @@ export function mapTestimonials(testimonials) {
     authorDesig: t.role,
     img: img(t.avatar),
     desc: t.quote,
+    featured: !!t.featured,
   }));
 }

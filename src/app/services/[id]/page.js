@@ -1,46 +1,23 @@
-import ServiceDetailsMain from "@/components/layout/main/ServiceDetailsMain";
-import PageWrapper from "@/components/shared/wrappers/PageWrapper";
+import { notFound, permanentRedirect } from "next/navigation";
 import { fetchAllContent } from "@/libs/portfolioData";
-import getALlServices from "@/libs/getALlServices";
-import { notFound } from "next/navigation";
+import {
+  findLegacyCapabilityMatch,
+  legacyCapabilityTarget,
+} from "@/libs/legacyRedirects";
 
-async function loadServices() {
-  const content = await fetchAllContent();
-  return content.services || getALlServices();
-}
-
-function findService(services, id) {
-  return services?.find(({ id: id1 }) => id1 === parseInt(id));
-}
-
-// Existence check lives here: metadata resolves before the response starts
-// streaming, so notFound() from this function produces a real 404 status.
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  if (!findService(await loadServices(), id)) {
-    notFound();
-  }
-  return {
-    title:
-      "Service Details - Dev Mohan - Personal Portfolio React  NextJs Template",
-    description:
-      "Service Details - Dev Mohan - Personal Portfolio React  NextJs Template",
-  };
-}
-
+/**
+ * Legacy template route. Capability detail pages live under /capabilities/[slug].
+ * Old numeric /services/<id> IDs mapped to the removed agency services list, not
+ * capabilities — unmatched IDs 404 instead of permanently redirecting to `/`.
+ */
 export default async function ServiceDetails({ params }) {
   const { id } = await params;
-  if (!findService(await loadServices(), id)) {
-    notFound();
+  const content = await fetchAllContent();
+  const capabilities = content.capabilities?.items || [];
+  const match = findLegacyCapabilityMatch(capabilities, id);
+  const target = legacyCapabilityTarget(match);
+  if (target) {
+    permanentRedirect(target);
   }
-  return (
-    <PageWrapper isInnerPage={true}>
-      <ServiceDetailsMain />
-    </PageWrapper>
-  );
-}
-
-export async function generateStaticParams() {
-  const services = await loadServices();
-  return services?.map(({ id }) => ({ id: id.toString() }));
+  notFound();
 }

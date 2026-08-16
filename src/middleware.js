@@ -1,46 +1,31 @@
 import { NextResponse } from "next/server";
+import { resolveBlogHostAction } from "@/libs/legacyRedirects";
 
 // Serve the blog under blog.devmohan.in while the app itself keeps its /blogs
 // routes. On the blog host we rewrite short URLs onto /blogs; on the apex domain
 // we redirect /blogs traffic to the subdomain so there's one canonical home.
-const BLOG_HOST = "blog.devmohan.in";
 
 export function middleware(request) {
   const host = (request.headers.get("host") || "").split(":")[0].toLowerCase();
   const { pathname } = request.nextUrl;
+  const action = resolveBlogHostAction({ host, pathname });
 
-  if (host === BLOG_HOST) {
-    // The /blogs prefix is internal-only on the subdomain. Bounce any /blogs or
-    // /blogs/<slug> request (incl. the app's own links) to the clean short URL,
-    // so there's a single canonical form (no /blogs duplicate).
-    //   blog.devmohan.in/blogs         -> blog.devmohan.in/
-    //   blog.devmohan.in/blogs/<slug>  -> blog.devmohan.in/<slug>
-    if (pathname === "/blogs" || pathname.startsWith("/blogs/")) {
-      const url = request.nextUrl.clone();
-      url.pathname = pathname.replace(/^\/blogs/, "") || "/";
-      return NextResponse.redirect(url, 308);
-    }
-    // Serve the clean short URLs by rewriting onto the real /blogs routes:
-    //   blog.devmohan.in/          -> /blogs
-    //   blog.devmohan.in/<slug>    -> /blogs/<slug>
-    const url = request.nextUrl.clone();
-    url.pathname = pathname === "/" ? "/blogs" : `/blogs${pathname}`;
+  if (!action) {
+    return NextResponse.next();
+  }
+
+  const url = request.nextUrl.clone();
+  url.pathname = action.pathname;
+  if (action.host) {
+    url.protocol = action.protocol || "https:";
+    url.host = action.host;
+    url.port = "";
+  }
+
+  if (action.type === "rewrite") {
     return NextResponse.rewrite(url);
   }
-
-  // On the apex/www domain, send blog traffic to the subdomain (SEO consolidation):
-  //   devmohan.in/blogs          -> https://blog.devmohan.in/
-  //   devmohan.in/blogs/<slug>   -> https://blog.devmohan.in/<slug>
-  if (pathname === "/blogs" || pathname.startsWith("/blogs/")) {
-    const url = request.nextUrl.clone();
-    url.protocol = "https:";
-    url.host = BLOG_HOST;
-    url.port = "";
-    url.pathname = pathname.replace(/^\/blogs/, "") || "/";
-    return NextResponse.redirect(url, 308);
-  }
-
-  return NextResponse.next();
+  return NextResponse.redirect(url, action.status || 308);
 }
 
 export const config = {

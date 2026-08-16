@@ -1,65 +1,71 @@
-export function getContactEmailTemplate(formData) {
-  const primary = "#6366f1"; // Tailwind indigo-500
-  const secondary = "#f43f5e"; // Tailwind rose-500
-  const bg = "#f5f3ff"; // cream-light-color
-  const dark = "#18181b"; // black-color
-  const textGray = "#4b5563";
-  const lightGray = "#e5e7eb";
+export function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
+export function getContactEmailTemplate(formData) {
+  const primary = "#0f766e";
+  const accent = "#14b8a6";
+  const bg = "#f3f4f6";
+  const dark = "#0b0d10";
+  const textGray = "#374151";
+  const lightGray = "#e5e7eb";
   const currentYear = new Date().getFullYear();
 
+  const name = escapeHtml(formData.name);
+  const email = escapeHtml(formData.user_email);
+  const company = escapeHtml(formData.company || "N/A");
+  const phone = escapeHtml(formData.phone || "N/A");
+  const reason = escapeHtml(formData.select);
+  const message = escapeHtml(formData.message);
+
   return `
-    <div style="font-family: 'Inter', Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 580px; margin: auto; box-shadow: 0 4px 24px rgba(99,102,241,0.08); border: 1px solid ${primary};">
-      <!-- Header -->
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-        <img src='https://devmohan.in/img/logo/logo.png' alt='Logo' style='width:40px;height:40px;border-radius:8px;border:2px solid ${secondary};background:${primary};object-fit:contain;' />
-        <h2 style="background: linear-gradient(90deg, ${primary}, ${secondary}); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.7rem; font-weight: 700; margin: 0;">New Contact Form Submission</h2>
+    <div style="font-family: 'Sora', Inter, Arial, sans-serif; background: ${bg}; padding: 32px; border-radius: 18px; color: ${dark}; max-width: 580px; margin: auto; border: 1px solid ${lightGray};">
+      <div style="margin-bottom: 24px;">
+        <p style="margin: 0 0 6px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: ${primary}; font-weight: 700;">devmohan.in</p>
+        <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; color: ${dark};">New contact enquiry</h2>
       </div>
 
-      <!-- Table Data -->
       <table style="width: 100%; border-collapse: collapse; font-size: 1rem;">
         <tr>
-          <td style="font-weight: 600; padding: 10px 0; width: 140px; color: ${primary};">Name:</td>
-          <td style="padding: 10px 0;">${formData.name}</td>
+          <td style="font-weight: 600; padding: 10px 0; width: 140px; color: ${primary};">Name</td>
+          <td style="padding: 10px 0;">${name}</td>
         </tr>
         <tr>
-          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Email:</td>
-          <td style="padding: 10px 0;">${formData.user_email}</td>
+          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Email</td>
+          <td style="padding: 10px 0;">${email}</td>
         </tr>
         <tr>
-          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Phone:</td>
-          <td style="padding: 10px 0;">${formData.phone || "N/A"}</td>
+          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Company</td>
+          <td style="padding: 10px 0;">${company}</td>
         </tr>
         <tr>
-          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Reason:</td>
-          <td style="padding: 10px 0;">${formData.select}</td>
+          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Phone</td>
+          <td style="padding: 10px 0;">${phone}</td>
         </tr>
         <tr>
-          <td style="font-weight: 600; padding: 10px 0; vertical-align: top; color: ${primary};">Message:</td>
-          <td style="padding: 10px 0; white-space: pre-line; color: ${textGray}; line-height: 1.5;">${
-    formData.message
-  }</td>
+          <td style="font-weight: 600; padding: 10px 0; color: ${primary};">Reason</td>
+          <td style="padding: 10px 0;">${reason}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 600; padding: 10px 0; vertical-align: top; color: ${primary};">Message</td>
+          <td style="padding: 10px 0; white-space: pre-line; color: ${textGray}; line-height: 1.5;">${message}</td>
         </tr>
       </table>
 
-      <!-- CTA -->
       <div style="text-align: center; margin-top: 32px;">
-        <a href="mailto:${
-          formData.user_email
-        }" style="background: linear-gradient(90deg, ${primary}, ${secondary}); padding: 12px 20px; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600;">📩 Reply to ${
-    formData.name
-  }</a>
+        <a href="mailto:${email}" style="background: linear-gradient(90deg, ${primary}, ${accent}); padding: 12px 20px; color: #fff; border-radius: 999px; text-decoration: none; font-weight: 600; display: inline-block;">
+          Reply to ${name}
+        </a>
       </div>
 
-      <!-- Footer -->
       <div style="margin-top: 40px; text-align: center; font-size: 0.85rem; color: ${textGray}; border-top: 1px solid ${lightGray}; padding-top: 16px;">
-        <p>This message was sent via <strong>devmohan.in</strong>'s contact form.</p>
-        <p style="margin: 8px 0;">&copy; ${currentYear} Mohan Sagar K. All rights reserved.</p>
-        <div style="margin-top: 10px;">
-          <a href="https://linkedin.com/in/mohansagark" style="margin: 0 8px; color: ${primary}; text-decoration: none;">LinkedIn</a> |
-          <a href="https://github.com/mohansagark" style="margin: 0 8px; color: ${primary}; text-decoration: none;">GitHub</a> |
-          <a href="https://devmohan.in" style="margin: 0 8px; color: ${primary}; text-decoration: none;">Website</a>
-        </div>
+        <p style="margin: 0;">Sent via the contact form on <strong>devmohan.in</strong>.</p>
+        <p style="margin: 8px 0 0;">&copy; ${currentYear} Mohan Sagar</p>
       </div>
     </div>
   `;

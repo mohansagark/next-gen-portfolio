@@ -148,18 +148,22 @@ const AuthorDisplay = ({ author, className = "", showBy = true }) => {
 
   useEffect(() => cancelClose, [cancelClose]);
 
-  // Reset paint state whenever the panel closes or the theme remounts the badge.
-  useEffect(() => {
-    if (!open) {
+  // Reset paint state whenever the panel closes or the theme remounts the
+  // badge. Adjusted during render (React's recommended pattern for resetting
+  // state on a value change) instead of in an effect, so it lands in the same
+  // render pass rather than triggering a follow-up one.
+  const [prevOpen, setPrevOpen] = useState(open);
+  const [prevTheme, setPrevTheme] = useState(theme);
+  if (open !== prevOpen || theme !== prevTheme) {
+    const justClosed = prevOpen && !open;
+    const themeChanged = theme !== prevTheme;
+    setPrevOpen(open);
+    setPrevTheme(theme);
+    if (justClosed || themeChanged) {
       setBadgeReady(false);
       setLoadFailed(false);
     }
-  }, [open]);
-
-  useEffect(() => {
-    setBadgeReady(false);
-    setLoadFailed(false);
-  }, [theme]);
+  }
 
   // The panel is portalled to the end of <body>, so Tab from the trigger would
   // skip past it — hand focus over explicitly for keyboard users.

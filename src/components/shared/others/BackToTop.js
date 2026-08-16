@@ -2,6 +2,7 @@
 
 import backTopController from "@/libs/backTopController";
 import { useEffect } from "react";
+import "@/app/css/backToTop.css";
 
 const BackToTop = () => {
   useEffect(() => {

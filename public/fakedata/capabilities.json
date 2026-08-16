@@ -1,0 +1,223 @@
+{
+  "sectionTitle": "What I build",
+  "sectionSubcopy": "AI products and digital experiences built for real users — reliable, usable, and ready to grow with your business.",
+  "explorationNote": "",
+  "items": [
+    {
+      "id": "ai-surfaces",
+      "slug": "ai-product-experiences",
+      "title": "AI product experiences",
+      "body": "Copilots and assistants your customers trust — clear, fast, and safe enough for everyday use.",
+      "image": "/images/capabilities/cover-ai-experiences-chat.jpg",
+      "imageLight": "/images/capabilities/cover-ai-experiences-chat-light.jpg",
+      "evidence": ["ivygpt", "servicenow-agentic"],
+      "page": {
+        "eyebrow": "Service",
+        "headline": "AI your customers will actually use",
+        "intro": "Turn AI from a demo into a product people trust — copilots and assistants that feel fast, clear, and safe enough for everyday work.",
+        "offeringsTitle": "What I deliver",
+        "offerings": [
+          {
+            "title": "Assistants people prefer using",
+            "description": "Clear conversation flows, fast responses, and helpful recovery when something goes wrong — so the experience feels intentional, not experimental."
+          },
+          {
+            "title": "Help where work already happens",
+            "description": "AI embedded in support, research, and ops — with smooth handoffs when a human should take over."
+          },
+          {
+            "title": "Safety your brand can stand behind",
+            "description": "Permissions, audit trails, and failure handling so AI stays predictable when real customers are on the line."
+          },
+          {
+            "title": "Polish that drives adoption",
+            "description": "The speed and accessibility details that make people choose the AI path — not avoid it."
+          }
+        ],
+        "benefitsTitle": "How it helps your business",
+        "benefits": [
+          {
+            "title": "Customers get value faster",
+            "description": "People reach a useful outcome in minutes, without training on a brittle prototype."
+          },
+          {
+            "title": "Higher trust and retention",
+            "description": "Transparent, reliable interactions build confidence — and bring users back."
+          },
+          {
+            "title": "Fewer support escalations",
+            "description": "Clear experiences cut confusion, edge-case tickets, and “AI went wrong” moments."
+          },
+          {
+            "title": "A product you can demo and sell",
+            "description": "You leave with something you can show stakeholders, measure, and improve — not a prototype stuck in engineering."
+          }
+        ],
+        "ctaLabel": "Improve your AI experience",
+        "ctaHref": "/#contact"
+      }
+    },
+    {
+      "id": "agentic",
+      "slug": "agentic-systems",
+      "title": "Agentic systems",
+      "body": "Automate multi-step work across your tools — with visibility and human control at every critical step.",
+      "image": "/images/capabilities/cover-agentic-bots-v3.jpg",
+      "imageLight": "/images/capabilities/cover-agentic-bots-light-v3.jpg",
+      "evidence": ["servicenow-agentic"],
+      "page": {
+        "eyebrow": "Service",
+        "headline": "Automate complex work without losing control",
+        "intro": "Agents that complete multi-step jobs across your tools — with visibility and human checkpoints so your team stays in charge.",
+        "offeringsTitle": "What I deliver",
+        "offerings": [
+          {
+            "title": "Processes that run themselves",
+            "description": "Automation that plans, acts, and recovers across systems — built for real operations, not toy demos."
+          },
+          {
+            "title": "Safe access to your tools",
+            "description": "Clear boundaries so automation can use your APIs, tickets, and docs without guessing or overreaching."
+          },
+          {
+            "title": "Full visibility for your team",
+            "description": "See what happened and why — easy to audit, explain to stakeholders, and improve over time."
+          },
+          {
+            "title": "Human approval where it matters",
+            "description": "Pause, approve, and escalate at the moments judgment should stay with people."
+          }
+        ],
+        "benefitsTitle": "How it helps your business",
+        "benefits": [
+          {
+            "title": "Less manual busywork",
+            "description": "Move multi-system processes off checklists and into reliable, assisted flows."
+          },
+          {
+            "title": "Confidence to go live",
+            "description": "Visibility and controls remove the fear of runaway automation — so you can actually deploy."
+          },
+          {
+            "title": "Shorter delivery cycles",
+            "description": "Automation handles the repetitive middle; your team focuses on exceptions and decisions that matter."
+          },
+          {
+            "title": "Scale without chaos",
+            "description": "Structured automation grows with volume — instead of fragile one-off scripts that break under load."
+          }
+        ],
+        "ctaLabel": "Automate your critical workflows",
+        "ctaHref": "/#contact"
+      }
+    },
+    {
+      "id": "llm-plumbing",
+      "slug": "llm-application-infrastructure",
+      "title": "LLM application infrastructure",
+      "body": "Keep AI features reliable and affordable as usage grows — without rebuilding the foundation every release.",
+      "image": "/images/capabilities/cover-llm-infrastructure.jpg",
+      "imageLight": "/images/capabilities/cover-llm-infrastructure-light.jpg",
+      "evidence": ["ivygpt", "daily-dev-digest"],
+      "page": {
+        "eyebrow": "Service",
+        "headline": "AI that stays reliable as you grow",
+        "intro": "The backbone behind your AI features — so quality stays consistent, costs stay in check, and your team can ship without rebuilding the foundation every time.",
+        "offeringsTitle": "What I deliver",
+        "offerings": [
+          {
+            "title": "Always-on AI connectivity",
+            "description": "Provider setup, fallbacks, and smart routing so AI features stay available when vendors or models change."
+          },
+          {
+            "title": "Quality you can measure",
+            "description": "Shared prompt standards and evaluation — so output quality is intentional, not left to chance."
+          },
+          {
+            "title": "Answers grounded in your knowledge",
+            "description": "Document pipelines that give AI the right context at the right time — fewer hallucinations, more useful answers."
+          },
+          {
+            "title": "Operations your team can own",
+            "description": "Logging, metrics, and automation so AI systems are manageable day to day — not mysterious."
+          }
+        ],
+        "benefitsTitle": "How it helps your business",
+        "benefits": [
+          {
+            "title": "Fewer production surprises",
+            "description": "Fallbacks and monitoring reduce outages when models or vendors shift."
+          },
+          {
+            "title": "Consistent customer-facing quality",
+            "description": "Shared standards keep results stable across teams and releases."
+          },
+          {
+            "title": "Faster product iteration",
+            "description": "A solid foundation lets product teams ship AI features without rebuilding infrastructure each time."
+          },
+          {
+            "title": "Lower long-term cost",
+            "description": "Right-sized systems avoid wasteful spend and brittle one-off solutions."
+          }
+        ],
+        "ctaLabel": "Make your AI production-ready",
+        "ctaHref": "/#contact"
+      }
+    },
+    {
+      "id": "product-systems",
+      "slug": "product-frontend-systems",
+      "title": "Product frontend systems",
+      "body": "Fast, accessible interfaces that raise conversion — and stay consistent as your product and team grow.",
+      "image": "/images/capabilities/cover-frontend-systems.jpg",
+      "imageLight": "/images/capabilities/cover-frontend-systems-light.jpg",
+      "evidence": ["jio-platforms", "servicenow-agentic"],
+      "page": {
+        "eyebrow": "Service",
+        "headline": "Interfaces that earn customer trust",
+        "intro": "Fast, accessible, consistent product experiences — so customers complete more of what they came for, and your teams ship without reinventing the UI every sprint.",
+        "offeringsTitle": "What I deliver",
+        "offerings": [
+          {
+            "title": "A consistent brand experience",
+            "description": "Shared components and patterns that keep every screen on-brand across squads and platforms."
+          },
+          {
+            "title": "Speed customers can feel",
+            "description": "Performance work so the product feels fast in real use — not only in lab scores."
+          },
+          {
+            "title": "Access for every customer",
+            "description": "Inclusive design so more people can use your product well — keyboard, contrast, and resilient layouts."
+          },
+          {
+            "title": "A foundation teams can scale on",
+            "description": "Clear structure so squads ship independently without breaking the customer experience."
+          }
+        ],
+        "benefitsTitle": "How it helps your business",
+        "benefits": [
+          {
+            "title": "Ship faster, stay consistent",
+            "description": "Shared foundations cut redesign thrash and keep new features on-brand by default."
+          },
+          {
+            "title": "Better conversion and satisfaction",
+            "description": "Less friction means users finish more journeys — and come back."
+          },
+          {
+            "title": "Lower maintenance cost",
+            "description": "One coherent system beats a pile of one-off UIs that fight each other every release."
+          },
+          {
+            "title": "Ready for AI-era products",
+            "description": "A stable experience layer gives copilots and assistants a home customers will trust."
+          }
+        ],
+        "ctaLabel": "Improve your customer experience",
+        "ctaHref": "/#contact"
+      }
+    }
+  ]
+}

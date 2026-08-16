@@ -36,7 +36,7 @@ const filterItems = (items, collection, filterItem, isProducts) => {
           makePath(author_role ? author_role : "") === filterItem
       );
 
-    case "search":
+    case "search": {
       if (!filterItem) return [];
       // Escape regex metacharacters — live search feeds partial input (e.g. a
       // lone "(" or "+") straight in, and an unescaped one would throw.
@@ -68,6 +68,7 @@ const filterItems = (items, collection, filterItem, isProducts) => {
         ].join(" ");
         return searchText.test(haystack);
       });
+    }
 
     case "popularity":
       return [...items]?.sort((a, b) => b.views - a.views);

@@ -1,29 +1,28 @@
-// src/libs/sendContactEmail.js
-// Handles sending contact form data to the Python email service
-
+/**
+ * Client helper — posts contact form data (incl. Turnstile token) to /api/contact.
+ * Server verifies captcha and sends email via Resend.
+ */
 export async function sendContactEmail(formData) {
-  const payload = {
-    to: "contact@devmohan.in",
-    subject: "New Contact Form Submission",
-    content: getContactEmailTemplate({
+  const response = await fetch("/api/contact/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
       name: formData.name,
-      user_email: formData.user_email,
-      phone: formData.phone,
-      select: formData.select,
+      email: formData.email || formData.user_email,
+      company: formData.company || "",
+      phone: formData.phone || "",
+      reason: formData.reason || formData.select || "General Inquiry",
       message: formData.message,
+      token: formData.token || formData["cf-turnstile-response"] || "",
     }),
-  };
-  const response = await fetch(
-    "https://python-email-service.onrender.com/send-email",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
-  return response;
-}
+  });
 
-import { getContactEmailTemplate } from "./contactEmailTemplate";
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
+
+  return { ok: response.ok && Boolean(data?.ok), status: response.status, data };
+}

@@ -1,0 +1,12 @@
+{
+  "sectionTitle": "Writing",
+  "sectionSubcopy": "Notes on AI applications, product engineering, and shipping software.",
+  "homepageLimit": 3,
+  "preferredSlugs": [
+    "building-a-resilient-business-with-autonomous-ai-agents",
+    "build-a-rag-application-with-langchain-a",
+    "a-week-in-the-life-of-an-ai-augmented-de",
+    "beyond-the-hype-what-ai-can-really-do-fo",
+    "designing-with-ai-not-around-it-practica"
+  ]
+}

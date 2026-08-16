@@ -1,48 +1,22 @@
-import PortfoliodetailsMain from "@/components/layout/main/PortfoliodetailsMain";
-import PageWrapper from "@/components/shared/wrappers/PageWrapper";
+import { notFound, permanentRedirect } from "next/navigation";
 import { fetchAllContent } from "@/libs/portfolioData";
 import getPortfolio from "@/libs/getPortfolio";
-import { notFound } from "next/navigation";
+import {
+  findLegacyPortfolioMatch,
+  legacyPortfolioTarget,
+} from "@/libs/legacyRedirects";
 
-async function loadPortfolio() {
-  const content = await fetchAllContent();
-  return content.portfolio || getPortfolio();
-}
-
-function findPortfolio(portfolio, id) {
-  return portfolio?.find(
-    ({ slug, id: id1 }) => slug === id || id1 === parseInt(id)
-  );
-}
-
-// Existence check lives here: metadata resolves before the response starts
-// streaming, so notFound() from this function produces a real 404 status.
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  if (!findPortfolio(await loadPortfolio(), id)) {
-    notFound();
-  }
-  return {
-    title:
-      "Portfolio Details - Dev Mohan - Personal Portfolio React  NextJs Template",
-    description:
-      "Portfolio Details - Dev Mohan - Personal Portfolio React  NextJs Template",
-  };
-}
-
+/**
+ * Legacy template route. Canonical case studies live under /work/[slug].
+ */
 export default async function PortfolioDetails({ params }) {
   const { id } = await params;
-  if (!findPortfolio(await loadPortfolio(), id)) {
-    notFound();
+  const content = await fetchAllContent();
+  const portfolio = content.portfolio || getPortfolio() || [];
+  const match = findLegacyPortfolioMatch(portfolio, id);
+  const target = legacyPortfolioTarget(match);
+  if (target) {
+    permanentRedirect(target);
   }
-  return (
-    <PageWrapper isInnerPage={true}>
-      <PortfoliodetailsMain />
-    </PageWrapper>
-  );
-}
-
-export async function generateStaticParams() {
-  const portfolio = await loadPortfolio();
-  return portfolio?.map(({ id, slug }) => ({ id: slug || id.toString() }));
+  notFound();
 }

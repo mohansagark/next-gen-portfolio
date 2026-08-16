@@ -26,13 +26,13 @@ container
 /** @type {import('tailwindcss').Config} */
 
 // variables
-const primaryColor = "#8750f7";
-const primaryColor2 = "#9b8dff";
-const primaryColorLight = "#140c1c";
-const seondaryColor = "#2a1454";
-const seondaryColor2 = "#240f31";
-const seondaryColor3 = "#1D1129";
-const bodyColor = "#dddddd";
+const primaryColor = "#5eead4";
+const primaryColor2 = "#99f6e4";
+const primaryColorLight = "#12151a";
+const seondaryColor = "#181c22";
+const seondaryColor2 = "#12151a";
+const seondaryColor3 = "#0b0d10";
+const bodyColor = "#c6ccd6";
 const bodyColor2 = "#7A7A7A";
 const bodyColor3 = "#FFFFFF99";
 const whiteColor = "#ffffff";
@@ -42,24 +42,24 @@ const whiteColor4 = "#ffffff99";
 const blackColor = "#050709";
 const blackColor2 = "#0b0410";
 const grayColor = "#636363";
-const grayColor2 = "#747779";
+const grayColor2 = "#374151";
 const grayColor3 = "#22272c";
 const grayColor4 = "#FFFFFF80";
 const borderColor = "#d9d9d9";
-const borderColor2 = "rgba(129, 76, 236, 0.2)";
+const borderColor2 = "rgba(20, 184, 166, 0.2)";
 const borderColor3 = "#FFFFFF24";
 const borderColor4 = "#FFFFFF26";
 const borderColor5 = "#ffffff14";
-const creamLightColor = "#f6f3fc";
-const darkColor = "#0f0715";
-const darkColor2 = "#2e314c";
+const creamLightColor = "#e8eaed";
+const darkColor = "#0b0d10";
+const darkColor2 = "#12151a";
 const bgColor = "#10171c";
 const bgColor2 = "#FFFFFF1A";
 const bgColor3 = "#d9d9d980";
 const bgColor4 = "#0c1115";
 const bgColor5 = "#2e1f3e";
 const bgColor6 = "rgba(36, 15, 49, 0.5)";
-const bgColor7 = "#814CEC33";
+const bgColor7 = "#14b8a633";
 const bgColor8 = "rgb(192, 172, 233)";
 const green1 = "#00ff2f";
 const green2 = "#00f721";
@@ -91,6 +91,40 @@ module.exports = {
     },
     extend: {
       colors: {
+        // shadcn/ui semantic colors (HSL channels via CSS variables)
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
         "primary-color": primaryColor,
         "primary-color-2": primaryColor2,
         "primary-color-light": primaryColorLight,
@@ -108,6 +142,7 @@ module.exports = {
         "black-color-2": blackColor2,
         "gray-color": grayColor,
         "gray-color-2": grayColor2,
+        "gray-color2": grayColor2,
         "gray-color-3": grayColor3,
         "gray-color-4": grayColor4,
         "dark-color": darkColor,
@@ -421,7 +456,8 @@ module.exports = {
 
       // typography
       fontFamily: {
-        sora: "'Sora', sans-serif",
+        sora: "var(--font-sora), 'Sora', sans-serif",
+        display: "var(--font-display), Fraunces, Georgia, serif",
         fontawesome: `"Font Awesome 6 Pro"`,
         helvetica: `"Helvetica Neue", sans-serif`,
         flaticon: `flaticon_gerold`,
@@ -525,10 +561,13 @@ module.exports = {
         "gradient-primary": `linear-gradient(260deg,	${seondaryColor} 0%, ${primaryColor} 100%)`,
         "gradient-secondary": `linear-gradient( to right, ${primaryColor} 0%, ${seondaryColor} 51%, ${primaryColor} 100%)`,
         "gradient-secondary-2": `linear-gradient(90deg, ${primaryColor} 0%, ${seondaryColor} 110.61%)`,
+        /* Metallic CTA fills — light: deep teal sheen · dark: bright teal sheen */
+        "gradient-btn-light": `linear-gradient(to right, #0f766e 0%, #0b0d10 51%, #14b8a6 100%)`,
+        "gradient-btn-dark": `linear-gradient(to right, ${primaryColor} 0%, ${seondaryColor} 51%, ${primaryColor} 100%)`,
         "gradient-text": `linear-gradient(to right, ${primaryColor} 0%, ${whiteColor} 100%)`,
         "gradient-text-light": `linear-gradient(to right, ${primaryColor} 0%, ${seondaryColor} 100%)`,
-        "gradient-circle": `linear-gradient(260deg, ${primaryColor} 0%, rgba(115, 67, 210, 0) 100%)`,
-        "gradient-circle-2": `linear-gradient(260deg, ${primaryColor} 0%, rgba(115, 67, 210, 0.1) 100%)`,
+        "gradient-circle": `linear-gradient(260deg, ${primaryColor} 0%, rgba(94, 234, 212, 0) 100%)`,
+        "gradient-circle-2": `linear-gradient(260deg, ${primaryColor} 0%, rgba(94, 234, 212, 0.1) 100%)`,
         "gradient-primary-2": `linear-gradient(161deg, ${seondaryColor} 0%, ${primaryColor} 100%)`,
         "gradient-primary-3": `linear-gradient(to right, ${primaryColor} 0, ${primaryColor} 100%)`,
         "gradient-primary-4": `linear-gradient(-45deg, ${seondaryColor} 11.52%, ${primaryColor} 91.55%)`,
@@ -539,7 +578,7 @@ module.exports = {
         "gradient-primary-8": `linear-gradient(-10deg, ${seondaryColor} 0%, ${primaryColor} 100%)`,
         "gradient-primary-9": `linear-gradient(180deg, rgba(5, 7, 8, 0) 0%, #050708 100%)`,
         "gradient-primary-10": `linear-gradient(107deg, rgba(129, 76, 236, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%)`,
-        "gradient-primary-10-light": `linear-gradient(to right, rgba(135, 80, 247, 0.1) 0%, ${seondaryColor} 100%)`,
+        "gradient-primary-10-light": `linear-gradient(to right, rgba(94, 234, 212, 0.12) 0%, ${seondaryColor} 100%)`,
         "gradient-primary-11": `linear-gradient(to right, currentColor 0, currentColor 100%)`,
         "gradient-12": `linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.01) 100%)`,
         "gradient-13": `linear-gradient(90deg, ${primaryColor}, #CB0891, ${primaryColor}, #CB0891, ${primaryColor}, #CB0891)`,
@@ -672,7 +711,7 @@ module.exports = {
 
       // shadow
       boxShadow: {
-        "boxShadow-1": "0 16px 40px rgba(135, 80, 247, 0.1)",
+        "boxShadow-1": "0 16px 40px rgba(94, 234, 212, 0.12)",
         "shadow-inset": "0px 0px 16.98px rgb(129, 76, 236) inset",
         "shadow-inset-2": "0px 0px 16.98px 0px rgb(129, 76, 236) inset",
       },
