@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import getProfile from "@/libs/getProfile";
 import ScrollReveal from "@/components/sections/home/ScrollReveal";
 
@@ -39,11 +40,12 @@ export default function HomeAbout() {
           <ScrollReveal>
             <div className="relative max-w-sm mx-auto lg:mx-0 w-full">
               <div className="absolute -inset-3 rounded-[2rem] border border-black/5 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03]" />
-              <img
+              <Image
                 src={avatarSrc}
                 alt={`${profile.firstName || "Mohan Sagar"}`}
                 width={520}
                 height={640}
+                sizes="(min-width: 1024px) 35vw, 384px"
                 className="relative w-full aspect-[4/5] object-cover object-top rounded-[1.6rem] border border-black/5 dark:border-white/10"
               />
             </div>

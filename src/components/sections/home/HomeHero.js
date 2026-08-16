@@ -3,6 +3,7 @@
 import getProfile from "@/libs/getProfile";
 import { isAuditOrBot } from "@/libs/isAuditClient";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
@@ -182,13 +183,13 @@ export default function HomeHero() {
       className="[grid-area:identity] flex items-center gap-3 mb-5 sm:mb-7 sm:gap-3.5 pt-1.5 max-lg:pt-2 max-lg:pr-14 lg:pt-0 lg:pr-0"
       {...chromeProps}
     >
-      <img
+      <Image
         src={avatarSrc}
         alt=""
         width={48}
         height={48}
-        fetchPriority="high"
-        decoding="async"
+        sizes="48px"
+        priority
         className="h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full object-cover object-top ring-1 ring-black/10 dark:ring-white/15"
       />
       <div className="min-w-0 flex-1 flex flex-col">
