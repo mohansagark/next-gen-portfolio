@@ -78,6 +78,19 @@ test("experience logos resolve to local responsive assets", () => {
   }
 });
 
+test("splash title can wrap on small screens instead of overflowing", () => {
+  const src = readFileSync(
+    join(root, "src/components/shared/others/Preloader.js"),
+    "utf8"
+  );
+  // Unprefixed nowrap clips "AI Engineer · Frontend Architect" on 320–390px.
+  assert.doesNotMatch(src, /text-white whitespace-nowrap/);
+  // Middot only on the single-line (md+) treatment, not when the title stacks.
+  assert.doesNotMatch(src, /AI Engineer · Frontend Architect/);
+  assert.match(src, /hidden md:inline/);
+  assert.match(src, /block md:inline/);
+});
+
 test("selected work uses realistic cover images instead of chart SVGs", () => {
   const visual = readFileSync(
     join(root, "src/components/sections/home/CaseStudyVisual.js"),
