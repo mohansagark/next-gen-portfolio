@@ -73,6 +73,22 @@ const progressVariants = {
   },
 };
 
+const splashTitleClass =
+  "font-display text-[1.5rem] leading-snug text-white sm:text-3xl md:whitespace-nowrap md:text-4xl";
+
+function SplashHeadline() {
+  return (
+    <>
+      AI Engineer
+      <span className="hidden md:inline" aria-hidden>
+        {" "}
+        ·{" "}
+      </span>
+      <span className="block md:inline">Frontend Architect</span>
+    </>
+  );
+}
+
 /**
  * Home splash with staggered Motion enter/exit.
  * Shows only on a hard load/reload of `/` when the boot script sets
@@ -182,7 +198,7 @@ export default function Preloader({ isHome = false }) {
             exit={{ opacity: 0, transition: { duration: 0.3 } }}
             aria-hidden
           >
-            <div className="flex flex-col items-center px-6 text-center">
+            <div className="flex w-full max-w-[min(100%,22rem)] flex-col items-center px-5 text-center sm:max-w-none sm:px-8">
               <Image
                 src="/img/logo/logo.png"
                 alt=""
@@ -191,11 +207,11 @@ export default function Preloader({ isHome = false }) {
                 className="mb-6 h-16 w-16"
                 priority
               />
-              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-teal-300/80">
+              <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:tracking-[0.28em]">
                 Mohan Sagar
               </p>
-              <p className="font-display text-2xl text-white whitespace-nowrap sm:text-3xl">
-                AI Engineer · Frontend Architect
+              <p className={splashTitleClass}>
+                <SplashHeadline />
               </p>
             </div>
           </motion.div>
@@ -233,7 +249,7 @@ export default function Preloader({ isHome = false }) {
           />
 
           <motion.div
-            className="relative flex flex-col items-center px-6 text-center"
+            className="relative flex w-full max-w-[min(100%,22rem)] flex-col items-center px-5 text-center sm:max-w-none sm:px-8"
             variants={contentVariants}
             initial="initial"
             animate="animate"
@@ -251,17 +267,14 @@ export default function Preloader({ isHome = false }) {
             </motion.div>
 
             <motion.p
-              className="mb-4 text-[11px] font-medium uppercase tracking-[0.28em] text-teal-300/80"
+              className="mb-4 text-[11px] font-medium uppercase tracking-[0.2em] text-teal-300/80 sm:tracking-[0.28em]"
               variants={itemVariants}
             >
               Mohan Sagar
             </motion.p>
 
-            <motion.p
-              className="font-display text-2xl text-white whitespace-nowrap sm:text-4xl"
-              variants={itemVariants}
-            >
-              AI Engineer · Frontend Architect
+            <motion.p className={splashTitleClass} variants={itemVariants}>
+              <SplashHeadline />
             </motion.p>
 
             <motion.div
