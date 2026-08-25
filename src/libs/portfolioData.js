@@ -57,8 +57,14 @@ async function fetchJson(name) {
   const local = readLocal(name);
   if (local) return local;
 
+  // 1h safety-net window: real content edits already trigger an instant full
+  // rebuild via rebuild-portfolio.yml's Vercel deploy hook, so this value only
+  // needs to catch a missed/failed hook — it doesn't buy real-time freshness.
+  // A short window here regenerates every route on every visit past its
+  // staleness point (this fetch runs in root layout.js), which was burning
+  // ISR write quota on ordinary traffic for no freshness benefit.
   const res = await fetch(remoteContentUrl(name), {
-    next: { revalidate: 300 },
+    next: { revalidate: 3600 },
   });
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
   return res.json();
